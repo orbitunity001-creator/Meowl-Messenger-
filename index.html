@@ -955,3 +955,88 @@ begin
   end;
 end
 $$;
+
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Meowl Messenger</title>
+</head>
+
+<body>
+
+  <h1>🐱 Meowl Messenger</h1>
+
+  <h2>Мои чаты</h2>
+
+  <button onclick="newChat()">➕ Новый чат</button>
+
+  <div id="chats">
+    <p>Пока чатов нет</p>
+  </div>
+
+  <hr>
+
+  <div id="chatWindow">
+    <h2 id="chatName">Выберите чат</h2>
+
+    <div id="messages"></div>
+
+    <input
+      id="messageInput"
+      type="text"
+      placeholder="Написать сообщение..."
+    >
+
+    <button onclick="sendMessage()">Отправить</button>
+  </div>
+
+  <script>
+
+    function newChat() {
+      const name = prompt("Имя пользователя:");
+
+      if (!name) return;
+
+      document.getElementById("chats").innerHTML =
+        "<button onclick=\"openChat('" + name + "')\">" +
+        "🐱 " + name +
+        "</button>";
+    }
+
+    function openChat(name) {
+      document.getElementById("chatName").textContent =
+        "💬 " + name;
+
+      document.getElementById("messages").innerHTML =
+        "<p>Чат открыт.</p>";
+    }
+
+    function sendMessage() {
+
+      const input =
+        document.getElementById("messageInput");
+
+      const text = input.value.trim();
+
+      if (!text) return;
+
+      const message =
+        document.createElement("p");
+
+      message.textContent =
+        "Вы: " + text;
+
+      document
+        .getElementById("messages")
+        .appendChild(message);
+
+      input.value = "";
+    }
+
+  </script>
+
+</body>
+</html>

@@ -1,77 +1,325 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>MeowI Messenger</title>
+    <title>MeowI Messenger</title>
 
-  <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-<div id="app"></div>
+<div id="authScreen">
+
+    <div class="auth-card">
+
+        <div class="logo">
+            MeowI
+        </div>
+
+        <div class="logo-subtitle">
+            Messenger
+        </div>
+
+        <div class="tabs">
+
+            <button id="registerTab" class="tab active">
+                Зарегистрироваться
+            </button>
+
+            <button id="loginTab" class="tab">
+                Войти
+            </button>
+
+        </div>
+
+
+        <!-- РЕГИСТРАЦИЯ -->
+
+        <form id="registerForm">
+
+            <input
+                id="registerName"
+                type="text"
+                placeholder="Ваше имя"
+                required
+            >
+
+            <input
+                id="registerUsername"
+                type="text"
+                placeholder="@username"
+                required
+            >
+
+            <input
+                id="registerEmail"
+                type="email"
+                placeholder="Email"
+                required
+            >
+
+            <input
+                id="registerPassword"
+                type="password"
+                placeholder="Пароль"
+                required
+            >
+
+            <button
+                type="submit"
+                class="main-button"
+            >
+                Зарегистрироваться
+            </button>
+
+        </form>
+
+
+        <!-- ВХОД -->
+
+        <form
+            id="loginForm"
+            class="hidden"
+        >
+
+            <input
+                id="loginEmail"
+                type="email"
+                placeholder="Email"
+                required
+            >
+
+            <input
+                id="loginPassword"
+                type="password"
+                placeholder="Пароль"
+                required
+            >
+
+            <button
+                type="submit"
+                class="main-button"
+            >
+                Войти
+            </button>
+
+        </form>
+
+
+        <div id="authMessage"></div>
+
+    </div>
+
+</div>
+
+
+<!-- MESSENGER -->
+
+<div
+    id="messengerScreen"
+    class="hidden"
+>
+
+    <div class="messenger">
+
+
+        <!-- ЛЕВАЯ ПАНЕЛЬ -->
+
+        <aside class="sidebar">
+
+            <div class="sidebar-top">
+
+                <div>
+
+                    <div class="messenger-title">
+                        MeowI
+                    </div>
+
+                    <div id="myUsername">
+                        @username
+                    </div>
+
+                </div>
+
+                <button
+                    id="profileButton"
+                    class="icon-button"
+                >
+                    👤
+                </button>
+
+            </div>
+
+
+            <div class="search-container">
+
+                <input
+                    id="searchInput"
+                    type="text"
+                    placeholder="Поиск по @username..."
+                >
+
+            </div>
+
+
+            <div
+                id="usersList"
+                class="users-list"
+            ></div>
+
+        </aside>
+
+
+        <!-- ЧАТ -->
+
+        <main class="chat">
+
+            <div
+                id="chatEmpty"
+                class="chat-empty"
+            >
+
+                <div class="big-icon">
+                    💬
+                </div>
+
+                <h2>
+                    MeowI Messenger
+                </h2>
+
+                <p>
+                    Найдите друга и начните общение
+                </p>
+
+            </div>
+
+
+            <div
+                id="chatWindow"
+                class="hidden chat-window"
+            >
+
+                <div class="chat-header">
+
+                    <button
+                        id="backButton"
+                        class="back-button"
+                    >
+                        ←
+                    </button>
+
+                    <div>
+
+                        <div
+                            id="chatName"
+                            class="chat-name"
+                        >
+                            Пользователь
+                        </div>
+
+                        <div
+                            id="chatUsername"
+                            class="chat-username"
+                        >
+                            @username
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div
+                    id="messages"
+                    class="messages"
+                ></div>
+
+
+                <form
+                    id="messageForm"
+                    class="message-form"
+                >
+
+                    <input
+                        id="messageInput"
+                        type="text"
+                        maxlength="4000"
+                        placeholder="Напишите сообщение..."
+                        autocomplete="off"
+                        required
+                    >
+
+                    <button
+                        type="submit"
+                        class="send-button"
+                    >
+                        ➤
+                    </button>
+
+                </form>
+
+            </div>
+
+        </main>
+
+    </div>
+
+</div>
+
+
+<!-- ПРОФИЛЬ -->
+
+<div
+    id="profileModal"
+    class="modal hidden"
+>
+
+    <div class="modal-card">
+
+        <button
+            id="closeProfile"
+            class="close-button"
+        >
+            ×
+        </button>
+
+        <div
+            id="profileAvatar"
+            class="profile-avatar"
+        >
+            M
+        </div>
+
+        <h2 id="profileName">
+            —
+        </h2>
+
+        <p id="profileUsername">
+            —
+        </p>
+
+        <p id="profileEmail">
+            —
+        </p>
+
+        <button
+            id="logoutButton"
+            class="logout-button"
+        >
+            Выйти
+        </button>
+
+    </div>
+
+</div>
+
+
+<script src="https://cdn.socket.io/4.8.1/socket.io.min.js"></script>
 
 <script src="app.js"></script>
 
 </body>
 </html>
-
-<!DOCTYPE html>
-<html lang="ru">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-  <title>MeowI Messenger</title>
-
-  <link rel="stylesheet" href="style.css">
-</head>
-
-<body>
-
-  <div id="app"></div>
-
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-  <script src="app.js"></script>
-
-</body>
-</html>
-<!DOCTYPE html>
-<html lang="ru">
-
-<head>
-
-  <meta charset="UTF-8">
-
-  <meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0"
-  >
-
-  <title>MeowI Messenger</title>
-
-  <link
-    rel="stylesheet"
-    href="style.css"
-  >
-
-</head>
-
-<body>
-
-  <div id="app"></div>
-
-
-  <!-- Socket.IO -->
-
-  <script src="https://cdn.socket.io/4.8.1/socket.io.min.js"></script>
-
-  <!-- Наш код -->
-
-  <script src="app.js"></script>
-
-</body>
-
-</html> 

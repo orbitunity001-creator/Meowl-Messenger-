@@ -10,531 +10,726 @@
       box-sizing: border-box;
     }
 
+    html,
     body {
       margin: 0;
-      min-height: 100vh;
+      padding: 0;
+      width: 100%;
+      min-height: 100%;
       font-family: Arial, sans-serif;
-      background: #101010;
-      color: white;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      background: #f4f4f7;
+      color: #222;
     }
 
-    .auth {
+    body {
+      overflow-x: hidden;
+    }
+
+    button,
+    input {
+      font: inherit;
+    }
+
+    .page {
+      min-height: 100vh;
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+    }
+
+    .auth-card {
       width: 100%;
       max-width: 420px;
-      padding: 25px;
+      background: white;
+      border-radius: 24px;
+      padding: 28px 22px;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
     }
 
     .logo {
       text-align: center;
-      margin-bottom: 35px;
-    }
-
-    .logo-icon {
-      width: 72px;
-      height: 72px;
-      margin: 0 auto 15px;
-      border-radius: 22px;
-      background: #222;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 38px;
+      font-size: 42px;
+      margin-bottom: 5px;
     }
 
     h1 {
-      margin: 0;
-      font-size: 30px;
+      text-align: center;
+      margin: 0 0 8px;
+      font-size: 28px;
     }
 
     .subtitle {
-      color: #999;
-      margin-top: 8px;
+      text-align: center;
+      color: #777;
+      margin: 0 0 25px;
     }
 
-    .card {
-      background: #191919;
-      border: 1px solid #2b2b2b;
-      border-radius: 22px;
-      padding: 22px;
+    .form-title {
+      font-size: 21px;
+      margin-bottom: 18px;
     }
 
-    input {
+    .field {
+      margin-bottom: 14px;
+    }
+
+    .field label {
+      display: block;
+      margin-bottom: 6px;
+      font-size: 14px;
+      color: #555;
+    }
+
+    .field input {
       width: 100%;
-      padding: 15px;
-      margin-bottom: 12px;
-      border: 1px solid #333;
+      padding: 13px 14px;
+      border: 1px solid #ddd;
       border-radius: 12px;
-      background: #101010;
-      color: white;
-      font-size: 16px;
       outline: none;
+      background: #fafafa;
     }
 
-    input:focus {
-      border-color: #777;
+    .field input:focus {
+      border-color: #888;
+      background: white;
     }
 
-    button {
+    .main-button {
       width: 100%;
-      padding: 15px;
       border: 0;
       border-radius: 12px;
-      background: white;
-      color: black;
-      font-size: 16px;
-      font-weight: bold;
+      padding: 14px;
       cursor: pointer;
+      background: #222;
+      color: white;
+      font-weight: bold;
+      margin-top: 5px;
+    }
+
+    .main-button:disabled {
+      opacity: 0.6;
+      cursor: wait;
     }
 
     .switch {
       text-align: center;
       margin-top: 18px;
-      color: #999;
+      color: #777;
+      font-size: 14px;
     }
 
-    .switch span {
-      color: white;
+    .switch button {
+      border: 0;
+      background: none;
+      padding: 0;
       cursor: pointer;
-      text-decoration: underline;
+      font-weight: bold;
+      color: #222;
+    }
+
+    .message {
+      min-height: 20px;
+      margin: 12px 0 0;
+      text-align: center;
+      font-size: 14px;
     }
 
     .hidden {
-      display: none;
+      display: none !important;
+    }
+
+    /* Messenger */
+
+    #messenger {
+      min-height: 100vh;
+      width: 100%;
+      background: #f4f4f7;
+    }
+
+    .messenger-header {
+      width: 100%;
+      height: 64px;
+      background: white;
+      border-bottom: 1px solid #e5e5e5;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 18px;
+    }
+
+    .messenger-title {
+      font-size: 21px;
+      font-weight: bold;
+    }
+
+    .logout-button {
+      border: 0;
+      border-radius: 10px;
+      padding: 9px 13px;
+      background: #eee;
+      cursor: pointer;
+    }
+
+    .messenger-content {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+
+    .welcome-card {
+      background: white;
+      border-radius: 20px;
+      padding: 25px;
+      text-align: center;
+      box-shadow: 0 5px 25px rgba(0, 0, 0, 0.05);
+    }
+
+    .welcome-icon {
+      font-size: 55px;
+      margin-bottom: 10px;
+    }
+
+    .welcome-card h2 {
+      margin: 0 0 10px;
+    }
+
+    .welcome-card p {
+      color: #777;
+      line-height: 1.5;
+    }
+
+    @media (max-width: 480px) {
+      .page {
+        padding: 12px;
+        align-items: flex-start;
+        padding-top: 35px;
+      }
+
+      .auth-card {
+        padding: 25px 18px;
+        border-radius: 20px;
+      }
+
+      .messenger-content {
+        padding: 12px;
+      }
     }
   </style>
 </head>
 
 <body>
 
-  <main class="auth">
+  <!-- АВТОРИЗАЦИЯ -->
+  <section id="authPage" class="page">
 
-    <div class="logo">
-      <div class="logo-icon">🐱</div>
+    <div class="auth-card">
+
+      <div class="logo">🐱</div>
+
       <h1>Meowl Messenger</h1>
-      <div class="subtitle">Ваши сообщения — в одном месте</div>
+
+      <p class="subtitle">
+        Общайся с друзьями
+      </p>
+
+      <!-- ВХОД -->
+      <div id="loginForm">
+
+        <div class="form-title">
+          Вход
+        </div>
+
+        <div class="field">
+          <label for="loginEmail">Email</label>
+          <input
+            id="loginEmail"
+            type="email"
+            placeholder="Введите email"
+            autocomplete="email"
+          >
+        </div>
+
+        <div class="field">
+          <label for="loginPassword">Пароль</label>
+          <input
+            id="loginPassword"
+            type="password"
+            placeholder="Введите пароль"
+            autocomplete="current-password"
+          >
+        </div>
+
+        <button
+          id="loginButton"
+          class="main-button"
+          onclick="login()"
+        >
+          Войти
+        </button>
+
+        <div class="switch">
+          Нет аккаунта?
+          <button onclick="showRegister()">
+            Зарегистрироваться
+          </button>
+        </div>
+
+      </div>
+
+      <!-- РЕГИСТРАЦИЯ -->
+      <div id="registerForm" class="hidden">
+
+        <div class="form-title">
+          Регистрация
+        </div>
+
+        <div class="field">
+          <label for="registerUsername">Имя пользователя</label>
+          <input
+            id="registerUsername"
+            type="text"
+            placeholder="Например: MeowlCat"
+            autocomplete="username"
+          >
+        </div>
+
+        <div class="field">
+          <label for="registerEmail">Email</label>
+          <input
+            id="registerEmail"
+            type="email"
+            placeholder="Введите email"
+            autocomplete="email"
+          >
+        </div>
+
+        <div class="field">
+          <label for="registerPassword">Пароль</label>
+          <input
+            id="registerPassword"
+            type="password"
+            placeholder="Минимум 6 символов"
+            autocomplete="new-password"
+          >
+        </div>
+
+        <div class="field">
+          <label for="registerPassword2">Повторите пароль</label>
+          <input
+            id="registerPassword2"
+            type="password"
+            placeholder="Повторите пароль"
+            autocomplete="new-password"
+          >
+        </div>
+
+        <button
+          id="registerButton"
+          class="main-button"
+          onclick="register()"
+        >
+          Зарегистрироваться
+        </button>
+
+        <div class="switch">
+          Уже есть аккаунт?
+          <button onclick="showLogin()">
+            Войти
+          </button>
+        </div>
+
+      </div>
+
+      <div id="message" class="message"></div>
+
     </div>
 
-    <!-- ВХОД -->
-    <section class="card" id="login">
-      <h2>Вход</h2>
+  </section>
 
-      <input
-        type="email"
-        id="loginEmail"
-        placeholder="Email"
-      >
 
-      <input
-        type="password"
-        id="loginPassword"
-        placeholder="Пароль"
-      >
+  <!-- MESSENGER -->
+  <section id="messenger" class="hidden">
 
-      <button>Войти</button>
+    <header class="messenger-header">
 
-      <div class="switch">
-        Нет аккаунта?
-        <span onclick="showRegister()">Зарегистрироваться</span>
+      <div class="messenger-title">
+        🐱 Meowl Messenger
       </div>
-    </section>
 
-    <!-- РЕГИСТРАЦИЯ -->
-    <section class="card hidden" id="register">
-      <h2>Регистрация</h2>
-
-      <input
-        type="text"
-        id="username"
-        placeholder="Имя пользователя"
+      <button
+        class="logout-button"
+        onclick="logout()"
       >
+        Выйти
+      </button>
 
-      <input
-        type="email"
-        id="registerEmail"
-        placeholder="Email"
-      >
+    </header>
 
-      <input
-        type="password"
-        id="registerPassword"
-        placeholder="Пароль"
-      >
+    <main class="messenger-content">
 
-      <input
-        type="password"
-        id="registerPassword2"
-        placeholder="Повторите пароль"
-      >
+      <div class="welcome-card">
 
-      <button>Зарегистрироваться</button>
+        <div class="welcome-icon">
+          🐱
+        </div>
 
-      <div class="switch">
-        Уже есть аккаунт?
-        <span onclick="showLogin()">Войти</span>
+        <h2>
+          Добро пожаловать в Meowl Messenger!
+        </h2>
+
+        <p>
+          Ты успешно вошёл в свой аккаунт.
+        </p>
+
+        <p>
+          💬 Следующим шагом мы добавим сюда
+          настоящие чаты и сообщения.
+        </p>
+
       </div>
-    </section>
 
-  </main>
+    </main>
 
-  <script>
-    function showRegister() {
-      document.getElementById("login").classList.add("hidden");
-      document.getElementById("register").classList.remove("hidden");
-    }
+  </section>
 
-    function showLogin() {
-      document.getElementById("register").classList.add("hidden");
-      document.getElementById("login").classList.remove("hidden");
-    }
-  </script>
 
-</body>
-</html>
-
-<!DOCTYPE html>
-<html lang="ru">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Meowl Messenger</title>
-
+  <!-- SUPABASE -->
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
-  <style>
-    * {
-      box-sizing: border-box;
-    }
+  <script>
 
-    body {
-      margin: 0;
-      min-height: 100vh;
-      background: #101010;
-      color: #fff;
-      font-family: Arial, sans-serif;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
+    const SUPABASE_URL =
+      "https://ehkdidgjiszpqqajsxsu.supabase.co";
 
-    .container {
-      width: 100%;
-      max-width: 420px;
-      padding: 24px;
-    }
+    const SUPABASE_KEY =
+      "sb_publishable_5-1jR2q3JRmXTAjksWFndA_yraWCUD2";
 
-    .logo {
-      text-align: center;
-      margin-bottom: 30px;
-    }
-
-    .logo-icon {
-      width: 70px;
-      height: 70px;
-      margin: auto;
-      border-radius: 22px;
-      background: #222;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 38px;
-    }
-
-    h1 {
-      margin: 15px 0 5px;
-      font-size: 30px;
-    }
-
-    .subtitle {
-      color: #999;
-    }
-
-    .card {
-      background: #191919;
-      border: 1px solid #2d2d2d;
-      border-radius: 22px;
-      padding: 22px;
-    }
-
-    h2 {
-      margin-top: 0;
-    }
-
-    input {
-      width: 100%;
-      padding: 15px;
-      margin: 7px 0;
-      border: 1px solid #333;
-      border-radius: 12px;
-      background: #101010;
-      color: white;
-      font-size: 16px;
-    }
-
-    button {
-      width: 100%;
-      padding: 15px;
-      margin-top: 12px;
-      border: 0;
-      border-radius: 12px;
-      background: white;
-      color: black;
-      font-size: 16px;
-      font-weight: bold;
-    }
-
-    .switch {
-      text-align: center;
-      margin-top: 18px;
-      color: #999;
-    }
-
-    .switch span {
-      color: white;
-      text-decoration: underline;
-    }
-
-    .hidden {
-      display: none;
-    }
-
-    #message {
-      margin-top: 15px;
-      text-align: center;
-    }
-  </style>
-</head>
-
-<body>
-
-<div class="container">
-
-  <div class="logo">
-    <div class="logo-icon">🐱</div>
-    <h1>Meowl Messenger</h1>
-    <div class="subtitle">Ваш мессенджер</div>
-  </div>
-
-  <!-- ВХОД -->
-  <div class="card" id="loginBox">
-
-    <h2>Вход</h2>
-
-    <input
-      id="loginEmail"
-      type="email"
-      placeholder="Email"
-    >
-
-    <input
-      id="loginPassword"
-      type="password"
-      placeholder="Пароль"
-    >
-
-    <button onclick="login()">
-      Войти
-    </button>
-
-    <div class="switch">
-      Нет аккаунта?
-      <span onclick="showRegister()">Зарегистрироваться</span>
-    </div>
-
-  </div>
-
-  <!-- РЕГИСТРАЦИЯ -->
-  <div class="card hidden" id="registerBox">
-
-    <h2>Регистрация</h2>
-
-    <input
-      id="registerUsername"
-      type="text"
-      placeholder="Имя пользователя"
-    >
-
-    <input
-      id="registerEmail"
-      type="email"
-      placeholder="Email"
-    >
-
-    <input
-      id="registerPassword"
-      type="password"
-      placeholder="Пароль"
-    >
-
-    <input
-      id="registerPassword2"
-      type="password"
-      placeholder="Повторите пароль"
-    >
-
-    <button onclick="register()">
-      Зарегистрироваться
-    </button>
-
-    <div class="switch">
-      Уже есть аккаунт?
-      <span onclick="showLogin()">Войти</span>
-    </div>
-
-  </div>
-
-  <div id="message"></div>
-
-</div>
-
-<script>
-
-  const SUPABASE_URL =
-    "https://ehkdidgjiszpqqajsxsu.supabase.co";
-
-  const SUPABASE_KEY =
-    "sb_publishable_5-1jR2q3JRmXTAjksWFndA_yraWCUD2";
-
-  const supabaseClient =
-    window.supabase.createClient(
-      SUPABASE_URL,
-      SUPABASE_KEY
-    );
+    const supabaseClient =
+      window.supabase.createClient(
+        SUPABASE_URL,
+        SUPABASE_KEY
+      );
 
 
-  function showRegister() {
-    document
-      .getElementById("loginBox")
-      .classList.add("hidden");
+    const authPage =
+      document.getElementById("authPage");
 
-    document
-      .getElementById("registerBox")
-      .classList.remove("hidden");
+    const messenger =
+      document.getElementById("messenger");
 
-    document.getElementById("message").textContent = "";
-  }
+    const loginForm =
+      document.getElementById("loginForm");
 
-
-  function showLogin() {
-    document
-      .getElementById("registerBox")
-      .classList.add("hidden");
-
-    document
-      .getElementById("loginBox")
-      .classList.remove("hidden");
-
-    document.getElementById("message").textContent = "";
-  }
-
-
-  async function register() {
-
-    const username =
-      document.getElementById("registerUsername").value.trim();
-
-    const email =
-      document.getElementById("registerEmail").value.trim();
-
-    const password =
-      document.getElementById("registerPassword").value;
-
-    const password2 =
-      document.getElementById("registerPassword2").value;
+    const registerForm =
+      document.getElementById("registerForm");
 
     const message =
       document.getElementById("message");
 
 
-    if (!username || !email || !password) {
-      message.textContent = "Заполни все поля";
-      return;
-    }
-
-    if (password !== password2) {
-      message.textContent = "Пароли не совпадают";
-      return;
-    }
-
-    message.textContent = "Регистрация...";
-
-
-    const { data, error } =
-      await supabaseClient.auth.signUp({
-        email: email,
-        password: password
-      });
-
-
-    if (error) {
-      message.textContent =
-        "Ошибка: " + error.message;
-      return;
+    function showMessage(text) {
+      message.textContent = text;
     }
 
 
-    if (data.user) {
+    function showLogin() {
 
-      const { error: profileError } =
-        await supabaseClient
-          .from("profiles")
-          .insert({
-            id: data.user.id,
-            username: username
+      loginForm.classList.remove("hidden");
+      registerForm.classList.add("hidden");
+
+      showMessage("");
+
+    }
+
+
+    function showRegister() {
+
+      loginForm.classList.add("hidden");
+      registerForm.classList.remove("hidden");
+
+      showMessage("");
+
+    }
+
+
+    function openMessenger() {
+
+      authPage.classList.add("hidden");
+      messenger.classList.remove("hidden");
+
+    }
+
+
+    function openAuth() {
+
+      messenger.classList.add("hidden");
+      authPage.classList.remove("hidden");
+
+    }
+
+
+    async function register() {
+
+      const username =
+        document
+          .getElementById("registerUsername")
+          .value
+          .trim();
+
+      const email =
+        document
+          .getElementById("registerEmail")
+          .value
+          .trim();
+
+      const password =
+        document
+          .getElementById("registerPassword")
+          .value;
+
+      const password2 =
+        document
+          .getElementById("registerPassword2")
+          .value;
+
+      const button =
+        document.getElementById("registerButton");
+
+
+      if (!username || !email || !password || !password2) {
+
+        showMessage("Заполни все поля.");
+
+        return;
+      }
+
+
+      if (password.length < 6) {
+
+        showMessage("Пароль должен быть минимум 6 символов.");
+
+        return;
+      }
+
+
+      if (password !== password2) {
+
+        showMessage("Пароли не совпадают.");
+
+        return;
+      }
+
+
+      button.disabled = true;
+      showMessage("Создаём аккаунт...");
+
+
+      try {
+
+        const { data, error } =
+          await supabaseClient.auth.signUp({
+
+            email: email,
+
+            password: password,
+
+            options: {
+              data: {
+                username: username
+              }
+            }
+
           });
 
 
-      if (profileError) {
-        message.textContent =
-          "Аккаунт создан, но профиль не сохранился: "
-          + profileError.message;
+        if (error) {
+          throw error;
+        }
+
+
+        if (data.session) {
+
+          await saveProfile(
+            data.user.id,
+            username
+          );
+
+          showMessage("Аккаунт создан!");
+
+          openMessenger();
+
+        } else {
+
+          showMessage(
+            "Аккаунт создан. Проверь почту и подтверди email, затем войди."
+          );
+
+          showLogin();
+
+        }
+
+      } catch (error) {
+
+        console.error(error);
+
+        showMessage(
+          "Ошибка: " + error.message
+        );
+
+      } finally {
+
+        button.disabled = false;
+
+      }
+
+    }
+
+
+    async function saveProfile(userId, username) {
+
+      const { error } =
+        await supabaseClient
+          .from("profiles")
+          .upsert(
+            {
+              id: userId,
+              username: username
+            },
+            {
+              onConflict: "id"
+            }
+          );
+
+
+      if (error) {
+        console.error(
+          "Ошибка профиля:",
+          error
+        );
+      }
+
+    }
+
+
+    async function login() {
+
+      const email =
+        document
+          .getElementById("loginEmail")
+          .value
+          .trim();
+
+      const password =
+        document
+          .getElementById("loginPassword")
+          .value;
+
+      const button =
+        document.getElementById("loginButton");
+
+
+      if (!email || !password) {
+
+        showMessage("Заполни email и пароль.");
+
         return;
       }
+
+
+      button.disabled = true;
+      showMessage("Выполняем вход...");
+
+
+      try {
+
+        const { data, error } =
+          await supabaseClient.auth.signInWithPassword({
+
+            email: email,
+
+            password: password
+
+          });
+
+
+        if (error) {
+          throw error;
+        }
+
+
+        showMessage("Вход выполнен!");
+
+        openMessenger();
+
+      } catch (error) {
+
+        console.error(error);
+
+        showMessage(
+          "Ошибка: " + error.message
+        );
+
+      } finally {
+
+        button.disabled = false;
+
+      }
+
     }
 
 
-    message.textContent =
-      "Регистрация выполнена! Теперь можно войти.";
+    async function logout() {
 
-    showLogin();
-  }
+      await supabaseClient.auth.signOut();
 
+      openAuth();
 
-  async function login() {
+      showLogin();
 
-    const email =
-      document.getElementById("loginEmail").value.trim();
+      document.getElementById("loginPassword").value = "";
 
-    const password =
-      document.getElementById("loginPassword").value;
+      showMessage("Вы вышли из аккаунта.");
 
-    const message =
-      document.getElementById("message");
-
-    message.textContent = "Выполняется вход...";
-
-
-    const { error } =
-      await supabaseClient.auth.signInWithPassword({
-        email: email,
-        password: password
-      });
-
-
-    if (error) {
-      message.textContent =
-        "Ошибка: " + error.message;
-      return;
     }
 
 
-    message.textContent =
-      "Вход выполнен!";
-  }
+    async function checkUser() {
 
-</script>
+      const { data } =
+        await supabaseClient.auth.getSession();
+
+
+      if (data.session) {
+
+        openMessenger();
+
+      } else {
+
+        openAuth();
+
+      }
+
+    }
+
+
+    supabaseClient.auth.onAuthStateChange(
+      (event, session) => {
+
+        if (session) {
+
+          openMessenger();
+
+        }
+
+      }
+    );
+
+
+    checkUser();
+
+  </script>
 
 </body>
 </html>

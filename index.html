@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Meowl Messenger</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: Arial, sans-serif;
+      background: #101010;
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .auth {
+      width: 100%;
+      max-width: 420px;
+      padding: 25px;
+    }
+
+    .logo {
+      text-align: center;
+      margin-bottom: 35px;
+    }
+
+    .logo-icon {
+      width: 72px;
+      height: 72px;
+      margin: 0 auto 15px;
+      border-radius: 22px;
+      background: #222;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 38px;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: 30px;
+    }
+
+    .subtitle {
+      color: #999;
+      margin-top: 8px;
+    }
+
+    .card {
+      background: #191919;
+      border: 1px solid #2b2b2b;
+      border-radius: 22px;
+      padding: 22px;
+    }
+
+    input {
+      width: 100%;
+      padding: 15px;
+      margin-bottom: 12px;
+      border: 1px solid #333;
+      border-radius: 12px;
+      background: #101010;
+      color: white;
+      font-size: 16px;
+      outline: none;
+    }
+
+    input:focus {
+      border-color: #777;
+    }
+
+    button {
+      width: 100%;
+      padding: 15px;
+      border: 0;
+      border-radius: 12px;
+      background: white;
+      color: black;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .switch {
+      text-align: center;
+      margin-top: 18px;
+      color: #999;
+    }
+
+    .switch span {
+      color: white;
+      cursor: pointer;
+      text-decoration: underline;
+    }
+
+    .hidden {
+      display: none;
+    }
+  </style>
+</head>
+
+<body>
+
+  <main class="auth">
+
+    <div class="logo">
+      <div class="logo-icon">🐱</div>
+      <h1>Meowl Messenger</h1>
+      <div class="subtitle">Ваши сообщения — в одном месте</div>
+    </div>
+
+    <!-- ВХОД -->
+    <section class="card" id="login">
+      <h2>Вход</h2>
+
+      <input
+        type="email"
+        id="loginEmail"
+        placeholder="Email"
+      >
+
+      <input
+        type="password"
+        id="loginPassword"
+        placeholder="Пароль"
+      >
+
+      <button>Войти</button>
+
+      <div class="switch">
+        Нет аккаунта?
+        <span onclick="showRegister()">Зарегистрироваться</span>
+      </div>
+    </section>
+
+    <!-- РЕГИСТРАЦИЯ -->
+    <section class="card hidden" id="register">
+      <h2>Регистрация</h2>
+
+      <input
+        type="text"
+        id="username"
+        placeholder="Имя пользователя"
+      >
+
+      <input
+        type="email"
+        id="registerEmail"
+        placeholder="Email"
+      >
+
+      <input
+        type="password"
+        id="registerPassword"
+        placeholder="Пароль"
+      >
+
+      <input
+        type="password"
+        id="registerPassword2"
+        placeholder="Повторите пароль"
+      >
+
+      <button>Зарегистрироваться</button>
+
+      <div class="switch">
+        Уже есть аккаунт?
+        <span onclick="showLogin()">Войти</span>
+      </div>
+    </section>
+
+  </main>
+
+  <script>
+    function showRegister() {
+      document.getElementById("login").classList.add("hidden");
+      document.getElementById("register").classList.remove("hidden");
+    }
+
+    function showLogin() {
+      document.getElementById("register").classList.add("hidden");
+      document.getElementById("login").classList.remove("hidden");
+    }
+  </script>
+
+</body>
+</html>

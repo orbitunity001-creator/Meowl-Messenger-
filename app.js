@@ -1,3 +1,323 @@
+// ============================================================
+// MeowI Messenger
+// GitHub Pages + Supabase
+// ============================================================
+
+// ============================================================
+// 1. ДАННЫЕ SUPABASE
+// ============================================================
+
+const SUPABASE_URL = "https://ehkdidgjiszpqqajsxsu.supabase.co";
+const SUPABASE_KEY = "sb_publishable_5-1jR2q3JRmXTAjksWFndA_yraWCUD2";
+
+// Проверяем, вставлены ли ключи
+if (
+  SUPABASE_URL.includes("ТВОЙ_") ||
+  SUPABASE_KEY.includes("ТВОЙ_")
+) {
+  console.warn(
+    "В app.js нужно вставить SUPABASE_URL и SUPABASE_KEY."
+  );
+}
+
+// Создаём Supabase
+const supabase = window.supabase.createClient(
+  SUPABASE_URL,
+  SUPABASE_KEY
+);
+
+
+// ============================================================
+// 2. СОСТОЯНИЕ ПРИЛОЖЕНИЯ
+// ============================================================
+
+let currentUser = null;
+let currentProfile = null;
+let selectedFriend = null;
+let realtimeChannel = null;
+
+
+// ============================================================
+// 3. HTML ЭКРАН АВТОРИЗАЦИИ
+// ============================================================
+
+function showAuth() {
+  document.getElementById("app").innerHTML = `
+    <div class="auth-page">
+
+      <div class="auth-card">
+
+        <div class="logo">
+          <div class="logo-cat">😺</div>
+          <h1>MeowI</h1>
+          <p>Messenger</p>
+        </div>
+
+        <div class="auth-tabs">
+          <button
+            id="registerTab"
+            class="auth-tab active"
+            onclick="showRegister()"
+          >
+            Зарегистрироваться
+          </button>
+
+          <button
+            id="loginTab"
+            class="auth-tab"
+            onclick="showLogin()"
+          >
+            Войти
+          </button>
+        </div>
+
+        <div id="authForm"></div>
+
+      </div>
+
+    </div>
+  `;
+
+  showRegister();
+}
+
+
+// ============================================================
+// 4. РЕГИСТРАЦИЯ
+// ============================================================
+
+function showRegister() {
+
+  document.getElementById("registerTab").classList.add("active");
+  document.getElementById("loginTab").classList.remove("active");
+
+  document.getElementById("authForm").innerHTML = `
+
+    <form onsubmit="registerUser(event)">
+
+      <label>Имя</label>
+
+      <input
+        id="registerName"
+        type="text"
+        placeholder="Ваше имя"
+        required
+        minlength="2"
+        maxlength="50"
+      >
+
+      <label>Username</label>
+
+      <input
+        id="registerUsername"
+        type="text"
+        placeholder="@username"
+        required
+        minlength="3"
+        maxlength="30"
+      >
+
+      <small class="input-help">
+        По этому имени друзья смогут вас найти
+      </small>
+
+      <label>Email</label>
+
+      <input
+        id="registerEmail"
+        type="email"
+        placeholder="example@mail.com"
+        required
+      >
+
+      <label>Пароль</label>
+
+      <input
+        id="registerPassword"
+        type="password"
+        placeholder="Минимум 6 символов"
+        required
+        minlength="6"
+      >
+
+      <label>Повторите пароль</label>
+
+      <input
+        id="registerPassword2"
+        type="password"
+        placeholder="Повторите пароль"
+        required
+        minlength="6"
+      >
+
+      <button
+        class="main-button"
+        type="submit"
+      >
+        Зарегистрироваться
+      </button>
+
+      <div id="authMessage"></div>
+
+    </form>
+  `;
+}
+
+
+// ============================================================
+// 5. ВХОД
+// ============================================================
+
+function showLogin() {
+
+  document.getElementById("loginTab").classList.add("active");
+  document.getElementById("registerTab").classList.remove("active");
+
+  document.getElementById("authForm").innerHTML = `
+
+    <form onsubmit="loginUser(event)">
+
+      <label>Email</label>
+
+      <input
+        id="loginEmail"
+        type="email"
+        placeholder="example@mail.com"
+        required
+      >
+
+      <label>Пароль</label>
+
+      <input
+        id="loginPassword"
+        type="password"
+        placeholder="Ваш пароль"
+        required
+      >
+
+      <button
+        class="main-button"
+        type="submit"
+      >
+        Войти
+      </button>
+
+      <div id="authMessage"></div>
+
+    </form>
+  `;
+}
+
+
+// ============================================================
+// 6. ПОКАЗ СООБЩЕНИЯ ОБ ОШИБКЕ
+// ============================================================
+
+function authMessage(text, type = "error") {
+
+  const element = document.getElementById("authMessage");
+
+  if (!element) return;
+
+  element.innerHTML = `
+    <div class="auth-message ${type}">
+      ${esc(text)}
+    </div>
+  `;
+}
+
+
+// ============================================================
+// 7. РЕГИСТРАЦИЯ ПОЛЬЗОВАТЕЛЯ
+// ============================================================
+
+async function registerUser(event) {
+
+  event.preventDefault();
+
+  const name =
+    document.getElementById("registerName").value.trim();
+
+  let username =
+    document.getElementById("registerUsername").value.trim();
+
+  const email =
+    document.getElementById("registerEmail").value.trim();
+
+  const password =
+    document.getElementById("registerPassword").value;
+
+  const password2 =
+    document.getElementById("registerPassword2").value;
+
+
+  // Проверка паролей
+
+  if (password !== password2) {
+    authMessage("Пароли не совпадают.");
+    return;
+  }
+
+
+  // Проверка username
+
+  username = username
+    .replace(/^@+/, "")
+    .toLowerCase()
+    .replace(/[^a-z0-9_]/g, "");
+
+
+  if (username.length < 3) {
+    authMessage(
+      "Username должен содержать минимум 3 символа."
+    );
+    return;
+  }
+
+
+  // Проверяем, свободен ли username
+
+  const { data: existingProfile, error: usernameError } =
+    await supabase
+      .from("profiles")
+      .select("id")
+      .eq("username", username)
+      .maybeSingle();
+
+
+  if (usernameError) {
+
+    console.error(usernameError);
+
+    authMessage(
+      "Не удалось проверить username. Проверь настройки Supabase."
+    );
+
+    return;
+  }
+
+
+  if (existingProfile) {
+
+    authMessage(
+      "Этот username уже занят. Выбери другой."
+    );
+
+    return;
+  }
+
+
+  authMessage(
+    "Создаём аккаунт...",
+    "success"
+  );
+
+
+  // Создаём пользователя Supabase Auth
+
+  const {
+    data,
+    error
 /* ==========================================
    MeowI Messenger
    GitHub Pages version

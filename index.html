@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Messenger</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<div class="app">
+
+    <!-- Авторизация -->
+    <section id="authScreen" class="screen">
+
+        <div class="auth-card">
+
+            <div class="logo">M</div>
+
+            <h1>Messenger</h1>
+            <p class="subtitle">Общайся с друзьями</p>
+
+            <div class="tabs">
+                <button id="loginTab" class="tab active">
+                    Войти
+                </button>
+
+                <button id="registerTab" class="tab">
+                    Регистрация
+                </button>
+            </div>
+
+            <form id="authForm">
+
+                <input
+                    id="email"
+                    type="email"
+                    placeholder="Email"
+                    required
+                >
+
+                <input
+                    id="password"
+                    type="password"
+                    placeholder="Пароль"
+                    minlength="6"
+                    required
+                >
+
+                <button type="submit" class="main-button">
+                    Войти
+                </button>
+
+            </form>
+
+            <p id="errorMessage" class="error"></p>
+
+        </div>
+
+    </section>
+
+
+    <!-- Главное меню -->
+    <section id="chatScreen" class="screen hidden">
+
+        <header class="header">
+
+            <div>
+                <h2>Чаты</h2>
+                <span id="userEmail"></span>
+            </div>
+
+            <button id="logoutButton" class="logout">
+                Выйти
+            </button>
+
+        </header>
+
+
+        <main class="chats">
+
+            <div class="empty-chat">
+
+                <div class="chat-icon">
+                    💬
+                </div>
+
+                <h3>Пока нет чатов</h3>
+
+                <p>
+                    Здесь будут отображаться твои переписки
+                </p>
+
+            </div>
+
+        </main>
+
+    </section>
+
+</div>
+
+<script src="script.js"></script>
+
+</body>
+</html>

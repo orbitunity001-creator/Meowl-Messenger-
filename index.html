@@ -9,34 +9,65 @@
 
 <body>
 
-  <div id="app">
+<div id="app">
 
-    <header class="header">
-      <div class="logo">🐱</div>
-      <div>
-        <h1>Meowl Messenger</h1>
-        <p>Общайся с друзьями</p>
-      </div>
-    </header>
+  <header class="header">
+    <div class="logo">🐱</div>
+    <div>
+      <h1>Meowl Messenger</h1>
+      <p>Общайся с друзьями</p>
+    </div>
+  </header>
 
-    <main class="home">
+  <main class="home">
 
-      <div class="welcome">
-        <h2>Добро пожаловать!</h2>
-        <p>Твой новый мессенджер уже готовится.</p>
+    <div class="welcome">
 
-        <button onclick="showMessage()">
-          💬 Начать
+      <h2>Добро пожаловать!</h2>
+      <p>Войди или создай аккаунт</p>
+
+      <div id="auth">
+
+        <input
+          id="username"
+          type="text"
+          placeholder="Имя пользователя"
+        >
+
+        <input
+          id="email"
+          type="email"
+          placeholder="Email"
+        >
+
+        <input
+          id="password"
+          type="password"
+          placeholder="Пароль"
+        >
+
+        <button class="full" onclick="registerUser()">
+          📝 Зарегистрироваться
         </button>
 
-        <div id="message"></div>
+        <br><br>
+
+        <button class="full" onclick="loginUser()">
+          🔑 Войти
+        </button>
+
+        <div id="authMessage"></div>
+
       </div>
 
-    </main>
+    </div>
 
-  </div>
+  </main>
 
-  <script src="app.js"></script>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="app.js"></script>
 
 </body>
 </html>

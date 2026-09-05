@@ -733,3 +733,225 @@
 
 </body>
 </html>
+
+-- =========================================
+-- MEOWL MESSENGER DATABASE
+-- =========================================
+
+-- Профили пользователей
+create table if not exists public.profiles (
+  id uuid primary key references auth.users(id) on delete cascade,
+  username text not null unique,
+  avatar_url text,
+  created_at timestamptz not null default now()
+);
+
+-- Чаты
+create table if not exists public.chats (
+  id uuid primary key default gen_random_uuid(),
+  created_at timestamptz not null default now()
+);
+
+-- Участники чатов
+create table if not exists public.chat_members (
+  chat_id uuid not null references public.chats(id) on delete cascade,
+  user_id uuid not null references auth.users(id) on delete cascade,
+  joined_at timestamptz not null default now(),
+
+  primary key (chat_id, user_id)
+);
+
+-- Сообщения
+create table if not exists public.messages (
+  id uuid primary key default gen_random_uuid(),
+
+  chat_id uuid not null references public.chats(id) on delete cascade,
+
+  sender_id uuid not null references auth.users(id) on delete cascade,
+
+  body text not null,
+
+  created_at timestamptz not null default now()
+);
+
+
+-- =========================================
+-- INDEXES
+-- =========================================
+
+create index if not exists chat_members_user_id_idx
+on public.chat_members(user_id);
+
+create index if not exists chat_members_chat_id_idx
+on public.chat_members(chat_id);
+
+create index if not exists messages_chat_id_idx
+on public.messages(chat_id);
+
+create index if not exists messages_created_at_idx
+on public.messages(created_at);
+
+
+-- =========================================
+-- ENABLE RLS
+-- =========================================
+
+alter table public.profiles enable row level security;
+alter table public.chats enable row level security;
+alter table public.chat_members enable row level security;
+alter table public.messages enable row level security;
+
+
+-- =========================================
+-- PROFILES POLICIES
+-- =========================================
+
+drop policy if exists "profiles_select_authenticated"
+on public.profiles;
+
+create policy "profiles_select_authenticated"
+on public.profiles
+for select
+to authenticated
+using (true);
+
+
+drop policy if exists "profiles_insert_own"
+on public.profiles;
+
+create policy "profiles_insert_own"
+on public.profiles
+for insert
+to authenticated
+with check (id = auth.uid());
+
+
+drop policy if exists "profiles_update_own"
+on public.profiles;
+
+create policy "profiles_update_own"
+on public.profiles
+for update
+to authenticated
+using (id = auth.uid())
+with check (id = auth.uid());
+
+
+-- =========================================
+-- CHAT POLICIES
+-- =========================================
+
+drop policy if exists "chats_select_members"
+on public.chats;
+
+create policy "chats_select_members"
+on public.chats
+for select
+to authenticated
+using (
+  exists (
+    select 1
+    from public.chat_members cm
+    where cm.chat_id = chats.id
+      and cm.user_id = auth.uid()
+  )
+);
+
+
+drop policy if exists "chats_insert_authenticated"
+on public.chats;
+
+create policy "chats_insert_authenticated"
+on public.chats
+for insert
+to authenticated
+with check (true);
+
+
+-- =========================================
+-- CHAT MEMBERS POLICIES
+-- =========================================
+
+drop policy if exists "chat_members_select_members"
+on public.chat_members;
+
+create policy "chat_members_select_members"
+on public.chat_members
+for select
+to authenticated
+using (
+  exists (
+    select 1
+    from public.chat_members cm
+    where cm.chat_id = chat_members.chat_id
+      and cm.user_id = auth.uid()
+  )
+);
+
+
+drop policy if exists "chat_members_insert_self"
+on public.chat_members;
+
+create policy "chat_members_insert_self"
+on public.chat_members
+for insert
+to authenticated
+with check (
+  user_id = auth.uid()
+);
+
+
+-- =========================================
+-- MESSAGE POLICIES
+-- =========================================
+
+drop policy if exists "messages_select_chat_members"
+on public.messages;
+
+create policy "messages_select_chat_members"
+on public.messages
+for select
+to authenticated
+using (
+  exists (
+    select 1
+    from public.chat_members cm
+    where cm.chat_id = messages.chat_id
+      and cm.user_id = auth.uid()
+  )
+);
+
+
+drop policy if exists "messages_insert_chat_members"
+on public.messages;
+
+create policy "messages_insert_chat_members"
+on public.messages
+for insert
+to authenticated
+with check (
+  sender_id = auth.uid()
+  and exists (
+    select 1
+    from public.chat_members cm
+    where cm.chat_id = messages.chat_id
+      and cm.user_id = auth.uid()
+  )
+);
+
+
+-- =========================================
+-- REALTIME
+-- =========================================
+
+do $$
+begin
+  begin
+    alter publication supabase_realtime
+    add table public.messages;
+  exception
+    when duplicate_object then
+      null;
+  end;
+end
+$$;

@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Meowl Messenger</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<div id="authScreen">
+
+  <div class="auth-card">
+
+    <div class="logo">M</div>
+
+    <h1>Meowl Messenger</h1>
+    <p class="subtitle">Общайся. Быстро. Красиво.</p>
+
+    <div class="tabs">
+      <button id="loginTab" class="tab active">Войти</button>
+      <button id="registerTab" class="tab">Регистрация</button>
+    </div>
+
+    <input id="emailInput" type="email" placeholder="Почта">
+    <input id="passwordInput" type="password" placeholder="Пароль">
+
+    <button id="authButton" class="main-button">
+      Продолжить
+    </button>
+
+    <p id="authError"></p>
+
+  </div>
+
+</div>
+
+
+<div id="appScreen">
+
+  <header>
+    <div>
+      <h2 id="pageTitle">Чаты</h2>
+      <small id="emailLabel"></small>
+    </div>
+
+    <button id="logoutButton" class="logout-button">
+      Выйти
+    </button>
+  </header>
+
+
+  <main>
+
+    <!-- ЧАТЫ -->
+    <section id="chatsPage">
+
+      <div class="empty-card">
+        <div class="chat-icon">💬</div>
+
+        <h2>Чатов пока нет</h2>
+
+        <p>Здесь будут отображаться твои чаты</p>
+      </div>
+
+    </section>
+
+
+    <!-- ПРОФИЛЬ -->
+    <section id="profilePage" class="hidden">
+
+      <div class="profile-card">
+
+        <div class="avatar">
+          <img id="avatarImage">
+          <span id="avatarDefault">👤</span>
+        </div>
+
+        <h2 id="profileNickname">Ник</h2>
+
+        <p id="profileDescription">
+          Описание профиля
+        </p>
+
+        <button id="editProfileButton" class="main-button">
+          ✏️ Изменить профиль
+        </button>
+
+      </div>
+
+
+      <!-- РЕДАКТИРОВАНИЕ -->
+      <div id="editProfile" class="profile-card hidden">
+
+        <h2>Изменить профиль</h2>
+
+        <button id="photoButton" class="secondary-button">
+          📷 Выбрать фото
+        </button>
+
+        <input
+          id="photoInput"
+          type="file"
+          accept="image/*"
+          hidden
+        >
+
+        <input
+          id="nicknameInput"
+          type="text"
+          placeholder="Ник"
+        >
+
+        <textarea
+          id="descriptionInput"
+          placeholder="Описание"
+        ></textarea>
+
+        <input
+          id="profileEmail"
+          type="email"
+          readonly
+          disabled
+        >
+
+        <button id="saveProfileButton" class="main-button">
+          💾 Сохранить
+        </button>
+
+        <button id="cancelProfileButton" class="cancel-button">
+          Отмена
+        </button>
+
+      </div>
+
+    </section>
+
+  </main>
+
+
+  <nav>
+
+    <button id="chatsButton" class="nav-button active">
+      <span>💬</span>
+      Чаты
+    </button>
+
+    <button id="profileButton" class="nav-button">
+      <span>👤</span>
+      Профиль
+    </button>
+
+  </nav>
+
+</div>
+
+
+<script src="script.js"></script>
+
+</body>
+</html>

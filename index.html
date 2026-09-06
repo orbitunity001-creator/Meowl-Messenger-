@@ -10,7 +10,7 @@
 
 <div class="container">
 
-  <!-- ВХОД / РЕГИСТРАЦИЯ -->
+  <!-- ВХОД -->
   <div id="authScreen" class="card">
     <div class="logo">M</div>
 
@@ -53,11 +53,15 @@
 
     <!-- ЧАТЫ -->
     <div id="chatsPage" class="page">
+
       <div class="empty-card">
         <div class="chat-icon">💬</div>
+
         <h3>Пока нет чатов</h3>
+
         <p>Здесь появятся твои переписки.</p>
       </div>
+
     </div>
 
 
@@ -71,7 +75,10 @@
         </div>
 
         <h2 id="profileNickname">Профиль</h2>
-        <p id="profileDescription">Описание профиля</p>
+
+        <p id="profileDescription">
+          Описание профиля
+        </p>
 
         <button class="main-btn" onclick="openEditProfile()">
           ✏️ Изменить профиль
@@ -80,31 +87,68 @@
       </div>
 
 
-      <!-- РЕДАКТИРОВАНИЕ -->
+      <!-- РЕДАКТИРОВАНИЕ ПРОФИЛЯ -->
       <div id="editProfile" class="edit-card hidden">
 
         <h2>Изменить профиль</h2>
 
+
+        <!-- АВАТАР -->
         <label>Аватар</label>
 
         <label class="avatar-button">
-          📷 Выбрать аватар
-          <input id="avatarInput" type="file" accept="image/*">
+          📷 Выбрать фото с устройства
+          <input
+            id="avatarInput"
+            type="file"
+            accept="image/*"
+          >
         </label>
 
+
+        <!-- НИК -->
         <label>Никнейм</label>
-        <input id="nickname" type="text" placeholder="Твой ник">
 
+        <input
+          id="nickname"
+          type="text"
+          maxlength="30"
+          placeholder="Твой никнейм"
+        >
+
+
+        <!-- ОПИСАНИЕ -->
         <label>Описание</label>
-        <textarea id="description" placeholder="Расскажи о себе"></textarea>
 
+        <textarea
+          id="description"
+          maxlength="200"
+          placeholder="Расскажи о себе..."
+        ></textarea>
+
+
+        <!-- ПОЧТА -->
+        <label>Почта</label>
+
+        <input
+          id="profileEmail"
+          type="email"
+          readonly
+          disabled
+        >
+
+
+        <!-- СОХРАНИТЬ -->
         <button class="main-btn" onclick="saveProfile()">
-          💾 Сохранить
+          💾 Сохранить профиль
         </button>
 
+
+        <!-- ОТМЕНА -->
         <button class="cancel-btn" onclick="closeEditProfile()">
           Отмена
         </button>
+
 
         <p id="profileMessage"></p>
 
@@ -113,15 +157,23 @@
     </div>
 
 
-    <!-- НИЖНЕЕ МЕНЮ ТОЛЬКО В АККАУНТЕ -->
+    <!-- НИЖНЕЕ МЕНЮ -->
     <nav class="bottom-nav">
 
-      <button id="chatsNav" class="nav-btn active" onclick="showChats()">
+      <button
+        id="chatsNav"
+        class="nav-btn active"
+        onclick="showChats()"
+      >
         <span>💬</span>
         Чаты
       </button>
 
-      <button id="profileNav" class="nav-btn" onclick="showProfile()">
+      <button
+        id="profileNav"
+        class="nav-btn"
+        onclick="showProfile()"
+      >
         <span>👤</span>
         Профиль
       </button>
@@ -133,5 +185,6 @@
 </div>
 
 <script src="script.js"></script>
+
 </body>
 </html>

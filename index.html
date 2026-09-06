@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Meowl Messenger</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="container">
+
+  <div id="auth">
+    <div class="logo">M</div>
+
+    <h1>Meowl Messenger</h1>
+    <p class="subtitle">Общайся. Быстро. Удобно.</p>
+
+    <div class="tabs">
+      <button id="loginTab" class="active" onclick="setMode('login')">
+        Войти
+      </button>
+
+      <button id="registerTab" onclick="setMode('register')">
+        Регистрация
+      </button>
+    </div>
+
+    <input id="email" type="email" placeholder="Почта">
+    <input id="password" type="password" placeholder="Пароль">
+
+    <button class="mainBtn" onclick="authAction()" id="authBtn">
+      Войти
+    </button>
+
+    <p id="error"></p>
+  </div>
+
+
+  <div id="messenger" style="display:none">
+
+    <header>
+      <h2 id="pageTitle">Чаты</h2>
+
+      <button class="logout" onclick="logout()">
+        Выйти
+      </button>
+    </header>
+
+
+    <div id="chatsPage">
+
+      <div class="empty">
+        <div class="emptyIcon">💬</div>
+
+        <h3>Чатов пока нет</h3>
+
+        <p>Здесь появятся твои сообщения</p>
+      </div>
+
+    </div>
+
+
+    <div id="profilePage" style="display:none">
+
+      <div class="profileCard">
+
+        <div class="avatar" id="profileAvatar">
+          👤
+        </div>
+
+        <h2 id="profileNickname">
+          Пользователь
+        </h2>
+
+        <p id="profileDescription">
+          Описание не указано
+        </p>
+
+
+        <div class="profileInfo">
+
+          <div>
+            <span>📧 Почта</span>
+
+            <b id="profileEmail"></b>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <nav class="bottomNav">
+
+      <button onclick="showChats()">
+        💬
+        <span>Чаты</span>
+      </button>
+
+      <button onclick="showProfile()">
+        👤
+        <span>Профиль</span>
+      </button>
+
+    </nav>
+
+  </div>
+
+</div>
+
+<script src="script.js"></script>
+
+</body>
+</html>

@@ -3,62 +3,64 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#070914">
 <title>Meowl Messenger</title>
 
 <style>
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
+
 :root{
   --bg:#070914;
-  --card:rgba(255,255,255,.075);
-  --card2:rgba(255,255,255,.045);
-  --border:rgba(255,255,255,.13);
-  --text:#fff;
-  --muted:#a9afc7;
+  --panel:rgba(18,22,43,.78);
+  --panel2:rgba(25,29,54,.88);
+  --border:rgba(255,255,255,.10);
   --purple:#8b5cf6;
   --cyan:#22d3ee;
   --pink:#ec4899;
-  --green:#34d399;
-  --orange:#fb923c;
-  --radius:24px;
-  --glass-opacity:.075;
-  --glow:1;
-  --font-size:16px;
+  --text:#f8fafc;
+  --muted:#94a3b8;
+  --danger:#fb7185;
+  --success:#34d399;
+  --glow:24px;
+  --glass:.78;
 }
 
-*{
-  box-sizing:border-box;
-  -webkit-tap-highlight-color:transparent;
-}
-
-html,body{
-  margin:0;
-  padding:0;
-  min-height:100%;
+body{
+  min-height:100vh;
   background:
-    radial-gradient(circle at 15% 10%,rgba(139,92,246,.24),transparent 35%),
-    radial-gradient(circle at 85% 20%,rgba(34,211,238,.18),transparent 35%),
-    radial-gradient(circle at 50% 100%,rgba(236,72,153,.15),transparent 40%),
+    radial-gradient(circle at 10% 10%,rgba(139,92,246,.20),transparent 30%),
+    radial-gradient(circle at 90% 20%,rgba(34,211,238,.14),transparent 30%),
+    radial-gradient(circle at 50% 100%,rgba(236,72,153,.10),transparent 35%),
     var(--bg);
   color:var(--text);
   font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
-  font-size:var(--font-size);
   overflow-x:hidden;
 }
 
-button,input,textarea{
+button,
+input,
+textarea{
   font:inherit;
 }
 
 button{
-  border:0;
   cursor:pointer;
+}
+
+.hidden{
+  display:none!important;
 }
 
 .app{
   width:100%;
-  max-width:760px;
-  margin:auto;
+  max-width:900px;
   min-height:100vh;
-  padding-bottom:90px;
+  margin:auto;
+  padding-bottom:100px;
 }
 
 .page{
@@ -78,130 +80,163 @@ button{
   }
   to{
     opacity:1;
-    transform:translateY(0);
+    transform:none;
   }
+}
+
+.glass{
+  background:rgba(15,18,37,var(--glass));
+  border:1px solid var(--border);
+  backdrop-filter:blur(20px);
+  -webkit-backdrop-filter:blur(20px);
+  box-shadow:
+    0 10px 40px rgba(0,0,0,.25),
+    0 0 var(--glow) rgba(139,92,246,.08);
 }
 
 .header{
   display:flex;
   align-items:center;
   justify-content:space-between;
-  gap:15px;
-  margin-bottom:22px;
-}
-
-.brand{
-  display:flex;
-  align-items:center;
   gap:12px;
+  margin-bottom:20px;
 }
 
-.logo{
-  width:48px;
-  height:48px;
-  border-radius:17px;
+.title{
+  font-size:27px;
+  font-weight:800;
+  letter-spacing:-.5px;
+}
+
+.subtitle{
+  color:var(--muted);
+  font-size:14px;
+  margin-top:4px;
+}
+
+.icon-btn{
+  width:44px;
+  height:44px;
+  border-radius:15px;
+  border:1px solid var(--border);
+  background:rgba(255,255,255,.06);
+  color:white;
   display:flex;
   align-items:center;
   justify-content:center;
-  font-size:25px;
-  background:linear-gradient(135deg,rgba(139,92,246,.65),rgba(34,211,238,.4));
-  border:1px solid var(--border);
-  box-shadow:
-    0 0 calc(25px * var(--glow)) rgba(139,92,246,.45),
-    inset 0 1px 0 rgba(255,255,255,.15);
-  backdrop-filter:blur(20px);
+  transition:.2s;
 }
 
-.brand h1{
-  font-size:20px;
-  margin:0;
+.icon-btn:hover{
+  transform:translateY(-2px);
+  background:rgba(139,92,246,.18);
+  border-color:rgba(139,92,246,.4);
 }
 
-.brand p{
-  margin:3px 0 0;
-  color:var(--muted);
-  font-size:12px;
-}
-
-.icon-button{
-  width:45px;
-  height:45px;
+.primary-btn{
+  border:0;
   border-radius:16px;
-  color:#fff;
-  background:var(--card);
+  padding:13px 18px;
+  color:white;
+  font-weight:700;
+  background:linear-gradient(135deg,var(--purple),var(--pink));
+  box-shadow:0 0 var(--glow) rgba(139,92,246,.25);
+  transition:.2s;
+}
+
+.primary-btn:hover{
+  transform:translateY(-2px);
+}
+
+.secondary-btn{
   border:1px solid var(--border);
-  backdrop-filter:blur(18px);
+  border-radius:16px;
+  padding:12px 17px;
+  color:white;
+  background:rgba(255,255,255,.06);
+}
+
+.danger-btn{
+  border:1px solid rgba(251,113,133,.25);
+  border-radius:16px;
+  padding:12px 17px;
+  color:#fecdd3;
+  background:rgba(251,113,133,.10);
 }
 
 .card{
-  background:
-    linear-gradient(
-      145deg,
-      rgba(255,255,255,var(--glass-opacity)),
-      rgba(255,255,255,.025)
-    );
-  border:1px solid var(--border);
-  border-radius:var(--radius);
-  padding:18px;
-  margin-bottom:14px;
-  backdrop-filter:blur(22px);
-  -webkit-backdrop-filter:blur(22px);
-  box-shadow:
-    0 15px 45px rgba(0,0,0,.22),
-    inset 0 1px 0 rgba(255,255,255,.08);
-}
-
-.clickable{
-  cursor:pointer;
-  transition:.22s;
-}
-
-.clickable:hover{
-  transform:translateY(-3px);
-  border-color:rgba(139,92,246,.45);
+  border-radius:24px;
+  padding:20px;
+  margin-bottom:16px;
 }
 
 .hero{
+  padding:26px;
+  border-radius:28px;
+  margin-bottom:18px;
   position:relative;
   overflow:hidden;
-  padding:25px;
 }
 
-.hero h2{
-  margin:0 0 8px;
-  font-size:27px;
+.hero:after{
+  content:"";
+  position:absolute;
+  width:180px;
+  height:180px;
+  right:-80px;
+  top:-80px;
+  border-radius:50%;
+  background:rgba(34,211,238,.12);
+  filter:blur(20px);
+}
+
+.hero h1{
+  font-size:34px;
+  line-height:1.1;
 }
 
 .hero p{
   color:var(--muted);
-  line-height:1.55;
-  margin:0 0 20px;
+  margin-top:9px;
+  max-width:620px;
 }
 
-.gradient-text{
-  background:linear-gradient(90deg,var(--purple),var(--cyan),var(--pink));
-  -webkit-background-clip:text;
-  background-clip:text;
-  color:transparent;
+.bot-card{
+  display:flex;
+  align-items:center;
+  gap:15px;
+  padding:17px;
+  border-radius:21px;
+  margin-bottom:12px;
+  transition:.2s;
+}
+
+.bot-card:hover{
+  transform:translateY(-2px);
+  border-color:rgba(139,92,246,.35);
 }
 
 .avatar{
-  width:56px;
-  height:56px;
-  flex:0 0 56px;
+  width:54px;
+  height:54px;
+  min-width:54px;
+  border-radius:18px;
   display:flex;
   align-items:center;
   justify-content:center;
-  border-radius:19px;
-  font-size:28px;
-  background:linear-gradient(
-    135deg,
-    rgba(139,92,246,.5),
-    rgba(34,211,238,.35)
-  );
-  border:1px solid var(--border);
-  box-shadow:0 0 calc(25px * var(--glow)) rgba(139,92,246,.3);
   overflow:hidden;
+  background:
+    linear-gradient(135deg,rgba(139,92,246,.3),rgba(34,211,238,.2));
+  border:1px solid rgba(255,255,255,.10);
+  font-size:27px;
+}
+
+.avatar.large{
+  width:76px;
+  height:76px;
+  min-width:76px;
+  border-radius:24px;
+  font-size:36px;
 }
 
 .avatar img{
@@ -210,591 +245,600 @@ button{
   object-fit:cover;
 }
 
-.bot-card{
-  display:flex;
-  align-items:center;
-  gap:15px;
-}
-
 .bot-info{
-  min-width:0;
   flex:1;
+  min-width:0;
 }
 
-.bot-info h3{
-  margin:0 0 4px;
-  font-size:17px;
+.bot-name{
+  font-weight:800;
+  font-size:16px;
 }
 
-.bot-info p{
-  margin:0;
+.bot-username{
   color:var(--muted);
   font-size:13px;
-  overflow:hidden;
-  text-overflow:ellipsis;
-  white-space:nowrap;
+  margin-top:3px;
+}
+
+.bot-desc{
+  color:#cbd5e1;
+  font-size:13px;
+  margin-top:5px;
 }
 
 .badge{
   display:inline-flex;
   align-items:center;
-  padding:5px 9px;
-  border-radius:999px;
-  background:rgba(139,92,246,.15);
-  border:1px solid rgba(139,92,246,.35);
-  color:#ddd1ff;
+  gap:5px;
+  padding:5px 8px;
+  border-radius:9px;
   font-size:11px;
+  background:rgba(139,92,246,.13);
+  color:#c4b5fd;
   margin-top:7px;
 }
 
-.section-title{
-  margin:25px 0 12px;
-  font-size:14px;
-  color:var(--muted);
-  font-weight:700;
-}
-
-.grid{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:12px;
-}
-
-.small-card{
-  padding:17px;
-  min-height:125px;
-}
-
-.small-icon{
-  font-size:28px;
-  margin-bottom:12px;
-}
-
-.small-card h3{
-  margin:0 0 5px;
-  font-size:15px;
-}
-
-.small-card p{
-  color:var(--muted);
-  margin:0;
-  line-height:1.4;
-  font-size:12px;
-}
-
-.primary-button{
-  width:100%;
-  min-height:50px;
-  border-radius:17px;
-  padding:12px 17px;
-  color:#fff;
-  font-weight:700;
-  background:linear-gradient(
-    135deg,
-    rgba(139,92,246,.75),
-    rgba(34,211,238,.5)
-  );
-  border:1px solid rgba(255,255,255,.16);
-  box-shadow:0 10px 30px rgba(139,92,246,.2);
-}
-
-.secondary-button{
-  width:100%;
-  min-height:48px;
-  border-radius:17px;
-  padding:11px 15px;
-  color:#fff;
-  background:var(--card);
-  border:1px solid var(--border);
-}
-
-.danger-button{
-  background:rgba(251,113,133,.12);
-  border-color:rgba(251,113,133,.28);
-}
-
-.row-buttons{
-  display:flex;
-  gap:10px;
-}
-
-.row-buttons>*{
-  flex:1;
-}
-
-.input{
-  width:100%;
-  min-height:52px;
-  border-radius:17px;
-  padding:0 16px;
-  color:#fff;
-  outline:none;
-  background:rgba(0,0,0,.2);
-  border:1px solid var(--border);
-}
-
-textarea.input{
-  padding-top:14px;
-}
-
-.input:focus{
-  border-color:var(--purple);
-  box-shadow:0 0 22px rgba(139,92,246,.18);
-}
-
-.input::placeholder{
-  color:#737990;
-}
+/* NAV */
 
 .bottom-nav{
   position:fixed;
+  z-index:100;
+  bottom:14px;
   left:50%;
-  bottom:12px;
   transform:translateX(-50%);
-  width:min(720px,calc(100% - 22px));
+  width:min(94%,650px);
   display:grid;
   grid-template-columns:repeat(4,1fr);
-  gap:6px;
+  gap:7px;
   padding:8px;
-  z-index:100;
   border-radius:23px;
-  background:rgba(12,14,28,.74);
-  border:1px solid var(--border);
-  backdrop-filter:blur(25px);
-  box-shadow:0 15px 50px rgba(0,0,0,.4);
 }
 
-.nav-button{
-  min-height:58px;
-  border-radius:17px;
+.nav-btn{
+  border:0;
   background:transparent;
-  color:#81869f;
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  justify-content:center;
-  gap:3px;
-  font-size:11px;
+  color:#94a3b8;
+  border-radius:17px;
+  padding:10px 5px;
+  font-size:12px;
+  transition:.2s;
 }
 
-.nav-icon{
-  font-size:20px;
+.nav-btn span{
+  display:block;
+  font-size:21px;
+  margin-bottom:3px;
 }
 
-.nav-button.active{
-  color:#fff;
+.nav-btn.active{
+  color:white;
   background:linear-gradient(
     135deg,
-    rgba(139,92,246,.27),
+    rgba(139,92,246,.25),
     rgba(34,211,238,.12)
   );
 }
 
-.list-item{
-  display:flex;
-  align-items:center;
-  gap:13px;
-  padding:14px;
-  border-radius:19px;
-  background:var(--card);
-  border:1px solid var(--border);
-  margin-bottom:10px;
-  cursor:pointer;
+/* CHAT */
+
+.chat-page{
+  padding:0;
+  height:100vh;
+  max-height:100vh;
+  overflow:hidden;
 }
 
-.list-main{
+.chat-shell{
+  height:100vh;
+  display:flex;
+  flex-direction:column;
+  background:#080b18;
+}
+
+.chat-header{
+  min-height:74px;
+  padding:12px 15px;
+  display:flex;
+  align-items:center;
+  gap:10px;
+  border-bottom:1px solid rgba(255,255,255,.08);
+  background:rgba(9,12,27,.88);
+  backdrop-filter:blur(20px);
+  position:relative;
+  z-index:20;
+}
+
+.chat-header-info{
   flex:1;
   min-width:0;
 }
 
-.list-main h3{
-  margin:0 0 3px;
-  font-size:15px;
+.chat-header-name{
+  font-weight:800;
 }
 
-.list-main p{
-  margin:0;
-  color:var(--muted);
+.chat-header-status{
   font-size:12px;
-}
-
-.arrow{
-  color:#7e849d;
-  font-size:20px;
-}
-
-.profile-top{
-  text-align:center;
-  padding:28px 18px;
-}
-
-.profile-avatar{
-  width:90px;
-  height:90px;
-  border-radius:30px;
-  margin:0 auto 14px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  font-size:44px;
-  background:linear-gradient(
-    135deg,
-    rgba(139,92,246,.45),
-    rgba(34,211,238,.35)
-  );
-  border:1px solid var(--border);
-  overflow:hidden;
-}
-
-.profile-avatar img{
-  width:100%;
-  height:100%;
-  object-fit:cover;
-}
-
-.setting-title{
-  margin:0 0 10px;
-  font-size:13px;
-  color:var(--muted);
-  font-weight:700;
-}
-
-.theme-grid{
-  display:grid;
-  grid-template-columns:repeat(2,1fr);
-  gap:9px;
-}
-
-.theme-button{
-  min-height:80px;
-  border-radius:18px;
-  color:#fff;
-  text-align:left;
-  padding:13px;
-  border:1px solid rgba(255,255,255,.14);
-  background:rgba(255,255,255,.06);
-}
-
-.theme-button.active{
-  border-color:#fff;
-}
-
-.theme-dot{
-  width:28px;
-  height:28px;
-  border-radius:50%;
-  margin-bottom:8px;
-}
-
-.theme-purple{background:linear-gradient(135deg,#8b5cf6,#22d3ee)}
-.theme-cyan{background:linear-gradient(135deg,#06b6d4,#3b82f6)}
-.theme-orange{background:linear-gradient(135deg,#f97316,#fb7185)}
-.theme-pink{background:linear-gradient(135deg,#ec4899,#8b5cf6)}
-.theme-green{background:linear-gradient(135deg,#10b981,#22c55e)}
-.theme-blue{background:linear-gradient(135deg,#2563eb,#38bdf8)}
-.theme-red{background:linear-gradient(135deg,#ef4444,#f97316)}
-.theme-gold{background:linear-gradient(135deg,#eab308,#f59e0b)}
-.theme-ice{background:linear-gradient(135deg,#94a3b8,#e0f2fe)}
-.theme-rainbow{background:linear-gradient(135deg,#ec4899,#8b5cf6,#22d3ee,#34d399,#facc15)}
-
-.theme-name{
-  font-size:12px;
-  font-weight:700;
-}
-
-.option-grid{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:8px;
-}
-
-.option-button{
-  min-height:48px;
-  border-radius:15px;
-  background:var(--card);
-  color:#fff;
-  border:1px solid var(--border);
-}
-
-.option-button.active{
-  background:rgba(139,92,246,.3);
-  border-color:rgba(139,92,246,.7);
-}
-
-.range{
-  width:100%;
-  accent-color:var(--purple);
-}
-
-.range-row{
-  display:flex;
-  justify-content:space-between;
-  margin-bottom:8px;
-}
-
-.range-value{
-  color:var(--cyan);
-  font-size:12px;
-}
-
-.info-box{
-  padding:16px;
-  border-radius:18px;
-  background:var(--card);
-  border:1px solid var(--border);
-  line-height:1.6;
-  color:#d9dced;
-  font-size:13px;
-  white-space:pre-wrap;
-}
-
-.chat-header{
-  display:flex;
-  align-items:center;
-  gap:12px;
-  margin-bottom:15px;
-}
-
-.chat-header h2{
-  margin:0;
-  font-size:18px;
-}
-
-.chat-header p{
-  margin:3px 0 0;
-  color:var(--muted);
-  font-size:12px;
+  color:var(--success);
+  margin-top:3px;
 }
 
 .chat-messages{
-  min-height:52vh;
-  max-height:65vh;
+  flex:1;
   overflow-y:auto;
-  padding:5px 2px 15px;
+  padding:20px 15px 18px;
+  position:relative;
+  background-position:center;
+  background-size:cover;
+  background-attachment:fixed;
+}
+
+.chat-messages:before{
+  content:"";
+  position:fixed;
+  inset:74px 0 76px;
+  pointer-events:none;
+  background:
+    linear-gradient(
+      rgba(5,7,17,.32),
+      rgba(5,7,17,.32)
+    );
+  z-index:0;
+}
+
+.message-row{
+  position:relative;
+  z-index:1;
+  display:flex;
+  margin:8px 0;
+}
+
+.message-row.mine{
+  justify-content:flex-end;
 }
 
 .message{
-  max-width:90%;
-  padding:13px 15px;
-  margin:8px 0;
-  border-radius:19px;
-  line-height:1.5;
-  font-size:14px;
-  white-space:pre-wrap;
-  word-break:break-word;
+  max-width:min(78%,580px);
+  padding:10px 13px;
+  border-radius:18px;
+  background:rgba(26,31,55,.91);
+  border:1px solid rgba(255,255,255,.08);
+  box-shadow:0 7px 20px rgba(0,0,0,.15);
+  position:relative;
+  cursor:pointer;
 }
 
-.message.bot{
-  margin-right:auto;
-  background:var(--card);
-  border:1px solid var(--border);
-  border-bottom-left-radius:7px;
-}
-
-.message.user{
-  margin-left:auto;
+.message-row.mine .message{
   background:linear-gradient(
     135deg,
-    rgba(139,92,246,.62),
-    rgba(236,72,153,.35)
+    rgba(109,72,190,.95),
+    rgba(124,58,237,.85)
   );
-  border-bottom-right-radius:7px;
+  border-bottom-right-radius:6px;
+}
+
+.message-row:not(.mine) .message{
+  border-bottom-left-radius:6px;
+}
+
+.message-text{
+  white-space:pre-wrap;
+  word-break:break-word;
+  line-height:1.42;
+  font-size:14px;
+}
+
+.message-time{
+  font-size:10px;
+  color:rgba(255,255,255,.53);
+  margin-top:5px;
+  text-align:right;
+}
+
+.empty-chat{
+  position:relative;
+  z-index:2;
+  min-height:100%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  color:var(--muted);
+}
+
+.empty-chat-inner{
+  padding:30px;
+  max-width:360px;
+}
+
+.empty-chat-icon{
+  font-size:52px;
+  margin-bottom:12px;
+}
+
+.chat-input-area{
+  padding:10px;
+  background:rgba(8,11,24,.94);
+  border-top:1px solid rgba(255,255,255,.08);
+  position:relative;
+  z-index:20;
 }
 
 .chat-input{
   display:flex;
+  align-items:flex-end;
   gap:8px;
-  position:sticky;
-  bottom:0;
-  padding-top:8px;
+  padding:7px;
+  border-radius:20px;
 }
 
-.chat-input .input{
+.chat-input textarea{
   flex:1;
+  resize:none;
+  max-height:130px;
+  min-height:43px;
+  border:0;
+  outline:0;
+  background:transparent;
+  color:white;
+  padding:11px;
 }
 
-.send-button{
-  width:52px;
-  border-radius:17px;
+.send-btn{
+  width:44px;
+  height:44px;
+  border-radius:15px;
+  border:0;
+  color:white;
   background:linear-gradient(135deg,var(--purple),var(--cyan));
-  color:#fff;
-  font-size:20px;
+  font-size:19px;
 }
 
-.back-button{
+/* CHAT MENU */
+
+.dropdown{
+  position:absolute;
+  right:12px;
+  top:63px;
+  width:230px;
+  border-radius:19px;
+  padding:7px;
+  background:rgba(16,19,39,.97);
+  border:1px solid rgba(255,255,255,.12);
+  box-shadow:0 20px 60px rgba(0,0,0,.45);
+  backdrop-filter:blur(20px);
+  z-index:100;
+}
+
+.menu-item{
+  width:100%;
   display:flex;
   align-items:center;
-  gap:8px;
-  color:#fff;
+  gap:10px;
+  border:0;
   background:transparent;
-  padding:0;
-  margin-bottom:18px;
-  font-weight:700;
+  color:white;
+  text-align:left;
+  padding:12px;
+  border-radius:13px;
 }
 
-.empty{
-  text-align:center;
-  padding:35px 20px;
-  color:var(--muted);
+.menu-item:hover{
+  background:rgba(255,255,255,.07);
 }
 
-.empty-icon{
-  font-size:42px;
-  margin-bottom:10px;
+.menu-item.danger{
+  color:#fda4af;
 }
 
-.toast{
-  position:fixed;
-  left:50%;
-  bottom:90px;
-  transform:translate(-50%,20px);
-  opacity:0;
-  pointer-events:none;
-  z-index:300;
-  padding:12px 17px;
-  border-radius:16px;
-  background:rgba(15,17,32,.9);
-  border:1px solid var(--border);
-  backdrop-filter:blur(20px);
-  transition:.25s;
-}
+/* MODAL */
 
-.toast.show{
-  opacity:1;
-  transform:translate(-50%,0);
-}
-
-.modal{
+.modal-backdrop{
   position:fixed;
   inset:0;
-  z-index:250;
-  display:none;
+  z-index:500;
+  background:rgba(0,0,0,.67);
+  display:flex;
   align-items:center;
   justify-content:center;
-  padding:20px;
-  background:rgba(0,0,0,.62);
+  padding:18px;
   backdrop-filter:blur(8px);
 }
 
-.modal.show{
-  display:flex;
+.modal{
+  width:min(560px,100%);
+  max-height:90vh;
+  overflow:auto;
+  border-radius:27px;
+  padding:20px;
+  background:rgba(14,18,38,.97);
+  border:1px solid rgba(255,255,255,.11);
+  box-shadow:0 30px 90px rgba(0,0,0,.5);
+  animation:modalIn .2s ease;
 }
 
-.modal-card{
-  width:min(560px,100%);
-  max-height:88vh;
-  overflow-y:auto;
-  background:linear-gradient(
-    145deg,
-    rgba(25,28,50,.97),
-    rgba(9,11,25,.97)
-  );
-  border:1px solid var(--border);
-  border-radius:26px;
-  padding:21px;
+@keyframes modalIn{
+  from{
+    opacity:0;
+    transform:scale(.96) translateY(8px);
+  }
+  to{
+    opacity:1;
+    transform:none;
+  }
 }
 
 .modal-header{
   display:flex;
   align-items:center;
   justify-content:space-between;
-  margin-bottom:16px;
+  gap:12px;
+  margin-bottom:18px;
 }
 
-.modal-header h2{
-  margin:0;
+.modal-title{
+  font-size:21px;
+  font-weight:800;
 }
 
-.close-button{
+.close-btn{
   width:38px;
   height:38px;
+  border:0;
   border-radius:13px;
-  background:var(--card);
-  color:#fff;
-  border:1px solid var(--border);
+  color:white;
+  background:rgba(255,255,255,.07);
 }
 
-.avatar-picker{
-  display:grid;
-  grid-template-columns:repeat(6,1fr);
+.form-group{
+  margin-bottom:15px;
+}
+
+.form-label{
+  display:block;
+  color:#cbd5e1;
+  font-size:13px;
+  margin-bottom:7px;
+}
+
+.input{
+  width:100%;
+  border:1px solid rgba(255,255,255,.10);
+  background:rgba(255,255,255,.055);
+  color:white;
+  outline:none;
+  padding:13px 14px;
+  border-radius:15px;
+}
+
+.input:focus{
+  border-color:rgba(139,92,246,.55);
+  box-shadow:0 0 0 3px rgba(139,92,246,.08);
+}
+
+.modal-actions{
+  display:flex;
   gap:9px;
+  justify-content:flex-end;
+  margin-top:18px;
+  flex-wrap:wrap;
 }
 
-.avatar-choice{
-  height:55px;
+/* WALLPAPERS */
+
+.wallpaper-grid{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:10px;
+}
+
+.wallpaper-option{
+  height:105px;
   border-radius:17px;
-  background:var(--card);
-  border:1px solid var(--border);
-  color:#fff;
-  font-size:25px;
+  border:2px solid transparent;
+  position:relative;
+  overflow:hidden;
+  cursor:pointer;
+  transition:.2s;
 }
 
-.avatar-choice.active{
-  border-color:#fff;
-  background:rgba(139,92,246,.3);
-  box-shadow:0 0 20px rgba(139,92,246,.25);
+.wallpaper-option:hover{
+  transform:translateY(-2px);
 }
 
-.upload-box{
-  border:1px dashed rgba(255,255,255,.25);
-  border-radius:18px;
-  padding:17px;
-  text-align:center;
-  color:var(--muted);
+.wallpaper-option.selected{
+  border-color:#a78bfa;
+  box-shadow:0 0 25px rgba(139,92,246,.3);
 }
 
-.preview-avatar{
-  width:92px;
-  height:92px;
-  border-radius:28px;
-  margin:0 auto 15px;
+.wallpaper-label{
+  position:absolute;
+  left:9px;
+  bottom:8px;
+  font-size:12px;
+  font-weight:700;
+  background:rgba(0,0,0,.42);
+  padding:5px 8px;
+  border-radius:9px;
+}
+
+.wallpaper-default{
+  background:
+    radial-gradient(circle at 15% 25%,rgba(139,92,246,.7),transparent 35%),
+    radial-gradient(circle at 85% 75%,rgba(34,211,238,.55),transparent 35%),
+    #080b18;
+}
+
+.wallpaper-purple{
+  background:
+    radial-gradient(circle at 20% 30%,#8b5cf6,transparent 30%),
+    radial-gradient(circle at 80% 70%,#c026d3,transparent 32%),
+    #160b2c;
+}
+
+.wallpaper-blue{
+  background:
+    radial-gradient(circle at 20% 20%,#0ea5e9,transparent 32%),
+    radial-gradient(circle at 80% 80%,#2563eb,transparent 35%),
+    #06152c;
+}
+
+.wallpaper-pink{
+  background:
+    radial-gradient(circle at 20% 80%,#ec4899,transparent 32%),
+    radial-gradient(circle at 85% 20%,#f43f5e,transparent 35%),
+    #260916;
+}
+
+.wallpaper-ocean{
+  background:
+    linear-gradient(135deg,#062b3c,#083344 40%,#164e63);
+}
+
+.wallpaper-space{
+  background:
+    radial-gradient(circle at 20% 30%,white 0 1px,transparent 2px),
+    radial-gradient(circle at 80% 20%,white 0 1px,transparent 2px),
+    radial-gradient(circle at 60% 75%,#c4b5fd 0 1px,transparent 2px),
+    radial-gradient(circle at 30% 85%,#67e8f9 0 1px,transparent 2px),
+    radial-gradient(circle at 70% 50%,white 0 1px,transparent 2px),
+    linear-gradient(135deg,#020617,#111827,#1e1b4b);
+}
+
+.wallpaper-sunset{
+  background:
+    radial-gradient(circle at 50% 100%,#f97316,transparent 45%),
+    radial-gradient(circle at 50% 0%,#7c3aed,transparent 55%),
+    #180d2a;
+}
+
+.wallpaper-rainbow{
+  background:
+    linear-gradient(
+      135deg,
+      #7c3aed,
+      #2563eb,
+      #06b6d4,
+      #10b981,
+      #eab308,
+      #f97316,
+      #ec4899
+    );
+}
+
+/* LISTS */
+
+.list{
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+}
+
+.list-item{
+  padding:16px;
+  border-radius:19px;
   display:flex;
   align-items:center;
-  justify-content:center;
-  font-size:42px;
-  overflow:hidden;
-  background:linear-gradient(
-    135deg,
-    rgba(139,92,246,.45),
-    rgba(34,211,238,.3)
-  );
-  border:1px solid var(--border);
+  gap:12px;
 }
 
-.preview-avatar img{
-  width:100%;
-  height:100%;
-  object-fit:cover;
+.list-item-main{
+  flex:1;
 }
 
-.avatar-edit-button{
-  margin-top:8px;
+.list-item-title{
+  font-weight:750;
 }
 
-@media(max-width:560px){
+.list-item-sub{
+  color:var(--muted);
+  font-size:13px;
+  margin-top:3px;
+}
 
+/* PROFILE */
+
+.profile-top{
+  text-align:center;
+  padding:25px;
+}
+
+.profile-top .avatar{
+  margin:0 auto 13px;
+}
+
+.profile-name{
+  font-size:23px;
+  font-weight:800;
+}
+
+.profile-description{
+  color:var(--muted);
+  margin-top:5px;
+}
+
+.settings-row{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:15px;
+  padding:15px 0;
+  border-bottom:1px solid rgba(255,255,255,.07);
+}
+
+.settings-row:last-child{
+  border-bottom:0;
+}
+
+.range{
+  width:150px;
+}
+
+/* TOAST */
+
+.toast{
+  position:fixed;
+  left:50%;
+  bottom:92px;
+  transform:translateX(-50%) translateY(20px);
+  z-index:1000;
+  background:rgba(18,22,43,.96);
+  border:1px solid rgba(255,255,255,.12);
+  padding:11px 15px;
+  border-radius:15px;
+  opacity:0;
+  pointer-events:none;
+  transition:.25s;
+  box-shadow:0 15px 40px rgba(0,0,0,.35);
+}
+
+.toast.show{
+  opacity:1;
+  transform:translateX(-50%) translateY(0);
+}
+
+/* MOBILE */
+
+@media(max-width:600px){
   .page{
     padding:15px;
   }
 
-  .grid{
-    grid-template-columns:1fr;
+  .title{
+    font-size:24px;
   }
 
-  .theme-grid{
+  .hero h1{
+    font-size:29px;
+  }
+
+  .message{
+    max-width:86%;
+  }
+
+  .wallpaper-grid{
     grid-template-columns:1fr 1fr;
-  }
-
-  .option-grid{
-    grid-template-columns:1fr 1fr;
-  }
-
-  .avatar-picker{
-    grid-template-columns:repeat(4,1fr);
-  }
-
-  .hero h2{
-    font-size:23px;
   }
 }
 </style>
@@ -804,710 +848,1045 @@ textarea.input{
 
 <div class="app">
 
-<!-- HOME -->
+  <!-- HOME -->
+  <section id="page-home" class="page active">
 
-<section id="page-home" class="page active">
-
-  <div class="header">
-
-    <div class="brand">
-      <div class="logo">🐱</div>
-
+    <div class="header">
       <div>
-        <h1>Meowl Messenger</h1>
-        <p>Общение в стеклянном мире ✨</p>
-      </div>
-    </div>
-
-    <button class="icon-button" onclick="openSettings()">⚙️</button>
-
-  </div>
-
-  <div class="card hero">
-
-    <h2>
-      Добро пожаловать в
-      <span class="gradient-text">Meowl</span>
-    </h2>
-
-    <p>
-      Общайся, создавай ботов и настраивай свой
-      мессенджер под себя.
-    </p>
-
-    <button class="primary-button" onclick="openBot('official')">
-      🤖 Открыть Meowl Messenger
-    </button>
-
-  </div>
-
-  <div class="section-title">
-    Быстрый доступ
-  </div>
-
-  <div class="grid">
-
-    <div class="card small-card clickable"
-         onclick="showPage('chats')">
-
-      <div class="small-icon">💬</div>
-      <h3>Чаты</h3>
-      <p>Боты и сохранённые диалоги</p>
-
-    </div>
-
-    <div class="card small-card clickable"
-         onclick="showPage('people')">
-
-      <div class="small-icon">👥</div>
-      <h3>Люди</h3>
-      <p>Пользователи Meowl</p>
-
-    </div>
-
-    <div class="card small-card clickable"
-         onclick="openSettings()">
-
-      <div class="small-icon">🎨</div>
-      <h3>Темы</h3>
-      <p>Цвета и стекло</p>
-
-    </div>
-
-    <div class="card small-card clickable"
-         onclick="openRules()">
-
-      <div class="small-icon">📜</div>
-      <h3>Правила</h3>
-      <p>Правила мессенджера</p>
-
-    </div>
-
-  </div>
-
-  <div class="section-title">
-    Официальный бот
-  </div>
-
-  <div class="card clickable"
-       onclick="openBot('official')">
-
-    <div class="bot-card">
-
-      <div class="avatar">
-        🤖
+        <div class="title">Meowl Messenger</div>
+        <div class="subtitle">Твой неоновый мессенджер 🐾</div>
       </div>
 
-      <div class="bot-info">
-
-        <h3>Meowl Messenger</h3>
-
-        <p>
-          Официальный бот
-        </p>
-
-        <span class="badge">
-          ✓ official
-        </span>
-
-      </div>
-
-      <div class="arrow">›</div>
-
+      <button class="icon-btn" onclick="openSettings()">⚙️</button>
     </div>
 
-  </div>
-
-</section>
-
-
-<!-- CHATS -->
-
-<section id="page-chats" class="page">
-
-  <div class="header">
-
-    <div>
-      <h2 style="margin:0">💬 Чаты</h2>
-
-      <p style="color:var(--muted);margin:5px 0 0">
-        Твои боты и диалоги
+    <div class="hero glass">
+      <h1>Привет, мяу! 🐱</h1>
+      <p>
+        Общайся, создавай своих ботов и настраивай каждый чат
+        под себя.
       </p>
     </div>
 
-    <button class="icon-button"
-            onclick="openSettings()">
-      ⚙️
-    </button>
-
-  </div>
-
-  <div id="chats-list"></div>
-
-</section>
-
-
-<!-- PEOPLE -->
-
-<section id="page-people" class="page">
-
-  <div class="header">
-
-    <div>
-      <h2 style="margin:0">👥 Люди</h2>
-
-      <p style="color:var(--muted);margin:5px 0 0">
-        Пользователи Meowl
-      </p>
-    </div>
-
-  </div>
-
-  <input
-    id="people-search"
-    class="input"
-    placeholder="🔎 Поиск пользователя..."
-    oninput="renderPeople()"
-  >
-
-  <div style="height:15px"></div>
-
-  <div id="people-list"></div>
-
-</section>
-
-
-<!-- PROFILE -->
-
-<section id="page-profile" class="page">
-
-  <div class="header">
-
-    <div>
-      <h2 style="margin:0">👤 Профиль</h2>
-
-      <p style="color:var(--muted);margin:5px 0 0">
-        Твой профиль
-      </p>
-    </div>
-
-    <button class="icon-button"
-            onclick="openSettings()">
-      ⚙️
-    </button>
-
-  </div>
-
-  <div class="card profile-top">
-
-    <div class="profile-avatar">
-      🐱
-    </div>
-
-    <h2>Meowler</h2>
-
-    <p>@meowler</p>
-
-  </div>
-
-  <div class="card">
-
-    <div class="setting-title">
-      Профиль
-    </div>
-
-    <input
-      id="nickname-input"
-      class="input"
-      placeholder="Твоё имя"
-    >
-
-    <div style="height:10px"></div>
-
-    <input
-      id="username-input"
-      class="input"
-      placeholder="@username"
-    >
-
-    <div style="height:10px"></div>
-
-    <textarea
-      id="description-input"
-      class="input"
-      style="min-height:90px;resize:vertical"
-      placeholder="Описание..."
-    ></textarea>
-
-    <div style="height:10px"></div>
-
-    <button
-      class="primary-button"
-      onclick="saveProfile()"
-    >
-      💾 Сохранить профиль
-    </button>
-
-  </div>
-
-</section>
-
-
-<!-- SETTINGS -->
-
-<section id="page-settings" class="page">
-
-  <button class="back-button"
-          onclick="closeSettings()">
-    ← Назад
-  </button>
-
-  <div class="header">
-
-    <div>
-      <h2 style="margin:0">
-        ⚙️ Настройки
-      </h2>
-
-      <p style="color:var(--muted);margin:5px 0 0">
-        Настрой Meowl под себя
-      </p>
-    </div>
-
-  </div>
-
-
-  <div class="card">
-
-    <div class="setting-title">
-      🎨 Тема оформления
-    </div>
-
-    <div class="theme-grid">
-
-      <button class="theme-button"
-              data-theme="purple"
-              onclick="setTheme('purple')">
-        <div class="theme-dot theme-purple"></div>
-        <div class="theme-name">💜 Neon Purple</div>
-      </button>
-
-      <button class="theme-button"
-              data-theme="cyan"
-              onclick="setTheme('cyan')">
-        <div class="theme-dot theme-cyan"></div>
-        <div class="theme-name">💠 Cyan Glass</div>
-      </button>
-
-      <button class="theme-button"
-              data-theme="orange"
-              onclick="setTheme('orange')">
-        <div class="theme-dot theme-orange"></div>
-        <div class="theme-name">🧡 Orange</div>
-      </button>
-
-      <button class="theme-button"
-              data-theme="pink"
-              onclick="setTheme('pink')">
-        <div class="theme-dot theme-pink"></div>
-        <div class="theme-name">💫 Pink Galaxy</div>
-      </button>
-
-      <button class="theme-button"
-              data-theme="green"
-              onclick="setTheme('green')">
-        <div class="theme-dot theme-green"></div>
-        <div class="theme-name">💚 Emerald</div>
-      </button>
-
-      <button class="theme-button"
-              data-theme="blue"
-              onclick="setTheme('blue')">
-        <div class="theme-dot theme-blue"></div>
-        <div class="theme-name">🔵 Ocean</div>
-      </button>
-
-      <button class="theme-button"
-              data-theme="red"
-              onclick="setTheme('red')">
-        <div class="theme-dot theme-red"></div>
-        <div class="theme-name">❤️ Ruby</div>
-      </button>
-
-      <button class="theme-button"
-              data-theme="gold"
-              onclick="setTheme('gold')">
-        <div class="theme-dot theme-gold"></div>
-        <div class="theme-name">💛 Gold</div>
-      </button>
-
-      <button class="theme-button"
-              data-theme="ice"
-              onclick="setTheme('ice')">
-        <div class="theme-dot theme-ice"></div>
-        <div class="theme-name">❄️ Ice</div>
-      </button>
-
-      <button class="theme-button"
-              data-theme="rainbow"
-              onclick="setTheme('rainbow')">
-        <div class="theme-dot theme-rainbow"></div>
-        <div class="theme-name">🌈 Rainbow</div>
-      </button>
-
-    </div>
-
-  </div>
-
-
-  <div class="card">
-
-    <div class="setting-title">
-      🪟 Прозрачность стекла
-    </div>
-
-    <div class="range-row">
-      <span>Уровень</span>
-      <span id="glass-value"
-            class="range-value">
-        8%
-      </span>
-    </div>
-
-    <input
-      id="glass-range"
-      class="range"
-      type="range"
-      min="3"
-      max="18"
-      value="8"
-      oninput="changeGlass(this.value)"
-    >
-
-  </div>
-
-
-  <div class="card">
-
-    <div class="setting-title">
-      ✨ Свечение
-    </div>
-
-    <div class="range-row">
-      <span>Интенсивность</span>
-
-      <span id="glow-value"
-            class="range-value">
-        100%
-      </span>
-    </div>
-
-    <input
-      id="glow-range"
-      class="range"
-      type="range"
-      min="0"
-      max="200"
-      value="100"
-      oninput="changeGlow(this.value)"
-    >
-
-  </div>
-
-
-  <div class="card clickable"
-       onclick="openRules()">
-
-    <div class="bot-card">
-
-      <div class="avatar">📜</div>
-
-      <div class="bot-info">
-
-        <h3>Правила</h3>
-
-        <p>
-          Правила Meowl Messenger
-        </p>
-
-      </div>
-
-      <div class="arrow">›</div>
-
-    </div>
-
-  </div>
-
-
-  <div class="card clickable"
-       onclick="openBotFeatures()">
-
-    <div class="bot-card">
-
+    <div class="glass bot-card" onclick="openChat('official')">
       <div class="avatar">🤖</div>
 
       <div class="bot-info">
+        <div class="bot-name">
+          Meowl Messenger
+          <span class="badge">✓ официальный</span>
+        </div>
 
-        <h3>Возможности ботов</h3>
+        <div class="bot-username">@MeowlMessenger</div>
 
-        <p>
-          Что умеют боты
-        </p>
-
+        <div class="bot-desc">
+          Официальный бот мессенджера.
+        </div>
       </div>
 
-      <div class="arrow">›</div>
+      <div>›</div>
+    </div>
+
+    <div class="glass card">
+      <h3>🤖 Создать своего бота</h3>
+
+      <p class="subtitle">
+        Используй команду /newbot в официальном чате.
+      </p>
+
+      <button
+        class="primary-btn"
+        style="margin-top:14px"
+        onclick="openChat('official')"
+      >
+        Открыть Meowl Messenger
+      </button>
+    </div>
+
+  </section>
+
+
+  <!-- CHATS -->
+  <section id="page-chats" class="page">
+
+    <div class="header">
+      <div>
+        <div class="title">Чаты</div>
+        <div class="subtitle">Твои диалоги</div>
+      </div>
+    </div>
+
+    <div id="chatList"></div>
+
+  </section>
+
+
+  <!-- PEOPLE -->
+  <section id="page-people" class="page">
+
+    <div class="header">
+      <div>
+        <div class="title">Люди</div>
+        <div class="subtitle">Пользователи Meowl Messenger</div>
+      </div>
+    </div>
+
+    <div class="glass card">
+      <input
+        class="input"
+        id="peopleSearch"
+        placeholder="🔎 Поиск пользователя..."
+        oninput="renderPeople()"
+      >
+    </div>
+
+    <div id="peopleList"></div>
+
+  </section>
+
+
+  <!-- PROFILE -->
+  <section id="page-profile" class="page">
+
+    <div class="header">
+      <div>
+        <div class="title">Профиль</div>
+        <div class="subtitle">Твоя информация</div>
+      </div>
+
+      <button class="icon-btn" onclick="openSettings()">⚙️</button>
+    </div>
+
+    <div class="glass card profile-top">
+
+      <div id="profileAvatar" class="avatar large">
+        🐱
+      </div>
+
+      <div id="profileName" class="profile-name">
+        Meowl User
+      </div>
+
+      <div id="profileDescription" class="profile-description">
+        Добро пожаловать в Meowl Messenger
+      </div>
 
     </div>
 
-  </div>
+    <div class="glass card">
 
-
-  <div class="card clickable"
-       onclick="openAbout()">
-
-    <div class="bot-card">
-
-      <div class="avatar">ℹ️</div>
-
-      <div class="bot-info">
-
-        <h3>О Meowl Messenger</h3>
-
-        <p>
-          Версия и информация
-        </p>
-
+      <div class="form-group">
+        <label class="form-label">Имя</label>
+        <input id="profileNameInput" class="input">
       </div>
 
-      <div class="arrow">›</div>
+      <div class="form-group">
+        <label class="form-label">Описание</label>
+        <textarea
+          id="profileDescriptionInput"
+          class="input"
+          rows="3"
+        ></textarea>
+      </div>
+
+      <button class="primary-btn" onclick="saveProfile()">
+        Сохранить профиль
+      </button>
 
     </div>
 
-  </div>
-
-
-  <button
-    class="secondary-button danger-button"
-    onclick="resetSettings()"
-  >
-    ♻️ Сбросить настройки
-  </button>
-
-</section>
+  </section>
 
 </div>
 
 
 <!-- BOTTOM NAV -->
 
-<nav class="bottom-nav">
+<nav class="bottom-nav glass">
 
-  <button id="nav-home"
-          class="nav-button active"
-          onclick="showPage('home')">
-    <span class="nav-icon">🏠</span>
-    <span>Главная</span>
+  <button
+    id="nav-home"
+    class="nav-btn active"
+    onclick="showPage('home')"
+  >
+    <span>🏠</span>
+    Главная
   </button>
 
-  <button id="nav-chats"
-          class="nav-button"
-          onclick="showPage('chats')">
-    <span class="nav-icon">💬</span>
-    <span>Чаты</span>
+  <button
+    id="nav-chats"
+    class="nav-btn"
+    onclick="showPage('chats')"
+  >
+    <span>💬</span>
+    Чаты
   </button>
 
-  <button id="nav-people"
-          class="nav-button"
-          onclick="showPage('people')">
-    <span class="nav-icon">👥</span>
-    <span>Люди</span>
+  <button
+    id="nav-people"
+    class="nav-btn"
+    onclick="showPage('people')"
+  >
+    <span>👥</span>
+    Люди
   </button>
 
-  <button id="nav-profile"
-          class="nav-button"
-          onclick="showPage('profile')">
-    <span class="nav-icon">👤</span>
-    <span>Профиль</span>
+  <button
+    id="nav-profile"
+    class="nav-btn"
+    onclick="showPage('profile')"
+  >
+    <span>👤</span>
+    Профиль
   </button>
 
 </nav>
 
 
-<!-- CHAT -->
+<!-- CHAT SCREEN -->
 
-<section id="chat-page"
-         class="page"
-         style="
-           position:fixed;
-           inset:0;
-           z-index:150;
-           background:var(--bg);
-           max-width:760px;
-           margin:auto;
-           overflow-y:auto;
-           padding-bottom:20px;
-         ">
+<div id="chatScreen" class="chat-page hidden">
 
-  <button class="back-button"
-          onclick="closeChat()">
-    ← Назад к чатам
-  </button>
+  <div class="chat-shell">
 
-  <div id="chat-header"></div>
+    <header class="chat-header">
 
-  <div id="chat-messages"
-       class="chat-messages">
-  </div>
-
-  <div class="chat-input">
-
-    <input
-      id="chat-input"
-      class="input"
-      placeholder="Напиши сообщение..."
-      autocomplete="off"
-      onkeydown="
-        if(event.key==='Enter')
-        sendCurrentMessage()
-      "
-    >
-
-    <button
-      class="send-button"
-      onclick="sendCurrentMessage()"
-    >
-      ➤
-    </button>
-
-  </div>
-
-</section>
-
-
-<!-- MODAL -->
-
-<div id="modal"
-     class="modal">
-
-  <div class="modal-card">
-
-    <div class="modal-header">
-
-      <h2 id="modal-title">
-        Информация
-      </h2>
-
-      <button class="close-button"
-              onclick="closeModal()">
-        ×
+      <button class="icon-btn" onclick="closeChat()">
+        ←
       </button>
+
+      <div id="chatHeaderAvatar" class="avatar">
+        🤖
+      </div>
+
+      <div class="chat-header-info">
+        <div id="chatHeaderName" class="chat-header-name">
+          Meowl Messenger
+        </div>
+
+        <div class="chat-header-status">
+          ● онлайн
+        </div>
+      </div>
+
+      <button
+        class="icon-btn"
+        onclick="toggleChatMenu()"
+      >
+        ⋮
+      </button>
+
+      <div
+        id="chatMenu"
+        class="dropdown hidden"
+      >
+
+        <button
+          class="menu-item"
+          onclick="openWallpaperModal()"
+        >
+          🖼️ Обои чата
+        </button>
+
+        <button
+          class="menu-item"
+          onclick="openChatInfo()"
+        >
+          ℹ️ Информация
+        </button>
+
+        <button
+          id="editBotAvatarMenu"
+          class="menu-item hidden"
+          onclick="openEditBotAvatar()"
+        >
+          🖼️ Изменить аватар
+        </button>
+
+        <button
+          class="menu-item danger"
+          onclick="clearCurrentChat()"
+        >
+          🗑️ Очистить все сообщения
+        </button>
+
+      </div>
+
+    </header>
+
+
+    <main
+      id="chatMessages"
+      class="chat-messages"
+    ></main>
+
+
+    <div class="chat-input-area">
+
+      <div class="chat-input glass">
+
+        <textarea
+          id="messageInput"
+          placeholder="Написать сообщение..."
+          rows="1"
+          onkeydown="handleInputKey(event)"
+        ></textarea>
+
+        <button
+          class="send-btn"
+          onclick="sendMessage()"
+        >
+          ➤
+        </button>
+
+      </div>
 
     </div>
 
-    <div id="modal-content"></div>
-
   </div>
 
 </div>
 
 
-<div id="toast"
-     class="toast">
-</div>
+<!-- MODAL ROOT -->
+
+<div id="modalRoot"></div>
+
+<div id="toast" class="toast"></div>
 
 
 <script>
 
 /* =========================================================
-   MEOWL MESSENGER
-   Версия с аватарами ботов
-   ========================================================= */
-
-const APP_VERSION = "1.1.0";
-
+   STORAGE
+========================================================= */
 
 const STORAGE = {
-  bots:"meowl_created_bots_v4",
-  chats:"meowl_bot_chats_v4",
-  settings:"meowl_settings_v4",
-  profile:"meowl_profile_v4"
+
+  bots:"meowl_created_bots_v5",
+
+  chats:"meowl_bot_chats_v5",
+
+  wallpapers:"meowl_chat_wallpapers_v5",
+
+  profile:"meowl_profile_v5",
+
+  settings:"meowl_settings_v5"
+
 };
 
 
 /* =========================================================
    OFFICIAL BOT
-   ========================================================= */
+========================================================= */
 
 const officialBot = {
+
   id:"official",
+
   name:"Meowl Messenger",
+
   username:"MeowlMessenger",
+
   description:"Официальный бот Meowl Messenger.",
+
   emoji:"🤖",
+
   avatarType:"emoji",
+
   avatar:"",
+
   official:true
+
 };
 
 
 /* =========================================================
-   SETTINGS
-   ========================================================= */
+   STATE
+========================================================= */
 
-const defaultSettings = {
-  theme:"purple",
-  glass:8,
-  glow:100
-};
+let bots = load(STORAGE.bots, []);
 
+let chats = load(STORAGE.chats, {});
 
-let settings =
-  JSON.parse(localStorage.getItem(STORAGE.settings))
-  || {...defaultSettings};
+let wallpapers = load(STORAGE.wallpapers, {});
 
+let profile = load(
+  STORAGE.profile,
+  {
+    name:"Meowl User",
+    description:"Добро пожаловать в Meowl Messenger"
+  }
+);
 
-let profile =
-  JSON.parse(localStorage.getItem(STORAGE.profile))
-  || {
-    nickname:"Meowler",
-    username:"meowler",
-    description:"Люблю Meowl Messenger 🐱"
-  };
-
-
-let createdBots =
-  JSON.parse(localStorage.getItem(STORAGE.bots))
-  || [];
-
-
-let botChats =
-  JSON.parse(localStorage.getItem(STORAGE.chats))
-  || {};
-
-
-let currentBot = null;
+let settings = load(
+  STORAGE.settings,
+  {
+    glass:.78,
+    glow:24
+  }
+);
 
 let currentPage = "home";
 
+let currentChatId = null;
+
 let botCreationStep = null;
 
-let botCreationName = "";
+let newBotData = {};
 
-let botCreationUsername = "";
+let editingBotId = null;
 
-let newBotAvatar = {
-  type:"emoji",
-  value:"🤖"
-};
+
+/* =========================================================
+   HELPERS
+========================================================= */
+
+function load(key, fallback){
+
+  try{
+
+    const value = localStorage.getItem(key);
+
+    return value
+      ? JSON.parse(value)
+      : fallback;
+
+  }catch(e){
+
+    return fallback;
+
+  }
+
+}
+
+
+function save(key,value){
+
+  localStorage.setItem(
+    key,
+    JSON.stringify(value)
+  );
+
+}
+
+
+function escapeHtml(value){
+
+  return String(value ?? "")
+    .replace(/&/g,"&amp;")
+    .replace(/</g,"&lt;")
+    .replace(/>/g,"&gt;")
+    .replace(/"/g,"&quot;")
+    .replace(/'/g,"&#039;");
+
+}
+
+
+function uid(prefix="id"){
+
+  return prefix + "_" +
+    Date.now().toString(36) +
+    Math.random()
+      .toString(36)
+      .slice(2,8);
+
+}
+
+
+function showToast(text){
+
+  const toast =
+    document.getElementById("toast");
+
+  toast.textContent = text;
+
+  toast.classList.add("show");
+
+  clearTimeout(showToast.timer);
+
+  showToast.timer = setTimeout(
+    ()=>{
+      toast.classList.remove("show");
+    },
+    2200
+  );
+
+}
+
+
+/* =========================================================
+   AVATAR
+========================================================= */
+
+function avatarHTML(entity, large=false){
+
+  const cls =
+    large
+      ? "avatar large"
+      : "avatar";
+
+  if(
+    entity &&
+    entity.avatarType === "image" &&
+    entity.avatar
+  ){
+
+    return `
+      <div class="${cls}">
+        <img src="${escapeHtml(entity.avatar)}">
+      </div>
+    `;
+
+  }
+
+  return `
+    <div class="${cls}">
+      ${escapeHtml(entity?.emoji || "🤖")}
+    </div>
+  `;
+
+}
+
+
+/* =========================================================
+   BOT DATA
+========================================================= */
+
+function getAllBots(){
+
+  return [
+    officialBot,
+    ...bots
+  ];
+
+}
+
+
+function getBot(id){
+
+  return getAllBots()
+    .find(bot => bot.id === id);
+
+}
+
+
+function ensureChat(id){
+
+  if(!chats[id]){
+
+    chats[id] = [];
+
+    save(STORAGE.chats,chats);
+
+  }
+
+}
+
+
+/* =========================================================
+   NAVIGATION
+========================================================= */
+
+function showPage(page){
+
+  closeChat();
+
+  currentPage = page;
+
+  document
+    .querySelectorAll(".page")
+    .forEach(el=>{
+      el.classList.remove("active");
+    });
+
+  const target =
+    document.getElementById(
+      "page-" + page
+    );
+
+  if(target){
+    target.classList.add("active");
+  }
+
+  document
+    .querySelectorAll(".nav-btn")
+    .forEach(el=>{
+      el.classList.remove("active");
+    });
+
+  const nav =
+    document.getElementById(
+      "nav-" + page
+    );
+
+  if(nav){
+    nav.classList.add("active");
+  }
+
+  if(page==="chats"){
+    renderChats();
+  }
+
+  if(page==="people"){
+    renderPeople();
+  }
+
+  if(page==="profile"){
+    renderProfile();
+  }
+
+}
+
+
+/* =========================================================
+   CHATS LIST
+========================================================= */
+
+function renderChats(){
+
+  const root =
+    document.getElementById("chatList");
+
+  const allBots = getAllBots();
+
+  if(allBots.length===0){
+
+    root.innerHTML = `
+      <div class="glass card">
+        <div style="font-size:40px">💬</div>
+        <h3 style="margin-top:10px">
+          Пока нет чатов
+        </h3>
+      </div>
+    `;
+
+    return;
+
+  }
+
+  root.innerHTML =
+    allBots.map(bot=>{
+
+      const messages =
+        chats[bot.id] || [];
+
+      const last =
+        messages[messages.length-1];
+
+      return `
+        <div
+          class="glass bot-card"
+          onclick="openChat('${bot.id}')"
+        >
+
+          ${avatarHTML(bot)}
+
+          <div class="bot-info">
+
+            <div class="bot-name">
+              ${escapeHtml(bot.name)}
+
+              ${
+                bot.official
+                  ? `<span class="badge">✓</span>`
+                  : ""
+              }
+
+            </div>
+
+            <div class="bot-username">
+              @${escapeHtml(bot.username)}
+            </div>
+
+            <div class="bot-desc">
+              ${
+                last
+                  ? escapeHtml(last.text).slice(0,80)
+                  : "Нет сообщений"
+              }
+            </div>
+
+          </div>
+
+          <div>›</div>
+
+        </div>
+      `;
+
+    }).join("");
+
+}
+
+
+/* =========================================================
+   OPEN CHAT
+========================================================= */
+
+function openChat(id){
+
+  const bot = getBot(id);
+
+  if(!bot){
+
+    showToast("Чат не найден");
+
+    return;
+
+  }
+
+  currentChatId = id;
+
+  ensureChat(id);
+
+  document
+    .querySelectorAll(".page")
+    .forEach(el=>{
+      el.classList.remove("active");
+    });
+
+  document
+    .querySelector(".bottom-nav")
+    .classList.add("hidden");
+
+  document
+    .getElementById("chatScreen")
+    .classList.remove("hidden");
+
+  document
+    .getElementById("chatHeaderName")
+    .textContent = bot.name;
+
+  document
+    .getElementById("chatHeaderAvatar")
+    .outerHTML =
+      avatarHTML(bot).replace(
+        'class="avatar"',
+        'class="avatar" id="chatHeaderAvatar"'
+      );
+
+  document
+    .getElementById("editBotAvatarMenu")
+    .classList.toggle(
+      "hidden",
+      !!bot.official
+    );
+
+  closeChatMenu();
+
+  applyChatWallpaper();
+
+  renderMessages();
+
+  setTimeout(()=>{
+    const box =
+      document.getElementById("chatMessages");
+
+    box.scrollTop = box.scrollHeight;
+  },30);
+
+}
+
+
+/* =========================================================
+   CLOSE CHAT
+========================================================= */
+
+function closeChat(){
+
+  document
+    .getElementById("chatScreen")
+    .classList.add("hidden");
+
+  document
+    .querySelector(".bottom-nav")
+    .classList.remove("hidden");
+
+  closeChatMenu();
+
+  currentChatId = null;
+
+}
+
+
+/* =========================================================
+   CHAT MENU
+========================================================= */
+
+function toggleChatMenu(){
+
+  document
+    .getElementById("chatMenu")
+    .classList.toggle("hidden");
+
+}
+
+
+function closeChatMenu(){
+
+  document
+    .getElementById("chatMenu")
+    .classList.add("hidden");
+
+}
+
+
+/* =========================================================
+   RENDER MESSAGES
+========================================================= */
+
+function renderMessages(){
+
+  const box =
+    document.getElementById("chatMessages");
+
+  const messages =
+    chats[currentChatId] || [];
+
+  if(messages.length===0){
+
+    const bot =
+      getBot(currentChatId);
+
+    box.innerHTML = `
+      <div class="empty-chat">
+
+        <div class="empty-chat-inner">
+
+          <div class="empty-chat-icon">
+            ${escapeHtml(bot?.emoji || "💬")}
+          </div>
+
+          <h3>
+            ${escapeHtml(bot?.name || "Чат")}
+          </h3>
+
+          <p style="margin-top:8px">
+            Здесь пока нет сообщений.
+          </p>
+
+          ${
+            bot?.official
+              ? `
+                <p style="
+                  margin-top:12px;
+                  color:#a78bfa;
+                ">
+                  Напиши /start
+                </p>
+              `
+              : ""
+          }
+
+        </div>
+
+      </div>
+    `;
+
+    return;
+
+  }
+
+  box.innerHTML =
+    messages.map(msg=>{
+
+      return `
+        <div
+          class="message-row ${msg.mine ? "mine" : ""}"
+        >
+
+          <div
+            class="message"
+            onclick="openMessageMenu('${msg.id}')"
+          >
+
+            <div class="message-text">
+              ${escapeHtml(msg.text)}
+            </div>
+
+            <div class="message-time">
+              ${escapeHtml(msg.time || "")}
+            </div>
+
+          </div>
+
+        </div>
+      `;
+
+    }).join("");
+
+}
+
+
+/* =========================================================
+   SEND MESSAGE
+========================================================= */
+
+function sendMessage(){
+
+  const input =
+    document.getElementById("messageInput");
+
+  const text =
+    input.value.trim();
+
+  if(!text || !currentChatId){
+
+    return;
+
+  }
+
+  addMessage(
+    currentChatId,
+    text,
+    true
+  );
+
+  input.value = "";
+
+  input.style.height = "auto";
+
+  handleBotCommand(text);
+
+}
+
+
+function addMessage(
+  chatId,
+  text,
+  mine=false
+){
+
+  ensureChat(chatId);
+
+  chats[chatId].push({
+
+    id:uid("msg"),
+
+    text,
+
+    mine,
+
+    time:new Date()
+      .toLocaleTimeString(
+        "ru-RU",
+        {
+          hour:"2-digit",
+          minute:"2-digit"
+        }
+      )
+
+  });
+
+  save(STORAGE.chats,chats);
+
+  renderMessages();
+
+  setTimeout(()=>{
+    const box =
+      document.getElementById("chatMessages");
+
+    box.scrollTop =
+      box.scrollHeight;
+
+  },20);
+
+}
+
+
+/* =========================================================
+   INPUT
+========================================================= */
+
+function handleInputKey(event){
+
+  if(
+    event.key==="Enter" &&
+    !event.shiftKey
+  ){
+
+    event.preventDefault();
+
+    sendMessage();
+
+  }
+
+}
+
+
+/* =========================================================
+   BOT COMMANDS
+========================================================= */
+
+function handleBotCommand(text){
+
+  const command =
+    text.trim().toLowerCase();
+
+  const bot =
+    getBot(currentChatId);
+
+  if(!bot?.official){
+
+    return;
+
+  }
+
+  if(command==="/start"){
+
+    setTimeout(()=>{
+
+      addMessage(
+        currentChatId,
+        getRulesMessage(),
+        false
+      );
+
+    },450);
+
+    return;
+
+  }
+
+  if(command==="/newbot"){
+
+    botCreationStep="name";
+
+    newBotData={};
+
+    setTimeout(()=>{
+
+      addMessage(
+        currentChatId,
+        "🤖 Отлично! Давай создадим нового бота.\n\n" +
+        "Шаг 1 из 3.\n\n" +
+        "Напиши имя бота на английском языке.\n\n" +
+        "Например: My Cool Bot",
+        false
+      );
+
+    },450);
+
+    return;
+
+  }
+
+  if(botCreationStep){
+
+    processBotCreation(text);
+
+  }
+
+}
 
 
 /* =========================================================
    RULES
-   ========================================================= */
+========================================================= */
 
-const rulesText = `
-🐾 ПРАВИЛА MEOWL MESSENGER
+function getRulesMessage(){
+
+  return `🐾 ПРАВИЛА MEOWL MESSENGER
 
 Добро пожаловать в Meowl Messenger!
 
@@ -1538,966 +1917,109 @@ const rulesText = `
 Относись к другим так, как хотел бы,
 чтобы относились к тебе.
 
-Команда Meowl Messenger 💜
-`;
-
-
-/* =========================================================
-   BOT FEATURES
-   ========================================================= */
-
-const botFeaturesText = `
-🤖 ВОЗМОЖНОСТИ БОТОВ
-
-/newbot
-
-Создание собственного бота.
-
-При создании можно указать:
-
-• имя;
-• username;
-• аватар.
-
-Аватар можно выбрать из готовых вариантов
-или загрузить изображение с устройства.
-
-Каждый созданный бот появляется
-в разделе 💬 Чаты.
-
-История сообщений сохраняется локально.
-
-⚠️ В этой версии без сервера созданные
-боты доступны только в твоём браузере.
-`;
-
-
-/* =========================================================
-   INIT
-   ========================================================= */
-
-document.addEventListener("DOMContentLoaded",()=>{
-
-  applySettings();
-
-  loadProfile();
-
-  renderChats();
-
-  renderPeople();
-
-  openBotFromUrl();
-
-});
-
-
-/* =========================================================
-   NAVIGATION
-   ========================================================= */
-
-function showPage(page){
-
-  currentPage=page;
-
-  document
-    .querySelectorAll(".page")
-    .forEach(el=>{
-      el.classList.remove("active");
-    });
-
-
-  const target =
-    document.getElementById("page-"+page);
-
-  if(target){
-    target.classList.add("active");
-  }
-
-
-  document
-    .querySelectorAll(".nav-button")
-    .forEach(el=>{
-      el.classList.remove("active");
-    });
-
-
-  const nav =
-    document.getElementById("nav-"+page);
-
-  if(nav){
-    nav.classList.add("active");
-  }
-
-
-  if(page==="chats"){
-    renderChats();
-  }
-
-  if(page==="people"){
-    renderPeople();
-  }
-
-  if(page==="profile"){
-    loadProfile();
-  }
+Команда Meowl Messenger 💜`;
 
 }
 
 
 /* =========================================================
-   SETTINGS
-   ========================================================= */
-
-function openSettings(){
-
-  document
-    .querySelectorAll(".page")
-    .forEach(el=>{
-      el.classList.remove("active");
-    });
-
-
-  document
-    .getElementById("page-settings")
-    .classList.add("active");
-
-}
-
-
-function closeSettings(){
-
-  showPage(
-    currentPage==="settings"
-    ? "home"
-    : currentPage
-  );
-
-}
-
-
-const themes={
-
-  purple:{
-    bg:"#070914",
-    purple:"#8b5cf6",
-    cyan:"#22d3ee",
-    pink:"#ec4899"
-  },
-
-  cyan:{
-    bg:"#041016",
-    purple:"#06b6d4",
-    cyan:"#38bdf8",
-    pink:"#3b82f6"
-  },
-
-  orange:{
-    bg:"#120907",
-    purple:"#f97316",
-    cyan:"#fb923c",
-    pink:"#fb7185"
-  },
-
-  pink:{
-    bg:"#120711",
-    purple:"#ec4899",
-    cyan:"#a855f7",
-    pink:"#f472b6"
-  },
-
-  green:{
-    bg:"#06110d",
-    purple:"#10b981",
-    cyan:"#34d399",
-    pink:"#22c55e"
-  },
-
-  blue:{
-    bg:"#060b17",
-    purple:"#2563eb",
-    cyan:"#38bdf8",
-    pink:"#60a5fa"
-  },
-
-  red:{
-    bg:"#130708",
-    purple:"#ef4444",
-    cyan:"#fb7185",
-    pink:"#f97316"
-  },
-
-  gold:{
-    bg:"#120e05",
-    purple:"#eab308",
-    cyan:"#f59e0b",
-    pink:"#facc15"
-  },
-
-  ice:{
-    bg:"#080d13",
-    purple:"#94a3b8",
-    cyan:"#e0f2fe",
-    pink:"#bae6fd"
-  },
-
-  rainbow:{
-    bg:"#080812",
-    purple:"#ec4899",
-    cyan:"#22d3ee",
-    pink:"#facc15"
-  }
-
-};
-
-
-function setTheme(theme){
-
-  settings.theme=theme;
-
-  saveSettings();
-
-  applySettings();
-
-}
-
-
-function applySettings(){
-
-  const theme =
-    themes[settings.theme]
-    || themes.purple;
-
-
-  const root =
-    document.documentElement;
-
-
-  root.style.setProperty(
-    "--bg",
-    theme.bg
-  );
-
-  root.style.setProperty(
-    "--purple",
-    theme.purple
-  );
-
-  root.style.setProperty(
-    "--cyan",
-    theme.cyan
-  );
-
-  root.style.setProperty(
-    "--pink",
-    theme.pink
-  );
-
-
-  root.style.setProperty(
-    "--glass-opacity",
-    Number(settings.glass)/100
-  );
-
-
-  root.style.setProperty(
-    "--glow",
-    Number(settings.glow)/100
-  );
-
-
-  document.querySelectorAll(".theme-button")
-    .forEach(button=>{
-      button.classList.toggle(
-        "active",
-        button.dataset.theme===settings.theme
-      );
-    });
-
-
-  const glass =
-    document.getElementById("glass-range");
-
-  if(glass){
-    glass.value=settings.glass;
-  }
-
-
-  const glassValue =
-    document.getElementById("glass-value");
-
-  if(glassValue){
-    glassValue.textContent=
-      settings.glass+"%";
-  }
-
-
-  const glow =
-    document.getElementById("glow-range");
-
-  if(glow){
-    glow.value=settings.glow;
-  }
-
-
-  const glowValue =
-    document.getElementById("glow-value");
-
-  if(glowValue){
-    glowValue.textContent=
-      settings.glow+"%";
-  }
-
-}
-
-
-function changeGlass(value){
-
-  settings.glass=Number(value);
-
-  saveSettings();
-
-  applySettings();
-
-}
-
-
-function changeGlow(value){
-
-  settings.glow=Number(value);
-
-  saveSettings();
-
-  applySettings();
-
-}
-
-
-function saveSettings(){
-
-  localStorage.setItem(
-    STORAGE.settings,
-    JSON.stringify(settings)
-  );
-
-}
-
-
-function resetSettings(){
-
-  settings={
-    ...defaultSettings
-  };
-
-  saveSettings();
-
-  applySettings();
-
-  showToast("♻️ Настройки сброшены");
-
-}
-
-
-/* =========================================================
-   BOT HELPERS
-   ========================================================= */
-
-function getAllBots(){
-
-  return [
-    officialBot,
-    ...createdBots
-  ];
-
-}
-
-
-function findBot(id){
-
-  return getAllBots()
-    .find(bot=>bot.id===id);
-
-}
-
-
-/* =========================================================
-   AVATAR HTML
-   ========================================================= */
-
-function botAvatarHTML(bot){
-
-  if(
-    bot.avatarType==="image" &&
-    bot.avatar
-  ){
-
-    return `
-      <img
-        src="${escapeHtml(bot.avatar)}"
-        alt="avatar"
-      >
-    `;
-
-  }
-
-  return escapeHtml(
-    bot.avatar ||
-    bot.emoji ||
-    "🤖"
-  );
-
-}
-
-
-/* =========================================================
-   CHAT LIST
-   ========================================================= */
-
-function renderChats(){
-
-  const container =
-    document.getElementById("chats-list");
-
-  if(!container){
-    return;
-  }
-
-
-  const bots =
-    getAllBots();
-
-
-  container.innerHTML =
-    bots.map(bot=>`
-
-      <div
-        class="list-item"
-        onclick="openBot('${escapeJs(bot.id)}')"
-      >
-
-        <div class="avatar">
-          ${botAvatarHTML(bot)}
-        </div>
-
-        <div class="list-main">
-
-          <h3>
-            ${escapeHtml(bot.name)}
-
-            ${
-              bot.official
-              ? `<span class="badge">✓ official</span>`
-              : ""
-            }
-
-          </h3>
-
-          <p>
-            @${escapeHtml(bot.username)}
-          </p>
-
-        </div>
-
-        <div class="arrow">
-          ›
-        </div>
-
-      </div>
-
-    `).join("");
-
-}
-
-
-/* =========================================================
-   OPEN BOT
-   ========================================================= */
-
-function openBot(id){
-
-  const bot=findBot(id);
-
-  if(!bot){
-    showToast("Бот не найден");
-    return;
-  }
-
-
-  currentBot=bot;
-
-
-  document
-    .querySelectorAll(".page")
-    .forEach(el=>{
-      el.classList.remove("active");
-    });
-
-
-  document
-    .getElementById("chat-page")
-    .classList.add("active");
-
-
-  renderChatHeader();
-
-  renderMessages();
-
-}
-
-
-function closeChat(){
-
-  document
-    .getElementById("chat-page")
-    .classList.remove("active");
-
-
-  showPage("chats");
-
-}
-
-
-/* =========================================================
-   CHAT HEADER
-   ========================================================= */
-
-function renderChatHeader(){
-
-  const header =
-    document.getElementById("chat-header");
-
-
-  header.innerHTML=`
-
-    <div class="chat-header">
-
-      <div class="avatar">
-        ${botAvatarHTML(currentBot)}
-      </div>
-
-      <div style="flex:1">
-
-        <h2>
-          ${escapeHtml(currentBot.name)}
-        </h2>
-
-        <p>
-          @${escapeHtml(currentBot.username)}
-        </p>
-
-      </div>
-
-      ${
-        !currentBot.official
-        ? `
-          <button
-            class="icon-button"
-            onclick="editBotAvatar('${escapeJs(currentBot.id)}')"
-          >
-            🖼️
-          </button>
-        `
-        : ""
-      }
-
-    </div>
-
-  `;
-
-}
-
-
-/* =========================================================
-   CHAT
-   ========================================================= */
-
-function getBotMessages(id){
-
-  if(!botChats[id]){
-    botChats[id]=[];
-  }
-
-  return botChats[id];
-
-}
-
-
-function saveChats(){
-
-  localStorage.setItem(
-    STORAGE.chats,
-    JSON.stringify(botChats)
-  );
-
-}
-
-
-function renderMessages(){
-
-  const container =
-    document.getElementById("chat-messages");
-
-
-  if(!container || !currentBot){
-    return;
-  }
-
-
-  const messages =
-    getBotMessages(currentBot.id);
-
-
-  if(!messages.length){
-
-    container.innerHTML=`
-
-      <div class="message bot">
-
-        ${
-          currentBot.official
-          ? `
-            Привет! 🐱
-
-            Я официальный бот Meowl Messenger.
-
-            /start — правила
-
-            /newbot — создать своего бота
-          `
-          : `
-            Привет! 🤖
-
-            Я бот @${escapeHtml(currentBot.username)}.
-
-            Напиши /start.
-          `
-        }
-
-      </div>
-
-    `;
-
-    return;
-  }
-
-
-  container.innerHTML =
-    messages.map(message=>`
-
-      <div class="message ${message.type}">
-        ${escapeHtml(message.text)}
-      </div>
-
-    `).join("");
-
-
-  container.scrollTop =
-    container.scrollHeight;
-
-}
-
-
-/* =========================================================
-   SEND
-   ========================================================= */
-
-function sendCurrentMessage(){
-
-  if(!currentBot){
-    return;
-  }
-
-
-  const input =
-    document.getElementById("chat-input");
-
-
-  const text =
-    input.value.trim();
-
-
-  if(!text){
-    return;
-  }
-
-
-  addMessage(
-    currentBot.id,
-    "user",
-    text
-  );
-
-
-  input.value="";
-
-
-  if(botCreationStep){
-
-    processBotCreation(text);
-
-    return;
-  }
-
-
-  setTimeout(()=>{
-    botReply(currentBot,text);
-  },250);
-
-}
-
-
-function addMessage(id,type,text){
-
-  if(!botChats[id]){
-    botChats[id]=[];
-  }
-
-
-  botChats[id].push({
-    type,
-    text,
-    time:Date.now()
-  });
-
-
-  saveChats();
-
-  renderMessages();
-
-}
-
-
-/* =========================================================
-   BOT REPLY
-   ========================================================= */
-
-function botReply(bot,text){
-
-  const command=
-    text.toLowerCase().trim();
-
-
-  if(command==="/start"){
-
-    addMessage(
-      bot.id,
-      "bot",
-      bot.official
-      ? rulesText
-      : `
-🤖 Добро пожаловать!
-
-Я бот @${bot.username}.
-
-Доступная команда:
-
-/start
-      `.trim()
-    );
-
-    return;
-  }
-
-
-  if(
-    bot.official &&
-    command==="/newbot"
-  ){
-
-    startNewBotCreation();
-
-    return;
-  }
-
-
-  addMessage(
-    bot.id,
-    "bot",
-    `
-🐱 Сообщение получено!
-
-Попробуй:
-
-/start
-/newbot
-    `.trim()
-  );
-
-}
-
-
-/* =========================================================
-   NEW BOT CREATION
-   ========================================================= */
-
-function startNewBotCreation(){
-
-  botCreationStep="name";
-
-  botCreationName="";
-
-  botCreationUsername="";
-
-  newBotAvatar={
-    type:"emoji",
-    value:"🤖"
-  };
-
-
-  addMessage(
-    currentBot.id,
-    "bot",
-    `
-🤖 СОЗДАНИЕ НОВОГО БОТА
-
-Шаг 1 из 3.
-
-Придумай имя бота.
-
-Можно использовать английские буквы,
-цифры, пробелы, "-" и "_".
-
-Например:
-
-My Music Bot
-Cool Cat
-Weather Bot
-
-Напиши имя.
-    `.trim()
-  );
-
-}
-
-
-/* =========================================================
-   PROCESS CREATION
-   ========================================================= */
+   BOT CREATION
+========================================================= */
 
 function processBotCreation(text){
-
-  /* NAME */
 
   if(botCreationStep==="name"){
 
     if(
-      !/^[A-Za-z0-9][A-Za-z0-9 _-]{2,40}$/
-      .test(text)
+      !/^[A-Za-z0-9 _-]+$/.test(text)
     ){
 
       addMessage(
-        currentBot.id,
-        "bot",
-        `
-❌ Неправильное имя.
-
-Попробуй ещё раз.
-        `.trim()
+        currentChatId,
+        "❌ Имя должно быть на английском языке.\n\n" +
+        "Можно использовать латинские буквы, цифры, пробел, _ и -.",
+        false
       );
 
       return;
+
     }
 
-
-    botCreationName=text;
+    newBotData.name = text;
 
     botCreationStep="username";
 
+    setTimeout(()=>{
 
-    addMessage(
-      currentBot.id,
-      "bot",
-      `
-✅ Имя сохранено.
+      addMessage(
+        currentChatId,
+        "✅ Имя принято.\n\n" +
+        "Шаг 2 из 3.\n\n" +
+        "Теперь придумай username.\n\n" +
+        "Например:\n" +
+        "mycoolbot\n\n" +
+        "Username должен состоять из английских букв, цифр и _. ",
+        false
+      );
 
-Шаг 2 из 3.
-
-Теперь придумай username.
-
-Разрешены:
-
-• английские буквы
-• цифры
-• _
-
-От 4 до 30 символов.
-
-Например:
-
-MyMusicBot
-Cool_Cat
-Weather123
-      `.trim()
-    );
+    },400);
 
     return;
+
   }
 
 
-  /* USERNAME */
-
   if(botCreationStep==="username"){
 
+    let username =
+      text
+        .trim()
+        .replace(/^@/,"")
+        .toLowerCase();
+
     if(
-      !/^[A-Za-z][A-Za-z0-9_]{3,29}$/
-      .test(text)
+      !/^[a-z0-9_]{3,32}$/.test(username)
     ){
 
       addMessage(
-        currentBot.id,
-        "bot",
-        `
-❌ Неправильный username.
-
-Первый символ должен быть английской буквой.
-
-Попробуй ещё раз.
-        `.trim()
+        currentChatId,
+        "❌ Неверный username.\n\n" +
+        "Используй 3–32 символа: a-z, 0-9 и _.",
+        false
       );
 
       return;
+
     }
 
-
     const exists =
-      getAllBots().some(
-        bot =>
-          bot.username.toLowerCase()===
-          text.toLowerCase()
-      );
-
+      getAllBots()
+        .some(
+          b =>
+            b.username.toLowerCase() ===
+            username
+        );
 
     if(exists){
 
       addMessage(
-        currentBot.id,
-        "bot",
-        `
-❌ Такой username уже занят.
-
-Придумай другой.
-        `.trim()
+        currentChatId,
+        "❌ Такой username уже занят.\n\n" +
+        "Придумай другой.",
+        false
       );
 
       return;
+
     }
 
-
-    botCreationUsername=text;
+    newBotData.username =
+      username;
 
     botCreationStep="avatar";
 
-
     openAvatarCreation();
 
-    return;
-  }
-
-
-  /* AVATAR */
-
-  if(botCreationStep==="avatar"){
-
-    return;
   }
 
 }
@@ -2505,617 +2027,829 @@ Weather123
 
 /* =========================================================
    AVATAR CREATION
-   ========================================================= */
+========================================================= */
 
 function openAvatarCreation(){
 
-  openModal(
-    "🖼️ Аватар бота",
-    `
+  openModal(`
 
-      <div style="text-align:center">
+    <div class="modal-header">
 
-        <div
-          id="avatar-preview"
-          class="preview-avatar"
-        >
-          🤖
-        </div>
-
-        <div class="setting-title">
-          Выбери аватар
-        </div>
-
-        <div class="avatar-picker">
-
-          <button
-            class="avatar-choice active"
-            onclick="selectBotEmoji('🤖',this)"
-          >
-            🤖
-          </button>
-
-          <button
-            class="avatar-choice"
-            onclick="selectBotEmoji('🐱',this)"
-          >
-            🐱
-          </button>
-
-          <button
-            class="avatar-choice"
-            onclick="selectBotEmoji('😺',this)"
-          >
-            😺
-          </button>
-
-          <button
-            class="avatar-choice"
-            onclick="selectBotEmoji('🐈',this)"
-          >
-            🐈
-          </button>
-
-          <button
-            class="avatar-choice"
-            onclick="selectBotEmoji('🦊',this)"
-          >
-            🦊
-          </button>
-
-          <button
-            class="avatar-choice"
-            onclick="selectBotEmoji('🐼',this)"
-          >
-            🐼
-          </button>
-
-          <button
-            class="avatar-choice"
-            onclick="selectBotEmoji('🐸',this)"
-          >
-            🐸
-          </button>
-
-          <button
-            class="avatar-choice"
-            onclick="selectBotEmoji('👾',this)"
-          >
-            👾
-          </button>
-
-          <button
-            class="avatar-choice"
-            onclick="selectBotEmoji('💜',this)"
-          >
-            💜
-          </button>
-
-          <button
-            class="avatar-choice"
-            onclick="selectBotEmoji('💠',this)"
-          >
-            💠
-          </button>
-
-          <button
-            class="avatar-choice"
-            onclick="selectBotEmoji('✨',this)"
-          >
-            ✨
-          </button>
-
-          <button
-            class="avatar-choice"
-            onclick="selectBotEmoji('🔥',this)"
-          >
-            🔥
-          </button>
-
-        </div>
-
-        <div style="height:18px"></div>
-
-        <div class="upload-box">
-
-          <div style="font-size:25px">
-            🖼️
-          </div>
-
-          <div style="margin:8px 0">
-            Или загрузи свою картинку
-          </div>
-
-          <input
-            id="bot-avatar-file"
-            type="file"
-            accept="image/*"
-            onchange="uploadBotAvatar(event)"
-            style="width:100%"
-          >
-
-        </div>
-
-        <div style="height:15px"></div>
-
-        <button
-          class="primary-button"
-          onclick="finishBotCreation()"
-        >
-          ✅ Создать бота
-        </button>
-
+      <div class="modal-title">
+        🖼️ Аватар бота
       </div>
 
-    `
-  );
+      <button
+        class="close-btn"
+        onclick="closeModal()"
+      >
+        ×
+      </button>
+
+    </div>
+
+    <p class="subtitle">
+      Шаг 3 из 3. Выбери аватар своего бота.
+    </p>
+
+    <div
+      id="newBotAvatarPreview"
+      style="
+        display:flex;
+        justify-content:center;
+        margin:22px 0;
+      "
+    >
+      ${avatarHTML({
+        emoji:"🤖"
+      },true)}
+    </div>
+
+    <div
+      style="
+        display:grid;
+        grid-template-columns:repeat(6,1fr);
+        gap:8px;
+      "
+    >
+
+      ${[
+        "🤖",
+        "🐱",
+        "😎",
+        "👾",
+        "🚀",
+        "🦊",
+        "🐼",
+        "🐸",
+        "👻",
+        "💜",
+        "🔥",
+        "⭐"
+      ].map(emoji=>`
+
+        <button
+          class="secondary-btn"
+          style="font-size:25px;padding:9px"
+          onclick="selectBotEmoji('${emoji}',this)"
+        >
+          ${emoji}
+        </button>
+
+      `).join("")}
+
+    </div>
+
+    <div
+      style="
+        margin-top:16px;
+        text-align:center;
+      "
+    >
+
+      <label
+        class="secondary-btn"
+        style="
+          display:inline-block;
+          cursor:pointer;
+        "
+      >
+        📷 Загрузить изображение
+
+        <input
+          type="file"
+          accept="image/*"
+          style="display:none"
+          onchange="uploadBotAvatar(event)"
+        >
+
+      </label>
+
+    </div>
+
+    <div class="modal-actions">
+
+      <button
+        class="secondary-btn"
+        onclick="closeModal()"
+      >
+        Отмена
+      </button>
+
+      <button
+        class="primary-btn"
+        onclick="finishBotCreation()"
+      >
+        Создать бота
+      </button>
+
+    </div>
+
+  `);
 
 }
 
 
-/* =========================================================
-   SELECT EMOJI
-   ========================================================= */
+let newBotAvatar = {
+  type:"emoji",
+  value:"🤖"
+};
 
-function selectBotEmoji(emoji,button){
+
+function selectBotEmoji(
+  emoji,
+  button
+){
 
   newBotAvatar={
     type:"emoji",
     value:emoji
   };
 
-
   document
-    .querySelectorAll(".avatar-choice")
-    .forEach(el=>{
-      el.classList.remove("active");
-    });
-
-
-  button.classList.add("active");
-
-
-  const preview =
-    document.getElementById("avatar-preview");
-
-
-  if(preview){
-
-    preview.innerHTML=
-      escapeHtml(emoji);
-
-  }
+    .getElementById("newBotAvatarPreview")
+    .innerHTML =
+      avatarHTML({
+        emoji
+      },true);
 
 }
 
-
-/* =========================================================
-   UPLOAD AVATAR
-   ========================================================= */
 
 function uploadBotAvatar(event){
 
   const file =
     event.target.files[0];
 
-
   if(!file){
-    return;
-  }
-
-
-  if(!file.type.startsWith("image/")){
-
-    showToast("Можно загрузить только изображение");
 
     return;
+
   }
 
+  if(file.size > 2*1024*1024){
 
-  if(file.size>2*1024*1024){
-
-    showToast("Максимальный размер — 2 МБ");
+    showToast("Изображение максимум 2 МБ");
 
     return;
-  }
 
+  }
 
   const reader =
     new FileReader();
 
-
-  reader.onload=function(){
+  reader.onload = function(){
 
     newBotAvatar={
       type:"image",
       value:reader.result
     };
 
-
-    const preview =
-      document.getElementById("avatar-preview");
-
-
-    if(preview){
-
-      preview.innerHTML=`
-        <img
-          src="${reader.result}"
-          alt="preview"
-        >
-      `;
-
-    }
-
-
     document
-      .querySelectorAll(".avatar-choice")
-      .forEach(el=>{
-        el.classList.remove("active");
-      });
+      .getElementById(
+        "newBotAvatarPreview"
+      )
+      .innerHTML =
+        avatarHTML({
+          avatarType:"image",
+          avatar:reader.result
+        },true);
 
   };
-
 
   reader.readAsDataURL(file);
 
 }
 
 
-/* =========================================================
-   FINISH BOT CREATION
-   ========================================================= */
-
 function finishBotCreation(){
 
   const bot={
 
-    id:
-      "bot_"+Date.now().toString(36),
+    id:uid("bot"),
 
-    name:
-      botCreationName,
+    name:newBotData.name,
 
-    username:
-      botCreationUsername,
+    username:newBotData.username,
 
-    description:
-      "Пользовательский бот Meowl Messenger.",
+    description:"Мой новый бот в Meowl Messenger.",
+
+    emoji:
+      newBotAvatar.type==="emoji"
+        ? newBotAvatar.value
+        : "🤖",
 
     avatarType:
       newBotAvatar.type,
 
     avatar:
-      newBotAvatar.value,
+      newBotAvatar.type==="image"
+        ? newBotAvatar.value
+        : "",
 
-    emoji:
-      newBotAvatar.type==="emoji"
-      ? newBotAvatar.value
-      : "🤖",
-
-    official:false,
-
-    createdAt:
-      Date.now()
+    official:false
 
   };
 
+  bots.push(bot);
 
-  createdBots.push(bot);
+  save(STORAGE.bots,bots);
 
+  ensureChat(bot.id);
 
-  localStorage.setItem(
-    STORAGE.bots,
-    JSON.stringify(createdBots)
-  );
-
-
-  botChats[bot.id]=[];
-
-  saveChats();
-
+  closeModal();
 
   botCreationStep=null;
 
-  botCreationName="";
-
-  botCreationUsername="";
-
-
-  closeModal();
-
-
-  const link =
-    createBotLink(bot.username);
-
-
-  addMessage(
-    currentBot.id,
-    "bot",
-    `
-🎉 БОТ СОЗДАН!
-
-🤖 Имя:
-${bot.name}
-
-👤 Username:
-@${bot.username}
-
-🖼️ Аватар:
-${bot.avatarType==="image"
-  ? "Загруженное изображение"
-  : bot.avatar}
-
-🔗 Ссылка:
-${link}
-
-Бот уже появился в:
-
-💬 Чаты
-
-Нажми на него, чтобы открыть.
-    `.trim()
-  );
-
-
-  renderChats();
-
-  showToast("🎉 Бот создан");
-
-}
-
-
-/* =========================================================
-   EDIT BOT AVATAR
-   ========================================================= */
-
-function editBotAvatar(id){
-
-  const bot =
-    createdBots.find(
-      bot=>bot.id===id
-    );
-
-
-  if(!bot){
-    return;
-  }
-
+  newBotData={};
 
   newBotAvatar={
-    type:
-      bot.avatarType || "emoji",
-
-    value:
-      bot.avatar ||
-      bot.emoji ||
-      "🤖"
+    type:"emoji",
+    value:"🤖"
   };
 
+  setTimeout(()=>{
 
-  openModal(
-    "🖼️ Изменить аватар",
-    `
-
-      <div style="text-align:center">
-
-        <div
-          id="avatar-preview"
-          class="preview-avatar"
-        >
-
-          ${
-            newBotAvatar.type==="image"
-            ? `<img src="${escapeHtml(newBotAvatar.value)}">`
-            : escapeHtml(newBotAvatar.value)
-          }
-
-        </div>
-
-        <div class="setting-title">
-          Новый аватар
-        </div>
-
-        <div class="avatar-picker">
-
-          <button
-            class="avatar-choice"
-            onclick="selectBotEmoji('🤖',this)"
-          >🤖</button>
-
-          <button
-            class="avatar-choice"
-            onclick="selectBotEmoji('🐱',this)"
-          >🐱</button>
-
-          <button
-            class="avatar-choice"
-            onclick="selectBotEmoji('😺',this)"
-          >😺</button>
-
-          <button
-            class="avatar-choice"
-            onclick="selectBotEmoji('🐈',this)"
-          >🐈</button>
-
-          <button
-            class="avatar-choice"
-            onclick="selectBotEmoji('🦊',this)"
-          >🦊</button>
-
-          <button
-            class="avatar-choice"
-            onclick="selectBotEmoji('🐼',this)"
-          >🐼</button>
-
-          <button
-            class="avatar-choice"
-            onclick="selectBotEmoji('🐸',this)"
-          >🐸</button>
-
-          <button
-            class="avatar-choice"
-            onclick="selectBotEmoji('👾',this)"
-          >👾</button>
-
-          <button
-            class="avatar-choice"
-            onclick="selectBotEmoji('💜',this)"
-          >💜</button>
-
-          <button
-            class="avatar-choice"
-            onclick="selectBotEmoji('💠',this)"
-          >💠</button>
-
-          <button
-            class="avatar-choice"
-            onclick="selectBotEmoji('✨',this)"
-          >✨</button>
-
-          <button
-            class="avatar-choice"
-            onclick="selectBotEmoji('🔥',this)"
-          >🔥</button>
-
-        </div>
-
-        <div style="height:18px"></div>
-
-        <div class="upload-box">
-
-          <div style="margin-bottom:8px">
-            🖼️ Загрузить новую картинку
-          </div>
-
-          <input
-            type="file"
-            accept="image/*"
-            onchange="uploadBotAvatar(event)"
-          >
-
-        </div>
-
-        <div style="height:15px"></div>
-
-        <button
-          class="primary-button"
-          onclick="saveEditedBotAvatar('${escapeJs(id)}')"
-        >
-          💾 Сохранить аватар
-        </button>
-
-      </div>
-
-    `
-  );
-
-}
-
-
-/* =========================================================
-   SAVE EDITED AVATAR
-   ========================================================= */
-
-function saveEditedBotAvatar(id){
-
-  const bot =
-    createdBots.find(
-      bot=>bot.id===id
+    addMessage(
+      "official",
+      "🎉 Бот успешно создан!\n\n" +
+      `Имя: ${bot.name}\n` +
+      `Username: @${bot.username}\n\n` +
+      "🔗 Ссылка на бота:\n" +
+      createBotLink(bot.username) +
+      "\n\n" +
+      "Твой бот уже появился в разделе 💬 Чаты.",
+      false
     );
 
+    showToast("Бот создан!");
 
-  if(!bot){
-    return;
-  }
-
-
-  bot.avatarType=
-    newBotAvatar.type;
-
-
-  bot.avatar=
-    newBotAvatar.value;
-
-
-  bot.emoji=
-    newBotAvatar.type==="emoji"
-    ? newBotAvatar.value
-    : "🤖";
-
-
-  localStorage.setItem(
-    STORAGE.bots,
-    JSON.stringify(createdBots)
-  );
-
-
-  closeModal();
-
-  renderChats();
-
-
-  if(currentBot &&
-     currentBot.id===id){
-
-    currentBot=bot;
-
-    renderChatHeader();
-
-  }
-
-
-  showToast("🖼️ Аватар изменён");
+  },300);
 
 }
 
 
 /* =========================================================
    BOT LINK
-   ========================================================= */
+========================================================= */
 
 function createBotLink(username){
 
-  return (
-    window.location.origin +
-    window.location.pathname +
+  return location.origin +
+    location.pathname +
     "?bot=" +
-    encodeURIComponent(username)
-  );
+    encodeURIComponent(username);
 
 }
 
 
-function openBotFromUrl(){
+/* =========================================================
+   EDIT BOT AVATAR
+========================================================= */
 
-  const params =
-    new URLSearchParams(
-      window.location.search
-    );
+function openEditBotAvatar(){
 
+  closeChatMenu();
 
-  const username =
-    params.get("bot");
+  if(!currentChatId){
 
-
-  if(!username){
     return;
+
   }
 
+  editingBotId =
+    currentChatId;
+
+  openModal(`
+
+    <div class="modal-header">
+
+      <div class="modal-title">
+        🖼️ Изменить аватар
+      </div>
+
+      <button
+        class="close-btn"
+        onclick="closeModal()"
+      >
+        ×
+      </button>
+
+    </div>
+
+    <div
+      id="editBotPreview"
+      style="
+        display:flex;
+        justify-content:center;
+        margin:20px 0;
+      "
+    >
+      ${avatarHTML(
+        getBot(editingBotId),
+        true
+      )}
+    </div>
+
+    <div
+      style="
+        display:grid;
+        grid-template-columns:repeat(6,1fr);
+        gap:8px;
+      "
+    >
+
+      ${[
+        "🤖",
+        "🐱",
+        "😎",
+        "👾",
+        "🚀",
+        "🦊",
+        "🐼",
+        "🐸",
+        "👻",
+        "💜",
+        "🔥",
+        "⭐"
+      ].map(emoji=>`
+
+        <button
+          class="secondary-btn"
+          style="font-size:25px;padding:9px"
+          onclick="selectEditedEmoji('${emoji}')"
+        >
+          ${emoji}
+        </button>
+
+      `).join("")}
+
+    </div>
+
+    <div style="text-align:center;margin-top:16px">
+
+      <label
+        class="secondary-btn"
+        style="display:inline-block"
+      >
+
+        📷 Загрузить изображение
+
+        <input
+          type="file"
+          accept="image/*"
+          style="display:none"
+          onchange="uploadEditedAvatar(event)"
+        >
+
+      </label>
+
+    </div>
+
+    <div class="modal-actions">
+
+      <button
+        class="secondary-btn"
+        onclick="closeModal()"
+      >
+        Отмена
+      </button>
+
+      <button
+        class="primary-btn"
+        onclick="saveEditedBotAvatar()"
+      >
+        Сохранить
+      </button>
+
+    </div>
+
+  `);
+
+}
+
+
+let editedAvatar={
+  type:"emoji",
+  value:"🤖"
+};
+
+
+function selectEditedEmoji(emoji){
+
+  editedAvatar={
+    type:"emoji",
+    value:emoji
+  };
+
+  document
+    .getElementById("editBotPreview")
+    .innerHTML =
+      avatarHTML({
+        emoji
+      },true);
+
+}
+
+
+function uploadEditedAvatar(event){
+
+  const file =
+    event.target.files[0];
+
+  if(!file){
+
+    return;
+
+  }
+
+  if(file.size > 2*1024*1024){
+
+    showToast("Изображение максимум 2 МБ");
+
+    return;
+
+  }
+
+  const reader =
+    new FileReader();
+
+  reader.onload=()=>{
+
+    editedAvatar={
+      type:"image",
+      value:reader.result
+    };
+
+    document
+      .getElementById("editBotPreview")
+      .innerHTML =
+        avatarHTML({
+          avatarType:"image",
+          avatar:reader.result
+        },true);
+
+  };
+
+  reader.readAsDataURL(file);
+
+}
+
+
+function saveEditedBotAvatar(){
 
   const bot =
-    getAllBots().find(
-      bot =>
-        bot.username.toLowerCase()===
-        username.toLowerCase()
+    bots.find(
+      b=>b.id===editingBotId
     );
 
+  if(!bot){
 
-  if(bot){
+    closeModal();
 
-    setTimeout(()=>{
-      openBot(bot.id);
-    },300);
+    return;
+
+  }
+
+  bot.avatarType =
+    editedAvatar.type;
+
+  if(editedAvatar.type==="emoji"){
+
+    bot.emoji =
+      editedAvatar.value;
+
+    bot.avatar="";
+
+  }else{
+
+    bot.avatarType="image";
+
+    bot.avatar=
+      editedAvatar.value;
+
+  }
+
+  save(STORAGE.bots,bots);
+
+  closeModal();
+
+  openChat(editingBotId);
+
+  showToast("Аватар изменён!");
+
+}
+
+
+/* =========================================================
+   WALLPAPER SYSTEM
+========================================================= */
+
+const WALLPAPERS = [
+
+  {
+    id:"default",
+    name:"Neon",
+    css:"wallpaper-default"
+  },
+
+  {
+    id:"purple",
+    name:"Purple",
+    css:"wallpaper-purple"
+  },
+
+  {
+    id:"blue",
+    name:"Blue",
+    css:"wallpaper-blue"
+  },
+
+  {
+    id:"pink",
+    name:"Pink",
+    css:"wallpaper-pink"
+  },
+
+  {
+    id:"ocean",
+    name:"Ocean",
+    css:"wallpaper-ocean"
+  },
+
+  {
+    id:"space",
+    name:"Space",
+    css:"wallpaper-space"
+  },
+
+  {
+    id:"sunset",
+    name:"Sunset",
+    css:"wallpaper-sunset"
+  },
+
+  {
+    id:"rainbow",
+    name:"Rainbow",
+    css:"wallpaper-rainbow"
+  }
+
+];
+
+
+function openWallpaperModal(){
+
+  closeChatMenu();
+
+  if(!currentChatId){
+
+    return;
+
+  }
+
+  const current =
+    wallpapers[currentChatId] ||
+    {
+      type:"preset",
+      value:"default"
+    };
+
+  openModal(`
+
+    <div class="modal-header">
+
+      <div class="modal-title">
+        🖼️ Обои чата
+      </div>
+
+      <button
+        class="close-btn"
+        onclick="closeModal()"
+      >
+        ×
+      </button>
+
+    </div>
+
+    <p class="subtitle" style="margin-bottom:15px">
+      Обои сохраняются отдельно для этого чата.
+    </p>
+
+    <div class="wallpaper-grid">
+
+      ${WALLPAPERS.map(wp=>`
+
+        <div
+          class="wallpaper-option ${
+            current.type==="preset" &&
+            current.value===wp.id
+              ? "selected"
+              : ""
+          }"
+          onclick="selectWallpaper('${wp.id}')"
+        >
+
+          <div
+            class="${wp.css}"
+            style="
+              width:100%;
+              height:100%;
+            "
+          ></div>
+
+          <div class="wallpaper-label">
+            ${wp.name}
+          </div>
+
+        </div>
+
+      `).join("")}
+
+    </div>
+
+    <div
+      style="
+        text-align:center;
+        margin-top:16px;
+      "
+    >
+
+      <label
+        class="secondary-btn"
+        style="display:inline-block"
+      >
+
+        📷 Загрузить свои обои
+
+        <input
+          type="file"
+          accept="image/*"
+          style="display:none"
+          onchange="uploadWallpaper(event)"
+        >
+
+      </label>
+
+    </div>
+
+    <div class="modal-actions">
+
+      <button
+        class="secondary-btn"
+        onclick="resetWallpaper()"
+      >
+        Сбросить
+      </button>
+
+      <button
+        class="primary-btn"
+        onclick="closeModal()"
+      >
+        Готово
+      </button>
+
+    </div>
+
+  `);
+
+}
+
+
+function selectWallpaper(id){
+
+  wallpapers[currentChatId]={
+    type:"preset",
+    value:id
+  };
+
+  save(
+    STORAGE.wallpapers,
+    wallpapers
+  );
+
+  applyChatWallpaper();
+
+  openWallpaperModal();
+
+}
+
+
+function uploadWallpaper(event){
+
+  const file =
+    event.target.files[0];
+
+  if(!file){
+
+    return;
+
+  }
+
+  if(file.size > 5*1024*1024){
+
+    showToast("Обои максимум 5 МБ");
+
+    return;
+
+  }
+
+  const reader =
+    new FileReader();
+
+  reader.onload=()=>{
+
+    wallpapers[currentChatId]={
+      type:"image",
+      value:reader.result
+    };
+
+    save(
+      STORAGE.wallpapers,
+      wallpapers
+    );
+
+    applyChatWallpaper();
+
+    closeModal();
+
+    showToast("Обои установлены!");
+
+  };
+
+  reader.readAsDataURL(file);
+
+}
+
+
+function resetWallpaper(){
+
+  delete wallpapers[currentChatId];
+
+  save(
+    STORAGE.wallpapers,
+    wallpapers
+  );
+
+  applyChatWallpaper();
+
+  closeModal();
+
+  showToast("Обои сброшены");
+
+}
+
+
+function applyChatWallpaper(){
+
+  const box =
+    document.getElementById("chatMessages");
+
+  if(!box || !currentChatId){
+
+    return;
+
+  }
+
+  const data =
+    wallpapers[currentChatId];
+
+  box.className =
+    "chat-messages";
+
+  box.style.backgroundImage="";
+
+  if(!data){
+
+    box.classList.add(
+      "wallpaper-default"
+    );
+
+    return;
+
+  }
+
+  if(data.type==="preset"){
+
+    const wp =
+      WALLPAPERS.find(
+        x=>x.id===data.value
+      );
+
+    if(wp){
+
+      box.classList.add(wp.css);
+
+    }
+
+    return;
+
+  }
+
+  if(data.type==="image"){
+
+    box.style.backgroundImage =
+      `url("${data.value}")`;
 
   }
 
@@ -3123,33 +2857,418 @@ function openBotFromUrl(){
 
 
 /* =========================================================
+   MESSAGE MENU
+========================================================= */
+
+function openMessageMenu(messageId){
+
+  const message =
+    (chats[currentChatId] || [])
+      .find(
+        m=>m.id===messageId
+      );
+
+  if(!message){
+
+    return;
+
+  }
+
+  openModal(`
+
+    <div class="modal-header">
+
+      <div class="modal-title">
+        Сообщение
+      </div>
+
+      <button
+        class="close-btn"
+        onclick="closeModal()"
+      >
+        ×
+      </button>
+
+    </div>
+
+    <div class="glass card">
+      ${escapeHtml(message.text)}
+    </div>
+
+    <button
+      class="menu-item"
+      onclick="copyMessage('${messageId}')"
+    >
+      📋 Копировать
+    </button>
+
+    <button
+      class="menu-item danger"
+      onclick="deleteMessage('${messageId}')"
+    >
+      🗑️ Удалить сообщение
+    </button>
+
+  `);
+
+}
+
+
+function deleteMessage(messageId){
+
+  if(!currentChatId){
+
+    return;
+
+  }
+
+  chats[currentChatId] =
+    (chats[currentChatId] || [])
+      .filter(
+        m=>m.id!==messageId
+      );
+
+  save(
+    STORAGE.chats,
+    chats
+  );
+
+  closeModal();
+
+  renderMessages();
+
+  showToast("Сообщение удалено");
+
+}
+
+
+async function copyMessage(messageId){
+
+  const message =
+    (chats[currentChatId] || [])
+      .find(
+        m=>m.id===messageId
+      );
+
+  if(!message){
+
+    return;
+
+  }
+
+  try{
+
+    await navigator.clipboard.writeText(
+      message.text
+    );
+
+    showToast("Скопировано");
+
+  }catch(e){
+
+    showToast("Не удалось скопировать");
+
+  }
+
+  closeModal();
+
+}
+
+
+/* =========================================================
+   CLEAR CHAT
+========================================================= */
+
+function clearCurrentChat(){
+
+  closeChatMenu();
+
+  if(!currentChatId){
+
+    return;
+
+  }
+
+  const bot =
+    getBot(currentChatId);
+
+  openModal(`
+
+    <div class="modal-header">
+
+      <div class="modal-title">
+        🗑️ Очистить чат?
+      </div>
+
+      <button
+        class="close-btn"
+        onclick="closeModal()"
+      >
+        ×
+      </button>
+
+    </div>
+
+    <p style="color:#cbd5e1;line-height:1.5">
+      Все сообщения из чата
+      <b>${escapeHtml(bot?.name || "")}</b>
+      будут удалены.
+      <br><br>
+      Обои и сам чат останутся.
+    </p>
+
+    <div class="modal-actions">
+
+      <button
+        class="secondary-btn"
+        onclick="closeModal()"
+      >
+        Отмена
+      </button>
+
+      <button
+        class="danger-btn"
+        onclick="confirmClearChat()"
+      >
+        🗑️ Очистить всё
+      </button>
+
+    </div>
+
+  `);
+
+}
+
+
+function confirmClearChat(){
+
+  chats[currentChatId]=[];
+
+  save(
+    STORAGE.chats,
+    chats
+  );
+
+  closeModal();
+
+  renderMessages();
+
+  showToast("Все сообщения удалены");
+
+}
+
+
+/* =========================================================
+   CHAT INFO
+========================================================= */
+
+function openChatInfo(){
+
+  closeChatMenu();
+
+  const bot =
+    getBot(currentChatId);
+
+  if(!bot){
+
+    return;
+
+  }
+
+  const count =
+    (chats[currentChatId] || []).length;
+
+  openModal(`
+
+    <div class="modal-header">
+
+      <div class="modal-title">
+        ℹ️ Информация о чате
+      </div>
+
+      <button
+        class="close-btn"
+        onclick="closeModal()"
+      >
+        ×
+      </button>
+
+    </div>
+
+    <div
+      style="
+        display:flex;
+        flex-direction:column;
+        align-items:center;
+        text-align:center;
+        padding:10px 0 20px;
+      "
+    >
+
+      ${avatarHTML(bot,true)}
+
+      <h2 style="margin-top:12px">
+        ${escapeHtml(bot.name)}
+      </h2>
+
+      <p class="subtitle">
+        @${escapeHtml(bot.username)}
+      </p>
+
+      <p
+        style="
+          color:#cbd5e1;
+          margin-top:12px;
+        "
+      >
+        ${escapeHtml(bot.description)}
+      </p>
+
+      <div class="badge" style="margin-top:14px">
+        💬 Сообщений: ${count}
+      </div>
+
+    </div>
+
+  `);
+
+}
+
+
+/* =========================================================
+   MODAL
+========================================================= */
+
+function openModal(html){
+
+  document
+    .getElementById("modalRoot")
+    .innerHTML = `
+
+      <div
+        class="modal-backdrop"
+        onclick="modalBackdropClick(event)"
+      >
+
+        <div class="modal">
+          ${html}
+        </div>
+
+      </div>
+
+    `;
+
+}
+
+
+function modalBackdropClick(event){
+
+  if(
+    event.target.classList.contains(
+      "modal-backdrop"
+    )
+  ){
+
+    closeModal();
+
+  }
+
+}
+
+
+function closeModal(){
+
+  document
+    .getElementById("modalRoot")
+    .innerHTML="";
+
+}
+
+
+/* =========================================================
+   PROFILE
+========================================================= */
+
+function renderProfile(){
+
+  document
+    .getElementById("profileName")
+    .textContent =
+      profile.name;
+
+  document
+    .getElementById("profileDescription")
+    .textContent =
+      profile.description;
+
+  document
+    .getElementById("profileNameInput")
+    .value =
+      profile.name;
+
+  document
+    .getElementById("profileDescriptionInput")
+    .value =
+      profile.description;
+
+}
+
+
+function saveProfile(){
+
+  profile.name =
+    document
+      .getElementById("profileNameInput")
+      .value
+      .trim() ||
+      "Meowl User";
+
+  profile.description =
+    document
+      .getElementById(
+        "profileDescriptionInput"
+      )
+      .value
+      .trim() ||
+      "Добро пожаловать в Meowl Messenger";
+
+  save(
+    STORAGE.profile,
+    profile
+  );
+
+  renderProfile();
+
+  showToast("Профиль сохранён");
+
+}
+
+
+/* =========================================================
    PEOPLE
-   ========================================================= */
+========================================================= */
 
-const localPeople=[
+const samplePeople = [
 
   {
-    id:"meowler",
-    name:"Meowler",
-    username:"meowler",
-    description:"Люблю Meowl Messenger 🐱",
-    emoji:"🐱"
+    name:"Meowl Cat",
+    username:"meowlcat",
+    emoji:"🐱",
+    description:"Люблю котиков 💜"
   },
 
   {
-    id:"meowl",
-    name:"Meowl",
-    username:"meowl",
-    description:"Создатель Meowl ✨",
-    emoji:"💜"
+    name:"Neon User",
+    username:"neonuser",
+    emoji:"😎",
+    description:"Neon vibes"
   },
 
   {
-    id:"neoncat",
-    name:"Neon Cat",
-    username:"neoncat",
-    description:"Neon & glass lover 💠",
-    emoji:"💠"
+    name:"Space Cat",
+    username:"spacecat",
+    emoji:"🚀",
+    description:"Космос и котики"
   }
 
 ];
@@ -3157,69 +3276,62 @@ const localPeople=[
 
 function renderPeople(){
 
-  const container =
-    document.getElementById("people-list");
-
-
-  if(!container){
-    return;
-  }
-
+  const root =
+    document.getElementById(
+      "peopleList"
+    );
 
   const search =
     (
-      document.getElementById("people-search")
-      ?.value || ""
-    ).toLowerCase();
-
+      document.getElementById(
+        "peopleSearch"
+      )?.value || ""
+    )
+      .trim()
+      .toLowerCase();
 
   const people =
-    localPeople.filter(
-      person =>
-        person.name.toLowerCase().includes(search)
-        ||
-        person.username.toLowerCase().includes(search)
+    samplePeople.filter(person=>
+
+      person.name
+        .toLowerCase()
+        .includes(search) ||
+
+      person.username
+        .toLowerCase()
+        .includes(search)
+
     );
 
-
-  if(!people.length){
-
-    container.innerHTML=`
-
-      <div class="card empty">
-        <div class="empty-icon">🔎</div>
-        Пользователь не найден.
-      </div>
-
-    `;
-
-    return;
-  }
-
-
-  container.innerHTML =
+  root.innerHTML =
     people.map(person=>`
 
-      <div class="list-item"
-           onclick="openPerson('${escapeJs(person.id)}')">
+      <div class="glass list-item">
 
-        <div class="avatar">
-          ${escapeHtml(person.emoji)}
-        </div>
+        ${avatarHTML(person)}
 
-        <div class="list-main">
+        <div class="list-item-main">
 
-          <h3>
+          <div class="list-item-title">
             ${escapeHtml(person.name)}
-          </h3>
+          </div>
 
-          <p>
+          <div class="list-item-sub">
             @${escapeHtml(person.username)}
-          </p>
+          </div>
+
+          <div class="list-item-sub">
+            ${escapeHtml(person.description)}
+          </div>
 
         </div>
 
-        <div class="arrow">›</div>
+        <button
+          class="secondary-btn"
+          onclick="showToast('Пока доступен локальный режим')"
+        >
+          Написать
+        </button>
 
       </div>
 
@@ -3228,265 +3340,226 @@ function renderPeople(){
 }
 
 
-function openPerson(id){
+/* =========================================================
+   SETTINGS
+========================================================= */
 
-  const person =
-    localPeople.find(
-      p=>p.id===id
+function openSettings(){
+
+  openModal(`
+
+    <div class="modal-header">
+
+      <div class="modal-title">
+        ⚙️ Настройки
+      </div>
+
+      <button
+        class="close-btn"
+        onclick="closeModal()"
+      >
+        ×
+      </button>
+
+    </div>
+
+    <div class="settings-row">
+
+      <div>
+        <b>Стекло</b>
+        <div class="subtitle">
+          Прозрачность интерфейса
+        </div>
+      </div>
+
+      <input
+        class="range"
+        type="range"
+        min=".4"
+        max="1"
+        step=".01"
+        value="${settings.glass}"
+        oninput="changeGlass(this.value)"
+      >
+
+    </div>
+
+    <div class="settings-row">
+
+      <div>
+        <b>Свечение</b>
+        <div class="subtitle">
+          Сила neon glow
+        </div>
+      </div>
+
+      <input
+        class="range"
+        type="range"
+        min="5"
+        max="50"
+        value="${settings.glow}"
+        oninput="changeGlow(this.value)"
+      >
+
+    </div>
+
+    <div
+      style="
+        margin-top:18px;
+        color:#cbd5e1;
+        font-size:13px;
+        line-height:1.5;
+      "
+    >
+
+      💡 Настройки чатов, включая обои,
+      сохраняются отдельно для каждого чата.
+
+    </div>
+
+  `);
+
+}
+
+
+function changeGlass(value){
+
+  settings.glass =
+    Number(value);
+
+  document
+    .documentElement
+    .style
+    .setProperty(
+      "--glass",
+      settings.glass
     );
 
+  save(
+    STORAGE.settings,
+    settings
+  );
 
-  if(!person){
-    return;
-  }
+}
 
 
-  openModal(
-    person.name,
-    `
-      <div style="text-align:center">
+function changeGlow(value){
 
-        <div class="preview-avatar">
-          ${escapeHtml(person.emoji)}
-        </div>
+  settings.glow =
+    Number(value);
 
-        <h2>
-          ${escapeHtml(person.name)}
-        </h2>
+  document
+    .documentElement
+    .style
+    .setProperty(
+      "--glow",
+      settings.glow + "px"
+    );
 
-        <p style="color:var(--muted)">
-          @${escapeHtml(person.username)}
-        </p>
-
-        <div class="info-box">
-          ${escapeHtml(person.description)}
-        </div>
-
-      </div>
-    `
+  save(
+    STORAGE.settings,
+    settings
   );
 
 }
 
 
 /* =========================================================
-   PROFILE
-   ========================================================= */
+   INITIALIZATION
+========================================================= */
 
-function loadProfile(){
+function initialize(){
 
-  const n=
-    document.getElementById("nickname-input");
+  document
+    .documentElement
+    .style
+    .setProperty(
+      "--glass",
+      settings.glass
+    );
 
-  const u=
-    document.getElementById("username-input");
+  document
+    .documentElement
+    .style
+    .setProperty(
+      "--glow",
+      settings.glow + "px"
+    );
 
-  const d=
-    document.getElementById("description-input");
+  renderProfile();
 
+  renderPeople();
 
-  if(n)n.value=profile.nickname;
+  renderChats();
 
-  if(u)u.value=profile.username;
+  const params =
+    new URLSearchParams(
+      location.search
+    );
 
-  if(d)d.value=profile.description;
+  const username =
+    params.get("bot");
 
-}
+  if(username){
 
+    const bot =
+      getAllBots()
+        .find(
+          b =>
+            b.username.toLowerCase() ===
+            username.toLowerCase()
+        );
 
-function saveProfile(){
+    if(bot){
 
-  profile={
+      setTimeout(
+        ()=>openChat(bot.id),
+        200
+      );
 
-    nickname:
-      document.getElementById("nickname-input")
-      .value.trim(),
-
-    username:
-      document.getElementById("username-input")
-      .value.trim()
-      .replace(/^@/,""),
-
-    description:
-      document.getElementById("description-input")
-      .value.trim()
-
-  };
-
-
-  localStorage.setItem(
-    STORAGE.profile,
-    JSON.stringify(profile)
-  );
-
-
-  showToast("✅ Профиль сохранён");
-
-}
-
-
-/* =========================================================
-   INFO
-   ========================================================= */
-
-function openRules(){
-
-  openModal(
-    "📜 Правила",
-    `<div class="info-box">
-      ${escapeHtml(rulesText)}
-    </div>`
-  );
-
-}
-
-
-function openBotFeatures(){
-
-  openModal(
-    "🤖 Возможности ботов",
-    `<div class="info-box">
-      ${escapeHtml(botFeaturesText)}
-    </div>`
-  );
-
-}
-
-
-function openAbout(){
-
-  openModal(
-    "ℹ️ Meowl Messenger",
-    `
-      <div class="info-box">
-
-        🐱 Meowl Messenger
-
-        Версия: ${APP_VERSION}
-
-        Платформа: GitHub Pages
-
-        Хранение: локальный браузер
-
-        Бэкенд: отсутствует
-
-        Боты: локальные
-
-        Аватары ботов:
-        emoji + загрузка изображения
-
-        Настройки:
-        localStorage
-
-      </div>
-    `
-  );
-
-}
-
-
-/* =========================================================
-   MODAL
-   ========================================================= */
-
-function openModal(title,content){
-
-  document.getElementById("modal-title")
-    .textContent=title;
-
-
-  document.getElementById("modal-content")
-    .innerHTML=content;
-
-
-  document.getElementById("modal")
-    .classList.add("show");
-
-}
-
-
-function closeModal(){
-
-  document.getElementById("modal")
-    .classList.remove("show");
-
-}
-
-
-document
-  .getElementById("modal")
-  .addEventListener("click",e=>{
-
-    if(e.target===e.currentTarget){
-      closeModal();
     }
 
-  });
-
-
-/* =========================================================
-   TOAST
-   ========================================================= */
-
-let toastTimer;
-
-
-function showToast(text){
-
-  const toast =
-    document.getElementById("toast");
-
-
-  toast.textContent=text;
-
-  toast.classList.add("show");
-
-
-  clearTimeout(toastTimer);
-
-
-  toastTimer=setTimeout(()=>{
-    toast.classList.remove("show");
-  },2200);
-
-}
-
-
-/* =========================================================
-   ESCAPE
-   ========================================================= */
-
-function escapeHtml(text){
-
-  return String(text)
-    .replace(/&/g,"&amp;")
-    .replace(/</g,"&lt;")
-    .replace(/>/g,"&gt;")
-    .replace(/"/g,"&quot;")
-    .replace(/'/g,"&#039;");
-
-}
-
-
-function escapeJs(text){
-
-  return String(text)
-    .replace(/\\/g,"\\\\")
-    .replace(/'/g,"\\'");
-}
-
-
-/* =========================================================
-   ESC
-   ========================================================= */
-
-document.addEventListener("keydown",e=>{
-
-  if(e.key==="Escape"){
-    closeModal();
   }
 
-});
+}
+
+
+/* =========================================================
+   GLOBAL CLICK
+========================================================= */
+
+document.addEventListener(
+  "click",
+  event=>{
+
+    const menu =
+      document.getElementById(
+        "chatMenu"
+      );
+
+    const target =
+      event.target;
+
+    if(
+      menu &&
+      !menu.classList.contains("hidden") &&
+      !target.closest(".chat-header")
+    ){
+
+      closeChatMenu();
+
+    }
+
+  }
+);
+
+
+/* =========================================================
+   START
+========================================================= */
+
+initialize();
 
 </script>
 

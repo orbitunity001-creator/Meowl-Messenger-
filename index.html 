@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Meowl Messenger</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div id="authScreen" class="screen">
+  <div class="card auth-card">
+    <div class="logo">🐱</div>
+    <h1>Meowl Messenger</h1>
+    <p>Твой личный мессенджер</p>
+
+    <div class="tabs">
+      <button id="loginTab" class="active">Вход</button>
+      <button id="registerTab">Регистрация</button>
+    </div>
+
+    <input id="email" type="email" placeholder="Email">
+    <input id="password" type="password" placeholder="Пароль">
+
+    <button id="authButton" class="main-button">Продолжить</button>
+    <div id="authError"></div>
+  </div>
+</div>
+
+<div id="appScreen" class="screen hidden">
+
+  <header>
+    <h2>Чаты</h2>
+    <button id="logout">Выйти</button>
+  </header>
+
+  <main class="chat-list">
+
+    <button id="favorites" class="chat">
+      <div class="avatar">🐱</div>
+
+      <div>
+        <strong>Избранное ⭐</strong>
+        <p id="preview">Чат с самим собой</p>
+      </div>
+    </button>
+
+  </main>
+
+  <nav>
+    <button id="chatsButton" class="active">💬<span>Чаты</span></button>
+    <button id="profileButton">👤<span>Профиль</span></button>
+  </nav>
+
+</div>
+
+
+<div id="chatScreen" class="screen hidden">
+
+  <header class="chat-header">
+    <button id="back">←</button>
+
+    <div class="chat-title">
+      <div class="small-avatar">🐱</div>
+      <div>
+        <strong>Избранное</strong>
+        <small>Только ты</small>
+      </div>
+    </div>
+
+    <button id="clear">🗑️</button>
+  </header>
+
+  <main id="messages"></main>
+
+  <div id="attachMenu" class="attach-menu hidden">
+    <button id="photoButton">🖼️ Фото</button>
+    <button id="videoButton">🎥 Видео</button>
+  </div>
+
+  <form id="messageForm">
+
+    <button type="button" id="attach">＋</button>
+
+    <input
+      id="message"
+      type="text"
+      placeholder="Написать сообщение..."
+      autocomplete="off"
+    >
+
+    <button type="submit" id="send">➤</button>
+
+  </form>
+
+  <input id="photoInput" type="file" accept="image/*" hidden>
+  <input id="videoInput" type="file" accept="video/*" hidden>
+
+</div>
+
+
+<div id="profileScreen" class="screen hidden">
+
+  <header>
+    <h2>Профиль</h2>
+    <button id="profileBack">←</button>
+  </header>
+
+  <main class="profile">
+    <div class="profile-avatar">🐱</div>
+    <h2>Meowl</h2>
+    <p>Добро пожаловать в Meowl Messenger 🐱</p>
+  </main>
+
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Meowl Messenger</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="app">
+
+  <!-- АВТОРИЗАЦИЯ -->
+  <section id="auth">
+    <div class="auth-card">
+      <div class="logo">M</div>
+
+      <h1>Meowl Messenger</h1>
+      <p class="subtitle">Общайся. Быстро. Удобно.</p>
+
+      <div class="tabs">
+        <button id="loginTab" class="active" onclick="setMode('login')">
+          Войти
+        </button>
+        <button id="registerTab" onclick="setMode('register')">
+          Регистрация
+        </button>
+      </div>
+
+      <input id="email" type="email" placeholder="Почта">
+      <input id="password" type="password" placeholder="Пароль">
+
+      <button class="main-btn" id="authBtn" onclick="authAction()">
+        Войти
+      </button>
+
+      <div id="error"></div>
+    </div>
+  </section>
+
+
+  <!-- ПРИЛОЖЕНИЕ -->
+  <section id="messenger" style="display:none">
+
+    <header>
+      <div>
+        <h2 id="pageTitle">Чаты</h2>
+        <p id="userEmail"></p>
+      </div>
+
+      <button class="logout" onclick="logout()">Выйти</button>
+    </header>
+
+
+    <!-- ЧАТЫ -->
+    <div id="chatsPage" class="page">
+
+      <div class="welcome-card">
+        <div class="big-icon">💬</div>
+        <h2>Добро пожаловать!</h2>
+        <p>Здесь будут твои чаты и сообщения.</p>
+      </div>
+
+    </div>
+
+
+    <!-- ПРОФИЛЬ -->
+    <div id="profilePage" class="page" style="display:none">
+
+      <div class="profile-card">
+
+        <div class="avatar" id="profileAvatar">👤</div>
+
+        <h2 id="profileNickname">Пользователь</h2>
+
+        <p id="profileDescription">
+          Описание не указано
+        </p>
+
+        <div class="info">
+          <span>📧 Почта</span>
+          <b id="profileEmail"></b>
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <!-- НИЖНЕЕ МЕНЮ -->
+    <nav class="bottom-nav">
+
+      <button onclick="showChats()">
+        <strong>💬</strong>
+        <span>Чаты</span>
+      </button>
+
+      <button onclick="showProfile()">
+        <strong>👤</strong>
+        <span>Профиль</span>
+      </button>
+
+    </nav>
+
+  </section>
+
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>

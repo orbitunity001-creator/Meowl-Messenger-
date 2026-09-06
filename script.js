@@ -196,3 +196,265 @@ if (currentUser) {
     openMessenger(currentUser);
 
 }
+
+/* =========================
+   ПРОФИЛЬ
+========================= */
+
+const avatarInput =
+    document.getElementById("avatarInput");
+
+const avatarPreview =
+    document.getElementById("avatarPreview");
+
+const nicknameInput =
+    document.getElementById("nickname");
+
+const descriptionInput =
+    document.getElementById("description");
+
+const profileEmail =
+    document.getElementById("profileEmail");
+
+const saveProfileButton =
+    document.getElementById("saveProfile");
+
+const profileMessage =
+    document.getElementById("profileMessage");
+
+
+/* Открытие профиля */
+
+function showProfile() {
+
+    chatsPage.classList.add("hidden");
+
+    profilePage.classList.remove("hidden");
+
+    chatsButton.classList.remove("active");
+
+    profileButton.classList.add("active");
+
+    pageTitle.textContent = "Профиль";
+
+
+    const currentUser =
+        localStorage.getItem(
+            "messengerCurrentUser"
+        );
+
+
+    if (currentUser) {
+        loadProfile(currentUser);
+    }
+}
+
+
+/* Загрузка профиля */
+
+function loadProfile(email) {
+
+    const users =
+        JSON.parse(
+            localStorage.getItem(
+                "messengerUsers"
+            )
+        ) || {};
+
+
+    const user = users[email];
+
+
+    if (!user) {
+        return;
+    }
+
+
+    if (!user.profile) {
+
+        user.profile = {
+
+            nickname:
+                email.split("@")[0],
+
+            description: "",
+
+            avatar: ""
+
+        };
+
+        users[email] = user;
+
+        localStorage.setItem(
+            "messengerUsers",
+            JSON.stringify(users)
+        );
+    }
+
+
+    nicknameInput.value =
+        user.profile.nickname || "";
+
+
+    descriptionInput.value =
+        user.profile.description || "";
+
+
+    profileEmail.textContent =
+        email;
+
+
+    if (user.profile.avatar) {
+
+        avatarPreview.innerHTML =
+            `<img src="${user.profile.avatar}" alt="Аватар">`;
+
+    } else {
+
+        avatarPreview.innerHTML = "👤";
+
+    }
+}
+
+
+/* Выбор аватара */
+
+avatarInput.addEventListener(
+    "change",
+    function () {
+
+        const file =
+            avatarInput.files[0];
+
+
+        if (!file) {
+            return;
+        }
+
+
+        if (!file.type.startsWith("image/")) {
+
+            alert("Выбери изображение.");
+
+            return;
+        }
+
+
+        const reader =
+            new FileReader();
+
+
+        reader.onload =
+            function (event) {
+
+                avatarPreview.innerHTML =
+                    `<img src="${event.target.result}" alt="Аватар">`;
+
+            };
+
+
+        reader.readAsDataURL(file);
+    }
+);
+
+
+/* Сохранение профиля */
+
+saveProfileButton.addEventListener(
+    "click",
+    function () {
+
+        const currentUser =
+            localStorage.getItem(
+                "messengerCurrentUser"
+            );
+
+
+        if (!currentUser) {
+            return;
+        }
+
+
+        const users =
+            JSON.parse(
+                localStorage.getItem(
+                    "messengerUsers"
+                )
+            ) || {};
+
+
+        const user =
+            users[currentUser];
+
+
+        if (!user) {
+            return;
+        }
+
+
+        let nickname =
+            nicknameInput.value.trim();
+
+
+        if (!nickname) {
+
+            nickname =
+                currentUser.split("@")[0];
+
+        }
+
+
+        let avatar = "";
+
+
+        const image =
+            avatarPreview.querySelector("img");
+
+
+        if (image) {
+
+            avatar = image.src;
+
+        } else {
+
+            avatar =
+                user.profile?.avatar || "";
+
+        }
+
+
+        user.profile = {
+
+            nickname: nickname,
+
+            description:
+                descriptionInput.value.trim(),
+
+            avatar: avatar
+
+        };
+
+
+        users[currentUser] = user;
+
+
+        localStorage.setItem(
+            "messengerUsers",
+            JSON.stringify(users)
+        );
+
+
+        profileMessage.textContent =
+            "✓ Профиль сохранён";
+
+
+        setTimeout(
+            function () {
+
+                profileMessage.textContent = "";
+
+            },
+            2500
+        );
+    }
+);

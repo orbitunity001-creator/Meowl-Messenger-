@@ -17,31 +17,33 @@
 
 html,body{
   min-height:100%;
+  background:#0d0e13;
 }
 
 body{
   min-height:100vh;
-  color:#fff;
+  color:white;
   background:
     radial-gradient(circle at 10% 10%,rgba(108,92,231,.45),transparent 32%),
     radial-gradient(circle at 90% 90%,rgba(0,206,201,.28),transparent 30%),
     #0d0e13;
-  overflow-x:hidden;
 }
 
 button,input,textarea{
-  font-family:inherit;
+  font:inherit;
 }
 
 button{
-  -webkit-tap-highlight-color:transparent;
+  cursor:pointer;
 }
 
 .hidden{
   display:none!important;
 }
 
-/* AUTH */
+/* =========================
+   АВТОРИЗАЦИЯ
+========================= */
 
 #authScreen{
   min-height:100vh;
@@ -64,28 +66,31 @@ button{
   backdrop-filter:blur(25px);
   -webkit-backdrop-filter:blur(25px);
 
-  box-shadow:
-    0 30px 90px rgba(0,0,0,.45),
-    0 0 50px rgba(108,92,231,.08);
+  box-shadow:0 30px 90px rgba(0,0,0,.45);
 }
 
 .logo{
   width:78px;
   height:78px;
-  margin:0 auto 20px;
 
   display:flex;
   align-items:center;
   justify-content:center;
+
+  margin:0 auto 20px;
 
   border-radius:23px;
 
   font-size:42px;
   font-weight:bold;
 
-  background:linear-gradient(135deg,#7659ff,#00cfc8);
+  background:linear-gradient(
+    135deg,
+    #7358ed,
+    #08c7c4
+  );
 
-  box-shadow:0 0 40px rgba(78,120,255,.35);
+  box-shadow:0 0 35px rgba(80,110,255,.25);
 }
 
 .auth-card h1{
@@ -96,12 +101,12 @@ button{
 .subtitle{
   color:rgba(255,255,255,.5);
   margin-bottom:27px;
-  font-size:15px;
 }
 
 .tabs{
   display:flex;
   gap:5px;
+
   padding:5px;
   margin-bottom:18px;
 
@@ -111,6 +116,7 @@ button{
 
 .tab{
   flex:1;
+
   padding:13px 8px;
 
   border:0;
@@ -118,21 +124,23 @@ button{
 
   color:rgba(255,255,255,.5);
   background:transparent;
-
-  cursor:pointer;
-  font-size:14px;
 }
 
 .tab.active{
-  color:#fff;
-  background:linear-gradient(135deg,#7358ed,#08c7c4);
-  box-shadow:0 5px 18px rgba(108,92,231,.25);
+  color:white;
+
+  background:linear-gradient(
+    135deg,
+    #7358ed,
+    #08c7c4
+  );
 }
 
-input,textarea{
+input,
+textarea{
   width:100%;
-  padding:15px;
 
+  padding:15px;
   margin-bottom:13px;
 
   border:1px solid rgba(255,255,255,.11);
@@ -140,21 +148,19 @@ input,textarea{
 
   outline:none;
 
-  color:#fff;
+  color:white;
   background:rgba(0,0,0,.22);
 
   font-size:15px;
 }
 
-input::placeholder,
-textarea::placeholder{
-  color:rgba(255,255,255,.4);
-}
-
 input:focus,
 textarea:focus{
-  border-color:rgba(108,92,231,.8);
-  box-shadow:0 0 0 3px rgba(108,92,231,.12);
+  border-color:#7358ed;
+
+  box-shadow:
+    0 0 0 3px
+    rgba(108,92,231,.12);
 }
 
 textarea{
@@ -164,42 +170,48 @@ textarea{
 
 .main-button{
   width:100%;
+
   padding:15px 18px;
 
   border:0;
   border-radius:15px;
 
-  color:#fff;
-
-  font-size:15px;
+  color:white;
   font-weight:bold;
 
-  cursor:pointer;
+  background:
+    linear-gradient(
+      135deg,
+      #7358ed,
+      #08c7c4
+    );
 
-  background:linear-gradient(135deg,#7358ed,#08c7c4);
-
-  box-shadow:0 10px 28px rgba(79,101,240,.25);
-
-  transition:.2s;
+  box-shadow:
+    0 10px 28px
+    rgba(79,101,240,.25);
 }
 
-.main-button:active{
+.main-button:active,
+.secondary-button:active,
+.cancel-button:active,
+.logout-button:active,
+.settings-action:active{
   transform:scale(.98);
 }
 
 #authError{
   min-height:20px;
+
   margin-top:12px;
+
   color:#ff687c;
+
   font-size:13px;
 }
 
-/* APP */
-
-#appScreen{
-  min-height:100vh;
-  padding-bottom:90px;
-}
+/* =========================
+   ШАПКА
+========================= */
 
 header{
   position:sticky;
@@ -212,12 +224,12 @@ header{
 
   padding:19px 20px;
 
-  background:rgba(13,14,19,.78);
+  background:rgba(13,14,19,.82);
 
-  border-bottom:1px solid rgba(255,255,255,.08);
+  border-bottom:
+    1px solid rgba(255,255,255,.08);
 
   backdrop-filter:blur(22px);
-  -webkit-backdrop-filter:blur(22px);
 }
 
 header h2{
@@ -226,33 +238,45 @@ header h2{
 
 header small{
   display:block;
+
   margin-top:4px;
+
   color:rgba(255,255,255,.38);
+
   font-size:11px;
 }
 
 .logout-button{
   padding:9px 14px;
 
-  border:1px solid rgba(255,255,255,.1);
+  border:
+    1px solid rgba(255,255,255,.1);
+
   border-radius:12px;
 
-  color:rgba(255,255,255,.75);
-  background:rgba(255,255,255,.05);
+  color:white;
 
-  cursor:pointer;
+  background:rgba(255,255,255,.05);
 }
 
-/* MAIN */
+/* =========================
+   ОСНОВА
+========================= */
 
 main{
   width:100%;
   max-width:720px;
-  margin:0 auto;
-  padding:24px 17px;
+
+  margin:auto;
+
+  padding:
+    24px 17px
+    100px;
 }
 
-/* SEARCH */
+/* =========================
+   ПОИСК
+========================= */
 
 .chat-search{
   display:flex;
@@ -262,7 +286,9 @@ main{
   padding:0 15px;
   margin-bottom:15px;
 
-  border:1px solid rgba(255,255,255,.1);
+  border:
+    1px solid rgba(255,255,255,.1);
+
   border-radius:16px;
 
   background:rgba(255,255,255,.045);
@@ -274,7 +300,9 @@ main{
   background:transparent;
 }
 
-/* FAVORITE */
+/* =========================
+   ИЗБРАННОЕ
+========================= */
 
 .favorite-chat{
   display:flex;
@@ -284,18 +312,18 @@ main{
   padding:15px;
   margin-bottom:18px;
 
-  border:1px solid rgba(255,255,255,.1);
+  border:
+    1px solid rgba(255,255,255,.1);
+
   border-radius:19px;
 
   background:rgba(255,255,255,.055);
 
-  cursor:pointer;
-
   transition:.2s;
 }
 
-.favorite-chat:active{
-  transform:scale(.98);
+.favorite-chat:hover{
+  transform:translateY(-2px);
 }
 
 .favorite-icon{
@@ -308,7 +336,12 @@ main{
 
   border-radius:16px;
 
-  background:linear-gradient(135deg,#7358ed,#08c7c4);
+  background:
+    linear-gradient(
+      135deg,
+      #7358ed,
+      #08c7c4
+    );
 
   font-size:23px;
 }
@@ -319,28 +352,42 @@ main{
 
 .favorite-chat p{
   margin-top:4px;
+
   color:rgba(255,255,255,.42);
+
   font-size:12px;
 }
 
 .arrow{
   margin-left:auto;
+
   color:rgba(255,255,255,.3);
+
   font-size:28px;
 }
 
-/* EMPTY */
+/* =========================
+   КАРТОЧКИ
+========================= */
 
-.empty-card{
-  padding:38px 20px;
-  text-align:center;
+.empty-card,
+.profile-card,
+.settings-card{
+  padding:28px;
+  margin-bottom:18px;
 
-  border:1px solid rgba(255,255,255,.1);
+  border:
+    1px solid rgba(255,255,255,.11);
+
   border-radius:25px;
 
-  background:rgba(255,255,255,.045);
+  background:rgba(255,255,255,.055);
 
-  backdrop-filter:blur(15px);
+  backdrop-filter:blur(20px);
+}
+
+.empty-card{
+  text-align:center;
 }
 
 .chat-icon{
@@ -350,12 +397,12 @@ main{
 
 .empty-card h2{
   margin-bottom:8px;
-  font-size:22px;
 }
 
-.empty-card p{
-  color:rgba(255,255,255,.43);
-  font-size:14px;
+.empty-card p,
+.profile-card>p,
+.settings-subtitle{
+  color:rgba(255,255,255,.45);
 }
 
 .small-button{
@@ -363,20 +410,12 @@ main{
   margin-top:18px;
 }
 
-/* PROFILE */
+/* =========================
+   ПРОФИЛЬ
+========================= */
 
 .profile-card{
-  padding:28px;
-  margin-bottom:18px;
-
   text-align:center;
-
-  border:1px solid rgba(255,255,255,.11);
-  border-radius:25px;
-
-  background:rgba(255,255,255,.055);
-
-  backdrop-filter:blur(20px);
 }
 
 .avatar{
@@ -393,9 +432,12 @@ main{
 
   border-radius:50%;
 
-  background:linear-gradient(135deg,#7358ed,#08c7c4);
-
-  box-shadow:0 0 35px rgba(80,110,255,.2);
+  background:
+    linear-gradient(
+      135deg,
+      #7358ed,
+      #08c7c4
+    );
 
   font-size:43px;
 }
@@ -403,64 +445,54 @@ main{
 .avatar img{
   width:100%;
   height:100%;
+
   object-fit:cover;
+
   display:none;
 }
 
-.profile-card h2{
-  margin-bottom:8px;
-}
-
 .profile-card>p{
-  margin-bottom:20px;
-  color:rgba(255,255,255,.48);
+  margin:8px 0 20px;
+
   line-height:1.5;
 }
 
 .secondary-button,
 .cancel-button{
   width:100%;
+
   padding:14px;
   margin-bottom:12px;
 
   border-radius:14px;
 
-  color:#fff;
-  cursor:pointer;
-  font-size:14px;
+  color:white;
 }
 
 .secondary-button{
-  border:1px solid rgba(255,255,255,.1);
+  border:
+    1px solid rgba(255,255,255,.1);
+
   background:rgba(255,255,255,.06);
 }
 
 .cancel-button{
-  border:1px solid rgba(255,255,255,.08);
+  border:
+    1px solid rgba(255,255,255,.08);
+
   background:rgba(255,255,255,.025);
 }
 
-/* SETTINGS */
-
-.settings-card{
-  padding:23px;
-
-  border:1px solid rgba(255,255,255,.11);
-  border-radius:25px;
-
-  background:rgba(255,255,255,.055);
-
-  backdrop-filter:blur(20px);
-}
+/* =========================
+   НАСТРОЙКИ
+========================= */
 
 .settings-card>h2{
   font-size:25px;
 }
 
 .settings-subtitle{
-  margin-top:6px;
-  margin-bottom:20px;
-  color:rgba(255,255,255,.45);
+  margin:6px 0 20px;
   font-size:13px;
 }
 
@@ -468,7 +500,9 @@ main{
   padding:17px;
   margin-bottom:14px;
 
-  border:1px solid rgba(255,255,255,.07);
+  border:
+    1px solid rgba(255,255,255,.07);
+
   border-radius:19px;
 
   background:rgba(0,0,0,.15);
@@ -488,7 +522,8 @@ main{
 
   gap:15px;
 
-  border-bottom:1px solid rgba(255,255,255,.06);
+  border-bottom:
+    1px solid rgba(255,255,255,.06);
 }
 
 .setting-row:last-child{
@@ -502,13 +537,17 @@ main{
 
 .setting-row span{
   display:block;
+
   margin-top:4px;
+
   color:rgba(255,255,255,.4);
+
   font-size:11px;
+
   line-height:1.4;
 }
 
-/* SWITCH */
+/* переключатель */
 
 .switch{
   position:relative;
@@ -524,13 +563,12 @@ main{
 
 .slider{
   position:absolute;
+
   inset:0;
 
   border-radius:30px;
 
   background:rgba(255,255,255,.12);
-
-  cursor:pointer;
 }
 
 .slider:before{
@@ -546,20 +584,23 @@ main{
 
   border-radius:50%;
 
-  background:#fff;
+  background:white;
 
   transition:.2s;
 }
 
 .switch input:checked+.slider{
-  background:linear-gradient(135deg,#7358ed,#08c7c4);
+  background:
+    linear-gradient(
+      135deg,
+      #7358ed,
+      #08c7c4
+    );
 }
 
 .switch input:checked+.slider:before{
   transform:translateX(21px);
 }
-
-/* SETTINGS BUTTONS */
 
 .settings-action,
 .settings-danger{
@@ -570,23 +611,22 @@ main{
 
   border-radius:13px;
 
-  cursor:pointer;
-
-  color:#fff;
-  font-size:13px;
+  color:white;
 }
 
 .settings-action{
-  border:1px solid rgba(255,255,255,.1);
+  border:
+    1px solid rgba(255,255,255,.1);
+
   background:rgba(255,255,255,.05);
 }
 
 .settings-danger{
-  margin-top:15px;
-
   color:#ff687c;
 
-  border:1px solid rgba(255,80,100,.2);
+  border:
+    1px solid rgba(255,80,100,.2);
+
   background:rgba(255,60,80,.05);
 }
 
@@ -609,7 +649,12 @@ main{
   font-size:29px;
   font-weight:bold;
 
-  background:linear-gradient(135deg,#7358ed,#08c7c4);
+  background:
+    linear-gradient(
+      135deg,
+      #7358ed,
+      #08c7c4
+    );
 }
 
 .about-section p{
@@ -619,12 +664,17 @@ main{
 
 .about-section span{
   display:block;
+
   margin-top:10px;
+
   color:rgba(255,255,255,.25);
+
   font-size:10px;
 }
 
-/* NAV */
+/* =========================
+   НИЖНЕЕ МЕНЮ
+========================= */
 
 nav{
   position:fixed;
@@ -643,15 +693,18 @@ nav{
 
   padding:7px;
 
-  border:1px solid rgba(255,255,255,.12);
+  border:
+    1px solid rgba(255,255,255,.12);
+
   border-radius:21px;
 
-  background:rgba(18,19,25,.9);
+  background:rgba(18,19,25,.92);
 
   backdrop-filter:blur(25px);
-  -webkit-backdrop-filter:blur(25px);
 
-  box-shadow:0 15px 50px rgba(0,0,0,.45);
+  box-shadow:
+    0 15px 50px
+    rgba(0,0,0,.45);
 }
 
 .nav-button{
@@ -673,8 +726,6 @@ nav{
 
   background:transparent;
 
-  cursor:pointer;
-
   font-size:11px;
 }
 
@@ -683,22 +734,28 @@ nav{
 }
 
 .nav-button.active{
-  color:#fff;
+  color:white;
   background:rgba(255,255,255,.09);
 }
 
-/* LIGHT */
+/* =========================
+   СВЕТЛАЯ ТЕМА
+========================= */
 
 body.light{
   color:#171820;
 
   background:
-    radial-gradient(circle at 10% 10%,rgba(108,92,231,.18),transparent 35%),
+    radial-gradient(
+      circle at 10% 10%,
+      rgba(108,92,231,.18),
+      transparent 35%
+    ),
     #edf0f7;
 }
 
 body.light header{
-  background:rgba(237,240,247,.85);
+  background:rgba(237,240,247,.88);
 }
 
 body.light .auth-card,
@@ -706,19 +763,14 @@ body.light .profile-card,
 body.light .settings-card,
 body.light .empty-card,
 body.light .favorite-chat{
-  background:rgba(255,255,255,.75);
+  background:rgba(255,255,255,.78);
   border-color:rgba(0,0,0,.08);
-}
-
-body.light .settings-section{
-  background:rgba(0,0,0,.025);
 }
 
 body.light input,
 body.light textarea{
   color:#171820;
-  background:rgba(255,255,255,.8);
-  border-color:rgba(0,0,0,.1);
+  background:rgba(255,255,255,.85);
 }
 
 body.light .subtitle,
@@ -730,6 +782,11 @@ body.light .favorite-chat p{
   color:rgba(0,0,0,.5);
 }
 
+body.light nav{
+  background:rgba(255,255,255,.92);
+  border-color:rgba(0,0,0,.1);
+}
+
 body.light .nav-button{
   color:rgba(0,0,0,.45);
 }
@@ -739,18 +796,7 @@ body.light .nav-button.active{
   background:rgba(0,0,0,.06);
 }
 
-body.light nav{
-  background:rgba(255,255,255,.9);
-  border-color:rgba(0,0,0,.1);
-}
-
-body.light .settings-action,
-body.light .secondary-button,
-body.light .cancel-button{
-  color:#171820;
-}
-
-/* LARGE TEXT */
+/* крупный текст */
 
 body.large-text .setting-row strong{
   font-size:17px;
@@ -760,16 +806,15 @@ body.large-text .setting-row span{
   font-size:13px;
 }
 
-/* REDUCED MOTION */
+/* уменьшение анимаций */
 
-body.reduced-motion *,
-body.reduced-motion *:before,
-body.reduced-motion *:after{
+body.reduced-motion *{
   transition:none!important;
-  animation:none!important;
 }
 
-/* MOBILE */
+/* =========================
+   МОБИЛЬНАЯ ВЕРСИЯ
+========================= */
 
 @media(max-width:500px){
 
@@ -791,7 +836,9 @@ body.reduced-motion *:after{
   }
 
   main{
-    padding:20px 13px;
+    padding:
+      20px 13px
+      100px;
   }
 
   .settings-card{
@@ -821,7 +868,9 @@ body.reduced-motion *:after{
 
 <body>
 
-<!-- ================= АВТОРИЗАЦИЯ ================= -->
+<!-- =========================
+     ЭКРАН ВХОДА
+========================= -->
 
 <div id="authScreen">
 
@@ -837,11 +886,17 @@ body.reduced-motion *:after{
 
     <div class="tabs">
 
-      <button id="loginTab" class="tab active">
+      <button
+        type="button"
+        id="loginTab"
+        class="tab active">
         Войти
       </button>
 
-      <button id="registerTab" class="tab">
+      <button
+        type="button"
+        id="registerTab"
+        class="tab">
         Регистрация
       </button>
 
@@ -851,19 +906,21 @@ body.reduced-motion *:after{
       id="emailInput"
       type="email"
       placeholder="Почта"
-    >
+      autocomplete="email">
 
     <input
       id="passwordInput"
       type="password"
       placeholder="Пароль"
-    >
+      autocomplete="current-password">
 
     <button
+      type="button"
       id="authButton"
-      class="main-button"
-    >
+      class="main-button">
+
       Продолжить
+
     </button>
 
     <p id="authError"></p>
@@ -873,588 +930,836 @@ body.reduced-motion *:after{
 </div>
 
 
-<!-- ================= ПРИЛОЖЕНИЕ ================= -->
+<!-- =========================
+     ПРИЛОЖЕНИЕ
+========================= -->
 
 <div id="appScreen" class="hidden">
 
-<header>
-
-  <div>
-
-    <h2 id="pageTitle">
-      Чаты
-    </h2>
-
-    <small id="emailLabel"></small>
-
-  </div>
-
-  <button
-    id="logoutButton"
-    class="logout-button"
-  >
-    Выйти
-  </button>
-
-</header>
-
-
-<main>
-
-
-<!-- ================= ЧАТЫ ================= -->
-
-<section id="chatsPage">
-
-  <div class="chat-search">
-
-    <span>🔍</span>
-
-    <input
-      id="chatSearch"
-      placeholder="Поиск"
-    >
-
-  </div>
-
-
-  <div
-    class="favorite-chat"
-    id="favoriteChat"
-  >
-
-    <div class="favorite-icon">
-      ⭐
-    </div>
+  <header>
 
     <div>
 
-      <h3>
-        Избранное
-      </h3>
+      <h2 id="pageTitle">
+        Чаты
+      </h2>
 
-      <p>
-        Личные сообщения
-      </p>
+      <small id="emailLabel"></small>
 
     </div>
 
-    <span class="arrow">
-      ›
-    </span>
-
-  </div>
-
-
-  <div class="empty-card">
-
-    <div class="chat-icon">
-      💬
-    </div>
-
-    <h2>
-      Чатов пока нет
-    </h2>
-
-    <p>
-      Здесь будут отображаться твои чаты
-    </p>
-
     <button
-      class="main-button small-button"
-      id="newChatButton"
-    >
-      ＋ Новый чат
+      type="button"
+      id="logoutButton"
+      class="logout-button">
+
+      Выйти
+
     </button>
 
-  </div>
-
-</section>
+  </header>
 
 
-<!-- ================= ПРОФИЛЬ ================= -->
+  <main>
 
-<section
-  id="profilePage"
-  class="hidden"
->
+    <!-- =====================
+         ЧАТЫ
+    ====================== -->
 
-  <div class="profile-card">
+    <section id="chatsPage">
 
-    <div class="avatar">
+      <div class="chat-search">
 
-      <img
-        id="avatarImage"
-        alt=""
-      >
+        <span>🔍</span>
 
-      <span id="avatarDefault">
-        👤
-      </span>
+        <input
+          id="chatSearch"
+          placeholder="Поиск">
 
-    </div>
+      </div>
 
-    <h2 id="profileNickname">
-      Ник
-    </h2>
 
-    <p id="profileDescription">
-      Описание профиля
-    </p>
+      <div
+        class="favorite-chat"
+        id="favoriteChat">
+
+        <div class="favorite-icon">
+          ⭐
+        </div>
+
+        <div>
+
+          <h3>
+            Избранное
+          </h3>
+
+          <p>
+            Личные сообщения
+          </p>
+
+        </div>
+
+        <span class="arrow">
+          ›
+        </span>
+
+      </div>
+
+
+      <div class="empty-card">
+
+        <div class="chat-icon">
+          💬
+        </div>
+
+        <h2>
+          Чатов пока нет
+        </h2>
+
+        <p>
+          Здесь будут отображаться твои чаты
+        </p>
+
+        <button
+          type="button"
+          class="main-button small-button"
+          id="newChatButton">
+
+          ＋ Новый чат
+
+        </button>
+
+      </div>
+
+    </section>
+
+
+    <!-- =====================
+         ПРОФИЛЬ
+    ====================== -->
+
+    <section
+      id="profilePage"
+      class="hidden">
+
+      <div class="profile-card">
+
+        <div class="avatar">
+
+          <img
+            id="avatarImage"
+            alt="Аватар">
+
+          <span id="avatarDefault">
+            👤
+          </span>
+
+        </div>
+
+        <h2 id="profileNickname">
+          Ник
+        </h2>
+
+        <p id="profileDescription">
+          Описание профиля
+        </p>
+
+        <button
+          type="button"
+          id="editProfileButton"
+          class="main-button">
+
+          ✏️ Изменить профиль
+
+        </button>
+
+      </div>
+
+
+      <!-- РЕДАКТИРОВАНИЕ ПРОФИЛЯ -->
+
+      <div
+        id="editProfile"
+        class="profile-card hidden">
+
+        <h2>
+          Изменить профиль
+        </h2>
+
+        <br>
+
+        <button
+          type="button"
+          id="photoButton"
+          class="secondary-button">
+
+          📷 Выбрать фото
+
+        </button>
+
+        <input
+          id="photoInput"
+          type="file"
+          accept="image/*"
+          hidden>
+
+
+        <input
+          id="nicknameInput"
+          type="text"
+          placeholder="Ник"
+          maxlength="30">
+
+
+        <textarea
+          id="descriptionInput"
+          placeholder="Описание"
+          maxlength="150">
+        </textarea>
+
+
+        <input
+          id="profileEmail"
+          type="email"
+          readonly
+          disabled>
+
+
+        <button
+          type="button"
+          id="saveProfileButton"
+          class="main-button">
+
+          💾 Сохранить
+
+        </button>
+
+
+        <button
+          type="button"
+          id="cancelProfileButton"
+          class="cancel-button">
+
+          Отмена
+
+        </button>
+
+      </div>
+
+    </section>
+
+
+    <!-- =====================
+         НАСТРОЙКИ
+    ====================== -->
+
+    <section
+      id="settingsPage"
+      class="hidden">
+
+      <div class="settings-card">
+
+        <h2>
+          ⚙️ Настройки
+        </h2>
+
+        <p class="settings-subtitle">
+          Настрой Meowl Messenger под себя
+        </p>
+
+
+        <!-- ВНЕШНИЙ ВИД -->
+
+        <div class="settings-section">
+
+          <h3>
+            🎨 Внешний вид
+          </h3>
+
+
+          <div class="setting-row">
+
+            <div>
+
+              <strong>
+                Тёмная тема
+              </strong>
+
+              <span>
+                Использовать тёмное оформление
+              </span>
+
+            </div>
+
+            <label class="switch">
+
+              <input
+                id="darkThemeToggle"
+                type="checkbox"
+                checked>
+
+              <span class="slider"></span>
+
+            </label>
+
+          </div>
+
+
+          <div class="setting-row">
+
+            <div>
+
+              <strong>
+                Неоновый эффект
+              </strong>
+
+              <span>
+                Свечение элементов интерфейса
+              </span>
+
+            </div>
+
+            <label class="switch">
+
+              <input
+                id="neonToggle"
+                type="checkbox"
+                checked>
+
+              <span class="slider"></span>
+
+            </label>
+
+          </div>
+
+        </div>
+
+
+        <!-- ЧАТЫ -->
+
+        <div class="settings-section">
+
+          <h3>
+            💬 Чаты
+          </h3>
+
+
+          <div class="setting-row">
+
+            <div>
+
+              <strong>
+                Enter — отправить
+              </strong>
+
+              <span>
+                Enter отправляет сообщение
+              </span>
+
+            </div>
+
+            <label class="switch">
+
+              <input
+                id="enterSendToggle"
+                type="checkbox"
+                checked>
+
+              <span class="slider"></span>
+
+            </label>
+
+          </div>
+
+
+          <div class="setting-row">
+
+            <div>
+
+              <strong>
+                Показывать время
+              </strong>
+
+              <span>
+                Показывать время сообщений
+              </span>
+
+            </div>
+
+            <label class="switch">
+
+              <input
+                id="timeToggle"
+                type="checkbox"
+                checked>
+
+              <span class="slider"></span>
+
+            </label>
+
+          </div>
+
+
+          <div class="setting-row">
+
+            <div>
+
+              <strong>
+                Предпросмотр сообщений
+              </strong>
+
+              <span>
+                Показывать последнее сообщение
+              </span>
+
+            </div>
+
+            <label class="switch">
+
+              <input
+                id="previewToggle"
+                type="checkbox"
+                checked>
+
+              <span class="slider"></span>
+
+            </label>
+
+          </div>
+
+        </div>
+
+
+        <!-- УВЕДОМЛЕНИЯ -->
+
+        <div class="settings-section">
+
+          <h3>
+            🔔 Уведомления
+          </h3>
+
+
+          <div class="setting-row">
+
+            <div>
+
+              <strong>
+                Уведомления
+              </strong>
+
+              <span>
+                Получать уведомления
+              </span>
+
+            </div>
+
+            <label class="switch">
+
+              <input
+                id="notificationsToggle"
+                type="checkbox"
+                checked>
+
+              <span class="slider"></span>
+
+            </label>
+
+          </div>
+
+
+          <div class="setting-row">
+
+            <div>
+
+              <strong>
+                Звуки
+              </strong>
+
+              <span>
+                Звук новых сообщений
+              </span>
+
+            </div>
+
+            <label class="switch">
+
+              <input
+                id="soundToggle"
+                type="checkbox"
+                checked>
+
+              <span class="slider"></span>
+
+            </label>
+
+          </div>
+
+
+          <div class="setting-row">
+
+            <div>
+
+              <strong>
+                Вибрация
+              </strong>
+
+              <span>
+                Вибрация при новых сообщениях
+              </span>
+
+            </div>
+
+            <label class="switch">
+
+              <input
+                id="vibrationToggle"
+                type="checkbox"
+                checked>
+
+              <span class="slider"></span>
+
+            </label>
+
+          </div>
+
+        </div>
+
+
+        <!-- ПРИВАТНОСТЬ -->
+
+        <div class="settings-section">
+
+          <h3>
+            🔐 Приватность
+          </h3>
+
+
+          <div class="setting-row">
+
+            <div>
+
+              <strong>
+                Показывать «В сети»
+              </strong>
+
+              <span>
+                Показывать статус онлайн
+              </span>
+
+            </div>
+
+            <label class="switch">
+
+              <input
+                id="onlineToggle"
+                type="checkbox"
+                checked>
+
+              <span class="slider"></span>
+
+            </label>
+
+          </div>
+
+
+          <div class="setting-row">
+
+            <div>
+
+              <strong>
+                Показывать «Печатает...»
+              </strong>
+
+              <span>
+                Показывать набор сообщения
+              </span>
+
+            </div>
+
+            <label class="switch">
+
+              <input
+                id="typingToggle"
+                type="checkbox"
+                checked>
+
+              <span class="slider"></span>
+
+            </label>
+
+          </div>
+
+
+          <div class="setting-row">
+
+            <div>
+
+              <strong>
+                Отчёты о прочтении
+              </strong>
+
+              <span>
+                Показывать прочитанные сообщения
+              </span>
+
+            </div>
+
+            <label class="switch">
+
+              <input
+                id="readToggle"
+                type="checkbox"
+                checked>
+
+              <span class="slider"></span>
+
+            </label>
+
+          </div>
+
+        </div>
+
+
+        <!-- ДОСТУПНОСТЬ -->
+
+        <div class="settings-section">
+
+          <h3>
+            ♿ Доступность
+          </h3>
+
+
+          <div class="setting-row">
+
+            <div>
+
+              <strong>
+                Крупный текст
+              </strong>
+
+              <span>
+                Увеличить размер текста
+              </span>
+
+            </div>
+
+            <label class="switch">
+
+              <input
+                id="largeTextToggle"
+                type="checkbox">
+
+              <span class="slider"></span>
+
+            </label>
+
+          </div>
+
+
+          <div class="setting-row">
+
+            <div>
+
+              <strong>
+                Уменьшить анимации
+              </strong>
+
+              <span>
+                Отключить лишние эффекты
+              </span>
+
+            </div>
+
+            <label class="switch">
+
+              <input
+                id="reducedMotionToggle"
+                type="checkbox">
+
+              <span class="slider"></span>
+
+            </label>
+
+          </div>
+
+        </div>
+
+
+        <!-- ДАННЫЕ -->
+
+        <div class="settings-section">
+
+          <h3>
+            💾 Данные
+          </h3>
+
+
+          <button
+            type="button"
+            id="exportDataButton"
+            class="settings-action">
+
+            📤 Экспортировать данные
+
+          </button>
+
+
+          <button
+            type="button"
+            id="importDataButton"
+            class="settings-action">
+
+            📥 Импортировать данные
+
+          </button>
+
+
+          <input
+            id="importDataInput"
+            type="file"
+            accept=".json,application/json"
+            hidden>
+
+
+          <button
+            type="button"
+            id="clearDataButton"
+            class="settings-danger">
+
+            🗑️ Очистить локальные данные
+
+          </button>
+
+        </div>
+
+
+        <!-- О ПРИЛОЖЕНИИ -->
+
+        <div class="settings-section about-section">
+
+          <div class="about-logo">
+            M
+          </div>
+
+          <h3>
+            Meowl Messenger
+          </h3>
+
+          <p>
+            Современный мессенджер с котиками 🐱
+          </p>
+
+          <span>
+            Версия 1.0.1
+          </span>
+
+        </div>
+
+      </div>
+
+    </section>
+
+  </main>
+
+
+  <!-- =====================
+       НИЖНЕЕ МЕНЮ
+  ====================== -->
+
+  <nav>
 
     <button
-      id="editProfileButton"
-      class="main-button"
-    >
-      ✏️ Изменить профиль
+      type="button"
+      id="chatsButton"
+      class="nav-button active">
+
+      <span>💬</span>
+
+      Чаты
+
     </button>
 
-  </div>
-
-
-  <div
-    id="editProfile"
-    class="profile-card hidden"
-  >
-
-    <h2>
-      Изменить профиль
-    </h2>
-
-    <br>
 
     <button
-      id="photoButton"
-      class="secondary-button"
-    >
-      📷 Выбрать фото
+      type="button"
+      id="settingsButton"
+      class="nav-button">
+
+      <span>⚙️</span>
+
+      Настройки
+
     </button>
 
-    <input
-      id="photoInput"
-      type="file"
-      accept="image/*"
-      hidden
-    >
-
-    <input
-      id="nicknameInput"
-      placeholder="Ник"
-      maxlength="30"
-    >
-
-    <textarea
-      id="descriptionInput"
-      placeholder="Описание"
-      maxlength="150"
-    ></textarea>
-
-    <input
-      id="profileEmail"
-      readonly
-      disabled
-    >
 
     <button
-      id="saveProfileButton"
-      class="main-button"
-    >
-      💾 Сохранить
+      type="button"
+      id="profileButton"
+      class="nav-button">
+
+      <span>👤</span>
+
+      Профиль
+
     </button>
 
-    <button
-      id="cancelProfileButton"
-      class="cancel-button"
-    >
-      Отмена
-    </button>
-
-  </div>
-
-</section>
-
-
-<!-- ================= НАСТРОЙКИ ================= -->
-
-<section
-  id="settingsPage"
-  class="hidden"
->
-
-<div class="settings-card">
-
-<h2>
-  ⚙️ Настройки
-</h2>
-
-<p class="settings-subtitle">
-  Настрой Meowl Messenger под себя
-</p>
-
-
-<div class="settings-section">
-
-<h3>
-  🎨 Внешний вид
-</h3>
-
-
-<div class="setting-row">
-
-<div>
-<strong>Тёмная тема</strong>
-<span>Использовать тёмное оформление</span>
-</div>
-
-<label class="switch">
-<input id="darkThemeToggle" type="checkbox" checked>
-<span class="slider"></span>
-</label>
-
-</div>
-
-
-<div class="setting-row">
-
-<div>
-<strong>Неоновый эффект</strong>
-<span>Свечение элементов интерфейса</span>
-</div>
-
-<label class="switch">
-<input id="neonToggle" type="checkbox" checked>
-<span class="slider"></span>
-</label>
-
-</div>
-
-</div>
-
-
-<div class="settings-section">
-
-<h3>
-  💬 Чаты
-</h3>
-
-
-<div class="setting-row">
-
-<div>
-<strong>Enter — отправить</strong>
-<span>Enter отправляет сообщение</span>
-</div>
-
-<label class="switch">
-<input id="enterSendToggle" type="checkbox" checked>
-<span class="slider"></span>
-</label>
-
-</div>
-
-
-<div class="setting-row">
-
-<div>
-<strong>Показывать время</strong>
-<span>Показывать время сообщений</span>
-</div>
-
-<label class="switch">
-<input id="timeToggle" type="checkbox" checked>
-<span class="slider"></span>
-</label>
-
-</div>
-
-
-<div class="setting-row">
-
-<div>
-<strong>Предпросмотр сообщений</strong>
-<span>Показывать последнее сообщение</span>
-</div>
-
-<label class="switch">
-<input id="previewToggle" type="checkbox" checked>
-<span class="slider"></span>
-</label>
-
-</div>
-
-</div>
-
-
-<div class="settings-section">
-
-<h3>
-  🔔 Уведомления
-</h3>
-
-
-<div class="setting-row">
-
-<div>
-<strong>Уведомления</strong>
-<span>Получать уведомления</span>
-</div>
-
-<label class="switch">
-<input id="notificationsToggle" type="checkbox" checked>
-<span class="slider"></span>
-</label>
-
-</div>
-
-
-<div class="setting-row">
-
-<div>
-<strong>Звуки</strong>
-<span>Звук новых сообщений</span>
-</div>
-
-<label class="switch">
-<input id="soundToggle" type="checkbox" checked>
-<span class="slider"></span>
-</label>
-
-</div>
-
-
-<div class="setting-row">
-
-<div>
-<strong>Вибрация</strong>
-<span>Вибрация при новых сообщениях</span>
-</div>
-
-<label class="switch">
-<input id="vibrationToggle" type="checkbox" checked>
-<span class="slider"></span>
-</label>
-
-</div>
-
-</div>
-
-
-<div class="settings-section">
-
-<h3>
-  🔐 Приватность
-</h3>
-
-
-<div class="setting-row">
-
-<div>
-<strong>Показывать «В сети»</strong>
-<span>Показывать другим пользователям</span>
-</div>
-
-<label class="switch">
-<input id="onlineToggle" type="checkbox" checked>
-<span class="slider"></span>
-</label>
-
-</div>
-
-
-<div class="setting-row">
-
-<div>
-<strong>Показывать «Печатает...»</strong>
-<span>Показывать набор сообщения</span>
-</div>
-
-<label class="switch">
-<input id="typingToggle" type="checkbox" checked>
-<span class="slider"></span>
-</label>
-
-</div>
-
-
-<div class="setting-row">
-
-<div>
-<strong>Отчёты о прочтении</strong>
-<span>Показывать прочитанные сообщения</span>
-</div>
-
-<label class="switch">
-<input id="readToggle" type="checkbox" checked>
-<span class="slider"></span>
-</label>
-
-</div>
-
-</div>
-
-
-<div class="settings-section">
-
-<h3>
-  ♿ Доступность
-</h3>
-
-
-<div class="setting-row">
-
-<div>
-<strong>Крупный текст</strong>
-<span>Увеличить размер текста</span>
-</div>
-
-<label class="switch">
-<input id="largeTextToggle" type="checkbox">
-<span class="slider"></span>
-</label>
-
-</div>
-
-
-<div class="setting-row">
-
-<div>
-<strong>Уменьшить анимации</strong>
-<span>Отключить лишние эффекты</span>
-</div>
-
-<label class="switch">
-<input id="reducedMotionToggle" type="checkbox">
-<span class="slider"></span>
-</label>
-
-</div>
-
-</div>
-
-
-<div class="settings-section">
-
-<h3>
-  💾 Данные
-</h3>
-
-<button
-  id="exportDataButton"
-  class="settings-action"
->
-  📤 Экспортировать данные
-</button>
-
-<button
-  id="importDataButton"
-  class="settings-action"
->
-  📥 Импортировать данные
-</button>
-
-<input
-  id="importDataInput"
-  type="file"
-  accept=".json,application/json"
-  hidden
->
-
-<button
-  id="clearDataButton"
-  class="settings-danger"
->
-  🗑️ Очистить локальные данные
-</button>
-
-</div>
-
-
-<div class="settings-section about-section">
-
-<div class="about-logo">
-M
-</div>
-
-<h3>
-Meowl Messenger
-</h3>
-
-<p>
-Современный мессенджер с котиками 🐱
-</p>
-
-<span>
-Версия 1.0.0
-</span>
-
-</div>
-
-</div>
-
-</section>
-
-</main>
-
-
-<!-- ================= НИЖНЕЕ МЕНЮ ================= -->
-
-<nav>
-
-<button
-  id="chatsButton"
-  class="nav-button active"
->
-  <span>💬</span>
-  Чаты
-</button>
-
-
-<button
-  id="settingsButton"
-  class="nav-button"
->
-  <span>⚙️</span>
-  Настройки
-</button>
-
-
-<button
-  id="profileButton"
-  class="nav-button"
->
-  <span>👤</span>
-  Профиль
-</button>
-
-</nav>
+  </nav>
 
 </div>
 
 
 <script>
 
-/* ================= ХРАНИЛИЩЕ ================= */
+(function(){
 
-const USERS_KEY="meowl_users";
-const CURRENT_KEY="meowl_current";
-const SETTINGS_KEY="meowl_settings";
+"use strict";
 
 
-let mode="login";
-let currentUser=null;
-let selectedAvatar="";
+/* =========================
+   ХРАНИЛИЩЕ
+========================= */
 
+const KEYS = {
+
+  users:"meowl_users",
+
+  current:"meowl_current",
+
+  settings:"meowl_settings"
+
+};
+
+
+let mode = "login";
+
+let currentUser = null;
+
+let selectedAvatar = "";
+
+
+/* =========================
+   СОКРАЩЕНИЕ
+========================= */
+
+const $ = id => document.getElementById(id);
+
+
+/* =========================
+   ПОЛЬЗОВАТЕЛИ
+========================= */
 
 function getUsers(){
 
   try{
-    return JSON.parse(
-      localStorage.getItem(USERS_KEY)
-    ) || [];
-  }
 
-  catch(e){
+    return JSON.parse(
+      localStorage.getItem(KEYS.users) || "[]"
+    );
+
+  }catch(e){
+
     return [];
+
   }
 
 }
@@ -1463,149 +1768,360 @@ function getUsers(){
 function saveUsers(users){
 
   localStorage.setItem(
-    USERS_KEY,
+    KEYS.users,
     JSON.stringify(users)
   );
 
 }
 
 
-/* ================= ЭЛЕМЕНТЫ ================= */
+/* =========================
+   НАСТРОЙКИ
+========================= */
 
-const authScreen=
-document.getElementById("authScreen");
+function getSettings(){
 
-const appScreen=
-document.getElementById("appScreen");
+  const defaults = {
 
-const loginTab=
-document.getElementById("loginTab");
+    darkTheme:true,
 
-const registerTab=
-document.getElementById("registerTab");
+    neon:true,
 
-const emailInput=
-document.getElementById("emailInput");
+    enterSend:true,
 
-const passwordInput=
-document.getElementById("passwordInput");
+    time:true,
 
-const authButton=
-document.getElementById("authButton");
+    preview:true,
 
-const authError=
-document.getElementById("authError");
+    notifications:true,
 
+    sound:true,
 
-/* ================= ТАБЫ ================= */
+    vibration:true,
 
-loginTab.onclick=()=>{
+    online:true,
 
-  mode="login";
+    typing:true,
 
-  loginTab.classList.add("active");
-  registerTab.classList.remove("active");
+    read:true,
 
-  authButton.textContent="Продолжить";
+    largeText:false,
 
-  authError.textContent="";
+    reducedMotion:false
 
-};
+  };
 
 
-registerTab.onclick=()=>{
+  try{
 
-  mode="register";
+    return Object.assign(
 
-  registerTab.classList.add("active");
-  loginTab.classList.remove("active");
+      defaults,
 
-  authButton.textContent="Зарегистрироваться";
+      JSON.parse(
+        localStorage.getItem(KEYS.settings) || "{}"
+      )
 
-  authError.textContent="";
+    );
 
-};
+  }catch(e){
+
+    return defaults;
+
+  }
+
+}
 
 
-/* ================= АВТОРИЗАЦИЯ ================= */
+function saveSettings(){
 
-authButton.onclick=()=>{
+  const s = {};
 
-  const email=
-  emailInput.value.trim().toLowerCase();
 
-  const password=
-  passwordInput.value;
+  document
+    .querySelectorAll(".switch input")
+    .forEach(el => {
+
+      s[
+        el.id.replace("Toggle","")
+      ] = el.checked;
+
+    });
+
+
+  localStorage.setItem(
+    KEYS.settings,
+    JSON.stringify(s)
+  );
+
+
+  applySettings();
+
+}
+
+
+function applySettings(){
+
+  const s = getSettings();
+
+
+  $("darkThemeToggle").checked =
+    !!s.darkTheme;
+
+  $("neonToggle").checked =
+    !!s.neon;
+
+  $("enterSendToggle").checked =
+    !!s.enterSend;
+
+  $("timeToggle").checked =
+    !!s.time;
+
+  $("previewToggle").checked =
+    !!s.preview;
+
+  $("notificationsToggle").checked =
+    !!s.notifications;
+
+  $("soundToggle").checked =
+    !!s.sound;
+
+  $("vibrationToggle").checked =
+    !!s.vibration;
+
+  $("onlineToggle").checked =
+    !!s.online;
+
+  $("typingToggle").checked =
+    !!s.typing;
+
+  $("readToggle").checked =
+    !!s.read;
+
+  $("largeTextToggle").checked =
+    !!s.largeText;
+
+  $("reducedMotionToggle").checked =
+    !!s.reducedMotion;
+
+
+  document.body.classList.toggle(
+    "light",
+    !s.darkTheme
+  );
+
+
+  document.body.classList.toggle(
+    "large-text",
+    !!s.largeText
+  );
+
+
+  document.body.classList.toggle(
+    "reduced-motion",
+    !!s.reducedMotion
+  );
+
+}
+
+
+/* =========================
+   ОШИБКА
+========================= */
+
+function error(text){
+
+  $("authError").textContent = text;
+
+}
+
+
+/* =========================
+   РЕЖИМ ВХОДА
+========================= */
+
+function setMode(newMode){
+
+  mode = newMode;
+
+
+  $("loginTab")
+    .classList.toggle(
+      "active",
+      mode === "login"
+    );
+
+
+  $("registerTab")
+    .classList.toggle(
+      "active",
+      mode === "register"
+    );
+
+
+  $("authButton").textContent =
+    mode === "login"
+      ? "Продолжить"
+      : "Зарегистрироваться";
+
+
+  error("");
+
+}
+
+
+/* =========================
+   ОТКРЫТИЕ ПРИЛОЖЕНИЯ
+========================= */
+
+function openApp(){
+
+  $("authScreen")
+    .classList.add("hidden");
+
+
+  $("appScreen")
+    .classList.remove("hidden");
+
+
+  $("emailLabel").textContent =
+    currentUser.email;
+
+
+  updateProfile();
+
+
+  showPage("chats");
+
+}
+
+
+/* =========================
+   ВЫХОД
+========================= */
+
+function logout(){
+
+  localStorage.removeItem(
+    KEYS.current
+  );
+
+
+  currentUser = null;
+
+
+  $("appScreen")
+    .classList.add("hidden");
+
+
+  $("authScreen")
+    .classList.remove("hidden");
+
+
+  $("emailInput").value = "";
+
+  $("passwordInput").value = "";
+
+
+  setMode("login");
+
+}
+
+
+/* =========================
+   ВХОД / РЕГИСТРАЦИЯ
+========================= */
+
+function auth(){
+
+  const email =
+    $("emailInput")
+      .value
+      .trim()
+      .toLowerCase();
+
+
+  const password =
+    $("passwordInput").value;
 
 
   if(!email){
 
-    authError.textContent=
-    "Введите почту.";
+    error("Введите почту.");
 
     return;
 
   }
 
 
-  if(!email.includes("@")){
+  if(
+    !/^[^\s@]+@[^\s@]+\.[^\s@]+$/
+      .test(email)
+  ){
 
-    authError.textContent=
-    "Введите правильную почту.";
-
-    return;
-
-  }
-
-
-  if(password.length<6){
-
-    authError.textContent=
-    "Пароль должен содержать минимум 6 символов.";
+    error(
+      "Введите правильную почту."
+    );
 
     return;
 
   }
 
 
-  let users=getUsers();
+  if(password.length < 6){
+
+    error(
+      "Пароль должен содержать минимум 6 символов."
+    );
+
+    return;
+
+  }
 
 
-  if(mode==="register"){
+  const users = getUsers();
+
+
+  /* РЕГИСТРАЦИЯ */
+
+  if(mode === "register"){
 
     if(
       users.some(
-        user=>user.email===email
+        user => user.email === email
       )
     ){
 
-      authError.textContent=
-      "Пользователь с такой почтой уже существует.";
+      error(
+        "Пользователь с такой почтой уже существует."
+      );
 
       return;
 
     }
 
 
-    const user={
+    const user = {
 
       id:
-      "user_"+Date.now(),
+        "user_" +
+        Date.now() +
+        "_" +
+        Math.random()
+          .toString(36)
+          .slice(2),
 
-      email,
+      email:email,
 
-      password,
+      password:password,
 
       nickname:
-      email.split("@")[0],
+        email.split("@")[0],
 
       description:
-      "Привет! Я использую Meowl Messenger 🐱",
+        "Привет! Я использую Meowl Messenger 🐱",
 
-      avatar:"",
-
-      createdAt:
-      Date.now()
+      avatar:""
 
     };
 
@@ -1614,312 +2130,198 @@ authButton.onclick=()=>{
 
     saveUsers(users);
 
-    currentUser=user;
-
-    localStorage.setItem(
-      CURRENT_KEY,
-      user.id
-    );
-
-    openApp();
-
-    return;
+    currentUser = user;
 
   }
 
 
-  const user=
-  users.find(
-    item=>
-      item.email===email &&
-      item.password===password
-  );
+  /* ВХОД */
+
+  else{
+
+    const user =
+      users.find(
+        u =>
+          u.email === email &&
+          u.password === password
+      );
 
 
-  if(!user){
+    if(!user){
 
-    authError.textContent=
-    "Неверная почта или пароль.";
+      error(
+        "Неверная почта или пароль."
+      );
 
-    return;
+      return;
+
+    }
+
+
+    currentUser = user;
 
   }
 
-
-  currentUser=user;
 
   localStorage.setItem(
-    CURRENT_KEY,
-    user.id
+    KEYS.current,
+    currentUser.id
   );
+
 
   openApp();
 
-};
-
-
-/* ================= ENTER ================= */
-
-passwordInput.onkeydown=e=>{
-
-  if(e.key==="Enter"){
-    authButton.click();
-  }
-
-};
-
-
-/* ================= APP ================= */
-
-function openApp(){
-
-  authScreen.classList.add("hidden");
-  appScreen.classList.remove("hidden");
-
-  document.getElementById(
-    "emailLabel"
-  ).textContent=currentUser.email;
-
-  updateProfile();
-
-  loadSettings();
-
-  showPage("chats");
-
 }
 
 
-/* ================= СТРАНИЦЫ ================= */
+/* =========================
+   СТРАНИЦЫ
+========================= */
 
 function showPage(page){
 
-  const pages=[
-    document.getElementById("chatsPage"),
-    document.getElementById("profilePage"),
-    document.getElementById("settingsPage")
-  ];
-
-  const buttons=[
-    document.getElementById("chatsButton"),
-    document.getElementById("profileButton"),
-    document.getElementById("settingsButton")
-  ];
+  $("chatsPage")
+    .classList.toggle(
+      "hidden",
+      page !== "chats"
+    );
 
 
-  pages.forEach(p=>
-    p.classList.add("hidden")
-  );
-
-  buttons.forEach(b=>
-    b.classList.remove("active")
-  );
+  $("profilePage")
+    .classList.toggle(
+      "hidden",
+      page !== "profile"
+    );
 
 
-  if(page==="chats"){
-
-    document.getElementById(
-      "chatsPage"
-    ).classList.remove("hidden");
-
-    document.getElementById(
-      "chatsButton"
-    ).classList.add("active");
-
-    document.getElementById(
-      "pageTitle"
-    ).textContent="Чаты";
-
-  }
+  $("settingsPage")
+    .classList.toggle(
+      "hidden",
+      page !== "settings"
+    );
 
 
-  if(page==="profile"){
-
-    document.getElementById(
-      "profilePage"
-    ).classList.remove("hidden");
-
-    document.getElementById(
-      "profileButton"
-    ).classList.add("active");
-
-    document.getElementById(
-      "pageTitle"
-    ).textContent="Профиль";
-
-  }
+  $("chatsButton")
+    .classList.toggle(
+      "active",
+      page === "chats"
+    );
 
 
-  if(page==="settings"){
+  $("settingsButton")
+    .classList.toggle(
+      "active",
+      page === "settings"
+    );
 
-    document.getElementById(
-      "settingsPage"
-    ).classList.remove("hidden");
 
-    document.getElementById(
-      "settingsButton"
-    ).classList.add("active");
+  $("profileButton")
+    .classList.toggle(
+      "active",
+      page === "profile"
+    );
 
-    document.getElementById(
-      "pageTitle"
-    ).textContent="Настройки";
 
-  }
+  $("pageTitle").textContent =
+
+    page === "chats"
+      ? "Чаты"
+
+      : page === "profile"
+      ? "Профиль"
+
+      : "Настройки";
 
 }
 
 
-document.getElementById("chatsButton").onclick=
-()=>showPage("chats");
-
-document.getElementById("settingsButton").onclick=
-()=>showPage("settings");
-
-document.getElementById("profileButton").onclick=
-()=>showPage("profile");
-
-
-/* ================= ПРОФИЛЬ ================= */
+/* =========================
+   ПРОФИЛЬ
+========================= */
 
 function updateProfile(){
 
-  document.getElementById(
-    "profileNickname"
-  ).textContent=
-  currentUser.nickname || "Ник";
+  $("profileNickname")
+    .textContent =
+      currentUser.nickname || "Ник";
 
 
-  document.getElementById(
-    "profileDescription"
-  ).textContent=
-  currentUser.description ||
-  "Описание профиля";
+  $("profileDescription")
+    .textContent =
+      currentUser.description ||
+      "Описание профиля";
 
 
-  document.getElementById(
-    "profileEmail"
-  ).value=
-  currentUser.email;
-
-
-  const image=
-  document.getElementById("avatarImage");
-
-  const def=
-  document.getElementById("avatarDefault");
+  $("profileEmail").value =
+    currentUser.email;
 
 
   if(currentUser.avatar){
 
-    image.src=currentUser.avatar;
-    image.style.display="block";
-    def.style.display="none";
+    $("avatarImage").src =
+      currentUser.avatar;
+
+    $("avatarImage")
+      .style.display = "block";
+
+    $("avatarDefault")
+      .style.display = "none";
 
   }
 
   else{
 
-    image.style.display="none";
-    def.style.display="block";
+    $("avatarImage")
+      .style.display = "none";
+
+    $("avatarDefault")
+      .style.display = "block";
 
   }
 
 }
 
 
-/* ================= РЕДАКТИРОВАНИЕ ================= */
+/* =========================
+   РЕДАКТИРОВАНИЕ
+========================= */
 
-document.getElementById(
-  "editProfileButton"
-).onclick=()=>{
+function editProfile(){
 
-  document.getElementById(
-    "nicknameInput"
-  ).value=
-  currentUser.nickname || "";
+  $("nicknameInput").value =
+    currentUser.nickname || "";
 
 
-  document.getElementById(
-    "descriptionInput"
-  ).value=
-  currentUser.description || "";
+  $("descriptionInput").value =
+    currentUser.description || "";
 
 
-  selectedAvatar=
-  currentUser.avatar || "";
+  $("profileEmail").value =
+    currentUser.email;
 
 
-  document.getElementById(
-    "editProfile"
-  ).classList.remove("hidden");
-
-};
+  selectedAvatar =
+    currentUser.avatar || "";
 
 
-document.getElementById(
-  "photoButton"
-).onclick=()=>{
+  $("editProfile")
+    .classList.remove("hidden");
 
-  document.getElementById(
-    "photoInput"
-  ).click();
-
-};
+}
 
 
-document.getElementById(
-  "photoInput"
-).onchange=e=>{
+function saveProfile(){
 
-  const file=e.target.files[0];
-
-  if(!file)return;
-
-  if(!file.type.startsWith("image/")){
-
-    alert("Выберите изображение.");
-
-    return;
-
-  }
+  const nickname =
+    $("nicknameInput")
+      .value
+      .trim();
 
 
-  if(file.size>5*1024*1024){
-
-    alert("Фото должно быть меньше 5 МБ.");
-
-    return;
-
-  }
-
-
-  const reader=new FileReader();
-
-  reader.onload=event=>{
-
-    selectedAvatar=
-    event.target.result;
-
-  };
-
-  reader.readAsDataURL(file);
-
-};
-
-
-document.getElementById(
-  "saveProfileButton"
-).onclick=()=>{
-
-  const nickname=
-  document.getElementById(
-    "nicknameInput"
-  ).value.trim();
-
-
-  const description=
-  document.getElementById(
-    "descriptionInput"
-  ).value.trim();
+  const description =
+    $("descriptionInput")
+      .value
+      .trim();
 
 
   if(!nickname){
@@ -1931,238 +2333,58 @@ document.getElementById(
   }
 
 
-  const users=getUsers();
-
-  const index=
-  users.findIndex(
-    user=>user.id===currentUser.id
-  );
+  const users = getUsers();
 
 
-  if(index===-1)return;
+  const index =
+    users.findIndex(
+      u => u.id === currentUser.id
+    );
 
 
-  users[index].nickname=nickname;
+  if(index < 0){
 
-  users[index].description=
-  description ||
-  "Пока ничего не рассказал о себе.";
+    alert(
+      "Пользователь не найден."
+    );
 
-  users[index].avatar=
-  selectedAvatar;
+    return;
 
-
-  currentUser=users[index];
-
-  saveUsers(users);
-
-  document.getElementById(
-    "editProfile"
-  ).classList.add("hidden");
-
-  updateProfile();
-
-};
+  }
 
 
-document.getElementById(
-  "cancelProfileButton"
-).onclick=()=>{
-
-  document.getElementById(
-    "editProfile"
-  ).classList.add("hidden");
-
-};
+  users[index].nickname =
+    nickname;
 
 
-/* ================= ВЫХОД ================= */
-
-document.getElementById(
-  "logoutButton"
-).onclick=()=>{
-
-  localStorage.removeItem(
-    CURRENT_KEY
-  );
-
-  currentUser=null;
-
-  appScreen.classList.add("hidden");
-
-  authScreen.classList.remove("hidden");
-
-  emailInput.value="";
-  passwordInput.value="";
-
-  loginTab.click();
-
-};
+  users[index].description =
+    description ||
+    "Пока ничего не рассказал о себе.";
 
 
-/* ================= НАСТРОЙКИ ================= */
-
-const settingIds=[
-
-  "darkThemeToggle",
-  "neonToggle",
-  "enterSendToggle",
-  "timeToggle",
-  "previewToggle",
-  "notificationsToggle",
-  "soundToggle",
-  "vibrationToggle",
-  "onlineToggle",
-  "typingToggle",
-  "readToggle",
-  "largeTextToggle",
-  "reducedMotionToggle"
-
-];
+  users[index].avatar =
+    selectedAvatar;
 
 
-function defaultSettings(){
+  currentUser =
+    users[index];
 
-  return{
-
-    darkTheme:true,
-    neon:true,
-    enterSend:true,
-    time:true,
-    preview:true,
-    notifications:true,
-    sound:true,
-    vibration:true,
-    online:true,
-    typing:true,
-    read:true,
-    largeText:false,
-    reducedMotion:false
-
-  };
-
-}
-
-
-function loadSettings(){
-
-  let settings;
 
   try{
 
-    settings=
-    JSON.parse(
-      localStorage.getItem(
-        SETTINGS_KEY
-      )
-    ) || defaultSettings();
+    saveUsers(users);
+
+    $("editProfile")
+      .classList.add("hidden");
+
+    updateProfile();
 
   }
 
   catch(e){
 
-    settings=defaultSettings();
-
-  }
-
-
-  settingIds.forEach(id=>{
-
-    const element=
-    document.getElementById(id);
-
-    const key=
-    id.replace("Toggle","");
-
-    element.checked=
-    settings[key]!==undefined
-      ? settings[key]
-      : element.checked;
-
-  });
-
-
-  applySettings();
-
-}
-
-
-function saveSettings(){
-
-  const settings={};
-
-  settingIds.forEach(id=>{
-
-    const element=
-    document.getElementById(id);
-
-    const key=
-    id.replace("Toggle","");
-
-    settings[key]=element.checked;
-
-  });
-
-
-  localStorage.setItem(
-    SETTINGS_KEY,
-    JSON.stringify(settings)
-  );
-
-  applySettings();
-
-}
-
-
-function applySettings(){
-
-  const dark=
-  document.getElementById(
-    "darkThemeToggle"
-  ).checked;
-
-
-  const neon=
-  document.getElementById(
-    "neonToggle"
-  ).checked;
-
-
-  const large=
-  document.getElementById(
-    "largeTextToggle"
-  ).checked;
-
-
-  const reduced=
-  document.getElementById(
-    "reducedMotionToggle"
-  ).checked;
-
-
-  document.body.classList.toggle(
-    "light",
-    !dark
-  );
-
-
-  document.body.classList.toggle(
-    "large-text",
-    large
-  );
-
-
-  document.body.classList.toggle(
-    "reduced-motion",
-    reduced
-  );
-
-
-  if(!neon){
-
-    document.body.style.setProperty(
-      "--no-neon",
-      "1"
+    alert(
+      "Не удалось сохранить профиль. Возможно, фото слишком большое."
     );
 
   }
@@ -2170,148 +2392,236 @@ function applySettings(){
 }
 
 
-settingIds.forEach(id=>{
+/* =========================
+   ФОТО
+========================= */
 
-  document.getElementById(id)
-  .addEventListener(
-    "change",
-    saveSettings
-  );
+function choosePhoto(){
 
-});
+  $("photoInput").click();
+
+}
 
 
-/* ================= ЭКСПОРТ ================= */
+function photoChanged(event){
 
-document.getElementById(
-  "exportDataButton"
-).onclick=()=>{
+  const file =
+    event.target.files &&
+    event.target.files[0];
 
-  const data={};
 
-  for(
-    let i=0;
-    i<localStorage.length;
-    i++
-  ){
+  if(!file){
 
-    const key=
-    localStorage.key(i);
-
-    data[key]=
-    localStorage.getItem(key);
+    return;
 
   }
 
 
-  const blob=
-  new Blob(
-    [
-      JSON.stringify(
-        data,
-        null,
-        2
-      )
-    ],
-    {
-      type:"application/json"
-    }
-  );
+  if(!file.type.startsWith("image/")){
+
+    alert(
+      "Выберите изображение."
+    );
+
+    return;
+
+  }
 
 
-  const url=
-  URL.createObjectURL(blob);
+  if(file.size > 3 * 1024 * 1024){
+
+    alert(
+      "Фото должно быть меньше 3 МБ."
+    );
+
+    return;
+
+  }
 
 
-  const link=
-  document.createElement("a");
-
-  link.href=url;
-
-  link.download=
-  "meowl-messenger-backup.json";
-
-  link.click();
-
-  URL.revokeObjectURL(url);
-
-};
+  const reader =
+    new FileReader();
 
 
-/* ================= ИМПОРТ ================= */
+  reader.onload =
+    function(event){
 
-document.getElementById(
-  "importDataButton"
-).onclick=()=>{
+      selectedAvatar =
+        event.target.result;
 
-  document.getElementById(
-    "importDataInput"
-  ).click();
-
-};
+    };
 
 
-document.getElementById(
-  "importDataInput"
-).onchange=e=>{
+  reader.readAsDataURL(file);
 
-  const file=e.target.files[0];
-
-  if(!file)return;
+}
 
 
-  const reader=new FileReader();
+/* =========================
+   ЭКСПОРТ
+========================= */
 
+function exportData(){
 
-  reader.onload=event=>{
+  const data = {
 
-    try{
+    users:getUsers(),
 
-      const data=
-      JSON.parse(
-        event.target.result
-      );
+    current:
+      localStorage.getItem(
+        KEYS.current
+      ),
 
-
-      Object.keys(data).forEach(key=>{
-
-        localStorage.setItem(
-          key,
-          data[key]
-        );
-
-      });
-
-
-      alert(
-        "Данные успешно восстановлены!"
-      );
-
-      location.reload();
-
-    }
-
-    catch(error){
-
-      alert(
-        "Не удалось восстановить данные."
-      );
-
-    }
+    settings:getSettings()
 
   };
 
 
+  const blob =
+    new Blob(
+      [
+        JSON.stringify(
+          data,
+          null,
+          2
+        )
+      ],
+      {
+        type:"application/json"
+      }
+    );
+
+
+  const url =
+    URL.createObjectURL(blob);
+
+
+  const a =
+    document.createElement("a");
+
+
+  a.href = url;
+
+  a.download =
+    "meowl-messenger-backup.json";
+
+
+  document.body.appendChild(a);
+
+  a.click();
+
+  a.remove();
+
+
+  setTimeout(
+    () => URL.revokeObjectURL(url),
+    500
+  );
+
+}
+
+
+/* =========================
+   ИМПОРТ
+========================= */
+
+function importData(event){
+
+  const file =
+    event.target.files &&
+    event.target.files[0];
+
+
+  if(!file){
+
+    return;
+
+  }
+
+
+  const reader =
+    new FileReader();
+
+
+  reader.onload =
+    function(event){
+
+      try{
+
+        const data =
+          JSON.parse(
+            event.target.result
+          );
+
+
+        if(
+          Array.isArray(
+            data.users
+          )
+        ){
+
+          localStorage.setItem(
+            KEYS.users,
+            JSON.stringify(
+              data.users
+            )
+          );
+
+        }
+
+
+        if(data.current){
+
+          localStorage.setItem(
+            KEYS.current,
+            data.current
+          );
+
+        }
+
+
+        if(data.settings){
+
+          localStorage.setItem(
+            KEYS.settings,
+            JSON.stringify(
+              data.settings
+            )
+          );
+
+        }
+
+
+        alert(
+          "Данные успешно восстановлены."
+        );
+
+
+        location.reload();
+
+      }
+
+      catch(error){
+
+        alert(
+          "Не удалось восстановить данные."
+        );
+
+      }
+
+    };
+
+
   reader.readAsText(file);
 
-};
+}
 
 
-/* ================= ОЧИСТКА ================= */
+/* =========================
+   ОЧИСТКА
+========================= */
 
-document.getElementById(
-  "clearDataButton"
-).onclick=()=>{
+function clearData(){
 
   if(
     confirm(
@@ -2319,20 +2629,302 @@ document.getElementById(
     )
   ){
 
-    localStorage.clear();
+    localStorage.removeItem(
+      KEYS.users
+    );
+
+
+    localStorage.removeItem(
+      KEYS.current
+    );
+
+
+    localStorage.removeItem(
+      KEYS.settings
+    );
+
 
     location.reload();
 
   }
 
-};
+}
 
 
-/* ================= НОВЫЙ ЧАТ ================= */
+/* =========================
+   ЗАПУСК
+========================= */
 
-document.getElementById(
-  "newChatButton"
-).onclick=()=>{
+function start(){
 
-  alert(
-    "Функция чатов между пользователями будет подключена отдельно
+  /* ВХОД */
+
+  $("loginTab")
+    .addEventListener(
+      "click",
+      () => setMode("login")
+    );
+
+
+  /* РЕГИСТРАЦИЯ */
+
+  $("registerTab")
+    .addEventListener(
+      "click",
+      () => setMode("register")
+    );
+
+
+  /* КНОПКА ВХОДА */
+
+  $("authButton")
+    .addEventListener(
+      "click",
+      auth
+    );
+
+
+  /* ENTER */
+
+  $("passwordInput")
+    .addEventListener(
+      "keydown",
+      event => {
+
+        if(event.key === "Enter"){
+
+          auth();
+
+        }
+
+      }
+    );
+
+
+  /* ВЫХОД */
+
+  $("logoutButton")
+    .addEventListener(
+      "click",
+      logout
+    );
+
+
+  /* ЧАТЫ */
+
+  $("chatsButton")
+    .addEventListener(
+      "click",
+      () => showPage("chats")
+    );
+
+
+  /* НАСТРОЙКИ */
+
+  $("settingsButton")
+    .addEventListener(
+      "click",
+      () => showPage("settings")
+    );
+
+
+  /* ПРОФИЛЬ */
+
+  $("profileButton")
+    .addEventListener(
+      "click",
+      () => showPage("profile")
+    );
+
+
+  /* ИЗМЕНИТЬ ПРОФИЛЬ */
+
+  $("editProfileButton")
+    .addEventListener(
+      "click",
+      editProfile
+    );
+
+
+  /* ФОТО */
+
+  $("photoButton")
+    .addEventListener(
+      "click",
+      choosePhoto
+    );
+
+
+  $("photoInput")
+    .addEventListener(
+      "change",
+      photoChanged
+    );
+
+
+  /* СОХРАНЕНИЕ */
+
+  $("saveProfileButton")
+    .addEventListener(
+      "click",
+      saveProfile
+    );
+
+
+  /* ОТМЕНА */
+
+  $("cancelProfileButton")
+    .addEventListener(
+      "click",
+      () => {
+
+        $("editProfile")
+          .classList.add("hidden");
+
+      }
+    );
+
+
+  /* ИЗБРАННОЕ */
+
+  $("favoriteChat")
+    .addEventListener(
+      "click",
+      () => {
+
+        alert(
+          "Избранное пока работает как раздел интерфейса. Настоящая переписка требует сервера."
+        );
+
+      }
+    );
+
+
+  /* НОВЫЙ ЧАТ */
+
+  $("newChatButton")
+    .addEventListener(
+      "click",
+      () => {
+
+        alert(
+          "Настоящий чат между разными людьми требует серверной части."
+        );
+
+      }
+    );
+
+
+  /* ВСЕ НАСТРОЙКИ */
+
+  document
+    .querySelectorAll(
+      ".switch input"
+    )
+    .forEach(
+      element => {
+
+        element.addEventListener(
+          "change",
+          saveSettings
+        );
+
+      }
+    );
+
+
+  /* ЭКСПОРТ */
+
+  $("exportDataButton")
+    .addEventListener(
+      "click",
+      exportData
+    );
+
+
+  /* ИМПОРТ */
+
+  $("importDataButton")
+    .addEventListener(
+      "click",
+      () =>
+        $("importDataInput").click()
+    );
+
+
+  $("importDataInput")
+    .addEventListener(
+      "change",
+      importData
+    );
+
+
+  /* УДАЛЕНИЕ */
+
+  $("clearDataButton")
+    .addEventListener(
+      "click",
+      clearData
+    );
+
+
+  /* НАСТРОЙКИ */
+
+  applySettings();
+
+
+  /* АВТОВХОД */
+
+  const id =
+    localStorage.getItem(
+      KEYS.current
+    );
+
+
+  if(id){
+
+    const user =
+      getUsers().find(
+        u => u.id === id
+      );
+
+
+    if(user){
+
+      currentUser = user;
+
+      openApp();
+
+    }
+
+  }
+
+}
+
+
+/* =========================
+   СТАРТ ПОСЛЕ ЗАГРУЗКИ
+========================= */
+
+if(
+  document.readyState === "loading"
+){
+
+  document.addEventListener(
+    "DOMContentLoaded",
+    start
+  );
+
+}
+
+else{
+
+  start();
+
+}
+
+})();
+</script>
+
+</body>
+</html>

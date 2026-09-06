@@ -3,829 +3,168 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#0d0e13">
-
   <title>Meowl Messenger</title>
-
   <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-  <!-- ================= AUTH ================= -->
+<div id="authScreen">
 
-  <div id="authScreen">
+  <div class="auth-card">
 
-    <div class="auth-card">
+    <div class="logo">M</div>
 
-      <div class="logo">M</div>
+    <h1>Meowl Messenger</h1>
+    <p class="subtitle">&#1054;&#1073;&#1097;&#1072;&#1081;&#1089;&#1103;. &#1041;&#1099;&#1089;&#1090;&#1088;&#1086;. &#1050;&#1088;&#1072;&#1089;&#1080;&#1074;&#1086;.</p>
 
-      <h1>Meowl Messenger</h1>
-
-      <p class="subtitle">
-        Общайся. Быстро. Красиво.
-      </p>
-
-      <div class="tabs">
-
-        <button
-          id="loginTab"
-          class="tab active"
-        >
-          Войти
-        </button>
-
-        <button
-          id="registerTab"
-          class="tab"
-        >
-          Регистрация
-        </button>
-
-      </div>
-
-      <input
-        id="emailInput"
-        type="email"
-        placeholder="Почта"
-        autocomplete="email"
-      >
-
-      <input
-        id="passwordInput"
-        type="password"
-        placeholder="Пароль"
-        autocomplete="current-password"
-      >
-
-      <button
-        id="authButton"
-        class="main-button"
-      >
-        Продолжить
-      </button>
-
-      <p id="authError"></p>
-
+    <div class="tabs">
+      <button id="loginTab" class="tab active">&#1042;&#1086;&#1081;&#1090;&#1080;</button>
+      <button id="registerTab" class="tab">&#1056;&#1077;&#1075;&#1080;&#1089;&#1090;&#1088;&#1072;&#1094;&#1080;&#1103;</button>
     </div>
 
+    <input
+      id="emailInput"
+      type="email"
+      placeholder="&#1055;&#1086;&#1095;&#1090;&#1072;"
+      autocomplete="email"
+    >
+
+    <input
+      id="passwordInput"
+      type="password"
+      placeholder="&#1055;&#1072;&#1088;&#1086;&#1083;&#1100;"
+      autocomplete="current-password"
+    >
+
+    <button id="authButton" class="main-button">
+      &#1055;&#1088;&#1086;&#1076;&#1086;&#1083;&#1078;&#1080;&#1090;&#1100;
+    </button>
+
+    <p id="authError"></p>
+
   </div>
 
+</div>
 
-  <!-- ================= APP ================= -->
 
-  <div id="appScreen" class="hidden">
+<div id="appScreen" class="hidden">
 
-    <header>
+  <header>
+    <div>
+      <h2 id="pageTitle">&#1063;&#1072;&#1090;&#1099;</h2>
+      <small id="emailLabel"></small>
+    </div>
 
-      <div>
+    <button id="logoutButton" class="logout-button">
+      &#1042;&#1099;&#1081;&#1090;&#1080;
+    </button>
+  </header>
 
-        <h2 id="pageTitle">
-          Чаты
-        </h2>
 
-        <small id="emailLabel"></small>
+  <main>
+
+    <section id="chatsPage">
+
+      <div class="empty-card">
+        <div class="chat-icon">💬</div>
+
+        <h2>&#1063;&#1072;&#1090;&#1086;&#1074; &#1087;&#1086;&#1082;&#1072; &#1085;&#1077;&#1090;</h2>
+
+        <p>&#1047;&#1076;&#1077;&#1089;&#1100; &#1073;&#1091;&#1076;&#1091;&#1090; &#1086;&#1090;&#1086;&#1073;&#1088;&#1072;&#1078;&#1072;&#1090;&#1100;&#1089;&#1103; &#1090;&#1074;&#1086;&#1080; &#1095;&#1072;&#1090;&#1099;</p>
+      </div>
+
+    </section>
+
+
+    <section id="profilePage" class="hidden">
+
+      <div class="profile-card">
+
+        <div class="avatar">
+          <img id="avatarImage" alt="">
+          <span id="avatarDefault">👤</span>
+        </div>
+
+        <h2 id="profileNickname">&#1053;&#1080;&#1082;</h2>
+
+        <p id="profileDescription">
+          &#1054;&#1087;&#1080;&#1089;&#1072;&#1085;&#1080;&#1077; &#1087;&#1088;&#1086;&#1092;&#1080;&#1083;&#1103;
+        </p>
+
+        <button id="editProfileButton" class="main-button">
+          ✏️ &#1048;&#1079;&#1084;&#1084;&#1077;&#1085;&#1080;&#1090;&#1100; &#1087;&#1088;&#1086;&#1092;&#1080;&#1083;&#1100;
+        </button>
 
       </div>
 
-      <button
-        id="logoutButton"
-        class="logout-button"
-      >
-        Выйти
-      </button>
 
-    </header>
+      <div id="editProfile" class="profile-card hidden">
 
+        <h2>&#1048;&#1079;&#1084;&#1077;&#1085;&#1080;&#1090;&#1100; &#1087;&#1088;&#1086;&#1092;&#1080;&#1083;&#1100;</h2>
 
-    <main>
+        <button id="photoButton" class="secondary-button">
+          📷 &#1042;&#1099;&#1073;&#1088;&#1072;&#1090;&#1100; &#1092;&#1086;&#1090;&#1086;
+        </button>
 
-
-      <!-- ================= CHATS ================= -->
-
-      <section id="chatsPage">
-
-        <div class="chat-search">
-
-          <span>🔍</span>
-
-          <input
-            id="chatSearch"
-            type="text"
-            placeholder="Поиск"
-          >
-
-        </div>
-
-
-        <div class="favorite-chat">
-
-          <div class="favorite-icon">
-            ⭐
-          </div>
-
-          <div>
-
-            <h3>
-              Избранное
-            </h3>
-
-            <p>
-              Личные сообщения
-            </p>
-
-          </div>
-
-          <span class="arrow">
-            ›
-          </span>
-
-        </div>
-
-
-        <div class="empty-card">
-
-          <div class="chat-icon">
-            💬
-          </div>
-
-          <h2>
-            Чатов пока нет
-          </h2>
-
-          <p>
-            Здесь будут отображаться твои чаты
-          </p>
-
-          <button
-            id="newChatButton"
-            class="main-button small-button"
-          >
-            ＋ Новый чат
-          </button>
-
-        </div>
-
-      </section>
-
-
-      <!-- ================= PROFILE ================= -->
-
-      <section
-        id="profilePage"
-        class="hidden"
-      >
-
-        <div class="profile-card">
-
-          <div class="avatar">
-
-            <img
-              id="avatarImage"
-              alt=""
-            >
-
-            <span id="avatarDefault">
-              👤
-            </span>
-
-          </div>
-
-          <h2 id="profileNickname">
-            Ник
-          </h2>
-
-          <p id="profileDescription">
-            Описание профиля
-          </p>
-
-          <button
-            id="editProfileButton"
-            class="main-button"
-          >
-            ✏️ Изменить профиль
-          </button>
-
-        </div>
-
-
-        <div
-          id="editProfile"
-          class="profile-card hidden"
+        <input
+          id="photoInput"
+          type="file"
+          accept="image/*"
+          hidden
         >
 
-          <h2>
-            Изменить профиль
-          </h2>
+        <input
+          id="nicknameInput"
+          type="text"
+          placeholder="&#1053;&#1080;&#1082;"
+        >
 
-          <button
-            id="photoButton"
-            class="secondary-button"
-          >
-            📷 Выбрать фото
-          </button>
+        <textarea
+          id="descriptionInput"
+          placeholder="&#1054;&#1087;&#1080;&#1089;&#1072;&#1085;&#1080;&#1077;"
+        ></textarea>
 
-          <input
-            id="photoInput"
-            type="file"
-            accept="image/*"
-            hidden
-          >
+        <input
+          id="profileEmail"
+          type="email"
+          readonly
+          disabled
+        >
 
-          <input
-            id="nicknameInput"
-            type="text"
-            placeholder="Ник"
-            maxlength="30"
-          >
+        <button id="saveProfileButton" class="main-button">
+          💾 &#1057;&#1086;&#1093;&#1088;&#1072;&#1085;&#1080;&#1090;&#1100;
+        </button>
 
-          <textarea
-            id="descriptionInput"
-            placeholder="Описание"
-            maxlength="150"
-          ></textarea>
+        <button id="cancelProfileButton" class="cancel-button">
+          &#1054;&#1090;&#1084;&#1077;&#1085;&#1072;
+        </button>
 
-          <input
-            id="profileEmail"
-            type="email"
-            readonly
-            disabled
-          >
+      </div>
 
-          <button
-            id="saveProfileButton"
-            class="main-button"
-          >
-            💾 Сохранить
-          </button>
+    </section>
 
-          <button
-            id="cancelProfileButton"
-            class="cancel-button"
-          >
-            Отмена
-          </button>
+  </main>
 
-        </div>
 
-      </section>
+  <nav>
 
+    <button id="chatsButton" class="nav-button active">
+      <span>💬</span>
+      &#1063;&#1072;&#1090;&#1099;
+    </button>
 
-      <!-- ================= SETTINGS ================= -->
+    <button id="profileButton" class="nav-button">
+      <span>👤</span>
+      &#1055;&#1088;&#1086;&#1092;&#1080;&#1083;&#1100;
+    </button>
 
-      <section
-        id="settingsPage"
-        class="hidden"
-      >
+  </nav>
 
-        <div class="settings-card">
+</div>
 
-          <h2>
-            ⚙️ Настройки
-          </h2>
 
-          <p class="settings-subtitle">
-            Настрой Meowl Messenger под себя
-          </p>
-
-
-          <!-- ВНЕШНИЙ ВИД -->
-
-          <div class="settings-section">
-
-            <h3>
-              🎨 Внешний вид
-            </h3>
-
-
-            <div class="setting-row">
-
-              <div>
-
-                <strong>
-                  Тёмная тема
-                </strong>
-
-                <span>
-                  Использовать тёмное оформление
-                </span>
-
-              </div>
-
-              <label class="switch">
-
-                <input
-                  type="checkbox"
-                  id="darkThemeToggle"
-                  checked
-                >
-
-                <span class="slider"></span>
-
-              </label>
-
-            </div>
-
-
-            <div class="setting-row">
-
-              <div>
-
-                <strong>
-                  Неоновый эффект
-                </strong>
-
-                <span>
-                  Свечение элементов интерфейса
-                </span>
-
-              </div>
-
-              <label class="switch">
-
-                <input
-                  type="checkbox"
-                  id="neonToggle"
-                  checked
-                >
-
-                <span class="slider"></span>
-
-              </label>
-
-            </div>
-
-          </div>
-
-
-          <!-- ЧАТЫ -->
-
-          <div class="settings-section">
-
-            <h3>
-              💬 Чаты
-            </h3>
-
-
-            <div class="setting-row">
-
-              <div>
-
-                <strong>
-                  Enter — отправить
-                </strong>
-
-                <span>
-                  Enter отправляет сообщение
-                </span>
-
-              </div>
-
-              <label class="switch">
-
-                <input
-                  type="checkbox"
-                  id="enterSendToggle"
-                  checked
-                >
-
-                <span class="slider"></span>
-
-              </label>
-
-            </div>
-
-
-            <div class="setting-row">
-
-              <div>
-
-                <strong>
-                  Показывать время
-                </strong>
-
-                <span>
-                  Показывать время сообщений
-                </span>
-
-              </div>
-
-              <label class="switch">
-
-                <input
-                  type="checkbox"
-                  id="timeToggle"
-                  checked
-                >
-
-                <span class="slider"></span>
-
-              </label>
-
-            </div>
-
-
-            <div class="setting-row">
-
-              <div>
-
-                <strong>
-                  Предпросмотр сообщений
-                </strong>
-
-                <span>
-                  Показывать последнее сообщение
-                </span>
-
-              </div>
-
-              <label class="switch">
-
-                <input
-                  type="checkbox"
-                  id="previewToggle"
-                  checked
-                >
-
-                <span class="slider"></span>
-
-              </label>
-
-            </div>
-
-          </div>
-
-
-          <!-- УВЕДОМЛЕНИЯ -->
-
-          <div class="settings-section">
-
-            <h3>
-              🔔 Уведомления
-            </h3>
-
-
-            <div class="setting-row">
-
-              <div>
-
-                <strong>
-                  Уведомления
-                </strong>
-
-                <span>
-                  Получать уведомления
-                </span>
-
-              </div>
-
-              <label class="switch">
-
-                <input
-                  type="checkbox"
-                  id="notificationsToggle"
-                  checked
-                >
-
-                <span class="slider"></span>
-
-              </label>
-
-            </div>
-
-
-            <div class="setting-row">
-
-              <div>
-
-                <strong>
-                  Звуки
-                </strong>
-
-                <span>
-                  Звук новых сообщений
-                </span>
-
-              </div>
-
-              <label class="switch">
-
-                <input
-                  type="checkbox"
-                  id="soundToggle"
-                  checked
-                >
-
-                <span class="slider"></span>
-
-              </label>
-
-            </div>
-
-
-            <div class="setting-row">
-
-              <div>
-
-                <strong>
-                  Вибрация
-                </strong>
-
-                <span>
-                  Вибрация при новых сообщениях
-                </span>
-
-              </div>
-
-              <label class="switch">
-
-                <input
-                  type="checkbox"
-                  id="vibrationToggle"
-                  checked
-                >
-
-                <span class="slider"></span>
-
-              </label>
-
-            </div>
-
-          </div>
-
-
-          <!-- ПРИВАТНОСТЬ -->
-
-          <div class="settings-section">
-
-            <h3>
-              🔐 Приватность
-            </h3>
-
-
-            <div class="setting-row">
-
-              <div>
-
-                <strong>
-                  Показывать «В сети»
-                </strong>
-
-                <span>
-                  Показывать другим пользователям
-                </span>
-
-              </div>
-
-              <label class="switch">
-
-                <input
-                  type="checkbox"
-                  id="onlineToggle"
-                  checked
-                >
-
-                <span class="slider"></span>
-
-              </label>
-
-            </div>
-
-
-            <div class="setting-row">
-
-              <div>
-
-                <strong>
-                  Показывать «Печатает...»
-                </strong>
-
-                <span>
-                  Показывать набор сообщения
-                </span>
-
-              </div>
-
-              <label class="switch">
-
-                <input
-                  type="checkbox"
-                  id="typingToggle"
-                  checked
-                >
-
-                <span class="slider"></span>
-
-              </label>
-
-            </div>
-
-
-            <div class="setting-row">
-
-              <div>
-
-                <strong>
-                  Отчёты о прочтении
-                </strong>
-
-                <span>
-                  Показывать прочитанные сообщения
-                </span>
-
-              </div>
-
-              <label class="switch">
-
-                <input
-                  type="checkbox"
-                  id="readToggle"
-                  checked
-                >
-
-                <span class="slider"></span>
-
-              </label>
-
-            </div>
-
-          </div>
-
-
-          <!-- ДОСТУПНОСТЬ -->
-
-          <div class="settings-section">
-
-            <h3>
-              ♿ Доступность
-            </h3>
-
-
-            <div class="setting-row">
-
-              <div>
-
-                <strong>
-                  Крупный текст
-                </strong>
-
-                <span>
-                  Увеличить размер текста
-                </span>
-
-              </div>
-
-              <label class="switch">
-
-                <input
-                  type="checkbox"
-                  id="largeTextToggle"
-                >
-
-                <span class="slider"></span>
-
-              </label>
-
-            </div>
-
-
-            <div class="setting-row">
-
-              <div>
-
-                <strong>
-                  Уменьшить анимации
-                </strong>
-
-                <span>
-                  Отключить лишние эффекты
-                </span>
-
-              </div>
-
-              <label class="switch">
-
-                <input
-                  type="checkbox"
-                  id="reducedMotionToggle"
-                >
-
-                <span class="slider"></span>
-
-              </label>
-
-            </div>
-
-          </div>
-
-
-          <!-- ДАННЫЕ -->
-
-          <div class="settings-section">
-
-            <h3>
-              💾 Данные
-            </h3>
-
-
-            <button
-              id="exportDataButton"
-              class="settings-action"
-            >
-              📤 Экспортировать данные
-            </button>
-
-
-            <button
-              id="importDataButton"
-              class="settings-action"
-            >
-              📥 Импортировать данные
-            </button>
-
-            <input
-              id="importDataInput"
-              type="file"
-              accept=".json,application/json"
-              hidden
-            >
-
-
-            <button
-              id="clearDataButton"
-              class="settings-danger"
-            >
-              🗑️ Очистить локальные данные
-            </button>
-
-          </div>
-
-
-          <!-- О ПРИЛОЖЕНИИ -->
-
-          <div class="settings-section about-section">
-
-            <div class="about-logo">
-              M
-            </div>
-
-            <h3>
-              Meowl Messenger
-            </h3>
-
-            <p>
-              Современный мессенджер с котиками 🐱
-            </p>
-
-            <span>
-              Версия 1.0.0
-            </span>
-
-          </div>
-
-        </div>
-
-      </section>
-
-    </main>
-
-
-    <!-- ================= NAV ================= -->
-
-    <nav>
-
-      <button
-        id="chatsButton"
-        class="nav-button active"
-      >
-        <span>💬</span>
-        Чаты
-      </button>
-
-
-      <button
-        id="settingsButton"
-        class="nav-button"
-      >
-        <span>⚙️</span>
-        Настройки
-      </button>
-
-
-      <button
-        id="profileButton"
-        class="nav-button"
-      >
-        <span>👤</span>
-        Профиль
-      </button>
-
-    </nav>
-
-  </div>
-
-
-  <script src="script.js"></script>
+<script src="script.js"></script>
 
 </body>
 </html>

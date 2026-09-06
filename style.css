@@ -5,12 +5,22 @@
 body {
   margin: 0;
   min-height: 100vh;
+
   font-family: Arial, sans-serif;
+
   color: white;
 
   background:
-    radial-gradient(circle at 10% 0%, #6c5ce7 0%, transparent 38%),
-    radial-gradient(circle at 100% 100%, #00cec9 0%, transparent 35%),
+    radial-gradient(
+      circle at 10% 0%,
+      #6c5ce7 0%,
+      transparent 38%
+    ),
+    radial-gradient(
+      circle at 100% 100%,
+      #00cec9 0%,
+      transparent 35%
+    ),
     #101116;
 }
 
@@ -23,21 +33,26 @@ textarea {
 .container {
   width: 100%;
   max-width: 430px;
+
   margin: auto;
+
   min-height: 100vh;
+
   padding: 20px;
 }
 
 
-/* ===== AUTH ===== */
+/* ===== ВХОД ===== */
 
 .card {
   margin-top: 60px;
+
   padding: 30px 25px;
 
   border-radius: 28px;
 
-  background: rgba(20, 20, 30, 0.78);
+  background: rgba(20,20,30,0.78);
+
   border: 1px solid rgba(255,255,255,0.12);
 
   backdrop-filter: blur(20px);
@@ -61,11 +76,12 @@ textarea {
   font-size: 35px;
   font-weight: bold;
 
-  background: linear-gradient(
-    135deg,
-    #6c5ce7,
-    #00cec9
-  );
+  background:
+    linear-gradient(
+      135deg,
+      #6c5ce7,
+      #00cec9
+    );
 
   box-shadow:
     0 10px 30px rgba(0,206,201,0.25);
@@ -73,21 +89,26 @@ textarea {
 
 h1 {
   text-align: center;
+
   margin: 15px 0 5px;
 }
 
 .subtitle {
   text-align: center;
+
   color: #aaa;
+
   margin-bottom: 25px;
 }
 
 
-/* ===== TABS ===== */
+/* ===== КНОПКИ ВХОДА ===== */
 
 .tabs {
   display: flex;
+
   gap: 8px;
+
   margin-bottom: 15px;
 }
 
@@ -97,6 +118,7 @@ h1 {
   padding: 13px;
 
   border: none;
+
   border-radius: 14px;
 
   background: rgba(255,255,255,0.06);
@@ -106,6 +128,7 @@ h1 {
   font-weight: bold;
 
   cursor: pointer;
+
   transition: 0.25s;
 }
 
@@ -128,7 +151,7 @@ h1 {
 }
 
 
-/* ===== INPUTS ===== */
+/* ===== ПОЛЯ ===== */
 
 input,
 textarea {
@@ -140,11 +163,13 @@ textarea {
 
   border-radius: 15px;
 
-  border: 1px solid rgba(255,255,255,0.1);
+  border:
+    1px solid rgba(255,255,255,0.1);
 
   outline: none;
 
-  background: rgba(255,255,255,0.06);
+  background:
+    rgba(255,255,255,0.06);
 
   color: white;
 
@@ -161,11 +186,12 @@ textarea:focus {
 
 textarea {
   min-height: 100px;
+
   resize: vertical;
 }
 
 
-/* ===== BEAUTIFUL BUTTON ===== */
+/* ===== ГЛАВНАЯ КНОПКА ===== */
 
 .main-btn {
   width: 100%;
@@ -173,11 +199,13 @@ textarea {
   padding: 15px;
 
   border: none;
+
   border-radius: 15px;
 
   color: white;
 
   font-weight: bold;
+
   font-size: 15px;
 
   cursor: pointer;
@@ -207,17 +235,20 @@ textarea {
 }
 
 
-/* ===== ERROR ===== */
+/* ===== ОШИБКА ===== */
 
 #error {
   text-align: center;
+
   color: #ff7675;
+
   font-size: 14px;
+
   min-height: 18px;
 }
 
 
-/* ===== APP ===== */
+/* ===== ПРИЛОЖЕНИЕ ===== */
 
 .hidden {
   display: none !important;
@@ -225,12 +256,15 @@ textarea {
 
 .app {
   min-height: calc(100vh - 40px);
+
   padding-bottom: 100px;
 }
 
 header {
   display: flex;
+
   align-items: center;
+
   justify-content: space-between;
 
   padding: 10px 5px 20px;
@@ -244,22 +278,25 @@ header p {
   margin: 0;
 
   color: #999;
+
   font-size: 13px;
 }
 
 
-/* ===== LOGOUT ===== */
+/* ===== ВЫЙТИ ===== */
 
 .logout-btn {
   padding: 11px 17px;
 
   border-radius: 13px;
 
-  border: 1px solid rgba(255,255,255,0.1);
+  border:
+    1px solid rgba(255,255,255,0.1);
 
   color: white;
 
-  background: rgba(255,255,255,0.07);
+  background:
+    rgba(255,255,255,0.07);
 
   cursor: pointer;
 
@@ -278,7 +315,7 @@ header p {
 }
 
 
-/* ===== CHATS ===== */
+/* ===== ЧАТЫ ===== */
 
 .empty-card {
   margin-top: 35px;
@@ -289,9 +326,11 @@ header p {
 
   border-radius: 25px;
 
-  background: rgba(20,20,30,0.7);
+  background:
+    rgba(20,20,30,0.7);
 
-  border: 1px solid rgba(255,255,255,0.1);
+  border:
+    1px solid rgba(255,255,255,0.1);
 
   backdrop-filter: blur(15px);
 }
@@ -309,7 +348,7 @@ header p {
 }
 
 
-/* ===== PROFILE ===== */
+/* ===== ПРОФИЛЬ ===== */
 
 .profile-card,
 .edit-card {
@@ -317,9 +356,11 @@ header p {
 
   border-radius: 25px;
 
-  background: rgba(20,20,30,0.72);
+  background:
+    rgba(20,20,30,0.72);
 
-  border: 1px solid rgba(255,255,255,0.1);
+  border:
+    1px solid rgba(255,255,255,0.1);
 
   backdrop-filter: blur(15px);
 
@@ -329,6 +370,9 @@ header p {
 .profile-card {
   text-align: center;
 }
+
+
+/* ===== АВАТАР ===== */
 
 .avatar {
   width: 120px;
@@ -365,11 +409,12 @@ header p {
 
 .profile-card p {
   color: #aaa;
+
   margin-bottom: 20px;
 }
 
 
-/* ===== EDIT PROFILE ===== */
+/* ===== РЕДАКТИРОВАНИЕ ===== */
 
 .edit-card h2 {
   margin-top: 0;
@@ -384,6 +429,9 @@ header p {
 
   font-size: 14px;
 }
+
+
+/* ===== ВЫБОР ФОТО ===== */
 
 .avatar-button {
   width: 100%;
@@ -408,11 +456,32 @@ header p {
     );
 
   margin-bottom: 15px !important;
+
+  transition: 0.25s;
+}
+
+.avatar-button:hover {
+  transform: translateY(-2px);
 }
 
 .avatar-button input {
   display: none;
 }
+
+
+/* ===== ПОЧТА НЕИЗМЕНЯЕМАЯ ===== */
+
+#profileEmail {
+  opacity: 0.55;
+
+  cursor: not-allowed;
+
+  background:
+    rgba(255,255,255,0.035);
+}
+
+
+/* ===== ОТМЕНА ===== */
 
 .cancel-btn {
   width: 100%;
@@ -423,9 +492,11 @@ header p {
 
   border-radius: 15px;
 
-  border: 1px solid rgba(255,255,255,0.1);
+  border:
+    1px solid rgba(255,255,255,0.1);
 
-  background: rgba(255,255,255,0.06);
+  background:
+    rgba(255,255,255,0.06);
 
   color: white;
 
@@ -437,38 +508,48 @@ header p {
 }
 
 .cancel-btn:hover {
-  background: rgba(255,255,255,0.12);
+  background:
+    rgba(255,255,255,0.12);
 }
+
+
+/* ===== СООБЩЕНИЕ ===== */
 
 #profileMessage {
   text-align: center;
+
   color: #00cec9;
 }
 
 
-/* ===== BOTTOM MENU ===== */
+/* ===== НИЖНЕЕ МЕНЮ ===== */
 
 .bottom-nav {
   position: fixed;
 
   bottom: 15px;
+
   left: 50%;
 
   transform: translateX(-50%);
 
   width: calc(100% - 40px);
+
   max-width: 390px;
 
   display: flex;
+
   gap: 8px;
 
   padding: 8px;
 
   border-radius: 20px;
 
-  background: rgba(20,20,30,0.9);
+  background:
+    rgba(20,20,30,0.9);
 
-  border: 1px solid rgba(255,255,255,0.1);
+  border:
+    1px solid rgba(255,255,255,0.1);
 
   backdrop-filter: blur(20px);
 
@@ -482,6 +563,7 @@ header p {
   padding: 10px;
 
   border: none;
+
   border-radius: 15px;
 
   background: transparent;
@@ -497,13 +579,17 @@ header p {
 
 .nav-btn span {
   display: block;
+
   font-size: 21px;
+
   margin-bottom: 3px;
 }
 
 .nav-btn:hover {
   color: white;
-  background: rgba(255,255,255,0.08);
+
+  background:
+    rgba(255,255,255,0.08);
 }
 
 .nav-btn.active {
@@ -518,7 +604,7 @@ header p {
 }
 
 
-/* ===== PHONE ===== */
+/* ===== ТЕЛЕФОН ===== */
 
 @media (max-width: 480px) {
 
@@ -528,7 +614,7 @@ header p {
 
   .card {
     margin-top: 25px;
+
     padding: 25px 20px;
   }
-
 }

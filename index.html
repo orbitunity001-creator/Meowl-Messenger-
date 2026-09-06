@@ -16,18 +16,29 @@
     <div class="logo">M</div>
 
     <h1>Meowl Messenger</h1>
-    <p class="subtitle">Общайся. Быстро. Красиво.</p>
+    <p class="subtitle">&#1054;&#1073;&#1097;&#1072;&#1081;&#1089;&#1103;. &#1041;&#1099;&#1089;&#1090;&#1088;&#1086;. &#1050;&#1088;&#1072;&#1089;&#1080;&#1074;&#1086;.</p>
 
     <div class="tabs">
-      <button id="loginTab" class="tab active">Войти</button>
-      <button id="registerTab" class="tab">Регистрация</button>
+      <button id="loginTab" class="tab active">&#1042;&#1086;&#1081;&#1090;&#1080;</button>
+      <button id="registerTab" class="tab">&#1056;&#1077;&#1075;&#1080;&#1089;&#1090;&#1088;&#1072;&#1094;&#1080;&#1103;</button>
     </div>
 
-    <input id="emailInput" type="email" placeholder="Почта">
-    <input id="passwordInput" type="password" placeholder="Пароль">
+    <input
+      id="emailInput"
+      type="email"
+      placeholder="&#1055;&#1086;&#1095;&#1090;&#1072;"
+      autocomplete="email"
+    >
+
+    <input
+      id="passwordInput"
+      type="password"
+      placeholder="&#1055;&#1072;&#1088;&#1086;&#1083;&#1100;"
+      autocomplete="current-password"
+    >
 
     <button id="authButton" class="main-button">
-      Продолжить
+      &#1055;&#1088;&#1086;&#1076;&#1086;&#1083;&#1078;&#1080;&#1090;&#1100;
     </button>
 
     <p id="authError"></p>
@@ -37,66 +48,63 @@
 </div>
 
 
-<div id="appScreen">
+<div id="appScreen" class="hidden">
 
   <header>
     <div>
-      <h2 id="pageTitle">Чаты</h2>
+      <h2 id="pageTitle">&#1063;&#1072;&#1090;&#1099;</h2>
       <small id="emailLabel"></small>
     </div>
 
     <button id="logoutButton" class="logout-button">
-      Выйти
+      &#1042;&#1099;&#1081;&#1090;&#1080;
     </button>
   </header>
 
 
   <main>
 
-    <!-- ЧАТЫ -->
     <section id="chatsPage">
 
       <div class="empty-card">
         <div class="chat-icon">💬</div>
 
-        <h2>Чатов пока нет</h2>
+        <h2>&#1063;&#1072;&#1090;&#1086;&#1074; &#1087;&#1086;&#1082;&#1072; &#1085;&#1077;&#1090;</h2>
 
-        <p>Здесь будут отображаться твои чаты</p>
+        <p>&#1047;&#1076;&#1077;&#1089;&#1100; &#1073;&#1091;&#1076;&#1091;&#1090; &#1086;&#1090;&#1086;&#1073;&#1088;&#1072;&#1078;&#1072;&#1090;&#1100;&#1089;&#1103; &#1090;&#1074;&#1086;&#1080; &#1095;&#1072;&#1090;&#1099;</p>
       </div>
 
     </section>
 
 
-    <!-- ПРОФИЛЬ -->
     <section id="profilePage" class="hidden">
 
       <div class="profile-card">
 
         <div class="avatar">
-          <img id="avatarImage">
+          <img id="avatarImage" alt="">
           <span id="avatarDefault">👤</span>
         </div>
 
-        <h2 id="profileNickname">Ник</h2>
+        <h2 id="profileNickname">&#1053;&#1080;&#1082;</h2>
 
         <p id="profileDescription">
-          Описание профиля
+          &#1054;&#1087;&#1080;&#1089;&#1072;&#1085;&#1080;&#1077; &#1087;&#1088;&#1086;&#1092;&#1080;&#1083;&#1103;
         </p>
 
         <button id="editProfileButton" class="main-button">
-          ✏️ Изменить профиль
+          ✏️ &#1048;&#1079;&#1084;&#1084;&#1077;&#1085;&#1080;&#1090;&#1100; &#1087;&#1088;&#1086;&#1092;&#1080;&#1083;&#1100;
         </button>
 
       </div>
 
 
-      <!-- РЕДАКТИРОВАНИЕ -->
       <div id="editProfile" class="profile-card hidden">
 
-        <h2>Изменить профиль</h2>
+        <h2>&#1048;&#1079;&#1084;&#1077;&#1085;&#1080;&#1090;&#1100; &#1087;&#1088;&#1086;&#1092;&#1080;&#1083;&#1100;</h2>
 
         <button id="photoButton" class="secondary-button">
-          📷 Выбрать фото
+          📷 &#1042;&#1099;&#1073;&#1088;&#1072;&#1090;&#1100; &#1092;&#1086;&#1090;&#1086;
         </button>
 
         <input
@@ -109,12 +117,12 @@
         <input
           id="nicknameInput"
           type="text"
-          placeholder="Ник"
+          placeholder="&#1053;&#1080;&#1082;"
         >
 
         <textarea
           id="descriptionInput"
-          placeholder="Описание"
+          placeholder="&#1054;&#1087;&#1080;&#1089;&#1072;&#1085;&#1080;&#1077;"
         ></textarea>
 
         <input
@@ -125,11 +133,11 @@
         >
 
         <button id="saveProfileButton" class="main-button">
-          💾 Сохранить
+          💾 &#1057;&#1086;&#1093;&#1088;&#1072;&#1085;&#1080;&#1090;&#1100;
         </button>
 
         <button id="cancelProfileButton" class="cancel-button">
-          Отмена
+          &#1054;&#1090;&#1084;&#1077;&#1085;&#1072;
         </button>
 
       </div>
@@ -143,12 +151,12 @@
 
     <button id="chatsButton" class="nav-button active">
       <span>💬</span>
-      Чаты
+      &#1063;&#1072;&#1090;&#1099;
     </button>
 
     <button id="profileButton" class="nav-button">
       <span>👤</span>
-      Профиль
+      &#1055;&#1088;&#1086;&#1092;&#1080;&#1083;&#1100;
     </button>
 
   </nav>

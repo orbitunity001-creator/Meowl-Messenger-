@@ -2,2680 +2,2074 @@
 <html lang="ru">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>Meowl Messenger</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#080912">
+<title>Meowl</title>
 
 <style>
 *{
-  box-sizing:border-box;
-  margin:0;
-  padding:0;
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
 }
 
 :root{
-  --bg:#080b16;
-  --card:rgba(20,25,45,.72);
-  --border:rgba(255,255,255,.1);
-  --text:#fff;
-  --muted:#9ca3b8;
-  --purple:#9b5cff;
-  --cyan:#35e8ff;
-  --danger:#ff5577;
+    --bg:#070811;
+    --bg2:#0c0e1b;
+    --glass:rgba(255,255,255,.055);
+    --glass2:rgba(255,255,255,.085);
+    --border:rgba(255,255,255,.10);
+    --white:#fff;
+    --muted:#8f94a8;
+    --purple:#9b5cff;
+    --purple2:#713cff;
+    --cyan:#3de7ff;
+    --pink:#ff4fd8;
+    --green:#56f6a2;
+}
+
+html,
+body{
+    width:100%;
+    min-height:100%;
 }
 
 body{
-  min-height:100vh;
-  font-family:Arial,sans-serif;
-  color:var(--text);
-  background:
-    radial-gradient(circle at 15% 15%,rgba(155,92,255,.24),transparent 35%),
-    radial-gradient(circle at 85% 20%,rgba(53,232,255,.16),transparent 35%),
-    radial-gradient(circle at 50% 100%,rgba(155,92,255,.12),transparent 40%),
-    var(--bg);
+    font-family:
+        Inter,
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        Arial,
+        sans-serif;
+
+    color:var(--white);
+
+    background:
+        radial-gradient(
+            circle at 10% 0%,
+            rgba(155,92,255,.25),
+            transparent 30%
+        ),
+        radial-gradient(
+            circle at 95% 15%,
+            rgba(61,231,255,.16),
+            transparent 28%
+        ),
+        radial-gradient(
+            circle at 50% 100%,
+            rgba(255,79,216,.10),
+            transparent 35%
+        ),
+        linear-gradient(
+            145deg,
+            #070811,
+            #0b0d18 50%,
+            #070811
+        );
+
+    overflow-x:hidden;
 }
 
 button,
 input,
 textarea{
-  font:inherit;
+    font:inherit;
 }
 
 button{
-  cursor:pointer;
-}
-
-.hidden{
-  display:none!important;
-}
-
-.glass{
-  background:var(--card);
-  border:1px solid var(--border);
-  backdrop-filter:blur(20px);
-  -webkit-backdrop-filter:blur(20px);
-  border-radius:22px;
-  box-shadow:
-    0 0 40px rgba(155,92,255,.07),
-    inset 0 0 30px rgba(255,255,255,.02);
-}
-
-/* ================= AUTH ================= */
-
-#authScreen{
-  min-height:100vh;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  padding:20px;
-}
-
-.auth-card{
-  width:100%;
-  max-width:430px;
-  padding:30px;
-}
-
-.logo{
-  text-align:center;
-  font-size:33px;
-  font-weight:800;
-  margin-bottom:8px;
-}
-
-.logo span{
-  color:var(--cyan);
-  text-shadow:0 0 20px rgba(53,232,255,.45);
-}
-
-.subtitle{
-  text-align:center;
-  color:var(--muted);
-  margin-bottom:25px;
-}
-
-.tabs{
-  display:flex;
-  gap:8px;
-  margin-bottom:20px;
-}
-
-.tab{
-  flex:1;
-  padding:12px;
-  border:1px solid var(--border);
-  border-radius:14px;
-  background:rgba(255,255,255,.04);
-  color:var(--muted);
-}
-
-.tab.active{
-  color:#fff;
-  border-color:rgba(155,92,255,.6);
-  background:rgba(155,92,255,.18);
-}
-
-.field{
-  margin-bottom:15px;
-}
-
-.field label{
-  display:block;
-  margin-bottom:7px;
-  color:var(--muted);
-  font-size:14px;
+    border:0;
+    cursor:pointer;
+    color:white;
 }
 
 input,
 textarea{
-  width:100%;
-  color:#fff;
-  background:rgba(255,255,255,.045);
-  border:1px solid var(--border);
-  border-radius:15px;
-  padding:13px 15px;
-  outline:none;
+    outline:none;
 }
 
-input:focus,
-textarea:focus{
-  border-color:rgba(53,232,255,.6);
-  box-shadow:0 0 18px rgba(53,232,255,.08);
+.hidden{
+    display:none !important;
 }
 
-textarea{
-  min-height:100px;
-  resize:vertical;
+/* =========================================
+   BACKGROUND
+========================================= */
+
+.bg-orb{
+    position:fixed;
+    border-radius:50%;
+    filter:blur(80px);
+    pointer-events:none;
+    z-index:-1;
+    opacity:.45;
 }
 
-.primary{
-  width:100%;
-  padding:14px;
-  border:0;
-  border-radius:15px;
-  color:#fff;
-  font-weight:700;
-  background:linear-gradient(135deg,var(--purple),#6240ff);
-  box-shadow:0 0 25px rgba(155,92,255,.2);
+.orb1{
+    width:260px;
+    height:260px;
+    background:var(--purple);
+    top:-100px;
+    left:-100px;
 }
 
-.primary:disabled{
-  opacity:.6;
-  cursor:not-allowed;
+.orb2{
+    width:220px;
+    height:220px;
+    background:var(--cyan);
+    right:-100px;
+    top:35%;
 }
 
-.error{
-  min-height:20px;
-  color:#ff7c99;
-  text-align:center;
-  margin-top:12px;
-  font-size:14px;
+.orb3{
+    width:280px;
+    height:280px;
+    background:var(--pink);
+    bottom:-180px;
+    left:30%;
 }
 
-/* ================= APP ================= */
+/* =========================================
+   APP
+========================================= */
 
-#appScreen{
-  min-height:100vh;
-  padding-bottom:82px;
+.app{
+    width:100%;
+    min-height:100vh;
+    padding-bottom:100px;
 }
+
+/* =========================================
+   TOP BAR
+========================================= */
 
 .topbar{
-  height:68px;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  padding:0 20px;
-  position:sticky;
-  top:0;
-  z-index:20;
-  background:rgba(8,11,22,.68);
-  backdrop-filter:blur(20px);
-  border-bottom:1px solid var(--border);
+    position:sticky;
+    top:0;
+    z-index:50;
+
+    height:74px;
+
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+
+    padding:0 22px;
+
+    background:rgba(7,8,17,.68);
+
+    backdrop-filter:blur(25px);
+    -webkit-backdrop-filter:blur(25px);
+
+    border-bottom:1px solid rgba(255,255,255,.07);
 }
 
-.top-title{
-  font-size:21px;
-  font-weight:800;
+.brand{
+    display:flex;
+    align-items:center;
+    gap:11px;
 }
 
-.status{
-  color:#66ffbb;
-  font-size:12px;
+.brand-logo{
+    width:42px;
+    height:42px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    border-radius:14px;
+
+    font-size:22px;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(155,92,255,.9),
+            rgba(61,231,255,.8)
+        );
+
+    box-shadow:
+        0 0 25px rgba(155,92,255,.28);
 }
+
+.brand-text{
+    font-size:20px;
+    font-weight:800;
+    letter-spacing:-.4px;
+}
+
+.brand-text span{
+    color:var(--cyan);
+}
+
+.online{
+    display:flex;
+    align-items:center;
+    gap:7px;
+
+    color:var(--muted);
+    font-size:12px;
+}
+
+.online-dot{
+    width:7px;
+    height:7px;
+    border-radius:50%;
+    background:var(--green);
+
+    box-shadow:
+        0 0 10px var(--green);
+}
+
+/* =========================================
+   CONTENT
+========================================= */
 
 .content{
-  width:100%;
-  max-width:850px;
-  margin:auto;
-  padding:20px;
+    width:min(900px,100%);
+    margin:auto;
+    padding:26px 18px;
+}
+
+.page{
+    animation:pageIn .3s ease;
+}
+
+@keyframes pageIn{
+    from{
+        opacity:0;
+        transform:translateY(8px);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
 }
 
 .page-title{
-  font-size:28px;
-  font-weight:800;
-  margin-bottom:18px;
+    font-size:31px;
+    font-weight:850;
+    letter-spacing:-1px;
+    margin-bottom:6px;
 }
 
-/* ================= USERS ================= */
-
-.search{
-  margin-bottom:15px;
+.page-subtitle{
+    color:var(--muted);
+    font-size:14px;
+    margin-bottom:24px;
 }
 
-.list{
-  display:flex;
-  flex-direction:column;
-  gap:10px;
+/* =========================================
+   GLASS
+========================================= */
+
+.glass{
+    background:
+        linear-gradient(
+            145deg,
+            rgba(255,255,255,.075),
+            rgba(255,255,255,.025)
+        );
+
+    border:1px solid var(--border);
+
+    box-shadow:
+        0 20px 70px rgba(0,0,0,.24),
+        inset 0 1px 0 rgba(255,255,255,.045);
+
+    backdrop-filter:blur(25px);
+    -webkit-backdrop-filter:blur(25px);
 }
 
-.user-card,
-.chat-card{
-  display:flex;
-  align-items:center;
-  gap:14px;
-  padding:15px;
-  border:1px solid var(--border);
-  background:rgba(255,255,255,.035);
-  border-radius:18px;
-  transition:.2s;
+/* =========================================
+   HOME
+========================================= */
+
+.hero{
+    padding:28px;
+    border-radius:28px;
+    position:relative;
+    overflow:hidden;
+    margin-bottom:16px;
 }
 
-.user-card{
-  cursor:pointer;
+.hero:after{
+    content:"";
+    position:absolute;
+    width:180px;
+    height:180px;
+    border-radius:50%;
+    right:-70px;
+    top:-80px;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(61,231,255,.22),
+            transparent 70%
+        );
 }
 
-.user-card:hover,
-.chat-card:hover{
-  border-color:rgba(53,232,255,.35);
-  transform:translateY(-1px);
+.hero-small{
+    color:var(--cyan);
+    font-size:13px;
+    font-weight:700;
+    margin-bottom:10px;
+}
+
+.hero-title{
+    font-size:38px;
+    line-height:1.02;
+    font-weight:900;
+    letter-spacing:-1.8px;
+    max-width:600px;
+}
+
+.hero-title span{
+    background:
+        linear-gradient(
+            90deg,
+            var(--purple),
+            var(--cyan)
+        );
+
+    -webkit-background-clip:text;
+    background-clip:text;
+    color:transparent;
+}
+
+.hero-text{
+    color:var(--muted);
+    line-height:1.6;
+    margin-top:15px;
+    max-width:550px;
+}
+
+.hero-buttons{
+    display:flex;
+    gap:10px;
+    margin-top:22px;
+    flex-wrap:wrap;
+}
+
+.primary-btn{
+    padding:13px 19px;
+    border-radius:15px;
+
+    background:
+        linear-gradient(
+            135deg,
+            var(--purple),
+            var(--purple2)
+        );
+
+    box-shadow:
+        0 10px 30px rgba(155,92,255,.22);
+
+    transition:.2s;
+}
+
+.primary-btn:hover{
+    transform:translateY(-2px);
+    box-shadow:
+        0 14px 35px rgba(155,92,255,.32);
+}
+
+.secondary-btn{
+    padding:13px 19px;
+    border-radius:15px;
+
+    color:#ddd;
+
+    background:rgba(255,255,255,.055);
+    border:1px solid var(--border);
+
+    transition:.2s;
+}
+
+.secondary-btn:hover{
+    background:rgba(255,255,255,.09);
+}
+
+/* =========================================
+   CARDS
+========================================= */
+
+.cards{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:12px;
+}
+
+.info-card{
+    padding:20px;
+    border-radius:21px;
+    transition:.2s;
+}
+
+.info-card:hover{
+    transform:translateY(-3px);
+    border-color:rgba(155,92,255,.28);
+}
+
+.info-icon{
+    width:43px;
+    height:43px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    border-radius:14px;
+
+    background:rgba(155,92,255,.12);
+
+    font-size:20px;
+
+    margin-bottom:15px;
+}
+
+.info-title{
+    font-weight:750;
+    margin-bottom:6px;
+}
+
+.info-text{
+    color:var(--muted);
+    font-size:13px;
+    line-height:1.5;
+}
+
+/* =========================================
+   USERS
+========================================= */
+
+.search-box{
+    position:relative;
+    margin-bottom:16px;
+}
+
+.search-box span{
+    position:absolute;
+    left:15px;
+    top:50%;
+    transform:translateY(-50%);
+    color:var(--muted);
+}
+
+.search-input{
+    width:100%;
+    height:52px;
+
+    padding:0 16px 0 44px;
+
+    color:white;
+
+    background:rgba(255,255,255,.045);
+
+    border:1px solid var(--border);
+    border-radius:17px;
+
+    transition:.2s;
+}
+
+.search-input:focus{
+    border-color:rgba(61,231,255,.4);
+
+    box-shadow:
+        0 0 25px rgba(61,231,255,.08);
+}
+
+.user-list{
+    display:flex;
+    flex-direction:column;
+    gap:10px;
+}
+
+.user{
+    display:flex;
+    align-items:center;
+    gap:13px;
+
+    padding:14px;
+
+    border-radius:19px;
+
+    transition:.2s;
+
+    cursor:pointer;
+}
+
+.user:hover{
+    transform:translateX(3px);
+    background:rgba(255,255,255,.075);
 }
 
 .avatar{
-  width:48px;
-  height:48px;
-  min-width:48px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  border-radius:50%;
-  color:#fff;
-  font-size:20px;
-  font-weight:800;
-  background:linear-gradient(135deg,var(--purple),var(--cyan));
-  box-shadow:0 0 20px rgba(155,92,255,.18);
+    width:49px;
+    height:49px;
+    min-width:49px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    border-radius:16px;
+
+    font-size:19px;
+    font-weight:800;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(155,92,255,.9),
+            rgba(61,231,255,.7)
+        );
+
+    box-shadow:
+        0 0 20px rgba(155,92,255,.16);
 }
 
 .user-info{
-  min-width:0;
+    min-width:0;
+    flex:1;
 }
 
 .user-name{
-  font-weight:700;
-  margin-bottom:4px;
+    font-weight:750;
+    margin-bottom:4px;
 }
 
-.username{
-  color:var(--cyan);
-  font-size:13px;
+.user-handle{
+    color:var(--cyan);
+    font-size:13px;
 }
 
-.description{
-  color:var(--muted);
-  font-size:13px;
-  margin-top:4px;
-  overflow:hidden;
-  text-overflow:ellipsis;
-  white-space:nowrap;
+.user-status{
+    width:8px;
+    height:8px;
+    border-radius:50%;
+    background:var(--green);
+    box-shadow:0 0 9px var(--green);
 }
+
+.user-arrow{
+    color:#676c80;
+}
+
+/* =========================================
+   PROFILE
+========================================= */
+
+.profile{
+    padding:24px;
+    border-radius:26px;
+    margin-bottom:14px;
+}
+
+.profile-top{
+    display:flex;
+    align-items:center;
+    gap:17px;
+}
+
+.big-avatar{
+    width:76px;
+    height:76px;
+    min-width:76px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    border-radius:25px;
+
+    font-size:31px;
+    font-weight:900;
+
+    background:
+        linear-gradient(
+            135deg,
+            var(--purple),
+            var(--cyan)
+        );
+
+    box-shadow:
+        0 0 35px rgba(155,92,255,.22);
+}
+
+.profile-name{
+    font-size:22px;
+    font-weight:850;
+}
+
+.profile-handle{
+    color:var(--cyan);
+    margin-top:4px;
+}
+
+.profile-description{
+    color:var(--muted);
+    margin-top:18px;
+    line-height:1.55;
+}
+
+/* =========================================
+   SETTINGS
+========================================= */
+
+.settings{
+    padding:21px;
+    border-radius:24px;
+    margin-bottom:13px;
+}
+
+.settings-title{
+    font-weight:800;
+    font-size:17px;
+    margin-bottom:17px;
+}
+
+.field{
+    margin-bottom:15px;
+}
+
+.field label{
+    display:block;
+    color:var(--muted);
+    font-size:13px;
+    margin-bottom:7px;
+}
+
+.field input,
+.field textarea{
+    width:100%;
+
+    color:white;
+
+    background:rgba(255,255,255,.045);
+
+    border:1px solid var(--border);
+    border-radius:15px;
+
+    padding:13px 14px;
+
+    transition:.2s;
+}
+
+.field textarea{
+    min-height:95px;
+    resize:none;
+}
+
+.field input:focus,
+.field textarea:focus{
+    border-color:rgba(155,92,255,.5);
+
+    box-shadow:
+        0 0 20px rgba(155,92,255,.08);
+}
+
+.setting-row{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+
+    padding:14px 0;
+
+    border-bottom:1px solid rgba(255,255,255,.06);
+}
+
+.setting-row:last-child{
+    border-bottom:0;
+}
+
+.setting-left{
+    display:flex;
+    align-items:center;
+    gap:12px;
+}
+
+.setting-icon{
+    width:39px;
+    height:39px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    border-radius:12px;
+
+    background:rgba(255,255,255,.055);
+}
+
+.setting-name{
+    font-size:14px;
+    font-weight:650;
+}
+
+.setting-desc{
+    color:var(--muted);
+    font-size:11px;
+    margin-top:3px;
+}
+
+/* =========================================
+   TOGGLE
+========================================= */
+
+.toggle{
+    width:48px;
+    height:27px;
+
+    padding:3px;
+
+    border-radius:30px;
+
+    background:#252839;
+
+    transition:.2s;
+}
+
+.toggle.active{
+    background:
+        linear-gradient(
+            90deg,
+            var(--purple),
+            var(--cyan)
+        );
+}
+
+.toggle-circle{
+    width:21px;
+    height:21px;
+
+    border-radius:50%;
+
+    background:white;
+
+    transition:.2s;
+}
+
+.toggle.active .toggle-circle{
+    transform:translateX(21px);
+}
+
+/* =========================================
+   CHAT MOCK
+========================================= */
+
+.chat-preview{
+    border-radius:25px;
+    overflow:hidden;
+}
+
+.chat-preview-head{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    padding:17px;
+
+    border-bottom:1px solid var(--border);
+}
+
+.chat-preview-messages{
+    padding:20px;
+
+    display:flex;
+    flex-direction:column;
+    gap:9px;
+
+    min-height:300px;
+}
+
+.bubble{
+    max-width:75%;
+    padding:11px 14px;
+    border-radius:17px;
+
+    font-size:14px;
+    line-height:1.4;
+}
+
+.bubble.me{
+    align-self:flex-end;
+
+    background:
+        linear-gradient(
+            135deg,
+            #7041d8,
+            #9655ff
+        );
+
+    border-bottom-right-radius:5px;
+}
+
+.bubble.you{
+    align-self:flex-start;
+
+    background:rgba(255,255,255,.075);
+
+    border-bottom-left-radius:5px;
+}
+
+.chat-input{
+    display:flex;
+    gap:8px;
+    padding:12px;
+
+    border-top:1px solid var(--border);
+}
+
+.chat-input input{
+    flex:1;
+
+    color:white;
+
+    background:rgba(255,255,255,.05);
+    border:1px solid var(--border);
+    border-radius:14px;
+
+    padding:12px;
+}
+
+.send{
+    width:47px;
+    min-width:47px;
+
+    border-radius:14px;
+
+    background:
+        linear-gradient(
+            135deg,
+            var(--purple),
+            var(--cyan)
+        );
+
+    font-size:18px;
+}
+
+/* =========================================
+   EMPTY
+========================================= */
 
 .empty{
-  text-align:center;
-  color:var(--muted);
-  padding:35px 15px;
+    padding:45px 20px;
+    text-align:center;
+    color:var(--muted);
 }
 
-/* ================= CHAT ================= */
-
-.chat-page{
-  height:calc(100vh - 155px);
-  display:flex;
-  flex-direction:column;
-  overflow:hidden;
+.empty-icon{
+    font-size:40px;
+    margin-bottom:12px;
 }
 
-.back-button{
-  margin-bottom:10px;
-  padding:9px 13px;
-  border:1px solid var(--border);
-  border-radius:12px;
-  color:#fff;
-  background:rgba(255,255,255,.05);
-}
-
-.chat-header{
-  padding:15px;
-  border-bottom:1px solid var(--border);
-  font-weight:700;
-}
-
-.messages{
-  flex:1;
-  overflow-y:auto;
-  padding:15px;
-  display:flex;
-  flex-direction:column;
-  gap:9px;
-}
-
-.message{
-  max-width:78%;
-  padding:10px 13px;
-  border-radius:17px;
-  word-break:break-word;
-  white-space:pre-wrap;
-}
-
-.message.mine{
-  align-self:flex-end;
-  background:linear-gradient(135deg,#7140df,#8d55ff);
-  border-bottom-right-radius:5px;
-}
-
-.message.other{
-  align-self:flex-start;
-  background:rgba(255,255,255,.08);
-  border-bottom-left-radius:5px;
-}
-
-.message-time{
-  margin-top:4px;
-  font-size:10px;
-  opacity:.6;
-  text-align:right;
-}
-
-.send-box{
-  display:flex;
-  gap:8px;
-  padding:10px;
-  border-top:1px solid var(--border);
-}
-
-.send-box input{
-  flex:1;
-}
-
-.send-button{
-  width:52px;
-  min-width:52px;
-  border:0;
-  border-radius:14px;
-  color:#fff;
-  background:linear-gradient(135deg,var(--purple),var(--cyan));
-  font-size:20px;
-}
-
-/* ================= SETTINGS ================= */
-
-.settings-card{
-  padding:20px;
-}
-
-.settings-card h3{
-  margin-bottom:18px;
-}
-
-.danger-button{
-  width:100%;
-  margin-top:12px;
-  padding:13px;
-  border:1px solid rgba(255,85,119,.35);
-  border-radius:14px;
-  color:#ff8aa2;
-  background:rgba(255,85,119,.08);
-}
-
-/* ================= BOTTOM NAV ================= */
+/* =========================================
+   BOTTOM NAV
+========================================= */
 
 .bottom-nav{
-  position:fixed;
-  left:0;
-  right:0;
-  bottom:0;
-  height:74px;
-  display:flex;
-  justify-content:center;
-  gap:8px;
-  padding:9px;
-  z-index:100;
-  background:rgba(8,11,22,.84);
-  backdrop-filter:blur(20px);
-  border-top:1px solid var(--border);
+    position:fixed;
+
+    left:50%;
+    bottom:15px;
+
+    transform:translateX(-50%);
+
+    width:min(500px,calc(100% - 24px));
+
+    height:70px;
+
+    display:flex;
+    align-items:center;
+
+    padding:7px;
+
+    z-index:100;
+
+    background:
+        rgba(13,15,28,.82);
+
+    border:
+        1px solid rgba(255,255,255,.11);
+
+    border-radius:23px;
+
+    backdrop-filter:blur(28px);
+    -webkit-backdrop-filter:blur(28px);
+
+    box-shadow:
+        0 15px 50px rgba(0,0,0,.45),
+        0 0 30px rgba(155,92,255,.07);
 }
 
-.nav-button{
-  width:min(30%,180px);
-  border:1px solid transparent;
-  border-radius:15px;
-  color:var(--muted);
-  background:transparent;
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  justify-content:center;
-  gap:3px;
+.nav-btn{
+    position:relative;
+
+    flex:1;
+    height:56px;
+
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+
+    gap:4px;
+
+    border-radius:17px;
+
+    color:#777c90;
+
+    background:transparent;
+
+    transition:.2s;
 }
 
-.nav-button.active{
-  color:#fff;
-  background:rgba(155,92,255,.15);
-  border-color:rgba(155,92,255,.3);
+.nav-btn:hover{
+    color:white;
+}
+
+.nav-btn.active{
+    color:white;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(155,92,255,.22),
+            rgba(61,231,255,.09)
+        );
+
+    box-shadow:
+        inset 0 0 20px rgba(155,92,255,.05);
 }
 
 .nav-icon{
-  font-size:19px;
+    font-size:20px;
+    line-height:20px;
 }
 
-.nav-text{
-  font-size:11px;
+.nav-label{
+    font-size:10px;
+    font-weight:650;
 }
 
-@media(max-width:600px){
+/* =========================================
+   TOAST
+========================================= */
 
-  .content{
-    padding:15px;
-  }
+.toast{
+    position:fixed;
+    left:50%;
+    bottom:100px;
 
-  .auth-card{
-    padding:22px;
-  }
+    transform:
+        translate(-50%,20px);
 
-  .page-title{
-    font-size:24px;
-  }
+    opacity:0;
 
-  .message{
-    max-width:88%;
-  }
+    padding:12px 17px;
+
+    border-radius:14px;
+
+    background:
+        rgba(20,23,40,.94);
+
+    border:1px solid var(--border);
+
+    color:white;
+
+    z-index:200;
+
+    pointer-events:none;
+
+    transition:.25s;
+}
+
+.toast.show{
+    opacity:1;
+    transform:translate(-50%,0);
+}
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media(max-width:650px){
+
+    .topbar{
+        padding:0 15px;
+    }
+
+    .brand-text{
+        font-size:18px;
+    }
+
+    .content{
+        padding:20px 14px;
+    }
+
+    .hero{
+        padding:22px;
+    }
+
+    .hero-title{
+        font-size:31px;
+    }
+
+    .cards{
+        grid-template-columns:1fr;
+    }
+
+    .info-card{
+        padding:17px;
+    }
+
+    .profile{
+        padding:19px;
+    }
+
+    .big-avatar{
+        width:65px;
+        height:65px;
+        min-width:65px;
+    }
 }
 </style>
 </head>
 
 <body>
 
-<!-- =====================================================
-     AUTH
-===================================================== -->
+<div class="bg-orb orb1"></div>
+<div class="bg-orb orb2"></div>
+<div class="bg-orb orb3"></div>
 
-<section id="authScreen">
+<div class="app">
 
-  <div class="auth-card glass">
+    <!-- TOP -->
+    <header class="topbar">
 
-    <div class="logo">
-      🐱 Meowl <span>Messenger</span>
-    </div>
+        <div class="brand">
 
-    <div class="subtitle">
-      Общайся с людьми в реальном времени
-    </div>
+            <div class="brand-logo">
+                🐱
+            </div>
 
-    <div class="tabs">
-
-      <button
-        id="loginTab"
-        class="tab active"
-        type="button">
-        Войти
-      </button>
-
-      <button
-        id="registerTab"
-        class="tab"
-        type="button">
-        Регистрация
-      </button>
-
-    </div>
-
-    <form id="authForm">
-
-      <div class="field">
-        <label>Email</label>
-
-        <input
-          id="emailInput"
-          type="email"
-          autocomplete="email"
-          placeholder="example@mail.com"
-          required>
-      </div>
-
-      <div class="field">
-        <label>Пароль</label>
-
-        <input
-          id="passwordInput"
-          type="password"
-          autocomplete="current-password"
-          placeholder="Минимум 6 символов"
-          required>
-      </div>
-
-      <div
-        id="registerNameField"
-        class="field hidden">
-
-        <label>Имя</label>
-
-        <input
-          id="registerNameInput"
-          type="text"
-          maxlength="40"
-          placeholder="Твоё имя">
-
-      </div>
-
-      <button
-        id="authButton"
-        class="primary"
-        type="submit">
-        Войти
-      </button>
-
-      <div
-        id="authError"
-        class="error">
-      </div>
-
-    </form>
-
-  </div>
-
-</section>
-
-
-<!-- =====================================================
-     APP
-===================================================== -->
-
-<section id="appScreen" class="hidden">
-
-  <header class="topbar">
-
-    <div class="top-title">
-      🐱 Meowl Messenger
-    </div>
-
-    <div class="status">
-      ● online
-    </div>
-
-  </header>
-
-
-  <main class="content">
-
-    <!-- ================= CHATS ================= -->
-
-    <section
-      id="chatsPage"
-      class="page">
-
-      <div class="page-title">
-        Чаты
-      </div>
-
-      <div
-        id="chatList"
-        class="list">
-
-        <div class="empty">
-          Загрузка чатов...
-        </div>
-
-      </div>
-
-    </section>
-
-
-    <!-- ================= USERS ================= -->
-
-    <section
-      id="usersPage"
-      class="page hidden">
-
-      <div class="page-title">
-        Пользователи
-      </div>
-
-      <input
-        id="userSearch"
-        class="search"
-        type="text"
-        autocomplete="off"
-        placeholder="Поиск по @username">
-
-      <div
-        id="userList"
-        class="list">
-
-        <div class="empty">
-          Загрузка пользователей...
-        </div>
-
-      </div>
-
-    </section>
-
-
-    <!-- ================= SETTINGS ================= -->
-
-    <section
-      id="settingsPage"
-      class="page hidden">
-
-      <div class="page-title">
-        Настройки
-      </div>
-
-      <div class="settings-card glass">
-
-        <h3>
-          Мой профиль
-        </h3>
-
-        <div class="field">
-
-          <label>
-            Username
-          </label>
-
-          <input
-            id="settingsUsername"
-            type="text"
-            maxlength="21"
-            placeholder="@username">
+            <div class="brand-text">
+                Meowl <span>Messenger</span>
+            </div>
 
         </div>
 
-
-        <div class="field">
-
-          <label>
-            Имя
-          </label>
-
-          <input
-            id="settingsNickname"
-            type="text"
-            maxlength="40"
-            placeholder="Имя">
-
+        <div class="online">
+            <span class="online-dot"></span>
+            Online
         </div>
 
+    </header>
 
-        <div class="field">
 
-          <label>
-            Описание
-          </label>
+    <main class="content">
 
-          <textarea
-            id="settingsDescription"
-            maxlength="160"
-            placeholder="Расскажи немного о себе"></textarea>
+        <!-- =====================================
+             HOME
+        ====================================== -->
 
-        </div>
+        <section
+            id="homePage"
+            class="page">
 
+            <div class="page-title">
+                Привет 👋
+            </div>
+
+            <div class="page-subtitle">
+                Добро пожаловать в Meowl
+            </div>
+
+
+            <div class="hero glass">
+
+                <div class="hero-small">
+                    ✦ НОВОЕ ПОКОЛЕНИЕ ОБЩЕНИЯ
+                </div>
+
+                <div class="hero-title">
+                    Общайся.
+                    <br>
+                    Находи людей.
+                    <br>
+                    <span>Оставайся собой.</span>
+                </div>
+
+                <div class="hero-text">
+                    Минималистичный мессенджер
+                    с красивым интерфейсом,
+                    быстрым поиском людей
+                    и атмосферным дизайном.
+                </div>
+
+                <div class="hero-buttons">
+
+                    <button
+                        class="primary-btn"
+                        onclick="goTo('users')">
+
+                        👥 Найти людей
+
+                    </button>
+
+                    <button
+                        class="secondary-btn"
+                        onclick="goTo('settings')">
+
+                        ⚙️ Профиль
+
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <div class="cards">
+
+                <div class="info-card glass">
+
+                    <div class="info-icon">
+                        👥
+                    </div>
+
+                    <div class="info-title">
+                        Люди
+                    </div>
+
+                    <div class="info-text">
+                        Находи интересных
+                        пользователей и знакомься.
+                    </div>
+
+                </div>
+
+
+                <div class="info-card glass">
+
+                    <div class="info-icon">
+                        ✨
+                    </div>
+
+                    <div class="info-title">
+                        Красиво
+                    </div>
+
+                    <div class="info-text">
+                        Стекло, неон,
+                        мягкие свечения и плавные
+                        анимации.
+                    </div>
+
+                </div>
+
+
+                <div class="info-card glass">
+
+                    <div class="info-icon">
+                        🔒
+                    </div>
+
+                    <div class="info-title">
+                        Приватность
+                    </div>
+
+                    <div class="info-text">
+                        В будущем здесь будет
+                        полноценная защищённая система.
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =====================================
+             USERS
+        ====================================== -->
+
+        <section
+            id="usersPage"
+            class="page hidden">
+
+            <div class="page-title">
+                Люди
+            </div>
+
+            <div class="page-subtitle">
+                Найди кого-нибудь интересного
+            </div>
+
+
+            <div class="search-box">
+
+                <span>⌕</span>
+
+                <input
+                    id="search"
+                    class="search-input"
+                    placeholder="Поиск по имени или @username">
+
+            </div>
+
+
+            <div
+                id="users"
+                class="user-list">
+
+                <div class="user glass">
+
+                    <div class="avatar">
+                        M
+                    </div>
+
+                    <div class="user-info">
+
+                        <div class="user-name">
+                            Meow User
+                        </div>
+
+                        <div class="user-handle">
+                            @meow
+                        </div>
+
+                    </div>
+
+                    <div class="user-status"></div>
+
+                    <div class="user-arrow">
+                        ›
+                    </div>
+
+                </div>
+
+
+                <div class="user glass">
+
+                    <div class="avatar">
+                        A
+                    </div>
+
+                    <div class="user-info">
+
+                        <div class="user-name">
+                            Alex
+                        </div>
+
+                        <div class="user-handle">
+                            @alex
+                        </div>
+
+                    </div>
+
+                    <div class="user-status"></div>
+
+                    <div class="user-arrow">
+                        ›
+                    </div>
+
+                </div>
+
+
+                <div class="user glass">
+
+                    <div class="avatar">
+                        K
+                    </div>
+
+                    <div class="user-info">
+
+                        <div class="user-name">
+                            Kitty
+                        </div>
+
+                        <div class="user-handle">
+                            @kitty
+                        </div>
+
+                    </div>
+
+                    <div class="user-status"></div>
+
+                    <div class="user-arrow">
+                        ›
+                    </div>
+
+                </div>
+
+
+                <div class="user glass">
+
+                    <div class="avatar">
+                        N
+                    </div>
+
+                    <div class="user-info">
+
+                        <div class="user-name">
+                            Neon
+                        </div>
+
+                        <div class="user-handle">
+                            @neon
+                        </div>
+
+                    </div>
+
+                    <div class="user-status"></div>
+
+                    <div class="user-arrow">
+                        ›
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =====================================
+             SETTINGS
+        ====================================== -->
+
+        <section
+            id="settingsPage"
+            class="page hidden">
+
+            <div class="page-title">
+                Настройки
+            </div>
+
+            <div class="page-subtitle">
+                Настрой свой профиль
+            </div>
+
+
+            <div class="profile glass">
+
+                <div class="profile-top">
+
+                    <div class="big-avatar">
+                        M
+                    </div>
+
+                    <div>
+
+                        <div class="profile-name">
+                            Meow User
+                        </div>
+
+                        <div class="profile-handle">
+                            @meow
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="profile-description">
+                    Добро пожаловать в мой профиль ✨
+                </div>
+
+            </div>
+
+
+            <div class="settings glass">
+
+                <div class="settings-title">
+                    ✦ Профиль
+                </div>
+
+
+                <div class="field">
+
+                    <label>
+                        Имя
+                    </label>
+
+                    <input
+                        id="nameInput"
+                        value="Meow User"
+                        maxlength="40">
+
+                </div>
+
+
+                <div class="field">
+
+                    <label>
+                        Username
+                    </label>
+
+                    <input
+                        id="usernameInput"
+                        value="@meow"
+                        maxlength="20">
+
+                </div>
+
+
+                <div class="field">
+
+                    <label>
+                        Описание
+                    </label>
+
+                    <textarea
+                        id="descriptionInput">Добро пожаловать в мой профиль ✨</textarea>
+
+                </div>
+
+
+                <button
+                    class="primary-btn"
+                    style="width:100%"
+                    onclick="saveProfile()">
+
+                    Сохранить изменения
+
+                </button>
+
+            </div>
+
+
+            <div class="settings glass">
+
+                <div class="settings-title">
+                    ✦ Интерфейс
+                </div>
+
+
+                <div class="setting-row">
+
+                    <div class="setting-left">
+
+                        <div class="setting-icon">
+                            🌙
+                        </div>
+
+                        <div>
+
+                            <div class="setting-name">
+                                Тёмная тема
+                            </div>
+
+                            <div class="setting-desc">
+                                Атмосферный внешний вид
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <button
+                        id="themeToggle"
+                        class="toggle active"
+                        onclick="toggleSetting(this)">
+
+                        <div class="toggle-circle"></div>
+
+                    </button>
+
+                </div>
+
+
+                <div class="setting-row">
+
+                    <div class="setting-left">
+
+                        <div class="setting-icon">
+                            ✨
+                        </div>
+
+                        <div>
+
+                            <div class="setting-name">
+                                Анимации
+                            </div>
+
+                            <div class="setting-desc">
+                                Плавные эффекты интерфейса
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <button
+                        class="toggle active"
+                        onclick="toggleSetting(this)">
+
+                        <div class="toggle-circle"></div>
+
+                    </button>
+
+                </div>
+
+
+                <div class="setting-row">
+
+                    <div class="setting-left">
+
+                        <div class="setting-icon">
+                            🔔
+                        </div>
+
+                        <div>
+
+                            <div class="setting-name">
+                                Уведомления
+                            </div>
+
+                            <div class="setting-desc">
+                                Пока только визуальная настройка
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <button
+                        class="toggle"
+                        onclick="toggleSetting(this)">
+
+                        <div class="toggle-circle"></div>
+
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <div class="settings glass">
+
+                <div class="settings-title">
+                    ✦ О приложении
+                </div>
+
+                <div class="setting-row">
+
+                    <div class="setting-left">
+
+                        <div class="setting-icon">
+                            🐱
+                        </div>
+
+                        <div>
+
+                            <div class="setting-name">
+                                Meowl Messenger
+                            </div>
+
+                            <div class="setting-desc">
+                                Версия 1.0 • Design Preview
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =====================================
+             CHAT PREVIEW
+             ТОЛЬКО ДИЗАЙН
+        ====================================== -->
+
+        <section
+            id="chatPage"
+            class="page hidden">
+
+            <div class="page-title">
+                Чат
+            </div>
+
+            <div class="page-subtitle">
+                Предпросмотр интерфейса
+            </div>
+
+
+            <div class="chat-preview glass">
+
+                <div class="chat-preview-head">
+
+                    <div class="avatar">
+                        A
+                    </div>
+
+                    <div class="user-info">
+
+                        <div class="user-name">
+                            Alex
+                        </div>
+
+                        <div class="user-handle">
+                            @alex
+                        </div>
+
+                    </div>
+
+                    <div class="user-status"></div>
+
+                </div>
+
+
+                <div
+                    id="messages"
+                    class="chat-preview-messages">
+
+                    <div class="bubble you">
+                        Привет! 👋
+                    </div>
+
+                    <div class="bubble me">
+                        Привет 😺
+                    </div>
+
+                    <div class="bubble you">
+                        Как тебе Meowl?
+                    </div>
+
+                    <div class="bubble me">
+                        Очень красиво 🔥
+                    </div>
+
+                </div>
+
+
+                <div class="chat-input">
+
+                    <input
+                        id="fakeMessage"
+                        placeholder="Сообщение..."
+                        onkeydown="fakeSend(event)">
+
+                    <button
+                        class="send"
+                        onclick="fakeSend()">
+
+                        ➤
+
+                    </button>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- =====================================
+         BOTTOM NAV
+    ====================================== -->
+
+    <nav class="bottom-nav">
 
         <button
-          id="saveProfileButton"
-          class="primary"
-          type="button">
+            id="navHome"
+            class="nav-btn active"
+            onclick="goTo('home')">
 
-          Сохранить
+            <div class="nav-icon">
+                ◈
+            </div>
+
+            <div class="nav-label">
+                Главная
+            </div>
 
         </button>
 
 
         <button
-          id="logoutButton"
-          class="danger-button"
-          type="button">
+            id="navUsers"
+            class="nav-btn"
+            onclick="goTo('users')">
 
-          Выйти из аккаунта
+            <div class="nav-icon">
+                ♡
+            </div>
+
+            <div class="nav-label">
+                Люди
+            </div>
 
         </button>
 
 
-        <div
-          id="settingsError"
-          class="error">
-        </div>
+        <button
+            id="navSettings"
+            class="nav-btn"
+            onclick="goTo('settings')">
 
-      </div>
+            <div class="nav-icon">
+                ⚙
+            </div>
 
-    </section>
+            <div class="nav-label">
+                Настройки
+            </div>
 
+        </button>
 
-    <!-- ================= PRIVATE CHAT ================= -->
+    </nav>
 
-    <section
-      id="chatPage"
-      class="page hidden">
+</div>
 
-      <button
-        id="backButton"
-        class="back-button"
-        type="button">
 
-        ← Назад
+<div
+    id="toast"
+    class="toast">
+</div>
 
-      </button>
 
+<script>
 
-      <div class="chat-page glass">
+/* =========================================
+   NAVIGATION
+========================================= */
 
-        <div
-          id="chatHeader"
-          class="chat-header">
+const pages = [
+    "home",
+    "users",
+    "settings",
+    "chat"
+];
 
-          Чат
+function goTo(page){
 
-        </div>
+    pages.forEach(name => {
 
+        const element =
+            document.getElementById(
+                name + "Page"
+            );
 
-        <div
-          id="messages"
-          class="messages">
+        if(element){
+            element.classList.add("hidden");
+        }
 
-          <div class="empty">
-            Загрузка...
-          </div>
+    });
 
-        </div>
 
+    const target =
+        document.getElementById(
+            page + "Page"
+        );
 
-        <form
-          id="sendForm"
-          class="send-box">
+    if(target){
+        target.classList.remove("hidden");
+    }
 
-          <input
-            id="messageInput"
-            type="text"
-            maxlength="2000"
-            autocomplete="off"
-            placeholder="Написать сообщение...">
 
-          <button
-            class="send-button"
-            type="submit">
+    document
+        .querySelectorAll(".nav-btn")
+        .forEach(btn => {
 
-            ➤
+            btn.classList.remove("active");
 
-          </button>
+        });
 
-        </form>
 
-      </div>
+    if(page === "home"){
+        document
+            .getElementById("navHome")
+            .classList.add("active");
+    }
 
-    </section>
+    if(page === "users"){
+        document
+            .getElementById("navUsers")
+            .classList.add("active");
+    }
 
-  </main>
+    if(page === "settings"){
+        document
+            .getElementById("navSettings")
+            .classList.add("active");
+    }
 
+    window.scrollTo({
+        top:0,
+        behavior:"smooth"
+    });
+}
 
-  <!-- ================= BOTTOM NAV ================= -->
 
-  <nav class="bottom-nav">
+/* =========================================
+   SEARCH
+========================================= */
 
-    <button
-      id="navChats"
-      class="nav-button active"
-      type="button">
+const search =
+    document.getElementById("search");
 
-      <span class="nav-icon">💬</span>
-      <span class="nav-text">Чаты</span>
+const users =
+    document.querySelectorAll(".user");
 
-    </button>
 
+search.addEventListener(
+    "input",
+    function(){
 
-    <button
-      id="navUsers"
-      class="nav-button"
-      type="button">
+        const value =
+            this.value
+                .toLowerCase()
+                .trim();
 
-      <span class="nav-icon">👥</span>
-      <span class="nav-text">Пользователи</span>
 
-    </button>
+        users.forEach(user => {
 
+            const text =
+                user.innerText
+                    .toLowerCase();
 
-    <button
-      id="navSettings"
-      class="nav-button"
-      type="button">
 
-      <span class="nav-icon">⚙️</span>
-      <span class="nav-text">Настройки</span>
+            if(text.includes(value)){
 
-    </button>
+                user.style.display =
+                    "flex";
 
-  </nav>
+            }else{
 
-</section>
+                user.style.display =
+                    "none";
+            }
 
+        });
 
-<script type="module">
-
-/* =====================================================
-   FIREBASE SDK
-===================================================== */
-
-import {
-  initializeApp
-} from "https://www.gstatic.com/firebasejs/12.18.0/firebase-app.js";
-
-import {
-  getAuth,
-  createUserWithEmailAndPassword,
-  signInWithEmailAndPassword,
-  onAuthStateChanged,
-  signOut
-} from "https://www.gstatic.com/firebasejs/12.18.0/firebase-auth.js";
-
-import {
-  getDatabase,
-  ref,
-  set,
-  get,
-  update,
-  remove,
-  push,
-  onValue,
-  serverTimestamp,
-  runTransaction
-} from "https://www.gstatic.com/firebasejs/12.18.0/firebase-database.js";
-
-
-/* =====================================================
-   🔥 ТВОЙ FIREBASE CONFIG
-===================================================== */
-
-const firebaseConfig = {
-
-  apiKey:
-    "AIzaSyDUu20AAahXFB57envRSAFIDqA9H6YKIM",
-
-  authDomain:
-    "meowl-messenger.firebaseapp.com",
-
-  databaseURL:
-    "https://meowl-messenger-default-rtdb.firebaseio.com",
-
-  projectId:
-    "meowl-messenger",
-
-  storageBucket:
-    "meowl-messenger.firebasestorage.app",
-
-  messagingSenderId:
-    "228165699456",
-
-  appId:
-    "1:228165699456:web:a33dfc849a553c01a36365",
-
-  measurementId:
-    "G-WBJM9L18VH"
-};
-
-
-/* =====================================================
-   FIREBASE INIT
-===================================================== */
-
-const firebaseApp =
-  initializeApp(firebaseConfig);
-
-const auth =
-  getAuth(firebaseApp);
-
-const db =
-  getDatabase(firebaseApp);
-
-
-/* =====================================================
-   STATE
-===================================================== */
-
-let currentUser = null;
-let currentProfile = null;
-
-let usersCache = {};
-let chatsCache = {};
-
-let currentChatId = null;
-let currentChatUser = null;
-
-let stopUsersListener = null;
-let stopChatsListener = null;
-let stopMessagesListener = null;
-
-let authMode = "login";
-
-
-/* =====================================================
-   ELEMENTS
-===================================================== */
-
-const authScreen =
-  document.getElementById("authScreen");
-
-const appScreen =
-  document.getElementById("appScreen");
-
-const authForm =
-  document.getElementById("authForm");
-
-const emailInput =
-  document.getElementById("emailInput");
-
-const passwordInput =
-  document.getElementById("passwordInput");
-
-const registerNameInput =
-  document.getElementById("registerNameInput");
-
-const registerNameField =
-  document.getElementById("registerNameField");
-
-const loginTab =
-  document.getElementById("loginTab");
-
-const registerTab =
-  document.getElementById("registerTab");
-
-const authButton =
-  document.getElementById("authButton");
-
-const authError =
-  document.getElementById("authError");
-
-
-/* =====================================================
-   AUTH TABS
-===================================================== */
-
-loginTab.addEventListener(
-  "click",
-  () => {
-
-    authMode = "login";
-
-    loginTab.classList.add("active");
-    registerTab.classList.remove("active");
-
-    registerNameField.classList.add("hidden");
-
-    authButton.textContent = "Войти";
-
-    authError.textContent = "";
-  }
+    }
 );
 
 
-registerTab.addEventListener(
-  "click",
-  () => {
+/* =========================================
+   USER CLICK
+========================================= */
 
-    authMode = "register";
+users.forEach(user => {
 
-    registerTab.classList.add("active");
-    loginTab.classList.remove("active");
+    user.addEventListener(
+        "click",
+        function(){
 
-    registerNameField.classList.remove("hidden");
-
-    authButton.textContent =
-      "Создать аккаунт";
-
-    authError.textContent = "";
-  }
-);
+            const name =
+                this.querySelector(
+                    ".user-name"
+                )?.innerText || "Пользователь";
 
 
-/* =====================================================
-   USERNAME
-===================================================== */
+            showToast(
+                "Профиль " + name
+            );
 
-function normalizeUsername(value){
-
-  let username =
-    String(value || "")
-      .trim()
-      .toLowerCase();
-
-  if(!username.startsWith("@")){
-    username = "@" + username;
-  }
-
-  return username;
-}
-
-
-function validUsername(username){
-
-  return /^@[a-z0-9_]{3,20}$/
-    .test(username);
-}
-
-
-/*
-  Важно:
-  @username является ключом Firebase.
-*/
-
-function usernameKey(username){
-
-  return normalizeUsername(username);
-}
-
-
-/* =====================================================
-   UNIQUE USERNAME
-===================================================== */
-
-async function claimUsername(
-  username,
-  uid
-){
-
-  const normalized =
-    normalizeUsername(username);
-
-
-  if(!validUsername(normalized)){
-
-    throw new Error(
-      "Username должен содержать 3–20 символов: a-z, 0-9 и _."
-    );
-  }
-
-
-  const usernameRef =
-    ref(
-      db,
-      "usernameIndex/" +
-      usernameKey(normalized)
+        }
     );
 
+});
 
-  /*
-    Transaction защищает от ситуации,
-    когда два человека одновременно
-    пытаются занять один username.
-  */
 
-  const result =
-    await runTransaction(
-      usernameRef,
-      current => {
+/* =========================================
+   SETTINGS TOGGLE
+========================================= */
 
-        if(current === null){
-          return uid;
-        }
+function toggleSetting(button){
 
-        if(current === uid){
-          return current;
-        }
+    button.classList.toggle("active");
+
+    showToast(
+        button.classList.contains("active")
+            ? "Настройка включена"
+            : "Настройка выключена"
+    );
+}
+
+
+/* =========================================
+   PROFILE
+========================================= */
+
+function saveProfile(){
+
+    const name =
+        document.getElementById(
+            "nameInput"
+        ).value.trim();
+
+
+    const username =
+        document.getElementById(
+            "usernameInput"
+        ).value.trim();
+
+
+    const description =
+        document.getElementById(
+            "descriptionInput"
+        ).value.trim();
+
+
+    if(!name){
+
+        showToast(
+            "Введите имя"
+        );
 
         return;
-      }
-    );
-
-
-  if(!result.committed){
-
-    throw new Error(
-      "Этот username уже занят."
-    );
-  }
-
-
-  return normalized;
-}
-
-
-/* =====================================================
-   GENERATE USERNAME
-===================================================== */
-
-function generateUsername(uid){
-
-  const clean =
-    uid
-      .replace(/[^a-zA-Z0-9]/g,"")
-      .slice(-8)
-      .toLowerCase();
-
-
-  return "@meow" + clean;
-}
-
-
-/* =====================================================
-   CREATE PROFILE
-===================================================== */
-
-async function createProfile(
-  firebaseUser,
-  name
-){
-
-  /*
-    🔐 НАСТОЯЩИЙ UID FIREBASE AUTH
-  */
-
-  const uid =
-    firebaseUser.uid;
-
-
-  let username =
-    generateUsername(uid);
-
-
-  /*
-    Резервируем username.
-  */
-
-  let claimed = false;
-
-
-  for(let i = 0; i < 20; i++){
-
-    const candidate =
-      i === 0
-        ? username
-        : "@meow" +
-          uid.slice(-6).toLowerCase() +
-          i;
-
-
-    try{
-
-      username =
-        await claimUsername(
-          candidate,
-          uid
-        );
-
-      claimed = true;
-      break;
-
-    }catch(error){
-
-      if(i === 19){
-        throw error;
-      }
-    }
-  }
-
-
-  if(!claimed){
-
-    throw new Error(
-      "Не удалось создать username."
-    );
-  }
-
-
-  /*
-    Профиль хранится ПО UID Firebase.
-  */
-
-  const profile = {
-
-    uid: uid,
-
-    username: username,
-
-    usernameLower: username,
-
-    nickname:
-      String(
-        name || "Пользователь"
-      )
-      .trim()
-      .slice(0,40),
-
-    nicknameLower:
-      String(
-        name || "Пользователь"
-      )
-      .trim()
-      .toLowerCase()
-      .slice(0,40),
-
-    description: "",
-
-    email:
-      firebaseUser.email || "",
-
-    createdAt:
-      serverTimestamp()
-  };
-
-
-  try{
-
-    await set(
-      ref(
-        db,
-        "users/" + uid
-      ),
-      profile
-    );
-
-  }catch(error){
-
-    /*
-      Если запись профиля не прошла,
-      освобождаем username.
-    */
-
-    try{
-
-      await remove(
-        ref(
-          db,
-          "usernameIndex/" +
-          usernameKey(username)
-        )
-      );
-
-    }catch(_){}
-
-    throw error;
-  }
-
-
-  return profile;
-}
-
-
-/* =====================================================
-   LOAD CURRENT PROFILE
-===================================================== */
-
-async function loadCurrentProfile(){
-
-  if(!currentUser){
-    return;
-  }
-
-
-  /*
-    Никогда не используем email
-    или username как ID.
-
-    Только Firebase Auth UID.
-  */
-
-  const uid =
-    currentUser.uid;
-
-
-  const snapshot =
-    await get(
-      ref(
-        db,
-        "users/" + uid
-      )
-    );
-
-
-  if(snapshot.exists()){
-
-    currentProfile =
-      snapshot.val();
-
-    return;
-  }
-
-
-  /*
-    Если пользователь авторизован,
-    но профиля нет — создаём его.
-  */
-
-  currentProfile =
-    await createProfile(
-      currentUser,
-      currentUser.email
-        ? currentUser.email.split("@")[0]
-        : "Пользователь"
-    );
-}
-
-
-/* =====================================================
-   LOGIN / REGISTER
-===================================================== */
-
-authForm.addEventListener(
-  "submit",
-  async event => {
-
-    event.preventDefault();
-
-    authError.textContent = "";
-
-    authButton.disabled = true;
-
-
-    const email =
-      emailInput.value.trim();
-
-    const password =
-      passwordInput.value;
-
-
-    try{
-
-      if(authMode === "login"){
-
-        /*
-          Firebase сам проверяет
-          email + пароль и выдаёт
-          авторизационный токен.
-        */
-
-        await signInWithEmailAndPassword(
-          auth,
-          email,
-          password
-        );
-
-
-      }else{
-
-        if(password.length < 6){
-
-          throw new Error(
-            "Пароль должен быть минимум 6 символов."
-          );
-        }
-
-
-        /*
-          Создание аккаунта Firebase Auth.
-        */
-
-        const credential =
-          await createUserWithEmailAndPassword(
-            auth,
-            email,
-            password
-          );
-
-
-        /*
-          credential.user.uid —
-          настоящий UID пользователя.
-        */
-
-        await createProfile(
-          credential.user,
-          registerNameInput.value
-        );
-      }
-
-
-    }catch(error){
-
-      console.error(error);
-
-      authError.textContent =
-        firebaseError(error);
-
-    }finally{
-
-      authButton.disabled = false;
-    }
-  }
-);
-
-
-/* =====================================================
-   FIREBASE ERRORS
-===================================================== */
-
-function firebaseError(error){
-
-  switch(error.code){
-
-    case "auth/email-already-in-use":
-      return "Этот email уже зарегистрирован.";
-
-    case "auth/invalid-email":
-      return "Неверный email.";
-
-    case "auth/invalid-credential":
-      return "Неверный email или пароль.";
-
-    case "auth/weak-password":
-      return "Пароль слишком слабый.";
-
-    case "auth/network-request-failed":
-      return "Ошибка сети.";
-
-    case "PERMISSION_DENIED":
-      return "Firebase Rules запретили действие.";
-
-    default:
-      return error.message ||
-        "Произошла ошибка.";
-  }
-}
-
-
-/* =====================================================
-   AUTH STATE
-===================================================== */
-
-onAuthStateChanged(
-  auth,
-  async user => {
-
-    currentUser = user;
-
-
-    if(!user){
-
-      authScreen.classList.remove("hidden");
-      appScreen.classList.add("hidden");
-
-      cleanup();
-
-      return;
     }
 
 
-    /*
-      🔐 Firebase уже подтвердил авторизацию.
+    document.querySelector(
+        ".profile-name"
+    ).textContent = name;
 
-      user.uid = настоящий ID пользователя.
-    */
 
-    console.log(
-      "Firebase UID:",
-      user.uid
+    document.querySelector(
+        ".profile-handle"
+    ).textContent =
+        username.startsWith("@")
+            ? username
+            : "@" + username;
+
+
+    document.querySelector(
+        ".profile-description"
+    ).textContent =
+        description ||
+        "Описание пока не добавлено";
+
+
+    document.querySelector(
+        ".big-avatar"
+    ).textContent =
+        name
+            .charAt(0)
+            .toUpperCase();
+
+
+    showToast(
+        "Профиль сохранён ✓"
     );
+}
 
 
-    try{
+/* =========================================
+   FAKE CHAT
+========================================= */
 
-      await loadCurrentProfile();
+function fakeSend(event){
 
+    if(event){
 
-      authScreen.classList.add("hidden");
-      appScreen.classList.remove("hidden");
+        if(event.key !== "Enter"){
+            return;
+        }
 
-
-      fillSettings();
-
-      startUsersListener();
-
-      startChatsListener();
-
-      showPage("chats");
-
-
-    }catch(error){
-
-      console.error(error);
-
-      alert(
-        "Ошибка загрузки профиля:\n" +
-        error.message
-      );
+        event.preventDefault();
     }
-  }
-);
 
 
-/* =====================================================
-   USERS LISTENER
-===================================================== */
-
-function startUsersListener(){
-
-  if(stopUsersListener){
-    stopUsersListener();
-  }
-
-
-  stopUsersListener =
-    onValue(
-      ref(db,"users"),
-      snapshot => {
-
-        usersCache =
-          snapshot.val() || {};
-
-        renderUsers();
-
-        renderChats();
-      },
-      error => {
-
-        console.error(
-          "Users:",
-          error
-        );
-      }
-    );
-}
-
-
-/* =====================================================
-   RENDER USERS
-===================================================== */
-
-function renderUsers(){
-
-  const list =
-    document.getElementById(
-      "userList"
-    );
-
-
-  const search =
-    document.getElementById(
-      "userSearch"
-    )
-    .value
-    .trim()
-    .toLowerCase();
-
-
-  list.innerHTML = "";
-
-
-  const normalizedSearch =
-    search
-      ? (
-          search.startsWith("@")
-            ? search
-            : "@" + search
-        )
-      : "";
-
-
-  const result =
-    Object.entries(usersCache)
-      .filter(([uid,user]) => {
-
-        if(!user){
-          return false;
-        }
-
-
-        /*
-          Себя не показываем.
-        */
-
-        if(
-          currentUser &&
-          uid === currentUser.uid
-        ){
-          return false;
-        }
-
-
-        const username =
-          String(
-            user.username || ""
-          ).toLowerCase();
-
-
-        if(!normalizedSearch){
-          return true;
-        }
-
-
-        return username.includes(
-          normalizedSearch
-        );
-      });
-
-
-  if(!result.length){
-
-    list.innerHTML =
-      `<div class="empty">
-        Пользователи не найдены
-      </div>`;
-
-    return;
-  }
-
-
-  result
-    .sort(
-      (a,b) =>
-        String(
-          a[1].username || ""
-        ).localeCompare(
-          String(
-            b[1].username || ""
-          )
-        )
-    )
-    .forEach(
-      ([uid,user]) => {
-
-        const card =
-          document.createElement("div");
-
-        card.className =
-          "user-card";
-
-
-        const name =
-          user.nickname ||
-          "Пользователь";
-
-
-        const username =
-          user.username ||
-          "@unknown";
-
-
-        const description =
-          user.description || "";
-
-
-        card.innerHTML = `
-
-          <div class="avatar">
-            ${escapeHtml(
-              name
-                .charAt(0)
-                .toUpperCase()
-            )}
-          </div>
-
-          <div class="user-info">
-
-            <div class="user-name">
-              ${escapeHtml(name)}
-            </div>
-
-            <div class="username">
-              ${escapeHtml(username)}
-            </div>
-
-            ${
-              description
-                ? `
-                  <div class="description">
-                    ${escapeHtml(description)}
-                  </div>
-                `
-                : ""
-            }
-
-          </div>
-        `;
-
-
-        card.addEventListener(
-          "click",
-          () =>
-            openPrivateChat(
-              uid,
-              user
-            )
-        );
-
-
-        list.appendChild(card);
-      }
-    );
-}
-
-
-/* =====================================================
-   SEARCH
-===================================================== */
-
-document
-  .getElementById("userSearch")
-  .addEventListener(
-    "input",
-    renderUsers
-  );
-
-
-/* =====================================================
-   CHAT ID
-===================================================== */
-
-function makeChatId(
-  uid1,
-  uid2
-){
-
-  return [
-    uid1,
-    uid2
-  ]
-  .sort()
-  .join("_");
-}
-
-
-/* =====================================================
-   OPEN PRIVATE CHAT
-===================================================== */
-
-async function openPrivateChat(
-  otherUid,
-  otherUser
-){
-
-  if(!currentUser){
-    return;
-  }
-
-
-  if(
-    otherUid === currentUser.uid
-  ){
-    return;
-  }
-
-
-  const id =
-    makeChatId(
-      currentUser.uid,
-      otherUid
-    );
-
-
-  currentChatId = id;
-  currentChatUser = otherUser;
-
-
-  const chatRef =
-    ref(
-      db,
-      "chats/" + id
-    );
-
-
-  const snapshot =
-    await get(chatRef);
-
-
-  if(!snapshot.exists()){
-
-    /*
-      Приватный чат 1 на 1.
-
-      Оба участника определяются
-      реальными Firebase UID.
-    */
-
-    await set(
-      chatRef,
-      {
-
-        participants: {
-
-          [currentUser.uid]: true,
-
-          [otherUid]: true
-
-        },
-
-        createdAt:
-          serverTimestamp(),
-
-        updatedAt:
-          serverTimestamp()
-      }
-    );
-  }
-
-
-  document.getElementById(
-    "chatHeader"
-  ).textContent =
-    otherUser.nickname ||
-    otherUser.username ||
-    "Пользователь";
-
-
-  showPage("chat");
-
-  startMessagesListener(id);
-}
-
-
-/* =====================================================
-   MESSAGES
-===================================================== */
-
-function startMessagesListener(chatId){
-
-  if(stopMessagesListener){
-    stopMessagesListener();
-  }
-
-
-  stopMessagesListener =
-    onValue(
-      ref(
-        db,
-        "chats/" +
-        chatId +
-        "/messages"
-      ),
-      snapshot => {
-
-        const box =
-          document.getElementById(
-            "messages"
-          );
-
-
-        box.innerHTML = "";
-
-
-        const data =
-          snapshot.val();
-
-
-        if(!data){
-
-          box.innerHTML =
-            `<div class="empty">
-              Пока нет сообщений
-            </div>`;
-
-          return;
-        }
-
-
-        Object.entries(data)
-          .sort(
-            (a,b) =>
-              Number(
-                a[1].createdAt || 0
-              ) -
-              Number(
-                b[1].createdAt || 0
-              )
-          )
-          .forEach(
-            ([id,message]) => {
-
-              const element =
-                document.createElement(
-                  "div"
-                );
-
-
-              const mine =
-                message.senderId ===
-                currentUser.uid;
-
-
-              element.className =
-                "message " +
-                (
-                  mine
-                    ? "mine"
-                    : "other"
-                );
-
-
-              const text =
-                document.createElement(
-                  "div"
-                );
-
-              text.textContent =
-                message.text || "";
-
-
-              const time =
-                document.createElement(
-                  "div"
-                );
-
-              time.className =
-                "message-time";
-
-
-              if(message.createdAt){
-
-                time.textContent =
-                  new Date(
-                    message.createdAt
-                  )
-                  .toLocaleTimeString(
-                    "ru-RU",
-                    {
-                      hour:"2-digit",
-                      minute:"2-digit"
-                    }
-                  );
-              }
-
-
-              element.appendChild(text);
-              element.appendChild(time);
-
-              box.appendChild(element);
-            }
-          );
-
-
-        box.scrollTop =
-          box.scrollHeight;
-      },
-      error => {
-
-        console.error(
-          "Messages:",
-          error
-        );
-      }
-    );
-}
-
-
-/* =====================================================
-   SEND MESSAGE
-===================================================== */
-
-document
-  .getElementById("sendForm")
-  .addEventListener(
-    "submit",
-    async event => {
-
-      event.preventDefault();
-
-
-      const input =
+    const input =
         document.getElementById(
-          "messageInput"
+            "fakeMessage"
         );
 
 
-      const text =
+    const text =
         input.value.trim();
 
 
-      if(
-        !text ||
-        !currentUser ||
-        !currentChatId
-      ){
+    if(!text){
         return;
-      }
-
-
-      if(text.length > 2000){
-        return;
-      }
-
-
-      input.disabled = true;
-
-
-      try{
-
-        const messageRef =
-          push(
-            ref(
-              db,
-              "chats/" +
-              currentChatId +
-              "/messages"
-            )
-          );
-
-
-        await set(
-          messageRef,
-          {
-
-            text: text,
-
-            /*
-              Только настоящий Firebase UID.
-            */
-
-            senderId:
-              currentUser.uid,
-
-            createdAt:
-              serverTimestamp()
-          }
-        );
-
-
-        /*
-          Обновляем только updatedAt.
-        */
-
-        await set(
-          ref(
-            db,
-            "chats/" +
-            currentChatId +
-            "/updatedAt"
-          ),
-          serverTimestamp()
-        );
-
-
-        input.value = "";
-
-      }catch(error){
-
-        console.error(error);
-
-        alert(
-          "Не удалось отправить сообщение:\n" +
-          error.message
-        );
-
-      }finally{
-
-        input.disabled = false;
-
-        input.focus();
-      }
-    }
-  );
-
-
-/* =====================================================
-   CHATS LISTENER
-===================================================== */
-
-function startChatsListener(){
-
-  if(stopChatsListener){
-    stopChatsListener();
-  }
-
-
-  stopChatsListener =
-    onValue(
-      ref(db,"chats"),
-      snapshot => {
-
-        chatsCache =
-          snapshot.val() || {};
-
-        renderChats();
-      },
-      error => {
-
-        console.error(
-          "Chats:",
-          error
-        );
-      }
-    );
-}
-
-
-/* =====================================================
-   RENDER CHATS
-===================================================== */
-
-function renderChats(){
-
-  const list =
-    document.getElementById(
-      "chatList"
-    );
-
-
-  list.innerHTML = "";
-
-
-  if(!currentUser){
-    return;
-  }
-
-
-  const myChats =
-    Object.entries(chatsCache)
-      .filter(
-        ([id,chat]) =>
-          chat &&
-          chat.participants &&
-          chat.participants[
-            currentUser.uid
-          ] === true
-      );
-
-
-  if(!myChats.length){
-
-    list.innerHTML =
-      `<div class="empty">
-        Пока нет чатов.<br>
-        Открой «Пользователи» и выбери человека.
-      </div>`;
-
-    return;
-  }
-
-
-  myChats
-    .sort(
-      (a,b) =>
-        Number(
-          b[1].updatedAt || 0
-        ) -
-        Number(
-          a[1].updatedAt || 0
-        )
-    )
-    .forEach(
-      ([chatId,chat]) => {
-
-        const otherUid =
-          Object.keys(
-            chat.participants || {}
-          )
-          .find(
-            uid =>
-              uid !== currentUser.uid
-          );
-
-
-        if(!otherUid){
-          return;
-        }
-
-
-        const user =
-          usersCache[otherUid];
-
-
-        if(!user){
-          return;
-        }
-
-
-        const card =
-          document.createElement(
-            "div"
-          );
-
-
-        card.className =
-          "chat-card";
-
-
-        const name =
-          user.nickname ||
-          "Пользователь";
-
-
-        const username =
-          user.username ||
-          "@unknown";
-
-
-        card.innerHTML = `
-
-          <div class="avatar">
-            ${escapeHtml(
-              name
-                .charAt(0)
-                .toUpperCase()
-            )}
-          </div>
-
-          <div class="user-info">
-
-            <div class="user-name">
-              ${escapeHtml(name)}
-            </div>
-
-            <div class="username">
-              ${escapeHtml(username)}
-            </div>
-
-          </div>
-        `;
-
-
-        card.addEventListener(
-          "click",
-          () =>
-            openPrivateChat(
-              otherUid,
-              user
-            )
-        );
-
-
-        list.appendChild(card);
-      }
-    );
-}
-
-
-/* =====================================================
-   SETTINGS
-===================================================== */
-
-function fillSettings(){
-
-  if(!currentProfile){
-    return;
-  }
-
-
-  document.getElementById(
-    "settingsUsername"
-  ).value =
-    currentProfile.username || "";
-
-
-  document.getElementById(
-    "settingsNickname"
-  ).value =
-    currentProfile.nickname || "";
-
-
-  document.getElementById(
-    "settingsDescription"
-  ).value =
-    currentProfile.description || "";
-}
-
-
-document
-  .getElementById("saveProfileButton")
-  .addEventListener(
-    "click",
-    saveProfile
-  );
-
-
-async function saveProfile(){
-
-  if(!currentUser){
-    return;
-  }
-
-
-  const errorElement =
-    document.getElementById(
-      "settingsError"
-    );
-
-
-  errorElement.textContent = "";
-  errorElement.style.color = "";
-
-
-  const newUsername =
-    normalizeUsername(
-      document.getElementById(
-        "settingsUsername"
-      ).value
-    );
-
-
-  const nickname =
-    document.getElementById(
-      "settingsNickname"
-    ).value
-    .trim()
-    .slice(0,40);
-
-
-  const description =
-    document.getElementById(
-      "settingsDescription"
-    ).value
-    .trim()
-    .slice(0,160);
-
-
-  if(!validUsername(newUsername)){
-
-    errorElement.textContent =
-      "Username: @ + 3–20 символов, только a-z, 0-9 и _.";
-
-    return;
-  }
-
-
-  if(!nickname){
-
-    errorElement.textContent =
-      "Укажи имя.";
-
-    return;
-  }
-
-
-  const oldUsername =
-    currentProfile.username;
-
-
-  const usernameChanged =
-    newUsername !== oldUsername;
-
-
-  try{
-
-    /*
-      Сначала резервируем новый username.
-    */
-
-    if(usernameChanged){
-
-      await claimUsername(
-        newUsername,
-        currentUser.uid
-      );
     }
 
 
-    /*
-      Обновляем профиль под
-      настоящим Firebase UID.
-    */
+    const message =
+        document.createElement("div");
 
-    await update(
-      ref(
-        db,
-        "users/" +
-        currentUser.uid
-      ),
-      {
 
-        username:
-          newUsername,
+    message.className =
+        "bubble me";
 
-        usernameLower:
-          newUsername,
 
-        nickname:
-          nickname,
+    message.textContent =
+        text;
 
-        nicknameLower:
-          nickname.toLowerCase(),
 
-        description:
-          description
-      }
-    );
+    document
+        .getElementById("messages")
+        .appendChild(message);
 
 
-    /*
-      Старый username освобождаем
-      после успешного обновления.
-    */
+    input.value = "";
 
-    if(
-      usernameChanged &&
-      oldUsername
-    ){
 
-      await remove(
-        ref(
-          db,
-          "usernameIndex/" +
-          usernameKey(oldUsername)
-        )
-      );
-    }
-
-
-    currentProfile = {
-
-      ...currentProfile,
-
-      username:
-        newUsername,
-
-      usernameLower:
-        newUsername,
-
-      nickname:
-        nickname,
-
-      nicknameLower:
-        nickname.toLowerCase(),
-
-      description:
-        description
-    };
-
-
-    fillSettings();
-
-    renderUsers();
-
-    errorElement.style.color =
-      "#66ffbb";
-
-    errorElement.textContent =
-      "Профиль сохранён ✓";
-
-
-    setTimeout(
-      () => {
-
-        errorElement.textContent = "";
-        errorElement.style.color = "";
-
-      },
-      2500
-    );
-
-
-  }catch(error){
-
-    console.error(error);
-
-    errorElement.style.color =
-      "#ff7c99";
-
-    errorElement.textContent =
-      error.message ||
-      "Не удалось сохранить профиль.";
-  }
-}
-
-
-/* =====================================================
-   NAVIGATION
-===================================================== */
-
-const pages = {
-
-  chats:
-    document.getElementById(
-      "chatsPage"
-    ),
-
-  users:
-    document.getElementById(
-      "usersPage"
-    ),
-
-  settings:
-    document.getElementById(
-      "settingsPage"
-    ),
-
-  chat:
-    document.getElementById(
-      "chatPage"
-    )
-};
-
-
-const navs = {
-
-  chats:
-    document.getElementById(
-      "navChats"
-    ),
-
-  users:
-    document.getElementById(
-      "navUsers"
-    ),
-
-  settings:
-    document.getElementById(
-      "navSettings"
-    )
-};
-
-
-function showPage(page){
-
-  Object.values(pages)
-    .forEach(
-      element =>
-        element.classList.add(
-          "hidden"
-        )
-    );
-
-
-  Object.values(navs)
-    .forEach(
-      element =>
-        element.classList.remove(
-          "active"
-        )
-    );
-
-
-  pages[page]
-    .classList.remove(
-      "hidden"
-    );
-
-
-  if(navs[page]){
-
-    navs[page]
-      .classList.add(
-        "active"
-      );
-  }
-}
-
-
-navs.chats.onclick =
-  () => {
-
-    closeMessagesListener();
-
-    showPage("chats");
-  };
-
-
-navs.users.onclick =
-  () => {
-
-    closeMessagesListener();
-
-    showPage("users");
-  };
-
-
-navs.settings.onclick =
-  () => {
-
-    closeMessagesListener();
-
-    fillSettings();
-
-    showPage("settings");
-  };
-
-
-document
-  .getElementById("backButton")
-  .addEventListener(
-    "click",
-    () => {
-
-      closeMessagesListener();
-
-      showPage("chats");
-    }
-  );
-
-
-function closeMessagesListener(){
-
-  if(stopMessagesListener){
-
-    stopMessagesListener();
-
-    stopMessagesListener = null;
-  }
-}
-
-
-/* =====================================================
-   LOGOUT
-===================================================== */
-
-document
-  .getElementById("logoutButton")
-  .addEventListener(
-    "click",
-    async () => {
-
-      try{
-
-        await signOut(auth);
-
-      }catch(error){
-
-        console.error(error);
-
-        alert(
-          "Ошибка выхода:\n" +
-          error.message
+    const box =
+        document.getElementById(
+            "messages"
         );
-      }
-    }
-  );
 
 
-/* =====================================================
-   CLEANUP
-===================================================== */
-
-function cleanup(){
-
-  if(stopUsersListener){
-
-    stopUsersListener();
-    stopUsersListener = null;
-  }
-
-
-  if(stopChatsListener){
-
-    stopChatsListener();
-    stopChatsListener = null;
-  }
-
-
-  if(stopMessagesListener){
-
-    stopMessagesListener();
-    stopMessagesListener = null;
-  }
-
-
-  usersCache = {};
-  chatsCache = {};
-
-  currentProfile = null;
-
-  currentChatId = null;
-  currentChatUser = null;
+    box.scrollTop =
+        box.scrollHeight;
 }
 
 
-/* =====================================================
-   ESCAPE HTML
-===================================================== */
+/* =========================================
+   TOAST
+========================================= */
 
-function escapeHtml(value){
+let toastTimer;
 
-  return String(value ?? "")
-    .replace(/&/g,"&amp;")
-    .replace(/</g,"&lt;")
-    .replace(/>/g,"&gt;")
-    .replace(/"/g,"&quot;")
-    .replace(/'/g,"&#039;");
+function showToast(text){
+
+    const toast =
+        document.getElementById(
+            "toast"
+        );
+
+
+    toast.textContent =
+        text;
+
+
+    toast.classList.add(
+        "show"
+    );
+
+
+    clearTimeout(
+        toastTimer
+    );
+
+
+    toastTimer =
+        setTimeout(
+            () => {
+
+                toast.classList.remove(
+                    "show"
+                );
+
+            },
+            1800
+        );
 }
 
 </script>

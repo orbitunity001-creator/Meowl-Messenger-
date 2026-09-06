@@ -114,3 +114,102 @@
 </html>
 
 Этот файл просто замени целиком вместо старого "index.html". "style.css" и "script.js" пока не меняй.
+
+<main id="profilePage" class="page hidden">
+
+    <div class="profile-card">
+
+        <h2>Мой профиль</h2>
+
+        <p class="profile-subtitle">
+            Настрой свой профиль
+        </p>
+
+        <!-- Аватар -->
+        <div class="avatar-section">
+
+            <div id="avatarPreview" class="avatar">
+                👤
+            </div>
+
+            <label
+                for="avatarInput"
+                class="avatar-button"
+            >
+                Изменить аватар
+            </label>
+
+            <input
+                id="avatarInput"
+                type="file"
+                accept="image/*"
+                hidden
+            >
+
+        </div>
+
+
+        <!-- Ник -->
+        <div class="field">
+
+            <label for="nickname">
+                Никнейм
+            </label>
+
+            <input
+                id="nickname"
+                type="text"
+                maxlength="24"
+                placeholder="Введите свой ник"
+            >
+
+        </div>
+
+
+        <!-- Описание -->
+        <div class="field">
+
+            <label for="description">
+                О себе
+            </label>
+
+            <textarea
+                id="description"
+                maxlength="120"
+                placeholder="Расскажите о себе..."
+            ></textarea>
+
+        </div>
+
+
+        <!-- Email -->
+        <div class="field">
+
+            <label>
+                Email
+            </label>
+
+            <div
+                id="profileEmail"
+                class="email-box"
+            ></div>
+
+        </div>
+
+
+        <!-- Сохранение -->
+        <button
+            id="saveProfile"
+            class="main-button"
+        >
+            Сохранить профиль
+        </button>
+
+        <p
+            id="profileMessage"
+            class="profile-message"
+        ></p>
+
+    </div>
+
+</main>

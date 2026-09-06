@@ -1,202 +1,109 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Meowl Messenger</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Meowl Messenger</title>
+  <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
 
-<div class="app">
+<div class="container">
 
-    <!-- ВХОД -->
-    <section id="authScreen" class="screen">
+  <!-- ВХОД -->
+  <div id="authScreen" class="card">
+    <div class="logo">M</div>
+    <h1>Meowl Messenger</h1>
+    <p class="subtitle">Общайся. Создавай. Будь собой.</p>
 
-        <div class="auth-card">
+    <div class="tabs">
+      <button id="loginTab" class="tab active" onclick="setMode('login')">
+        Войти
+      </button>
+      <button id="registerTab" class="tab" onclick="setMode('register')">
+        Регистрация
+      </button>
+    </div>
 
-            <div class="logo">M</div>
+    <input id="email" type="email" placeholder="Email">
+    <input id="password" type="password" placeholder="Пароль">
 
-            <h1>Meowl Messenger</h1>
+    <button class="main-btn" onclick="auth()">
+      <span id="authButtonText">Войти</span>
+    </button>
 
-            <p class="subtitle">Общайся с друзьями</p>
+    <p id="error"></p>
+  </div>
 
-            <div class="tabs">
-                <button id="loginTab" class="tab active">Войти</button>
-                <button id="registerTab" class="tab">Регистрация</button>
-            </div>
+  <!-- ПРИЛОЖЕНИЕ -->
+  <div id="appScreen" class="app hidden">
 
-            <form id="authForm">
+    <header>
+      <div>
+        <h2 id="pageTitle">Чаты</h2>
+        <p id="userEmail"></p>
+      </div>
 
-                <input id="email"
-                       type="email"
-                       placeholder="Email"
-                       required>
+      <button class="small-btn" onclick="logout()">Выйти</button>
+    </header>
 
-                <input id="password"
-                       type="password"
-                       placeholder="Пароль"
-                       minlength="6"
-                       required>
+    <!-- ЧАТЫ -->
+    <section id="chatsPage" class="page">
+      <div class="empty-card">
+        <div class="big-icon">💬</div>
+        <h3>Пока нет чатов</h3>
+        <p>Здесь появятся твои переписки.</p>
+      </div>
+    </section>
 
-                <button type="submit" class="main-button">
-                    Войти
-                </button>
+    <!-- ПРОФИЛЬ -->
+    <section id="profilePage" class="page hidden">
+      <div class="profile-card">
 
-            </form>
-
-            <p id="errorMessage" class="error"></p>
-
+        <div class="avatar-wrapper">
+          <img id="avatarPreview" src="" alt="Аватар">
         </div>
 
+        <label class="main-btn avatar-btn">
+          📷 Изменить аватар
+          <input id="avatarInput" type="file" accept="image/*">
+        </label>
+
+        <label>Никнейм</label>
+        <input id="nickname" type="text" placeholder="Твой никнейм">
+
+        <label>Описание</label>
+        <textarea id="description" placeholder="Расскажи о себе..."></textarea>
+
+        <label>Email</label>
+        <input id="profileEmail" type="email" disabled>
+
+        <button class="main-btn" onclick="saveProfile()">
+          💾 Сохранить профиль
+        </button>
+
+        <p id="profileMessage"></p>
+
+      </div>
     </section>
 
+    <!-- НИЖНЕЕ МЕНЮ -->
+    <nav class="bottom-nav">
+      <button id="chatsNav" class="nav-btn active" onclick="showChats()">
+        <span>💬</span>
+        <small>Чаты</small>
+      </button>
 
-    <!-- МЕССЕНДЖЕР -->
-    <section id="chatScreen" class="screen hidden">
+      <button id="profileNav" class="nav-btn" onclick="showProfile()">
+        <span>👤</span>
+        <small>Профиль</small>
+      </button>
+    </nav>
 
-        <header class="header">
-
-            <div>
-                <h2 id="pageTitle">Чаты</h2>
-                <span id="userEmail"></span>
-            </div>
-
-            <button id="logoutButton" class="logout">
-                Выйти
-            </button>
-
-        </header>
-
-
-        <!-- ЧАТЫ -->
-        <main id="chatsPage" class="page">
-
-            <div class="empty-chat">
-
-                <div class="chat-icon">💬</div>
-
-                <h3>Пока нет чатов</h3>
-
-                <p>
-                    Здесь будут отображаться твои переписки
-                </p>
-
-            </div>
-
-        </main>
-
-
-        <!-- ПРОФИЛЬ -->
-        <main id="profilePage" class="page hidden">
-
-            <div class="profile-card">
-
-                <h2>Мой профиль</h2>
-
-                <p class="profile-subtitle">
-                    Настрой свой профиль
-                </p>
-
-
-                <div class="avatar-section">
-
-                    <div id="avatarPreview" class="avatar">
-                        👤
-                    </div>
-
-                    <label for="avatarInput"
-                           class="avatar-button">
-                        Изменить аватар
-                    </label>
-
-                    <input id="avatarInput"
-                           type="file"
-                           accept="image/*"
-                           hidden>
-
-                </div>
-
-
-                <div class="field">
-
-                    <label for="nickname">
-                        Никнейм
-                    </label>
-
-                    <input id="nickname"
-                           type="text"
-                           maxlength="24"
-                           placeholder="Введите ник">
-
-                </div>
-
-
-                <div class="field">
-
-                    <label for="description">
-                        О себе
-                    </label>
-
-                    <textarea id="description"
-                              maxlength="120"
-                              placeholder="Расскажите о себе..."></textarea>
-
-                </div>
-
-
-                <div class="field">
-
-                    <label>Email</label>
-
-                    <div id="profileEmail"
-                         class="email-box">
-                    </div>
-
-                </div>
-
-
-                <button id="saveProfile"
-                        class="main-button">
-                    Сохранить профиль
-                </button>
-
-                <p id="profileMessage"
-                   class="profile-message"></p>
-
-            </div>
-
-        </main>
-
-
-        <!-- НИЖНЕЕ МЕНЮ -->
-        <nav class="bottom-nav">
-
-            <button id="chatsButton"
-                    class="nav-button active">
-
-                <span class="nav-icon">💬</span>
-                <span>Чаты</span>
-
-            </button>
-
-
-            <button id="profileButton"
-                    class="nav-button">
-
-                <span class="nav-icon">👤</span>
-                <span>Профиль</span>
-
-            </button>
-
-        </nav>
-
-    </section>
+  </div>
 
 </div>
 
 <script src="script.js"></script>
-
 </body>
 </html>

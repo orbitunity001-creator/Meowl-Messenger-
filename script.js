@@ -1,1326 +1,445 @@
-/* ==================================================
-   MEOWL MESSENGER
-   Локальная версия для GitHub Pages
-================================================== */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+}
 
+body {
+  min-height: 100vh;
+  color: white;
 
-/* ================= НАСТРОЙКИ ================= */
-
-var USERS_KEY = "meowl_users";
-var CURRENT_KEY = "meowl_current";
-var SETTINGS_KEY = "meowl_settings";
-
-var mode = "login";
-var currentUser = null;
-var selectedAvatar = "";
-
-
-/* ================= ЭЛЕМЕНТЫ ================= */
-
-var authScreen =
-  document.getElementById("authScreen");
-
-var appScreen =
-  document.getElementById("appScreen");
-
-var loginTab =
-  document.getElementById("loginTab");
-
-var registerTab =
-  document.getElementById("registerTab");
-
-var emailInput =
-  document.getElementById("emailInput");
-
-var passwordInput =
-  document.getElementById("passwordInput");
-
-var authButton =
-  document.getElementById("authButton");
-
-var authError =
-  document.getElementById("authError");
-
-var logoutButton =
-  document.getElementById("logoutButton");
-
-var chatsPage =
-  document.getElementById("chatsPage");
-
-var profilePage =
-  document.getElementById("profilePage");
-
-var settingsPage =
-  document.getElementById("settingsPage");
-
-var chatsButton =
-  document.getElementById("chatsButton");
-
-var settingsButton =
-  document.getElementById("settingsButton");
-
-var profileButton =
-  document.getElementById("profileButton");
-
-var pageTitle =
-  document.getElementById("pageTitle");
-
-var emailLabel =
-  document.getElementById("emailLabel");
-
-var profileNickname =
-  document.getElementById("profileNickname");
-
-var profileDescription =
-  document.getElementById("profileDescription");
-
-var avatarImage =
-  document.getElementById("avatarImage");
-
-var avatarDefault =
-  document.getElementById("avatarDefault");
-
-var editProfile =
-  document.getElementById("editProfile");
-
-var editProfileButton =
-  document.getElementById("editProfileButton");
-
-var photoButton =
-  document.getElementById("photoButton");
-
-var photoInput =
-  document.getElementById("photoInput");
-
-var nicknameInput =
-  document.getElementById("nicknameInput");
-
-var descriptionInput =
-  document.getElementById("descriptionInput");
-
-var profileEmail =
-  document.getElementById("profileEmail");
-
-var saveProfileButton =
-  document.getElementById("saveProfileButton");
-
-var cancelProfileButton =
-  document.getElementById("cancelProfileButton");
-
-
-/* ================= ПОЛЬЗОВАТЕЛИ ================= */
-
-function getUsers() {
-
-  var data =
-    localStorage.getItem(USERS_KEY);
-
-  if (!data) {
-    return [];
-  }
-
-  try {
-    return JSON.parse(data);
-  } catch (error) {
-    return [];
-  }
+  background:
+    radial-gradient(circle at 10% 10%, rgba(108,92,231,.45), transparent 32%),
+    radial-gradient(circle at 90% 90%, rgba(0,206,201,.28), transparent 30%),
+    #0d0e13;
 }
 
 
-function saveUsers(users) {
+/* AUTH */
 
-  localStorage.setItem(
-    USERS_KEY,
-    JSON.stringify(users)
-  );
+#authScreen {
+  min-height: 100vh;
 
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 15px;
+}
+
+.auth-card {
+  width: 390px;
+  max-width: 100%;
+
+  padding: 35px;
+
+  border-radius: 28px;
+
+  background: rgba(255,255,255,.07);
+
+  backdrop-filter: blur(25px);
+
+  border: 1px solid rgba(255,255,255,.12);
+
+  box-shadow: 0 25px 80px rgba(0,0,0,.45);
+}
+
+.logo {
+  width: 70px;
+  height: 70px;
+
+  margin: auto;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 22px;
+
+  font-size: 34px;
+  font-weight: bold;
+
+  background: linear-gradient(135deg,#6c5ce7,#00cec9);
+}
+
+h1 {
+  text-align: center;
+  margin-top: 20px;
+  font-size: 27px;
+}
+
+.subtitle {
+  text-align: center;
+  margin-top: 8px;
+  margin-bottom: 25px;
+  opacity: .5;
 }
 
 
-/* ================= ОШИБКА ================= */
+/* TABS */
 
-function showAuthError(message) {
+.tabs {
+  display: flex;
+  gap: 7px;
+  padding: 5px;
 
-  authError.textContent = message;
+  border-radius: 15px;
 
+  background: rgba(0,0,0,.2);
+}
+
+.tab {
+  flex: 1;
+
+  padding: 12px;
+
+  border: 0;
+  border-radius: 11px;
+
+  color: white;
+  background: transparent;
+
+  cursor: pointer;
+}
+
+.tab.active {
+  background: linear-gradient(135deg,#6c5ce7,#00cec9);
 }
 
 
-/* ================= РЕЖИМ ВХОДА ================= */
+/* INPUTS */
 
-loginTab.addEventListener(
-  "click",
-  function () {
+input,
+textarea {
+  width: 100%;
 
-    mode = "login";
+  margin-top: 13px;
+  padding: 14px;
 
-    loginTab.classList.add("active");
+  border-radius: 14px;
 
-    registerTab.classList.remove("active");
+  border: 1px solid rgba(255,255,255,.1);
 
-    authButton.textContent =
-      "Продолжить";
+  outline: none;
 
-    passwordInput.autocomplete =
-      "current-password";
+  color: white;
 
-    showAuthError("");
+  background: rgba(0,0,0,.22);
+}
 
-  }
-);
+textarea {
+  min-height: 100px;
+  resize: vertical;
+}
 
+input:focus,
+textarea:focus {
+  border-color: #6c5ce7;
+}
 
-/* ================= РЕЖИМ РЕГИСТРАЦИИ ================= */
-
-registerTab.addEventListener(
-  "click",
-  function () {
-
-    mode = "register";
-
-    registerTab.classList.add("active");
-
-    loginTab.classList.remove("active");
-
-    authButton.textContent =
-      "Зарегистрироваться";
-
-    passwordInput.autocomplete =
-      "new-password";
-
-    showAuthError("");
-
-  }
-);
-
-
-/* ================= AUTH ================= */
-
-authButton.addEventListener(
-  "click",
-  function () {
-
-    var email =
-      emailInput.value
-        .trim()
-        .toLowerCase();
-
-    var password =
-      passwordInput.value;
-
-    showAuthError("");
-
-
-    if (!email) {
-
-      showAuthError(
-        "Введите почту."
-      );
-
-      return;
-    }
-
-
-    if (!email.includes("@")) {
-
-      showAuthError(
-        "Введите правильную почту."
-      );
-
-      return;
-    }
-
-
-    if (password.length < 6) {
-
-      showAuthError(
-        "Пароль должен содержать минимум 6 символов."
-      );
-
-      return;
-    }
-
-
-    var users =
-      getUsers();
-
-
-    /* РЕГИСТРАЦИЯ */
-
-    if (mode === "register") {
-
-      var exists =
-        users.some(
-          function (user) {
-            return user.email === email;
-          }
-        );
-
-
-      if (exists) {
-
-        showAuthError(
-          "Пользователь с такой почтой уже существует."
-        );
-
-        return;
-      }
-
-
-      var user = {
-
-        id:
-          "user_" +
-          Date.now() +
-          "_" +
-          Math.random()
-            .toString(36)
-            .substring(2, 9),
-
-        email: email,
-
-        password: password,
-
-        nickname:
-          email.split("@")[0],
-
-        description:
-          "Привет! Я использую Meowl Messenger 🐱",
-
-        avatar: "",
-
-        createdAt:
-          Date.now()
-
-      };
-
-
-      users.push(user);
-
-      saveUsers(users);
-
-      currentUser = user;
-
-      localStorage.setItem(
-        CURRENT_KEY,
-        user.id
-      );
-
-      openApp();
-
-      return;
-    }
-
-
-    /* ВХОД */
-
-    var foundUser =
-      users.find(
-        function (user) {
-
-          return (
-            user.email === email &&
-            user.password === password
-          );
-
-        }
-      );
-
-
-    if (!foundUser) {
-
-      showAuthError(
-        "Неверная почта или пароль."
-      );
-
-      return;
-    }
-
-
-    currentUser =
-      foundUser;
-
-
-    localStorage.setItem(
-      CURRENT_KEY,
-      currentUser.id
-    );
-
-
-    openApp();
-
-  }
-);
-
-
-/* ================= ENTER ================= */
-
-emailInput.addEventListener(
-  "keydown",
-  function (event) {
-
-    if (event.key === "Enter") {
-
-      passwordInput.focus();
-
-    }
-
-  }
-);
-
-
-passwordInput.addEventListener(
-  "keydown",
-  function (event) {
-
-    if (event.key === "Enter") {
-
-      authButton.click();
-
-    }
-
-  }
-);
-
-
-/* ================= ОТКРЫТИЕ APP ================= */
-
-function openApp() {
-
-  authScreen.classList.add("hidden");
-
-  appScreen.classList.remove("hidden");
-
-  emailLabel.textContent =
-    currentUser.email;
-
-  updateProfile();
-
-  loadSettings();
-
-  showPage("chats");
-
+input:disabled {
+  opacity: .45;
 }
 
 
-/* ================= ПРОФИЛЬ ================= */
+/* BUTTONS */
 
-function updateProfile() {
+.main-button,
+.secondary-button,
+.cancel-button {
+  width: 100%;
 
-  if (!currentUser) {
-    return;
-  }
+  margin-top: 15px;
+  padding: 14px;
 
+  border: 0;
+  border-radius: 14px;
 
-  profileNickname.textContent =
-    currentUser.nickname ||
-    "Ник";
+  color: white;
 
+  font-size: 15px;
 
-  profileDescription.textContent =
-    currentUser.description ||
-    "Описание профиля";
+  cursor: pointer;
 
+  transition: .2s;
+}
 
-  profileEmail.value =
-    currentUser.email;
+.main-button {
+  background: linear-gradient(135deg,#6c5ce7,#00cec9);
+}
 
+.secondary-button {
+  background: rgba(255,255,255,.1);
+}
 
-  if (currentUser.avatar) {
+.cancel-button {
+  background: rgba(255,255,255,.06);
+}
 
-    avatarImage.src =
-      currentUser.avatar;
+.main-button:hover,
+.secondary-button:hover,
+.cancel-button:hover,
+.logout-button:hover,
+.nav-button:hover {
+  transform: translateY(-2px);
+}
 
-    avatarImage.style.display =
-      "block";
+#authError {
+  min-height: 20px;
 
-    avatarDefault.style.display =
-      "none";
+  margin-top: 13px;
 
-  } else {
+  text-align: center;
 
-    avatarImage.style.display =
-      "none";
-
-    avatarDefault.style.display =
-      "block";
-
-  }
-
+  color: #ff7675;
 }
 
 
-/* ================= ПОКАЗ СТРАНИЦЫ ================= */
+/* APP */
 
-function showPage(page) {
+#appScreen {
+  display: none;
 
-  chatsPage.classList.add("hidden");
+  min-height: 100vh;
 
-  profilePage.classList.add("hidden");
-
-  settingsPage.classList.add("hidden");
-
-  chatsButton.classList.remove("active");
-
-  profileButton.classList.remove("active");
-
-  settingsButton.classList.remove("active");
-
-
-  if (page === "chats") {
-
-    chatsPage.classList.remove("hidden");
-
-    chatsButton.classList.add("active");
-
-    pageTitle.textContent =
-      "Чаты";
-
-  }
-
-
-  if (page === "profile") {
-
-    profilePage.classList.remove("hidden");
-
-    profileButton.classList.add("active");
-
-    pageTitle.textContent =
-      "Профиль";
-
-  }
-
-
-  if (page === "settings") {
-
-    settingsPage.classList.remove("hidden");
-
-    settingsButton.classList.add("active");
-
-    pageTitle.textContent =
-      "Настройки";
-
-  }
-
+  padding-bottom: 100px;
 }
 
 
-/* ================= NAV ================= */
+/* HEADER */
 
-chatsButton.addEventListener(
-  "click",
-  function () {
+header {
+  height: 90px;
 
-    showPage("chats");
+  padding: 22px 28px;
 
-  }
-);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
 
+header h2 {
+  font-size: 25px;
+}
 
-settingsButton.addEventListener(
-  "click",
-  function () {
+#emailLabel {
+  margin-top: 5px;
 
-    showPage("settings");
+  font-size: 12px;
 
-  }
-);
+  opacity: .4;
+}
 
+.logout-button {
+  padding: 10px 16px;
 
-profileButton.addEventListener(
-  "click",
-  function () {
+  border: 0;
+  border-radius: 12px;
 
-    showPage("profile");
+  color: white;
 
-  }
-);
+  background: rgba(255,255,255,.08);
 
-
-/* ================= РЕДАКТИРОВАНИЕ ================= */
-
-editProfileButton.addEventListener(
-  "click",
-  function () {
-
-    nicknameInput.value =
-      currentUser.nickname || "";
-
-    descriptionInput.value =
-      currentUser.description || "";
-
-    profileEmail.value =
-      currentUser.email;
-
-    selectedAvatar =
-      currentUser.avatar || "";
-
-    editProfile.classList.remove(
-      "hidden"
-    );
-
-  }
-);
-
-
-/* ================= ФОТО ================= */
-
-photoButton.addEventListener(
-  "click",
-  function () {
-
-    photoInput.click();
-
-  }
-);
-
-
-photoInput.addEventListener(
-  "change",
-  function () {
-
-    var file =
-      photoInput.files[0];
-
-    if (!file) {
-      return;
-    }
-
-
-    if (!file.type.startsWith("image/")) {
-
-      alert(
-        "Выберите изображение."
-      );
-
-      return;
-    }
-
-
-    if (file.size > 5 * 1024 * 1024) {
-
-      alert(
-        "Фото должно быть меньше 5 МБ."
-      );
-
-      return;
-    }
-
-
-    var reader =
-      new FileReader();
-
-
-    reader.onload =
-      function (event) {
-
-        selectedAvatar =
-          event.target.result;
-
-      };
-
-
-    reader.readAsDataURL(file);
-
-  }
-);
-
-
-/* ================= СОХРАНЕНИЕ ПРОФИЛЯ ================= */
-
-saveProfileButton.addEventListener(
-  "click",
-  function () {
-
-    var nickname =
-      nicknameInput.value.trim();
-
-    var description =
-      descriptionInput.value.trim();
-
-
-    if (!nickname) {
-
-      alert(
-        "Введите ник."
-      );
-
-      return;
-    }
-
-
-    var users =
-      getUsers();
-
-
-    var index =
-      users.findIndex(
-        function (user) {
-
-          return (
-            user.id === currentUser.id
-          );
-
-        }
-      );
-
-
-    if (index === -1) {
-      return;
-    }
-
-
-    users[index].nickname =
-      nickname;
-
-    users[index].description =
-      description ||
-      "Пока ничего не рассказал о себе.";
-
-    users[index].avatar =
-      selectedAvatar;
-
-
-    currentUser =
-      users[index];
-
-
-    saveUsers(users);
-
-
-    editProfile.classList.add(
-      "hidden"
-    );
-
-
-    updateProfile();
-
-    alert(
-      "Профиль сохранён."
-    );
-
-  }
-);
-
-
-/* ================= ОТМЕНА ================= */
-
-cancelProfileButton.addEventListener(
-  "click",
-  function () {
-
-    editProfile.classList.add(
-      "hidden"
-    );
-
-  }
-);
-
-
-/* ================= LOGOUT ================= */
-
-logoutButton.addEventListener(
-  "click",
-  function () {
-
-    localStorage.removeItem(
-      CURRENT_KEY
-    );
-
-    currentUser = null;
-
-    appScreen.classList.add(
-      "hidden"
-    );
-
-    authScreen.classList.remove(
-      "hidden"
-    );
-
-    emailInput.value = "";
-
-    passwordInput.value = "";
-
-    showAuthError("");
-
-    mode = "login";
-
-    loginTab.click();
-
-  }
-);
-
-
-/* ==================================================
-   НАСТРОЙКИ
-================================================== */
-
-
-/* ЭЛЕМЕНТЫ */
-
-var darkThemeToggle =
-  document.getElementById(
-    "darkThemeToggle"
-  );
-
-var neonToggle =
-  document.getElementById(
-    "neonToggle"
-  );
-
-var enterSendToggle =
-  document.getElementById(
-    "enterSendToggle"
-  );
-
-var timeToggle =
-  document.getElementById(
-    "timeToggle"
-  );
-
-var previewToggle =
-  document.getElementById(
-    "previewToggle"
-  );
-
-var notificationsToggle =
-  document.getElementById(
-    "notificationsToggle"
-  );
-
-var soundToggle =
-  document.getElementById(
-    "soundToggle"
-  );
-
-var vibrationToggle =
-  document.getElementById(
-    "vibrationToggle"
-  );
-
-var onlineToggle =
-  document.getElementById(
-    "onlineToggle"
-  );
-
-var typingToggle =
-  document.getElementById(
-    "typingToggle"
-  );
-
-var readToggle =
-  document.getElementById(
-    "readToggle"
-  );
-
-var largeTextToggle =
-  document.getElementById(
-    "largeTextToggle"
-  );
-
-var reducedMotionToggle =
-  document.getElementById(
-    "reducedMotionToggle"
-  );
-
-
-/* ================= ПОЛУЧИТЬ НАСТРОЙКИ ================= */
-
-function getSettings() {
-
-  var data =
-    localStorage.getItem(
-      SETTINGS_KEY
-    );
-
-  if (!data) {
-
-    return {
-
-      darkTheme: true,
-      neon: true,
-      enterSend: true,
-      time: true,
-      preview: true,
-      notifications: true,
-      sound: true,
-      vibration: true,
-      online: true,
-      typing: true,
-      read: true,
-      largeText: false,
-      reducedMotion: false
-
-    };
-
-  }
-
-
-  try {
-
-    return JSON.parse(data);
-
-  } catch (error) {
-
-    return {};
-
-  }
-
+  cursor: pointer;
 }
 
 
-/* ================= СОХРАНИТЬ ================= */
+/* MAIN */
 
-function saveSettings() {
+main {
+  display: flex;
+  justify-content: center;
 
-  var settings = {
+  padding: 25px 15px;
+}
 
-    darkTheme:
-      darkThemeToggle.checked,
+.empty-card,
+.profile-card {
+  width: 390px;
+  max-width: 100%;
 
-    neon:
-      neonToggle.checked,
+  padding: 30px;
 
-    enterSend:
-      enterSendToggle.checked,
+  border-radius: 26px;
 
-    time:
-      timeToggle.checked,
+  background: rgba(255,255,255,.065);
 
-    preview:
-      previewToggle.checked,
+  backdrop-filter: blur(20px);
 
-    notifications:
-      notificationsToggle.checked,
+  border: 1px solid rgba(255,255,255,.1);
 
-    sound:
-      soundToggle.checked,
-
-    vibration:
-      vibrationToggle.checked,
-
-    online:
-      onlineToggle.checked,
-
-    typing:
-      typingToggle.checked,
-
-    read:
-      readToggle.checked,
-
-    largeText:
-      largeTextToggle.checked,
-
-    reducedMotion:
-      reducedMotionToggle.checked
-
-  };
-
-
-  localStorage.setItem(
-    SETTINGS_KEY,
-    JSON.stringify(settings)
-  );
-
-
-  applySettings();
-
+  box-shadow: 0 20px 60px rgba(0,0,0,.25);
 }
 
 
-/* ================= ЗАГРУЗКА ================= */
+/* CHATS */
 
-function loadSettings() {
+.empty-card {
+  text-align: center;
+}
 
-  var settings =
-    getSettings();
+.chat-icon {
+  width: 75px;
+  height: 75px;
 
+  margin: 0 auto 20px;
 
-  darkThemeToggle.checked =
-    settings.darkTheme !== false;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
-  neonToggle.checked =
-    settings.neon !== false;
+  border-radius: 23px;
 
-  enterSendToggle.checked =
-    settings.enterSend !== false;
+  font-size: 35px;
 
-  timeToggle.checked =
-    settings.time !== false;
+  background: linear-gradient(
+    135deg,
+    rgba(108,92,231,.3),
+    rgba(0,206,201,.2)
+  );
+}
 
-  previewToggle.checked =
-    settings.preview !== false;
+.empty-card h2 {
+  font-size: 22px;
+}
 
-  notificationsToggle.checked =
-    settings.notifications !== false;
-
-  soundToggle.checked =
-    settings.sound !== false;
-
-  vibrationToggle.checked =
-    settings.vibration !== false;
-
-  onlineToggle.checked =
-    settings.online !== false;
-
-  typingToggle.checked =
-    settings.typing !== false;
-
-  readToggle.checked =
-    settings.read !== false;
-
-  largeTextToggle.checked =
-    settings.largeText === true;
-
-  reducedMotionToggle.checked =
-    settings.reducedMotion === true;
-
-
-  applySettings();
-
+.empty-card p {
+  margin-top: 10px;
+  opacity: .45;
 }
 
 
-/* ================= ПРИМЕНЕНИЕ ================= */
+/* PROFILE */
 
-function applySettings() {
+.profile-card {
+  text-align: center;
+  margin-bottom: 20px;
+}
 
-  document.body.classList.toggle(
-    "light",
-    !darkThemeToggle.checked
-  );
+.avatar {
+  width: 115px;
+  height: 115px;
 
+  margin: 0 auto 18px;
 
-  document.body.classList.toggle(
-    "no-neon",
-    !neonToggle.checked
-  );
+  overflow: hidden;
 
+  border-radius: 50%;
 
-  document.body.classList.toggle(
-    "large-text",
-    largeTextToggle.checked
-  );
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
+  font-size: 45px;
 
-  document.body.classList.toggle(
-    "reduced-motion",
-    reducedMotionToggle.checked
-  );
+  background: linear-gradient(135deg,#6c5ce7,#00cec9);
 
+  border: 3px solid rgba(255,255,255,.15);
+}
+
+#avatarImage {
+  width: 100%;
+  height: 100%;
+
+  display: none;
+
+  object-fit: cover;
+}
+
+#profileNickname {
+  font-size: 24px;
+}
+
+#profileDescription {
+  margin-top: 8px;
+  margin-bottom: 5px;
+
+  opacity: .5;
 }
 
 
-/* ================= СОХРАНЕНИЕ ПРИ ИЗМЕНЕНИИ ================= */
+/* NAV */
 
-var allSettingsToggles = [
+nav {
+  position: fixed;
 
-  darkThemeToggle,
-  neonToggle,
-  enterSendToggle,
-  timeToggle,
-  previewToggle,
-  notificationsToggle,
-  soundToggle,
-  vibrationToggle,
-  onlineToggle,
-  typingToggle,
-  readToggle,
-  largeTextToggle,
-  reducedMotionToggle
+  left: 50%;
+  bottom: 18px;
 
-];
+  transform: translateX(-50%);
 
+  width: 360px;
+  max-width: calc(100% - 30px);
 
-allSettingsToggles.forEach(
-  function (toggle) {
+  padding: 7px;
 
-    toggle.addEventListener(
-      "change",
-      saveSettings
-    );
+  display: flex;
+  gap: 7px;
 
-  }
-);
+  border-radius: 21px;
 
+  background: rgba(20,20,26,.88);
 
-/* ==================================================
-   ЭКСПОРТ ДАННЫХ
-================================================== */
+  backdrop-filter: blur(25px);
 
-var exportDataButton =
-  document.getElementById(
-    "exportDataButton"
-  );
+  border: 1px solid rgba(255,255,255,.1);
 
+  box-shadow: 0 15px 50px rgba(0,0,0,.4);
+}
 
-exportDataButton.addEventListener(
-  "click",
-  function () {
+.nav-button {
+  flex: 1;
 
-    var data = {};
+  padding: 11px;
 
+  border: 0;
+  border-radius: 15px;
 
-    for (
-      var i = 0;
-      i < localStorage.length;
-      i++
-    ) {
+  color: white;
+  background: transparent;
 
-      var key =
-        localStorage.key(i);
+  cursor: pointer;
+}
 
-      data[key] =
-        localStorage.getItem(key);
+.nav-button span {
+  display: block;
 
-    }
+  margin-bottom: 3px;
 
+  font-size: 19px;
+}
 
-    var blob =
-      new Blob(
-        [
-          JSON.stringify(
-            data,
-            null,
-            2
-          )
-        ],
-        {
-          type:
-            "application/json"
-        }
-      );
-
-
-    var url =
-      URL.createObjectURL(blob);
-
-
-    var link =
-      document.createElement("a");
-
-
-    link.href =
-      url;
-
-    link.download =
-      "meowl-messenger-backup.json";
-
-
-    document.body.appendChild(link);
-
-    link.click();
-
-    document.body.removeChild(link);
-
-
-    URL.revokeObjectURL(url);
-
-  }
-);
-
-
-/* ==================================================
-   ИМПОРТ
-================================================== */
-
-var importDataButton =
-  document.getElementById(
-    "importDataButton"
-  );
-
-var importDataInput =
-  document.getElementById(
-    "importDataInput"
-  );
-
-
-importDataButton.addEventListener(
-  "click",
-  function () {
-
-    importDataInput.click();
-
-  }
-);
-
-
-importDataInput.addEventListener(
-  "change",
-  function () {
-
-    var file =
-      importDataInput.files[0];
-
-    if (!file) {
-      return;
-    }
-
-
-    var reader =
-      new FileReader();
-
-
-    reader.onload =
-      function (event) {
-
-        try {
-
-          var data =
-            JSON.parse(
-              event.target.result
-            );
-
-
-          Object.keys(data).forEach(
-            function (key) {
-
-              localStorage.setItem(
-                key,
-                data[key]
-              );
-
-            }
-          );
-
-
-          alert(
-            "Данные успешно восстановлены!"
-          );
-
-
-          location.reload();
-
-        } catch (error) {
-
-          alert(
-            "Ошибка: файл повреждён или имеет неправильный формат."
-          );
-
-        }
-
-      };
-
-
-    reader.readAsText(file);
-
-  }
-);
-
-
-/* ==================================================
-   ОЧИСТКА
-================================================== */
-
-var clearDataButton =
-  document.getElementById(
-    "clearDataButton"
-  );
-
-
-clearDataButton.addEventListener(
-  "click",
-  function () {
-
-    var answer =
-      confirm(
-        "ВНИМАНИЕ!\n\nУдалить все локальные данные Meowl Messenger?"
-      );
-
-
-    if (!answer) {
-      return;
-    }
-
-
-    localStorage.clear();
-
-
-    alert(
-      "Все локальные данные удалены."
-    );
-
-
-    location.reload();
-
-  }
-);
-
-
-/* ==================================================
-   НОВЫЙ ЧАТ
-================================================== */
-
-var newChatButton =
-  document.getElementById(
-    "newChatButton"
-  );
-
-
-newChatButton.addEventListener(
-  "click",
-  function () {
-
-    alert(
-      "Настоящие чаты между пользователями подключим следующим этапом."
-    );
-
-  }
-);
-
-
-/* ==================================================
-   АВТОВХОД
-================================================== */
-
-function checkCurrentUser() {
-
-  var currentId =
-    localStorage.getItem(
-      CURRENT_KEY
-    );
-
-
-  if (!currentId) {
-    return;
-  }
-
-
-  var users =
-    getUsers();
-
-
-  var user =
-    users.find(
-      function (item) {
-
-        return item.id === currentId;
-
-      }
-    );
-
-
-  if (!user) {
-
-    localStorage.removeItem(
-      CURRENT_KEY
-    );
-
-    return;
-  }
-
-
-  currentUser =
-    user;
-
-
-  openApp();
-
+.nav-button.active {
+  background: rgba(255,255,255,.1);
 }
 
 
-/* ================= START ================= */
+/* HIDDEN */
 
-loadSettings();
+.hidden {
+  display: none !important;
+}
 
-checkCurrentUser();
+
+/* MOBILE */
+
+@media (max-width: 500px) {
+
+  .auth-card {
+    padding: 25px;
+  }
+
+  header {
+    padding: 20px;
+  }
+
+  main {
+    padding: 20px 15px;
+  }
+
+  .empty-card,
+  .profile-card {
+    padding: 25px;
+  }
+}

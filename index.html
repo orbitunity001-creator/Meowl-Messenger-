@@ -4,9 +4,11 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#080912">
+
 <title>Meowl Messenger</title>
 
 <style>
+
 *{
     margin:0;
     padding:0;
@@ -14,18 +16,28 @@
 }
 
 :root{
+
     --bg:#070811;
     --bg2:#0c0e1b;
+
     --glass:rgba(255,255,255,.055);
     --glass2:rgba(255,255,255,.085);
+
     --border:rgba(255,255,255,.10);
+
     --white:#fff;
     --muted:#8f94a8;
+
     --purple:#9b5cff;
     --purple2:#713cff;
+
     --cyan:#3de7ff;
+
     --pink:#ff4fd8;
+
     --green:#56f6a2;
+
+    --red:#ff4f81;
 }
 
 html,
@@ -35,6 +47,7 @@ body{
 }
 
 body{
+
     font-family:
         Inter,
         -apple-system,
@@ -46,21 +59,25 @@ body{
     color:var(--white);
 
     background:
+
         radial-gradient(
             circle at 10% 0%,
             rgba(155,92,255,.25),
             transparent 30%
         ),
+
         radial-gradient(
             circle at 95% 15%,
             rgba(61,231,255,.16),
             transparent 28%
         ),
+
         radial-gradient(
             circle at 50% 100%,
             rgba(255,79,216,.10),
             transparent 35%
         ),
+
         linear-gradient(
             145deg,
             #070811,
@@ -92,89 +109,124 @@ textarea{
     display:none !important;
 }
 
+
 /* =========================================
    BACKGROUND
 ========================================= */
 
 .bg-orb{
+
     position:fixed;
+
     border-radius:50%;
+
     filter:blur(80px);
+
     pointer-events:none;
+
     z-index:-1;
+
     opacity:.45;
 }
 
 .orb1{
+
     width:260px;
     height:260px;
+
     background:var(--purple);
+
     top:-100px;
     left:-100px;
 }
 
 .orb2{
+
     width:220px;
     height:220px;
+
     background:var(--cyan);
+
     right:-100px;
     top:35%;
 }
 
 .orb3{
+
     width:280px;
     height:280px;
+
     background:var(--pink);
+
     bottom:-180px;
     left:30%;
 }
+
 
 /* =========================================
    APP
 ========================================= */
 
 .app{
+
     width:100%;
+
     min-height:100vh;
+
     padding-bottom:100px;
 }
+
 
 /* =========================================
    TOP BAR
 ========================================= */
 
 .topbar{
+
     position:sticky;
+
     top:0;
+
     z-index:50;
 
     height:74px;
 
     display:flex;
+
     align-items:center;
+
     justify-content:space-between;
 
     padding:0 22px;
 
-    background:rgba(7,8,17,.68);
+    background:
+        rgba(7,8,17,.68);
 
     backdrop-filter:blur(25px);
+
     -webkit-backdrop-filter:blur(25px);
 
-    border-bottom:1px solid rgba(255,255,255,.07);
+    border-bottom:
+        1px solid
+        rgba(255,255,255,.07);
 }
 
 .brand{
+
     display:flex;
+
     align-items:center;
+
     gap:11px;
 }
 
 .brand-logo{
+
     width:42px;
     height:42px;
 
     display:flex;
+
     align-items:center;
     justify-content:center;
 
@@ -190,120 +242,178 @@ textarea{
         );
 
     box-shadow:
-        0 0 25px rgba(155,92,255,.28);
+        0 0 25px
+        rgba(155,92,255,.28);
 }
 
 .brand-text{
+
     font-size:20px;
+
     font-weight:800;
+
     letter-spacing:-.4px;
 }
 
 .brand-text span{
+
     color:var(--cyan);
 }
 
 .online{
+
     display:flex;
+
     align-items:center;
+
     gap:7px;
 
     color:var(--muted);
+
     font-size:12px;
 }
 
 .online-dot{
+
     width:7px;
     height:7px;
+
     border-radius:50%;
+
     background:var(--green);
 
     box-shadow:
-        0 0 10px var(--green);
+        0 0 10px
+        var(--green);
 }
+
 
 /* =========================================
    CONTENT
 ========================================= */
 
 .content{
+
     width:min(900px,100%);
+
     margin:auto;
+
     padding:26px 18px;
 }
 
 .page{
-    animation:pageIn .3s ease;
+
+    animation:
+        pageIn
+        .3s
+        ease;
 }
 
 @keyframes pageIn{
+
     from{
+
         opacity:0;
-        transform:translateY(8px);
+
+        transform:
+            translateY(8px);
     }
+
     to{
+
         opacity:1;
-        transform:translateY(0);
+
+        transform:
+            translateY(0);
     }
 }
 
 .page-title{
+
     font-size:31px;
+
     font-weight:850;
+
     letter-spacing:-1px;
+
     margin-bottom:6px;
 }
 
 .page-subtitle{
+
     color:var(--muted);
+
     font-size:14px;
+
     margin-bottom:24px;
 }
+
 
 /* =========================================
    GLASS
 ========================================= */
 
 .glass{
+
     background:
+
         linear-gradient(
             145deg,
             rgba(255,255,255,.075),
             rgba(255,255,255,.025)
         );
 
-    border:1px solid var(--border);
+    border:
+        1px solid
+        var(--border);
 
     box-shadow:
-        0 20px 70px rgba(0,0,0,.24),
-        inset 0 1px 0 rgba(255,255,255,.045);
+
+        0 20px 70px
+        rgba(0,0,0,.24),
+
+        inset 0 1px 0
+        rgba(255,255,255,.045);
 
     backdrop-filter:blur(25px);
+
     -webkit-backdrop-filter:blur(25px);
 }
+
 
 /* =========================================
    HOME
 ========================================= */
 
 .hero{
+
     padding:28px;
+
     border-radius:28px;
+
     position:relative;
+
     overflow:hidden;
+
     margin-bottom:16px;
 }
 
 .hero:after{
+
     content:"";
+
     position:absolute;
+
     width:180px;
     height:180px;
+
     border-radius:50%;
+
     right:-70px;
     top:-80px;
 
     background:
+
         radial-gradient(
             circle,
             rgba(61,231,255,.22),
@@ -312,22 +422,33 @@ textarea{
 }
 
 .hero-small{
+
     color:var(--cyan);
+
     font-size:13px;
+
     font-weight:700;
+
     margin-bottom:10px;
 }
 
 .hero-title{
+
     font-size:38px;
+
     line-height:1.02;
+
     font-weight:900;
+
     letter-spacing:-1.8px;
+
     max-width:600px;
 }
 
 .hero-title span{
+
     background:
+
         linear-gradient(
             90deg,
             var(--purple),
@@ -335,29 +456,42 @@ textarea{
         );
 
     -webkit-background-clip:text;
+
     background-clip:text;
+
     color:transparent;
 }
 
 .hero-text{
+
     color:var(--muted);
+
     line-height:1.6;
+
     margin-top:15px;
+
     max-width:550px;
 }
 
 .hero-buttons{
+
     display:flex;
+
     gap:10px;
+
     margin-top:22px;
+
     flex-wrap:wrap;
 }
 
 .primary-btn{
+
     padding:13px 19px;
+
     border-radius:15px;
 
     background:
+
         linear-gradient(
             135deg,
             var(--purple),
@@ -365,65 +499,81 @@ textarea{
         );
 
     box-shadow:
-        0 10px 30px rgba(155,92,255,.22);
+        0 10px 30px
+        rgba(155,92,255,.22);
 
     transition:.2s;
 }
 
 .primary-btn:hover{
-    transform:translateY(-2px);
-    box-shadow:
-        0 14px 35px rgba(155,92,255,.32);
+
+    transform:
+        translateY(-2px);
 }
 
 .secondary-btn{
+
     padding:13px 19px;
+
     border-radius:15px;
 
     color:#ddd;
 
-    background:rgba(255,255,255,.055);
-    border:1px solid var(--border);
+    background:
+        rgba(255,255,255,.055);
+
+    border:
+        1px solid
+        var(--border);
 
     transition:.2s;
 }
 
 .secondary-btn:hover{
-    background:rgba(255,255,255,.09);
+
+    background:
+        rgba(255,255,255,.09);
 }
 
-/* =========================================
-   CARDS
-========================================= */
-
 .cards{
+
     display:grid;
-    grid-template-columns:repeat(3,1fr);
+
+    grid-template-columns:
+        repeat(3,1fr);
+
     gap:12px;
 }
 
 .info-card{
+
     padding:20px;
+
     border-radius:21px;
+
     transition:.2s;
 }
 
 .info-card:hover{
-    transform:translateY(-3px);
-    border-color:rgba(155,92,255,.28);
+
+    transform:
+        translateY(-3px);
 }
 
 .info-icon{
+
     width:43px;
     height:43px;
 
     display:flex;
+
     align-items:center;
     justify-content:center;
 
     border-radius:14px;
 
-    background:rgba(155,92,255,.12);
+    background:
+        rgba(155,92,255,.12);
 
     font-size:20px;
 
@@ -431,69 +581,101 @@ textarea{
 }
 
 .info-title{
+
     font-weight:750;
+
     margin-bottom:6px;
 }
 
 .info-text{
+
     color:var(--muted);
+
     font-size:13px;
+
     line-height:1.5;
 }
+
 
 /* =========================================
    SEARCH
 ========================================= */
 
 .search-box{
+
     position:relative;
+
     margin-bottom:16px;
 }
 
 .search-box span{
+
     position:absolute;
+
     left:15px;
+
     top:50%;
-    transform:translateY(-50%);
+
+    transform:
+        translateY(-50%);
+
     color:var(--muted);
+
+    font-size:22px;
 }
 
 .search-input{
+
     width:100%;
+
     height:52px;
 
-    padding:0 16px 0 44px;
+    padding:
+        0
+        16px
+        0
+        44px;
 
     color:white;
 
-    background:rgba(255,255,255,.045);
+    background:
+        rgba(255,255,255,.045);
 
-    border:1px solid var(--border);
+    border:
+        1px solid
+        var(--border);
+
     border-radius:17px;
 
     transition:.2s;
 }
 
 .search-input:focus{
-    border-color:rgba(61,231,255,.4);
 
-    box-shadow:
-        0 0 25px rgba(61,231,255,.08);
+    border-color:
+        rgba(61,231,255,.4);
 }
+
 
 /* =========================================
    USERS
 ========================================= */
 
 .user-list{
+
     display:flex;
+
     flex-direction:column;
+
     gap:10px;
 }
 
 .user{
+
     display:flex;
+
     align-items:center;
+
     gap:13px;
 
     padding:14px;
@@ -506,25 +688,34 @@ textarea{
 }
 
 .user:hover{
-    transform:translateX(3px);
-    background:rgba(255,255,255,.075);
+
+    transform:
+        translateX(3px);
+
+    background:
+        rgba(255,255,255,.075);
 }
 
 .avatar{
+
     width:49px;
     height:49px;
+
     min-width:49px;
 
     display:flex;
+
     align-items:center;
     justify-content:center;
 
     border-radius:16px;
 
     font-size:19px;
+
     font-weight:800;
 
     background:
+
         linear-gradient(
             135deg,
             rgba(155,92,255,.9),
@@ -532,68 +723,95 @@ textarea{
         );
 
     box-shadow:
-        0 0 20px rgba(155,92,255,.16);
+        0 0 20px
+        rgba(155,92,255,.16);
 }
 
 .user-info{
+
     min-width:0;
+
     flex:1;
 }
 
 .user-name{
+
     font-weight:750;
+
     margin-bottom:4px;
 }
 
 .user-handle{
+
     color:var(--cyan);
+
     font-size:13px;
 }
 
 .user-status{
+
     width:8px;
     height:8px;
+
     border-radius:50%;
+
     background:var(--green);
-    box-shadow:0 0 9px var(--green);
+
+    box-shadow:
+        0 0 9px
+        var(--green);
 }
 
 .user-arrow{
+
     color:#676c80;
+
     font-size:25px;
 }
+
 
 /* =========================================
    PROFILE
 ========================================= */
 
 .profile{
+
     padding:24px;
+
     border-radius:26px;
+
     margin-bottom:14px;
 }
 
 .profile-top{
+
     display:flex;
+
     align-items:center;
+
     gap:17px;
 }
 
 .big-avatar{
+
     width:76px;
     height:76px;
+
     min-width:76px;
 
     display:flex;
+
     align-items:center;
     justify-content:center;
 
     border-radius:25px;
 
     font-size:31px;
+
     font-weight:900;
 
     background:
+
         linear-gradient(
             135deg,
             var(--purple),
@@ -601,42 +819,53 @@ textarea{
         );
 
     box-shadow:
-        0 0 35px rgba(155,92,255,.22);
+        0 0 35px
+        rgba(155,92,255,.22);
 }
 
 .profile-name{
+
     font-size:22px;
+
     font-weight:850;
 }
 
 .profile-handle{
+
     color:var(--cyan);
+
     margin-top:4px;
 }
 
 .profile-description{
+
     color:var(--muted);
+
     margin-top:18px;
+
     line-height:1.55;
 }
 
-/* =========================================
-   PROFILE ACTIONS
-========================================= */
-
 .profile-actions{
+
     display:flex;
+
     gap:10px;
+
     margin-top:20px;
 }
 
 .profile-actions button{
+
     flex:1;
 }
 
 .back-btn{
+
     display:inline-flex;
+
     align-items:center;
+
     gap:7px;
 
     margin-bottom:18px;
@@ -647,53 +876,67 @@ textarea{
 
     color:#bbb;
 
-    background:rgba(255,255,255,.045);
-    border:1px solid var(--border);
+    background:
+        rgba(255,255,255,.045);
 
-    transition:.2s;
+    border:
+        1px solid
+        var(--border);
 }
 
-.back-btn:hover{
-    color:white;
-    background:rgba(255,255,255,.08);
-}
 
 /* =========================================
    SETTINGS
 ========================================= */
 
 .settings{
+
     padding:21px;
+
     border-radius:24px;
+
     margin-bottom:13px;
 }
 
 .settings-title{
+
     font-weight:800;
+
     font-size:17px;
+
     margin-bottom:17px;
 }
 
 .field{
+
     margin-bottom:15px;
 }
 
 .field label{
+
     display:block;
+
     color:var(--muted);
+
     font-size:13px;
+
     margin-bottom:7px;
 }
 
 .field input,
 .field textarea{
+
     width:100%;
 
     color:white;
 
-    background:rgba(255,255,255,.045);
+    background:
+        rgba(255,255,255,.045);
 
-    border:1px solid var(--border);
+    border:
+        1px solid
+        var(--border);
+
     border-radius:15px;
 
     padding:13px 14px;
@@ -702,67 +945,82 @@ textarea{
 }
 
 .field textarea{
+
     min-height:95px;
+
     resize:none;
 }
 
 .field input:focus,
 .field textarea:focus{
-    border-color:rgba(155,92,255,.5);
 
-    box-shadow:
-        0 0 20px rgba(155,92,255,.08);
+    border-color:
+        rgba(155,92,255,.5);
 }
 
 .setting-row{
+
     display:flex;
+
     align-items:center;
+
     justify-content:space-between;
 
     padding:14px 0;
 
-    border-bottom:1px solid rgba(255,255,255,.06);
+    border-bottom:
+        1px solid
+        rgba(255,255,255,.06);
 }
 
 .setting-row:last-child{
+
     border-bottom:0;
 }
 
 .setting-left{
+
     display:flex;
+
     align-items:center;
+
     gap:12px;
 }
 
 .setting-icon{
+
     width:39px;
     height:39px;
 
     display:flex;
+
     align-items:center;
     justify-content:center;
 
     border-radius:12px;
 
-    background:rgba(255,255,255,.055);
+    background:
+        rgba(255,255,255,.055);
 }
 
 .setting-name{
+
     font-size:14px;
+
     font-weight:650;
 }
 
 .setting-desc{
+
     color:var(--muted);
+
     font-size:11px;
+
     margin-top:3px;
 }
 
-/* =========================================
-   TOGGLE
-========================================= */
-
 .toggle{
+
     width:48px;
     height:27px;
 
@@ -776,7 +1034,9 @@ textarea{
 }
 
 .toggle.active{
+
     background:
+
         linear-gradient(
             90deg,
             var(--purple),
@@ -785,6 +1045,7 @@ textarea{
 }
 
 .toggle-circle{
+
     width:21px;
     height:21px;
 
@@ -795,75 +1056,339 @@ textarea{
     transition:.2s;
 }
 
-.toggle.active .toggle-circle{
-    transform:translateX(21px);
+.toggle.active
+.toggle-circle{
+
+    transform:
+        translateX(21px);
 }
 
+
 /* =========================================
-   CHAT
+   CHATS
+========================================= */
+
+.chat-list{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:10px;
+}
+
+.chat-item{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:13px;
+
+    padding:15px;
+
+    border-radius:20px;
+
+    cursor:pointer;
+
+    transition:.2s;
+}
+
+.chat-item:hover{
+
+    transform:
+        translateX(3px);
+
+    background:
+        rgba(255,255,255,.08);
+}
+
+.chat-item.has-unread{
+
+    border-color:
+        rgba(255,79,129,.30);
+
+    box-shadow:
+        0 0 24px
+        rgba(255,79,129,.08);
+}
+
+.chat-info{
+
+    flex:1;
+
+    min-width:0;
+}
+
+.chat-name-row{
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-between;
+
+    gap:10px;
+}
+
+.chat-name{
+
+    font-size:15px;
+
+    font-weight:800;
+}
+
+.chat-item.has-unread
+.chat-name{
+
+    color:white;
+}
+
+.chat-last{
+
+    color:var(--muted);
+
+    font-size:13px;
+
+    margin-top:5px;
+
+    overflow:hidden;
+
+    white-space:nowrap;
+
+    text-overflow:ellipsis;
+}
+
+.chat-item.has-unread
+.chat-last{
+
+    color:#e4e5ec;
+
+    font-weight:600;
+}
+
+.chat-time-small{
+
+    color:#6f7486;
+
+    font-size:10px;
+
+    white-space:nowrap;
+}
+
+.chat-arrow{
+
+    color:#676c80;
+
+    font-size:24px;
+}
+
+
+/* =========================================
+   UNREAD BADGES
+========================================= */
+
+.nav-icon-wrap{
+
+    position:relative;
+
+    width:24px;
+
+    height:22px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+}
+
+.chat-badge{
+
+    position:absolute;
+
+    top:-9px;
+
+    right:-13px;
+
+    min-width:18px;
+
+    height:18px;
+
+    padding:
+        0
+        5px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    border-radius:20px;
+
+    background:var(--red);
+
+    color:white;
+
+    font-size:9px;
+
+    font-weight:850;
+
+    box-shadow:
+        0 0 13px
+        rgba(255,79,129,.7);
+
+    border:
+        2px solid
+        #101220;
+
+    animation:
+        badgePulse
+        1.5s
+        infinite;
+}
+
+@keyframes badgePulse{
+
+    0%,
+    100%{
+        box-shadow:
+            0 0 9px
+            rgba(255,79,129,.5);
+    }
+
+    50%{
+        box-shadow:
+            0 0 18px
+            rgba(255,79,129,.9);
+    }
+}
+
+.unread-badge{
+
+    min-width:22px;
+
+    height:22px;
+
+    padding:
+        0
+        6px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    border-radius:20px;
+
+    background:var(--red);
+
+    color:white;
+
+    font-size:10px;
+
+    font-weight:850;
+
+    box-shadow:
+        0 0 12px
+        rgba(255,79,129,.55);
+}
+
+
+/* =========================================
+   CHAT PAGE
 ========================================= */
 
 .chat-page-head{
+
     display:flex;
+
     align-items:center;
+
     gap:10px;
+
     margin-bottom:17px;
 }
 
 .chat-back{
+
     width:42px;
     height:42px;
 
     border-radius:14px;
 
-    background:rgba(255,255,255,.055);
-    border:1px solid var(--border);
+    background:
+        rgba(255,255,255,.055);
+
+    border:
+        1px solid
+        var(--border);
 
     font-size:22px;
 }
 
 .chat-preview{
+
     border-radius:25px;
+
     overflow:hidden;
 }
 
 .chat-preview-head{
+
     display:flex;
+
     align-items:center;
+
     gap:12px;
+
     padding:17px;
 
-    border-bottom:1px solid var(--border);
+    border-bottom:
+        1px solid
+        var(--border);
 }
 
 .chat-preview-messages{
+
     padding:20px;
 
     display:flex;
+
     flex-direction:column;
+
     gap:9px;
 
     min-height:360px;
+
     max-height:55vh;
 
     overflow-y:auto;
 }
 
 .bubble{
+
     max-width:75%;
+
     padding:11px 14px;
+
     border-radius:17px;
 
     font-size:14px;
+
     line-height:1.4;
 
     word-break:break-word;
 }
 
 .bubble.me{
+
     align-self:flex-end;
 
     background:
+
         linear-gradient(
             135deg,
             #7041d8,
@@ -874,48 +1399,69 @@ textarea{
 }
 
 .bubble.you{
+
     align-self:flex-start;
 
-    background:rgba(255,255,255,.075);
+    background:
+        rgba(255,255,255,.075);
 
     border-bottom-left-radius:5px;
 }
 
 .chat-time{
+
     display:block;
+
     font-size:9px;
+
     opacity:.55;
+
     margin-top:4px;
+
     text-align:right;
 }
 
 .chat-input{
+
     display:flex;
+
     gap:8px;
+
     padding:12px;
 
-    border-top:1px solid var(--border);
+    border-top:
+        1px solid
+        var(--border);
 }
 
 .chat-input input{
+
     flex:1;
 
     color:white;
 
-    background:rgba(255,255,255,.05);
-    border:1px solid var(--border);
+    background:
+        rgba(255,255,255,.05);
+
+    border:
+        1px solid
+        var(--border);
+
     border-radius:14px;
 
     padding:12px;
 }
 
 .send{
+
     width:47px;
+
     min-width:47px;
 
     border-radius:14px;
 
     background:
+
         linear-gradient(
             135deg,
             var(--purple),
@@ -925,38 +1471,54 @@ textarea{
     font-size:18px;
 }
 
+
 /* =========================================
    EMPTY
 ========================================= */
 
 .empty{
+
     padding:45px 20px;
+
     text-align:center;
+
     color:var(--muted);
+
+    border-radius:22px;
 }
 
 .empty-icon{
+
     font-size:40px;
+
     margin-bottom:12px;
 }
+
 
 /* =========================================
    BOTTOM NAV
 ========================================= */
 
 .bottom-nav{
+
     position:fixed;
 
     left:50%;
+
     bottom:15px;
 
-    transform:translateX(-50%);
+    transform:
+        translateX(-50%);
 
-    width:min(500px,calc(100% - 24px));
+    width:min(
+        560px,
+        calc(100% - 24px)
+    );
 
     height:70px;
 
     display:flex;
+
     align-items:center;
 
     padding:7px;
@@ -967,27 +1529,38 @@ textarea{
         rgba(13,15,28,.82);
 
     border:
-        1px solid rgba(255,255,255,.11);
+        1px solid
+        rgba(255,255,255,.11);
 
     border-radius:23px;
 
     backdrop-filter:blur(28px);
+
     -webkit-backdrop-filter:blur(28px);
 
     box-shadow:
-        0 15px 50px rgba(0,0,0,.45),
-        0 0 30px rgba(155,92,255,.07);
+
+        0 15px 50px
+        rgba(0,0,0,.45),
+
+        0 0 30px
+        rgba(155,92,255,.07);
 }
 
 .nav-btn{
+
     position:relative;
 
     flex:1;
+
     height:56px;
 
     display:flex;
+
     flex-direction:column;
+
     align-items:center;
+
     justify-content:center;
 
     gap:4px;
@@ -1002,40 +1575,48 @@ textarea{
 }
 
 .nav-btn:hover{
+
     color:white;
 }
 
 .nav-btn.active{
+
     color:white;
 
     background:
+
         linear-gradient(
             135deg,
             rgba(155,92,255,.22),
             rgba(61,231,255,.09)
         );
-
-    box-shadow:
-        inset 0 0 20px rgba(155,92,255,.05);
 }
 
 .nav-icon{
+
     font-size:20px;
+
     line-height:20px;
 }
 
 .nav-label{
+
     font-size:10px;
+
     font-weight:650;
 }
+
 
 /* =========================================
    TOAST
 ========================================= */
 
 .toast{
+
     position:fixed;
+
     left:50%;
+
     bottom:100px;
 
     transform:
@@ -1050,7 +1631,9 @@ textarea{
     background:
         rgba(20,23,40,.94);
 
-    border:1px solid var(--border);
+    border:
+        1px solid
+        var(--border);
 
     color:white;
 
@@ -1062,9 +1645,13 @@ textarea{
 }
 
 .toast.show{
+
     opacity:1;
-    transform:translate(-50%,0);
+
+    transform:
+        translate(-50%,0);
 }
+
 
 /* =========================================
    MOBILE
@@ -1109,9 +1696,21 @@ textarea{
         height:65px;
         min-width:65px;
     }
+
+    .bottom-nav{
+        width:calc(100% - 18px);
+        bottom:9px;
+    }
+
+    .nav-label{
+        font-size:9px;
+    }
+
 }
+
 </style>
 </head>
+
 
 <body>
 
@@ -1119,7 +1718,13 @@ textarea{
 <div class="bg-orb orb2"></div>
 <div class="bg-orb orb3"></div>
 
+
 <div class="app">
+
+
+<!-- ======================================
+     TOP
+======================================= -->
 
 <header class="topbar">
 
@@ -1135,9 +1740,13 @@ textarea{
 
     </div>
 
+
     <div class="online">
+
         <span class="online-dot"></span>
+
         Online
+
     </div>
 
 </header>
@@ -1145,11 +1754,14 @@ textarea{
 
 <main class="content">
 
-<!-- =====================================
-     HOME
-====================================== -->
 
-<section id="homePage" class="page">
+<!-- ======================================
+     HOME
+======================================= -->
+
+<section
+    id="homePage"
+    class="page">
 
     <div class="page-title">
         Привет 👋
@@ -1159,6 +1771,7 @@ textarea{
         Добро пожаловать в Meowl
     </div>
 
+
     <div class="hero glass">
 
         <div class="hero-small">
@@ -1166,19 +1779,29 @@ textarea{
         </div>
 
         <div class="hero-title">
+
             Общайся.
             <br>
+
             Находи людей.
             <br>
-            <span>Оставайся собой.</span>
+
+            <span>
+                Оставайся собой.
+            </span>
+
         </div>
 
+
         <div class="hero-text">
+
             Минималистичный мессенджер
             с красивым интерфейсом,
             быстрым поиском людей
             и атмосферным дизайном.
+
         </div>
+
 
         <div class="hero-buttons">
 
@@ -1190,11 +1813,12 @@ textarea{
 
             </button>
 
+
             <button
                 class="secondary-btn"
                 onclick="goTo('settings')">
 
-                ⚙️ Профиль
+                👤 Профиль
 
             </button>
 
@@ -1204,6 +1828,7 @@ textarea{
 
 
     <div class="cards">
+
 
         <div class="info-card glass">
 
@@ -1216,8 +1841,8 @@ textarea{
             </div>
 
             <div class="info-text">
-                Находи интересных
-                пользователей и общайся.
+                Находи интересных пользователей
+                и общайся.
             </div>
 
         </div>
@@ -1234,8 +1859,7 @@ textarea{
             </div>
 
             <div class="info-text">
-                Стекло, неон,
-                мягкие свечения и плавные
+                Стекло, неон и плавные
                 анимации.
             </div>
 
@@ -1253,8 +1877,8 @@ textarea{
             </div>
 
             <div class="info-text">
-                Пока работаем локально.
-                Сервер подключим следующим этапом.
+                Твои локальные данные
+                сохраняются в браузере.
             </div>
 
         </div>
@@ -1264,11 +1888,38 @@ textarea{
 </section>
 
 
-<!-- =====================================
-     USERS
-====================================== -->
+<!-- ======================================
+     CHATS
+======================================= -->
 
-<section id="usersPage" class="page hidden">
+<section
+    id="chatsPage"
+    class="page hidden">
+
+    <div class="page-title">
+        Чаты
+    </div>
+
+    <div class="page-subtitle">
+        Люди, с которыми ты общался
+    </div>
+
+
+    <div
+        id="chatList"
+        class="chat-list">
+    </div>
+
+</section>
+
+
+<!-- ======================================
+     USERS
+======================================= -->
+
+<section
+    id="usersPage"
+    class="page hidden">
 
     <div class="page-title">
         Люди
@@ -1281,7 +1932,9 @@ textarea{
 
     <div class="search-box">
 
-        <span>⌕</span>
+        <span>
+            ⌕
+        </span>
 
         <input
             id="search"
@@ -1299,11 +1952,14 @@ textarea{
 </section>
 
 
-<!-- =====================================
-     USER PROFILE
-====================================== -->
+<!-- ======================================
+     PERSON PROFILE
+======================================= -->
 
-<section id="personPage" class="page hidden">
+<section
+    id="personPage"
+    class="page hidden">
+
 
     <button
         class="back-btn"
@@ -1316,26 +1972,36 @@ textarea{
 
     <div class="profile glass">
 
+
         <div class="profile-top">
+
 
             <div
                 id="personAvatar"
                 class="big-avatar">
+
                 A
+
             </div>
+
 
             <div>
 
                 <div
                     id="personName"
                     class="profile-name">
+
                     Alex
+
                 </div>
+
 
                 <div
                     id="personUsername"
                     class="profile-handle">
+
                     @alex
+
                 </div>
 
             </div>
@@ -1347,12 +2013,11 @@ textarea{
             id="personDescription"
             class="profile-description">
 
-            Привет! Я пользователь Meowl 😺
-
         </div>
 
 
         <div class="profile-actions">
+
 
             <button
                 class="secondary-btn"
@@ -1361,6 +2026,7 @@ textarea{
                 ← Назад
 
             </button>
+
 
             <button
                 class="primary-btn"
@@ -1377,14 +2043,17 @@ textarea{
 </section>
 
 
-<!-- =====================================
-     SETTINGS
-====================================== -->
+<!-- ======================================
+     PROFILE / SETTINGS
+======================================= -->
 
-<section id="settingsPage" class="page hidden">
+<section
+    id="settingsPage"
+    class="page hidden">
+
 
     <div class="page-title">
-        Настройки
+        Профиль
     </div>
 
     <div class="page-subtitle">
@@ -1394,37 +2063,46 @@ textarea{
 
     <div class="profile glass">
 
+
         <div class="profile-top">
+
 
             <div
                 id="myAvatar"
                 class="big-avatar">
+
                 M
+
             </div>
+
 
             <div>
 
                 <div
                     id="myProfileName"
                     class="profile-name">
+
                     Meow User
+
                 </div>
+
 
                 <div
                     id="myProfileUsername"
                     class="profile-handle">
+
                     @meow
+
                 </div>
 
             </div>
 
         </div>
 
+
         <div
             id="myProfileDescription"
             class="profile-description">
-
-            Добро пожаловать в мой профиль ✨
 
         </div>
 
@@ -1432,6 +2110,7 @@ textarea{
 
 
     <div class="settings glass">
+
 
         <div class="settings-title">
             ✦ Профиль
@@ -1491,6 +2170,7 @@ textarea{
 
     <div class="settings glass">
 
+
         <div class="settings-title">
             ✦ Интерфейс
         </div>
@@ -1498,11 +2178,14 @@ textarea{
 
         <div class="setting-row">
 
+
             <div class="setting-left">
+
 
                 <div class="setting-icon">
                     🌙
                 </div>
+
 
                 <div>
 
@@ -1518,6 +2201,7 @@ textarea{
 
             </div>
 
+
             <button
                 class="toggle active"
                 onclick="toggleSetting(this)">
@@ -1531,11 +2215,14 @@ textarea{
 
         <div class="setting-row">
 
+
             <div class="setting-left">
+
 
                 <div class="setting-icon">
                     ✨
                 </div>
+
 
                 <div>
 
@@ -1551,6 +2238,7 @@ textarea{
 
             </div>
 
+
             <button
                 class="toggle active"
                 onclick="toggleSetting(this)">
@@ -1564,11 +2252,14 @@ textarea{
 
         <div class="setting-row">
 
+
             <div class="setting-left">
+
 
                 <div class="setting-icon">
                     🔔
                 </div>
+
 
                 <div>
 
@@ -1584,6 +2275,7 @@ textarea{
 
             </div>
 
+
             <button
                 class="toggle"
                 onclick="toggleSetting(this)">
@@ -1596,49 +2288,20 @@ textarea{
 
     </div>
 
-
-    <div class="settings glass">
-
-        <div class="settings-title">
-            ✦ О приложении
-        </div>
-
-        <div class="setting-row">
-
-            <div class="setting-left">
-
-                <div class="setting-icon">
-                    🐱
-                </div>
-
-                <div>
-
-                    <div class="setting-name">
-                        Meowl Messenger
-                    </div>
-
-                    <div class="setting-desc">
-                        Версия 1.0
-                    </div>
-
-                </div>
-
-            </div>
-
-        </div>
-
-    </div>
-
 </section>
 
 
-<!-- =====================================
+<!-- ======================================
      CHAT
-====================================== -->
+======================================= -->
 
-<section id="chatPage" class="page hidden">
+<section
+    id="chatPage"
+    class="page hidden">
+
 
     <div class="chat-page-head">
+
 
         <button
             class="chat-back"
@@ -1648,21 +2311,28 @@ textarea{
 
         </button>
 
+
         <div>
 
             <div
                 id="chatTitle"
                 class="page-title"
-                style="font-size:24px;margin:0">
+                style="
+                    font-size:24px;
+                    margin:0;
+                ">
 
                 Alex
 
             </div>
 
+
             <div
                 id="chatUsername"
                 class="page-subtitle"
-                style="margin:2px 0 0">
+                style="
+                    margin:2px 0 0;
+                ">
 
                 @alex
 
@@ -1675,7 +2345,9 @@ textarea{
 
     <div class="chat-preview glass">
 
+
         <div class="chat-preview-head">
+
 
             <div
                 id="chatAvatar"
@@ -1685,7 +2357,9 @@ textarea{
 
             </div>
 
+
             <div class="user-info">
+
 
                 <div
                     id="chatHeadName"
@@ -1694,6 +2368,7 @@ textarea{
                     Alex
 
                 </div>
+
 
                 <div
                     id="chatHeadUsername"
@@ -1705,6 +2380,7 @@ textarea{
 
             </div>
 
+
             <div class="user-status"></div>
 
         </div>
@@ -1713,15 +2389,18 @@ textarea{
         <div
             id="messages"
             class="chat-preview-messages">
+
         </div>
 
 
         <div class="chat-input">
 
+
             <input
                 id="messageInput"
                 placeholder="Сообщение..."
                 maxlength="2000">
+
 
             <button
                 class="send"
@@ -1740,11 +2419,14 @@ textarea{
 </main>
 
 
-<!-- =====================================
+<!-- ======================================
      BOTTOM NAV
-====================================== -->
+======================================= -->
 
 <nav class="bottom-nav">
+
+
+    <!-- ГЛАВНАЯ -->
 
     <button
         id="navHome"
@@ -1752,7 +2434,7 @@ textarea{
         onclick="goTo('home')">
 
         <div class="nav-icon">
-            ◈
+            ◇
         </div>
 
         <div class="nav-label">
@@ -1761,6 +2443,38 @@ textarea{
 
     </button>
 
+
+    <!-- ЧАТЫ -->
+
+    <button
+        id="navChats"
+        class="nav-btn"
+        onclick="goTo('chats')">
+
+        <div class="nav-icon-wrap">
+
+            <div class="nav-icon">
+                💬
+            </div>
+
+            <span
+                id="chatBadge"
+                class="chat-badge hidden">
+
+                0
+
+            </span>
+
+        </div>
+
+        <div class="nav-label">
+            Чаты
+        </div>
+
+    </button>
+
+
+    <!-- ЛЮДИ -->
 
     <button
         id="navUsers"
@@ -1778,8 +2492,10 @@ textarea{
     </button>
 
 
+    <!-- ПРОФИЛЬ -->
+
     <button
-        id="navSettings"
+        id="navProfile"
         class="nav-btn"
         onclick="goTo('settings')">
 
@@ -1788,7 +2504,7 @@ textarea{
         </div>
 
         <div class="nav-label">
-            Настройки
+            Профиль
         </div>
 
     </button>
@@ -1806,45 +2522,65 @@ textarea{
 
 <script>
 
+
 /* =========================================
-   ДАННЫЕ ПОЛЬЗОВАТЕЛЕЙ
+   DEMO USERS
 ========================================= */
 
 const defaultUsers = [
 
     {
-        id:"meow",
-        name:"Meow User",
-        username:"@meow",
-        description:"Добро пожаловать в мой профиль ✨"
+        id:"alex",
+
+        name:"Alex",
+
+        username:"@alex",
+
+        description:
+            "Привет! Я Alex 👋 Люблю общение и новые знакомства."
     },
 
-    {
-        id:"alex",
-        name:"Alex",
-        username:"@alex",
-        description:"Привет! Я Alex 👋 Люблю общение и новые знакомства."
-    },
 
     {
         id:"kitty",
+
         name:"Kitty",
+
         username:"@kitty",
-        description:"Просто Kitty 😺"
+
+        description:
+            "Просто Kitty 😺"
     },
+
 
     {
         id:"neon",
+
         name:"Neon",
+
         username:"@neon",
-        description:"Люблю неон, музыку и красивые интерфейсы ✨"
+
+        description:
+            "Люблю неон, музыку и красивые интерфейсы ✨"
+    },
+
+
+    {
+        id:"meow",
+
+        name:"Meow User",
+
+        username:"@meow",
+
+        description:
+            "Добро пожаловать в мой профиль ✨"
     }
 
 ];
 
 
 /* =========================================
-   LOCAL STORAGE
+   PROFILE
 ========================================= */
 
 function getProfile(){
@@ -1854,28 +2590,42 @@ function getProfile(){
             "meowl_profile"
         );
 
+
     if(saved){
 
         try{
+
             return JSON.parse(saved);
+
         }catch(e){}
 
     }
 
+
     return {
+
         name:"Meow User",
+
         username:"@meow",
-        description:"Добро пожаловать в мой профиль ✨"
+
+        description:
+            "Добро пожаловать в мой профиль ✨"
+
     };
+
 }
 
 
 function saveProfileData(profile){
 
     localStorage.setItem(
+
         "meowl_profile",
+
         JSON.stringify(profile)
+
     );
+
 }
 
 
@@ -1883,24 +2633,34 @@ function saveProfileData(profile){
    USERS
 ========================================= */
 
-let currentPerson = null;
-
 function getUsers(){
 
-    const profile = getProfile();
+    const profile =
+        getProfile();
+
 
     return defaultUsers.map(user => {
+
 
         if(user.id === "meow"){
 
             return {
+
                 ...user,
-                name:profile.name,
-                username:profile.username,
-                description:profile.description
+
+                name:
+                    profile.name,
+
+                username:
+                    profile.username,
+
+                description:
+                    profile.description
+
             };
 
         }
+
 
         return user;
 
@@ -1910,34 +2670,639 @@ function getUsers(){
 
 
 /* =========================================
-   RENDER USERS
+   CURRENT PERSON
+========================================= */
+
+let currentPerson = null;
+
+
+/* =========================================
+   CHAT KEY
+========================================= */
+
+function chatKey(user){
+
+    return "meowl_chat_" + user.id;
+
+}
+
+
+/* =========================================
+   MESSAGES
+========================================= */
+
+function getMessages(user){
+
+    const saved =
+        localStorage.getItem(
+            chatKey(user)
+        );
+
+
+    if(!saved){
+
+        return [];
+
+    }
+
+
+    try{
+
+        return JSON.parse(saved);
+
+    }catch(e){
+
+        return [];
+
+    }
+
+}
+
+
+function saveMessages(
+    user,
+    messages
+){
+
+    localStorage.setItem(
+
+        chatKey(user),
+
+        JSON.stringify(messages)
+
+    );
+
+}
+
+
+/* =========================================
+   CHAT LIST
+========================================= */
+
+function getChatIds(){
+
+    const saved =
+        localStorage.getItem(
+            "meowl_chat_list"
+        );
+
+
+    if(!saved){
+
+        return [];
+
+    }
+
+
+    try{
+
+        return JSON.parse(saved);
+
+    }catch(e){
+
+        return [];
+
+    }
+
+}
+
+
+function saveChatIds(ids){
+
+    localStorage.setItem(
+
+        "meowl_chat_list",
+
+        JSON.stringify(ids)
+
+    );
+
+}
+
+
+function rememberChat(user){
+
+    let ids =
+        getChatIds();
+
+
+    if(!ids.includes(user.id)){
+
+        ids.push(user.id);
+
+        saveChatIds(ids);
+
+    }
+
+}
+
+
+/* =========================================
+   UNREAD
+========================================= */
+
+function unreadKey(userId){
+
+    return "meowl_unread_" + userId;
+
+}
+
+
+function getUnreadCount(userId){
+
+    const value =
+        localStorage.getItem(
+            unreadKey(userId)
+        );
+
+
+    return Number(value) || 0;
+
+}
+
+
+function setUnreadCount(
+    userId,
+    count
+){
+
+    if(count <= 0){
+
+        localStorage.removeItem(
+            unreadKey(userId)
+        );
+
+        return;
+
+    }
+
+
+    localStorage.setItem(
+
+        unreadKey(userId),
+
+        String(count)
+
+    );
+
+}
+
+
+function addUnreadMessage(userId){
+
+    const current =
+        getUnreadCount(userId);
+
+
+    setUnreadCount(
+
+        userId,
+
+        current + 1
+
+    );
+
+
+    updateChatBadge();
+
+    renderChats();
+
+}
+
+
+function markChatAsRead(userId){
+
+    setUnreadCount(
+
+        userId,
+
+        0
+
+    );
+
+
+    updateChatBadge();
+
+}
+
+
+function getTotalUnread(){
+
+    const ids =
+        getChatIds();
+
+
+    let total = 0;
+
+
+    ids.forEach(id => {
+
+        total +=
+            getUnreadCount(id);
+
+    });
+
+
+    return total;
+
+}
+
+
+function updateChatBadge(){
+
+    const badge =
+        document.getElementById(
+            "chatBadge"
+        );
+
+
+    if(!badge){
+
+        return;
+
+    }
+
+
+    const total =
+        getTotalUnread();
+
+
+    if(total <= 0){
+
+        badge.classList.add(
+            "hidden"
+        );
+
+        badge.textContent =
+            "0";
+
+        return;
+
+    }
+
+
+    badge.classList.remove(
+        "hidden"
+    );
+
+
+    badge.textContent =
+        total > 99
+            ? "99+"
+            : total;
+
+}
+
+
+/* =========================================
+   LAST MESSAGE
+========================================= */
+
+function getLastMessage(user){
+
+    const messages =
+        getMessages(user);
+
+
+    if(messages.length === 0){
+
+        return null;
+
+    }
+
+
+    return messages[
+        messages.length - 1
+    ];
+
+}
+
+
+/* =========================================
+   CHATS
+========================================= */
+
+function renderChats(){
+
+    const container =
+        document.getElementById(
+            "chatList"
+        );
+
+
+    const ids =
+        getChatIds();
+
+
+    const users =
+        getUsers();
+
+
+    const chats =
+        ids
+
+            .map(id =>
+
+                users.find(
+                    user =>
+                        user.id === id
+                )
+
+            )
+
+            .filter(Boolean);
+
+
+    container.innerHTML = "";
+
+
+    if(chats.length === 0){
+
+        container.innerHTML = `
+
+            <div class="empty glass">
+
+                <div class="empty-icon">
+                    💬
+                </div>
+
+                <div>
+                    Пока нет чатов
+                </div>
+
+                <div
+                    style="
+                    font-size:13px;
+                    margin-top:7px;
+                    color:#676c80;
+                    ">
+
+                    Открой раздел «Люди»
+                    и напиши кому-нибудь.
+
+                </div>
+
+            </div>
+
+        `;
+
+
+        updateChatBadge();
+
+        return;
+
+    }
+
+
+    chats.reverse();
+
+
+    chats.forEach(user => {
+
+
+        const messages =
+            getMessages(user);
+
+
+        const last =
+            messages.length
+                ? messages[
+                    messages.length - 1
+                  ]
+                : null;
+
+
+        const unread =
+            getUnreadCount(
+                user.id
+            );
+
+
+        const item =
+            document.createElement(
+                "div"
+            );
+
+
+        item.className =
+
+            "chat-item glass" +
+
+            (
+
+                unread > 0
+                    ? " has-unread"
+                    : ""
+
+            );
+
+
+        const firstLetter =
+            user.name
+                .charAt(0)
+                .toUpperCase();
+
+
+        let lastText =
+            "Начать общение";
+
+
+        let time = "";
+
+
+        if(last){
+
+            lastText =
+                last.text;
+
+
+            time =
+                new Date(
+                    last.time
+                ).toLocaleTimeString(
+
+                    "ru-RU",
+
+                    {
+
+                        hour:"2-digit",
+
+                        minute:"2-digit"
+
+                    }
+
+                );
+
+        }
+
+
+        item.innerHTML = `
+
+            <div class="avatar">
+
+                ${escapeHtml(
+                    firstLetter
+                )}
+
+            </div>
+
+
+            <div class="chat-info">
+
+
+                <div class="chat-name-row">
+
+
+                    <div class="chat-name">
+
+                        ${escapeHtml(
+                            user.name
+                        )}
+
+                    </div>
+
+
+                    <div class="chat-time-small">
+
+                        ${time}
+
+                    </div>
+
+                </div>
+
+
+                <div class="chat-last">
+
+                    ${escapeHtml(
+                        lastText
+                    )}
+
+                </div>
+
+            </div>
+
+
+            ${
+                unread > 0
+
+                ?
+
+                `
+
+                <div class="unread-badge">
+
+                    ${
+                        unread > 99
+                            ? "99+"
+                            : unread
+                    }
+
+                </div>
+
+                `
+
+                :
+
+                `
+
+                <div class="user-status"></div>
+
+                `
+            }
+
+
+            <div class="chat-arrow">
+
+                ›
+
+            </div>
+
+        `;
+
+
+        item.addEventListener(
+
+            "click",
+
+            () =>
+                openChat(user)
+
+        );
+
+
+        container.appendChild(
+            item
+        );
+
+    });
+
+
+    updateChatBadge();
+
+}
+
+
+/* =========================================
+   USERS LIST
 ========================================= */
 
 function renderUsers(){
 
     const container =
-        document.getElementById("users");
+        document.getElementById(
+            "users"
+        );
+
 
     const searchValue =
         document
-            .getElementById("search")
+            .getElementById(
+                "search"
+            )
             .value
             .toLowerCase()
             .trim();
 
 
+    const myProfile =
+        getProfile();
+
+
     const users =
         getUsers().filter(user => {
 
+
+            if(
+                user.id === "meow"
+            ){
+
+                return false;
+
+            }
+
+
             const name =
-                user.name.toLowerCase();
+                user.name
+                    .toLowerCase();
+
 
             const username =
-                user.username.toLowerCase();
+                user.username
+                    .toLowerCase();
+
 
             return (
-                name.includes(searchValue) ||
-                username.includes(searchValue)
+
+                name.includes(
+                    searchValue
+                )
+
+                ||
+
+                username.includes(
+                    searchValue
+                )
+
             );
 
         });
@@ -1963,13 +3328,18 @@ function renderUsers(){
         `;
 
         return;
+
     }
 
 
     users.forEach(user => {
 
+
         const item =
-            document.createElement("div");
+            document.createElement(
+                "div"
+            );
+
 
         item.className =
             "user glass";
@@ -1984,37 +3354,62 @@ function renderUsers(){
         item.innerHTML = `
 
             <div class="avatar">
-                ${escapeHtml(firstLetter)}
+
+                ${escapeHtml(
+                    firstLetter
+                )}
+
             </div>
+
 
             <div class="user-info">
 
+
                 <div class="user-name">
-                    ${escapeHtml(user.name)}
+
+                    ${escapeHtml(
+                        user.name
+                    )}
+
                 </div>
 
+
                 <div class="user-handle">
-                    ${escapeHtml(user.username)}
+
+                    ${escapeHtml(
+                        user.username
+                    )}
+
                 </div>
 
             </div>
 
+
             <div class="user-status"></div>
 
+
             <div class="user-arrow">
+
                 ›
+
             </div>
 
         `;
 
 
         item.addEventListener(
+
             "click",
-            () => openPerson(user)
+
+            () =>
+                openPerson(user)
+
         );
 
 
-        container.appendChild(item);
+        container.appendChild(
+            item
+        );
 
     });
 
@@ -2022,16 +3417,19 @@ function renderUsers(){
 
 
 /* =========================================
-   OPEN PERSON
+   PERSON
 ========================================= */
 
 function openPerson(user){
 
-    currentPerson = user;
+    currentPerson =
+        user;
+
 
     document.getElementById(
         "personAvatar"
     ).textContent =
+
         user.name
             .charAt(0)
             .toUpperCase();
@@ -2040,19 +3438,23 @@ function openPerson(user){
     document.getElementById(
         "personName"
     ).textContent =
+
         user.name;
 
 
     document.getElementById(
         "personUsername"
     ).textContent =
+
         user.username;
 
 
     document.getElementById(
         "personDescription"
     ).textContent =
+
         user.description ||
+
         "Описание отсутствует.";
 
 
@@ -2060,10 +3462,6 @@ function openPerson(user){
 
 }
 
-
-/* =========================================
-   BACK TO USERS
-========================================= */
 
 function backToUsers(){
 
@@ -2074,63 +3472,17 @@ function backToUsers(){
 }
 
 
-/* =========================================
-   WRITE TO PERSON
-========================================= */
-
 function writeToPerson(){
 
     if(!currentPerson){
+
         return;
-    }
-
-    openChat(currentPerson);
-
-}
-
-
-/* =========================================
-   CHAT STORAGE
-========================================= */
-
-function chatKey(user){
-
-    return "meowl_chat_" + user.id;
-
-}
-
-
-function getMessages(user){
-
-    const saved =
-        localStorage.getItem(
-            chatKey(user)
-        );
-
-
-    if(!saved){
-        return [];
-    }
-
-
-    try{
-
-        return JSON.parse(saved);
-
-    }catch(e){
-
-        return [];
 
     }
 
-}
 
-
-function saveMessages(user,messages){
-
-    localStorage.setItem(
-        chatKey(user),
-        JSON.stringify(messages)
+    openChat(
+        currentPerson
     );
 
 }
@@ -2142,36 +3494,53 @@ function saveMessages(user,messages){
 
 function openChat(user){
 
-    currentPerson = user;
+    currentPerson =
+        user;
+
+
+    /*
+       Как только чат открыт,
+       все его непрочитанные
+       сообщения считаются прочитанными.
+    */
+
+    markChatAsRead(
+        user.id
+    );
 
 
     document.getElementById(
         "chatTitle"
     ).textContent =
+
         user.name;
 
 
     document.getElementById(
         "chatUsername"
     ).textContent =
+
         user.username;
 
 
     document.getElementById(
         "chatHeadName"
     ).textContent =
+
         user.name;
 
 
     document.getElementById(
         "chatHeadUsername"
     ).textContent =
+
         user.username;
 
 
     document.getElementById(
         "chatAvatar"
     ).textContent =
+
         user.name
             .charAt(0)
             .toUpperCase();
@@ -2182,26 +3551,19 @@ function openChat(user){
 
     goTo("chat");
 
-
-    setTimeout(() => {
-
-        document
-            .getElementById("messageInput")
-            .focus();
-
-    },150);
-
 }
 
 
 /* =========================================
-   RENDER MESSAGES
+   MESSAGES
 ========================================= */
 
 function renderMessages(){
 
     if(!currentPerson){
+
         return;
+
     }
 
 
@@ -2212,7 +3574,9 @@ function renderMessages(){
 
 
     const messages =
-        getMessages(currentPerson);
+        getMessages(
+            currentPerson
+        );
 
 
     container.innerHTML = "";
@@ -2229,28 +3593,40 @@ function renderMessages(){
                 </div>
 
                 Начни общение с
-                ${escapeHtml(currentPerson.name)}
+                ${escapeHtml(
+                    currentPerson.name
+                )}
 
             </div>
 
         `;
 
         return;
+
     }
 
 
     messages.forEach(message => {
 
+
         const bubble =
-            document.createElement("div");
+            document.createElement(
+                "div"
+            );
 
 
         bubble.className =
+
             "bubble " +
+
             (
+
                 message.from === "me"
+
                     ? "me"
+
                     : "you"
+
             );
 
 
@@ -2258,20 +3634,30 @@ function renderMessages(){
             new Date(
                 message.time
             ).toLocaleTimeString(
+
                 "ru-RU",
+
                 {
+
                     hour:"2-digit",
+
                     minute:"2-digit"
+
                 }
+
             );
 
 
         bubble.innerHTML = `
 
-            ${escapeHtml(message.text)}
+            ${escapeHtml(
+                message.text
+            )}
 
             <span class="chat-time">
+
                 ${time}
+
             </span>
 
         `;
@@ -2297,7 +3683,9 @@ function renderMessages(){
 function sendMessage(){
 
     if(!currentPerson){
+
         return;
+
     }
 
 
@@ -2308,11 +3696,14 @@ function sendMessage(){
 
 
     const text =
-        input.value.trim();
+        input.value
+            .trim();
 
 
     if(!text){
+
         return;
+
     }
 
 
@@ -2334,8 +3725,21 @@ function sendMessage(){
 
 
     saveMessages(
+
         currentPerson,
+
         messages
+
+    );
+
+
+    /*
+       После первого сообщения
+       человек появляется в Чатах.
+    */
+
+    rememberChat(
+        currentPerson
     );
 
 
@@ -2344,22 +3748,126 @@ function sendMessage(){
 
     renderMessages();
 
+
+    renderChats();
+
+
+    showToast(
+        "Сообщение отправлено ✓"
+    );
+
 }
 
 
 /* =========================================
-   ENTER TO SEND
+   DEMO INCOMING MESSAGE
+========================================= */
+
+/*
+   Эта функция нужна для теста
+   счётчика входящих.
+
+   Например:
+
+   simulateIncomingMessage("alex", "Привет!");
+
+   В реальном Firebase она будет
+   заменена настоящими входящими.
+*/
+
+function simulateIncomingMessage(
+    userId,
+    text
+){
+
+    const user =
+        getUsers().find(
+            user =>
+                user.id === userId
+        );
+
+
+    if(!user){
+
+        return;
+
+    }
+
+
+    const messages =
+        getMessages(user);
+
+
+    messages.push({
+
+        from:"you",
+
+        text:text,
+
+        time:Date.now()
+
+    });
+
+
+    saveMessages(
+
+        user,
+
+        messages
+
+    );
+
+
+    rememberChat(
+        user
+    );
+
+
+    /*
+       Если мы сейчас НЕ находимся
+       в этом чате — увеличиваем
+       непрочитанные.
+    */
+
+    if(
+        !currentPerson ||
+        currentPerson.id !== user.id
+    ){
+
+        addUnreadMessage(
+            user.id
+        );
+
+    }
+
+
+    renderChats();
+
+}
+
+
+/* =========================================
+   ENTER SEND
 ========================================= */
 
 document
-    .getElementById("messageInput")
+    .getElementById(
+        "messageInput"
+    )
     .addEventListener(
+
         "keydown",
+
         function(event){
 
             if(
-                event.key === "Enter" &&
+
+                event.key === "Enter"
+
+                &&
+
                 !event.shiftKey
+
             ){
 
                 event.preventDefault();
@@ -2369,24 +3877,17 @@ document
             }
 
         }
+
     );
 
 
 /* =========================================
-   BACK FROM CHAT
+   BACK CHAT
 ========================================= */
 
 function backFromChat(){
 
-    if(currentPerson){
-
-        openPerson(currentPerson);
-
-        return;
-
-    }
-
-    goTo("users");
+    goTo("chats");
 
 }
 
@@ -2396,11 +3897,19 @@ function backFromChat(){
 ========================================= */
 
 const pages = [
+
     "home",
+
+    "chats",
+
     "users",
+
     "settings",
+
     "person",
+
     "chat"
+
 ];
 
 
@@ -2408,15 +3917,19 @@ function goTo(page){
 
     pages.forEach(name => {
 
+
         const element =
             document.getElementById(
                 name + "Page"
             );
 
+
         if(element){
+
             element.classList.add(
                 "hidden"
             );
+
         }
 
     });
@@ -2429,14 +3942,18 @@ function goTo(page){
 
 
     if(target){
+
         target.classList.remove(
             "hidden"
         );
+
     }
 
 
     document
-        .querySelectorAll(".nav-btn")
+        .querySelectorAll(
+            ".nav-btn"
+        )
         .forEach(btn => {
 
             btn.classList.remove(
@@ -2449,8 +3966,27 @@ function goTo(page){
     if(page === "home"){
 
         document
-            .getElementById("navHome")
-            .classList.add("active");
+            .getElementById(
+                "navHome"
+            )
+            .classList.add(
+                "active"
+            );
+
+    }
+
+
+    if(page === "chats"){
+
+        document
+            .getElementById(
+                "navChats"
+            )
+            .classList.add(
+                "active"
+            );
+
+        renderChats();
 
     }
 
@@ -2458,8 +3994,12 @@ function goTo(page){
     if(page === "users"){
 
         document
-            .getElementById("navUsers")
-            .classList.add("active");
+            .getElementById(
+                "navUsers"
+            )
+            .classList.add(
+                "active"
+            );
 
         renderUsers();
 
@@ -2469,8 +4009,12 @@ function goTo(page){
     if(page === "settings"){
 
         document
-            .getElementById("navSettings")
-            .classList.add("active");
+            .getElementById(
+                "navProfile"
+            )
+            .classList.add(
+                "active"
+            );
 
         loadProfileIntoSettings();
 
@@ -2478,8 +4022,11 @@ function goTo(page){
 
 
     window.scrollTo({
+
         top:0,
+
         behavior:"smooth"
+
     });
 
 }
@@ -2490,15 +4037,20 @@ function goTo(page){
 ========================================= */
 
 document
-    .getElementById("search")
+    .getElementById(
+        "search"
+    )
     .addEventListener(
+
         "input",
+
         renderUsers
+
     );
 
 
 /* =========================================
-   SETTINGS
+   PROFILE SETTINGS
 ========================================= */
 
 function loadProfileIntoSettings(){
@@ -2510,50 +4062,62 @@ function loadProfileIntoSettings(){
     document.getElementById(
         "nameInput"
     ).value =
+
         profile.name;
 
 
     document.getElementById(
         "usernameInput"
     ).value =
+
         profile.username;
 
 
     document.getElementById(
         "descriptionInput"
     ).value =
+
         profile.description;
 
 
-    updateMyProfileUI(profile);
+    updateMyProfileUI(
+        profile
+    );
 
 }
 
 
-function updateMyProfileUI(profile){
+function updateMyProfileUI(
+    profile
+){
 
     document.getElementById(
         "myProfileName"
     ).textContent =
+
         profile.name;
 
 
     document.getElementById(
         "myProfileUsername"
     ).textContent =
+
         profile.username;
 
 
     document.getElementById(
         "myProfileDescription"
     ).textContent =
+
         profile.description ||
+
         "Описание пока не добавлено";
 
 
     document.getElementById(
         "myAvatar"
     ).textContent =
+
         profile.name
             .charAt(0)
             .toUpperCase();
@@ -2565,21 +4129,27 @@ function saveProfile(){
 
     let name =
         document
-            .getElementById("nameInput")
+            .getElementById(
+                "nameInput"
+            )
             .value
             .trim();
 
 
     let username =
         document
-            .getElementById("usernameInput")
+            .getElementById(
+                "usernameInput"
+            )
             .value
             .trim();
 
 
     let description =
         document
-            .getElementById("descriptionInput")
+            .getElementById(
+                "descriptionInput"
+            )
             .value
             .trim();
 
@@ -2606,10 +4176,30 @@ function saveProfile(){
     }
 
 
-    if(!username.startsWith("@")){
+    if(
+        !username.startsWith("@")
+    ){
 
         username =
             "@" + username;
+
+    }
+
+
+    username =
+        username.toLowerCase();
+
+
+    if(
+        !/^@[a-z0-9_]{3,20}$/
+            .test(username)
+    ){
+
+        showToast(
+            "Username: 3–20 символов"
+        );
+
+        return;
 
     }
 
@@ -2622,6 +4212,7 @@ function saveProfile(){
 
         description:
             description ||
+
             "Описание пока не добавлено"
 
     };
@@ -2639,6 +4230,8 @@ function saveProfile(){
 
     renderUsers();
 
+    renderChats();
+
 
     showToast(
         "Профиль сохранён ✓"
@@ -2648,10 +4241,12 @@ function saveProfile(){
 
 
 /* =========================================
-   TOGGLE
+   TOGGLES
 ========================================= */
 
-function toggleSetting(button){
+function toggleSetting(
+    button
+){
 
     button.classList.toggle(
         "active"
@@ -2663,8 +4258,14 @@ function toggleSetting(button){
         button.classList.contains(
             "active"
         )
-            ? "Настройка включена"
-            : "Настройка выключена"
+
+            ?
+
+            "Настройка включена"
+
+            :
+
+            "Настройка выключена"
 
     );
 
@@ -2678,11 +4279,31 @@ function toggleSetting(button){
 function escapeHtml(value){
 
     return String(value)
-        .replaceAll("&","&amp;")
-        .replaceAll("<","&lt;")
-        .replaceAll(">","&gt;")
-        .replaceAll('"',"&quot;")
-        .replaceAll("'","&#039;");
+
+        .replaceAll(
+            "&",
+            "&amp;"
+        )
+
+        .replaceAll(
+            "<",
+            "&lt;"
+        )
+
+        .replaceAll(
+            ">",
+            "&gt;"
+        )
+
+        .replaceAll(
+            '"',
+            "&quot;"
+        )
+
+        .replaceAll(
+            "'",
+            "&#039;"
+        );
 
 }
 
@@ -2739,79 +4360,16 @@ function showToast(text){
 ========================================= */
 
 loadProfileIntoSettings();
+
 renderUsers();
+
+renderChats();
+
+updateChatBadge();
+
+goTo("home");
 
 </script>
 
 </body>
-<nav class="bottom-nav">
-
-    <!-- ГЛАВНАЯ -->
-    <button
-        id="navHome"
-        class="nav-btn active"
-        onclick="goTo('home')">
-
-        <div class="nav-icon">
-            ◇
-        </div>
-
-        <div class="nav-label">
-            Главная
-        </div>
-
-    </button>
-
-
-    <!-- ЧАТЫ -->
-    <button
-        id="navChats"
-        class="nav-btn"
-        onclick="goTo('chats')">
-
-        <div class="nav-icon">
-            💬
-        </div>
-
-        <div class="nav-label">
-            Чаты
-        </div>
-
-    </button>
-
-
-    <!-- ЛЮДИ -->
-    <button
-        id="navUsers"
-        class="nav-btn"
-        onclick="goTo('users')">
-
-        <div class="nav-icon">
-            ♡
-        </div>
-
-        <div class="nav-label">
-            Люди
-        </div>
-
-    </button>
-
-
-    <!-- ПРОФИЛЬ -->
-    <button
-        id="navProfile"
-        class="nav-btn"
-        onclick="goTo('settings')">
-
-        <div class="nav-icon">
-            ⚙
-        </div>
-
-        <div class="nav-label">
-            Профиль
-        </div>
-
-    </button>
-
-</nav>
 </html>

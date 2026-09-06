@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#080912">
-<title>Meowl</title>
+<title>Meowl Messenger</title>
 
 <style>
 *{
@@ -442,7 +442,7 @@ textarea{
 }
 
 /* =========================================
-   USERS
+   SEARCH
 ========================================= */
 
 .search-box{
@@ -480,6 +480,10 @@ textarea{
     box-shadow:
         0 0 25px rgba(61,231,255,.08);
 }
+
+/* =========================================
+   USERS
+========================================= */
 
 .user-list{
     display:flex;
@@ -556,6 +560,7 @@ textarea{
 
 .user-arrow{
     color:#676c80;
+    font-size:25px;
 }
 
 /* =========================================
@@ -613,6 +618,44 @@ textarea{
     color:var(--muted);
     margin-top:18px;
     line-height:1.55;
+}
+
+/* =========================================
+   PROFILE ACTIONS
+========================================= */
+
+.profile-actions{
+    display:flex;
+    gap:10px;
+    margin-top:20px;
+}
+
+.profile-actions button{
+    flex:1;
+}
+
+.back-btn{
+    display:inline-flex;
+    align-items:center;
+    gap:7px;
+
+    margin-bottom:18px;
+
+    padding:10px 14px;
+
+    border-radius:13px;
+
+    color:#bbb;
+
+    background:rgba(255,255,255,.045);
+    border:1px solid var(--border);
+
+    transition:.2s;
+}
+
+.back-btn:hover{
+    color:white;
+    background:rgba(255,255,255,.08);
 }
 
 /* =========================================
@@ -757,8 +800,27 @@ textarea{
 }
 
 /* =========================================
-   CHAT MOCK
+   CHAT
 ========================================= */
+
+.chat-page-head{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    margin-bottom:17px;
+}
+
+.chat-back{
+    width:42px;
+    height:42px;
+
+    border-radius:14px;
+
+    background:rgba(255,255,255,.055);
+    border:1px solid var(--border);
+
+    font-size:22px;
+}
 
 .chat-preview{
     border-radius:25px;
@@ -781,7 +843,10 @@ textarea{
     flex-direction:column;
     gap:9px;
 
-    min-height:300px;
+    min-height:360px;
+    max-height:55vh;
+
+    overflow-y:auto;
 }
 
 .bubble{
@@ -791,6 +856,8 @@ textarea{
 
     font-size:14px;
     line-height:1.4;
+
+    word-break:break-word;
 }
 
 .bubble.me{
@@ -812,6 +879,14 @@ textarea{
     background:rgba(255,255,255,.075);
 
     border-bottom-left-radius:5px;
+}
+
+.chat-time{
+    display:block;
+    font-size:9px;
+    opacity:.55;
+    margin-top:4px;
+    text-align:right;
 }
 
 .chat-input{
@@ -1046,691 +1121,679 @@ textarea{
 
 <div class="app">
 
-    <!-- TOP -->
-    <header class="topbar">
+<header class="topbar">
 
-        <div class="brand">
+    <div class="brand">
 
-            <div class="brand-logo">
-                🐱
-            </div>
+        <div class="brand-logo">
+            🐱
+        </div>
 
-            <div class="brand-text">
-                Meowl <span>Messenger</span>
-            </div>
+        <div class="brand-text">
+            Meowl <span>Messenger</span>
+        </div>
+
+    </div>
+
+    <div class="online">
+        <span class="online-dot"></span>
+        Online
+    </div>
+
+</header>
+
+
+<main class="content">
+
+<!-- =====================================
+     HOME
+====================================== -->
+
+<section id="homePage" class="page">
+
+    <div class="page-title">
+        Привет 👋
+    </div>
+
+    <div class="page-subtitle">
+        Добро пожаловать в Meowl
+    </div>
+
+    <div class="hero glass">
+
+        <div class="hero-small">
+            ✦ НОВОЕ ПОКОЛЕНИЕ ОБЩЕНИЯ
+        </div>
+
+        <div class="hero-title">
+            Общайся.
+            <br>
+            Находи людей.
+            <br>
+            <span>Оставайся собой.</span>
+        </div>
+
+        <div class="hero-text">
+            Минималистичный мессенджер
+            с красивым интерфейсом,
+            быстрым поиском людей
+            и атмосферным дизайном.
+        </div>
+
+        <div class="hero-buttons">
+
+            <button
+                class="primary-btn"
+                onclick="goTo('users')">
+
+                👥 Найти людей
+
+            </button>
+
+            <button
+                class="secondary-btn"
+                onclick="goTo('settings')">
+
+                ⚙️ Профиль
+
+            </button>
 
         </div>
 
-        <div class="online">
-            <span class="online-dot"></span>
-            Online
-        </div>
-
-    </header>
+    </div>
 
 
-    <main class="content">
+    <div class="cards">
 
-        <!-- =====================================
-             HOME
-        ====================================== -->
+        <div class="info-card glass">
 
-        <section
-            id="homePage"
-            class="page">
-
-            <div class="page-title">
-                Привет 👋
+            <div class="info-icon">
+                👥
             </div>
 
-            <div class="page-subtitle">
-                Добро пожаловать в Meowl
-            </div>
-
-
-            <div class="hero glass">
-
-                <div class="hero-small">
-                    ✦ НОВОЕ ПОКОЛЕНИЕ ОБЩЕНИЯ
-                </div>
-
-                <div class="hero-title">
-                    Общайся.
-                    <br>
-                    Находи людей.
-                    <br>
-                    <span>Оставайся собой.</span>
-                </div>
-
-                <div class="hero-text">
-                    Минималистичный мессенджер
-                    с красивым интерфейсом,
-                    быстрым поиском людей
-                    и атмосферным дизайном.
-                </div>
-
-                <div class="hero-buttons">
-
-                    <button
-                        class="primary-btn"
-                        onclick="goTo('users')">
-
-                        👥 Найти людей
-
-                    </button>
-
-                    <button
-                        class="secondary-btn"
-                        onclick="goTo('settings')">
-
-                        ⚙️ Профиль
-
-                    </button>
-
-                </div>
-
-            </div>
-
-
-            <div class="cards">
-
-                <div class="info-card glass">
-
-                    <div class="info-icon">
-                        👥
-                    </div>
-
-                    <div class="info-title">
-                        Люди
-                    </div>
-
-                    <div class="info-text">
-                        Находи интересных
-                        пользователей и знакомься.
-                    </div>
-
-                </div>
-
-
-                <div class="info-card glass">
-
-                    <div class="info-icon">
-                        ✨
-                    </div>
-
-                    <div class="info-title">
-                        Красиво
-                    </div>
-
-                    <div class="info-text">
-                        Стекло, неон,
-                        мягкие свечения и плавные
-                        анимации.
-                    </div>
-
-                </div>
-
-
-                <div class="info-card glass">
-
-                    <div class="info-icon">
-                        🔒
-                    </div>
-
-                    <div class="info-title">
-                        Приватность
-                    </div>
-
-                    <div class="info-text">
-                        В будущем здесь будет
-                        полноценная защищённая система.
-                    </div>
-
-                </div>
-
-            </div>
-
-        </section>
-
-
-        <!-- =====================================
-             USERS
-        ====================================== -->
-
-        <section
-            id="usersPage"
-            class="page hidden">
-
-            <div class="page-title">
+            <div class="info-title">
                 Люди
             </div>
 
-            <div class="page-subtitle">
-                Найди кого-нибудь интересного
+            <div class="info-text">
+                Находи интересных
+                пользователей и общайся.
             </div>
 
+        </div>
 
-            <div class="search-box">
 
-                <span>⌕</span>
+        <div class="info-card glass">
 
-                <input
-                    id="search"
-                    class="search-input"
-                    placeholder="Поиск по имени или @username">
-
+            <div class="info-icon">
+                ✨
             </div>
 
+            <div class="info-title">
+                Красиво
+            </div>
+
+            <div class="info-text">
+                Стекло, неон,
+                мягкие свечения и плавные
+                анимации.
+            </div>
+
+        </div>
+
+
+        <div class="info-card glass">
+
+            <div class="info-icon">
+                🔒
+            </div>
+
+            <div class="info-title">
+                Приватность
+            </div>
+
+            <div class="info-text">
+                Пока работаем локально.
+                Сервер подключим следующим этапом.
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================
+     USERS
+====================================== -->
+
+<section id="usersPage" class="page hidden">
+
+    <div class="page-title">
+        Люди
+    </div>
+
+    <div class="page-subtitle">
+        Найди кого-нибудь интересного
+    </div>
+
+
+    <div class="search-box">
+
+        <span>⌕</span>
+
+        <input
+            id="search"
+            class="search-input"
+            placeholder="Поиск по имени или @username">
+
+    </div>
+
+
+    <div
+        id="users"
+        class="user-list">
+    </div>
+
+</section>
+
+
+<!-- =====================================
+     USER PROFILE
+====================================== -->
+
+<section id="personPage" class="page hidden">
+
+    <button
+        class="back-btn"
+        onclick="backToUsers()">
+
+        ← Назад
+
+    </button>
+
+
+    <div class="profile glass">
+
+        <div class="profile-top">
 
             <div
-                id="users"
-                class="user-list">
-
-                <div class="user glass">
-
-                    <div class="avatar">
-                        M
-                    </div>
-
-                    <div class="user-info">
-
-                        <div class="user-name">
-                            Meow User
-                        </div>
-
-                        <div class="user-handle">
-                            @meow
-                        </div>
-
-                    </div>
-
-                    <div class="user-status"></div>
-
-                    <div class="user-arrow">
-                        ›
-                    </div>
-
-                </div>
-
-
-                <div class="user glass">
-
-                    <div class="avatar">
-                        A
-                    </div>
-
-                    <div class="user-info">
-
-                        <div class="user-name">
-                            Alex
-                        </div>
-
-                        <div class="user-handle">
-                            @alex
-                        </div>
-
-                    </div>
-
-                    <div class="user-status"></div>
-
-                    <div class="user-arrow">
-                        ›
-                    </div>
-
-                </div>
-
-
-                <div class="user glass">
-
-                    <div class="avatar">
-                        K
-                    </div>
-
-                    <div class="user-info">
-
-                        <div class="user-name">
-                            Kitty
-                        </div>
-
-                        <div class="user-handle">
-                            @kitty
-                        </div>
-
-                    </div>
-
-                    <div class="user-status"></div>
-
-                    <div class="user-arrow">
-                        ›
-                    </div>
-
-                </div>
-
-
-                <div class="user glass">
-
-                    <div class="avatar">
-                        N
-                    </div>
-
-                    <div class="user-info">
-
-                        <div class="user-name">
-                            Neon
-                        </div>
-
-                        <div class="user-handle">
-                            @neon
-                        </div>
-
-                    </div>
-
-                    <div class="user-status"></div>
-
-                    <div class="user-arrow">
-                        ›
-                    </div>
-
-                </div>
-
+                id="personAvatar"
+                class="big-avatar">
+                A
             </div>
 
-        </section>
-
-
-        <!-- =====================================
-             SETTINGS
-        ====================================== -->
-
-        <section
-            id="settingsPage"
-            class="page hidden">
-
-            <div class="page-title">
-                Настройки
-            </div>
-
-            <div class="page-subtitle">
-                Настрой свой профиль
-            </div>
-
-
-            <div class="profile glass">
-
-                <div class="profile-top">
-
-                    <div class="big-avatar">
-                        M
-                    </div>
-
-                    <div>
-
-                        <div class="profile-name">
-                            Meow User
-                        </div>
-
-                        <div class="profile-handle">
-                            @meow
-                        </div>
-
-                    </div>
-
-                </div>
-
-                <div class="profile-description">
-                    Добро пожаловать в мой профиль ✨
-                </div>
-
-            </div>
-
-
-            <div class="settings glass">
-
-                <div class="settings-title">
-                    ✦ Профиль
-                </div>
-
-
-                <div class="field">
-
-                    <label>
-                        Имя
-                    </label>
-
-                    <input
-                        id="nameInput"
-                        value="Meow User"
-                        maxlength="40">
-
-                </div>
-
-
-                <div class="field">
-
-                    <label>
-                        Username
-                    </label>
-
-                    <input
-                        id="usernameInput"
-                        value="@meow"
-                        maxlength="20">
-
-                </div>
-
-
-                <div class="field">
-
-                    <label>
-                        Описание
-                    </label>
-
-                    <textarea
-                        id="descriptionInput">Добро пожаловать в мой профиль ✨</textarea>
-
-                </div>
-
-
-                <button
-                    class="primary-btn"
-                    style="width:100%"
-                    onclick="saveProfile()">
-
-                    Сохранить изменения
-
-                </button>
-
-            </div>
-
-
-            <div class="settings glass">
-
-                <div class="settings-title">
-                    ✦ Интерфейс
-                </div>
-
-
-                <div class="setting-row">
-
-                    <div class="setting-left">
-
-                        <div class="setting-icon">
-                            🌙
-                        </div>
-
-                        <div>
-
-                            <div class="setting-name">
-                                Тёмная тема
-                            </div>
-
-                            <div class="setting-desc">
-                                Атмосферный внешний вид
-                            </div>
-
-                        </div>
-
-                    </div>
-
-                    <button
-                        id="themeToggle"
-                        class="toggle active"
-                        onclick="toggleSetting(this)">
-
-                        <div class="toggle-circle"></div>
-
-                    </button>
-
-                </div>
-
-
-                <div class="setting-row">
-
-                    <div class="setting-left">
-
-                        <div class="setting-icon">
-                            ✨
-                        </div>
-
-                        <div>
-
-                            <div class="setting-name">
-                                Анимации
-                            </div>
-
-                            <div class="setting-desc">
-                                Плавные эффекты интерфейса
-                            </div>
-
-                        </div>
-
-                    </div>
-
-                    <button
-                        class="toggle active"
-                        onclick="toggleSetting(this)">
-
-                        <div class="toggle-circle"></div>
-
-                    </button>
-
-                </div>
-
-
-                <div class="setting-row">
-
-                    <div class="setting-left">
-
-                        <div class="setting-icon">
-                            🔔
-                        </div>
-
-                        <div>
-
-                            <div class="setting-name">
-                                Уведомления
-                            </div>
-
-                            <div class="setting-desc">
-                                Пока только визуальная настройка
-                            </div>
-
-                        </div>
-
-                    </div>
-
-                    <button
-                        class="toggle"
-                        onclick="toggleSetting(this)">
-
-                        <div class="toggle-circle"></div>
-
-                    </button>
-
-                </div>
-
-            </div>
-
-
-            <div class="settings glass">
-
-                <div class="settings-title">
-                    ✦ О приложении
-                </div>
-
-                <div class="setting-row">
-
-                    <div class="setting-left">
-
-                        <div class="setting-icon">
-                            🐱
-                        </div>
-
-                        <div>
-
-                            <div class="setting-name">
-                                Meowl Messenger
-                            </div>
-
-                            <div class="setting-desc">
-                                Версия 1.0 • Design Preview
-                            </div>
-
-                        </div>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-        </section>
-
-
-        <!-- =====================================
-             CHAT PREVIEW
-             ТОЛЬКО ДИЗАЙН
-        ====================================== -->
-
-        <section
-            id="chatPage"
-            class="page hidden">
-
-            <div class="page-title">
-                Чат
-            </div>
-
-            <div class="page-subtitle">
-                Предпросмотр интерфейса
-            </div>
-
-
-            <div class="chat-preview glass">
-
-                <div class="chat-preview-head">
-
-                    <div class="avatar">
-                        A
-                    </div>
-
-                    <div class="user-info">
-
-                        <div class="user-name">
-                            Alex
-                        </div>
-
-                        <div class="user-handle">
-                            @alex
-                        </div>
-
-                    </div>
-
-                    <div class="user-status"></div>
-
-                </div>
-
+            <div>
 
                 <div
-                    id="messages"
-                    class="chat-preview-messages">
-
-                    <div class="bubble you">
-                        Привет! 👋
-                    </div>
-
-                    <div class="bubble me">
-                        Привет 😺
-                    </div>
-
-                    <div class="bubble you">
-                        Как тебе Meowl?
-                    </div>
-
-                    <div class="bubble me">
-                        Очень красиво 🔥
-                    </div>
-
+                    id="personName"
+                    class="profile-name">
+                    Alex
                 </div>
 
-
-                <div class="chat-input">
-
-                    <input
-                        id="fakeMessage"
-                        placeholder="Сообщение..."
-                        onkeydown="fakeSend(event)">
-
-                    <button
-                        class="send"
-                        onclick="fakeSend()">
-
-                        ➤
-
-                    </button>
-
+                <div
+                    id="personUsername"
+                    class="profile-handle">
+                    @alex
                 </div>
 
             </div>
 
-        </section>
-
-    </main>
+        </div>
 
 
-    <!-- =====================================
-         BOTTOM NAV
-    ====================================== -->
+        <div
+            id="personDescription"
+            class="profile-description">
 
-    <nav class="bottom-nav">
+            Привет! Я пользователь Meowl 😺
+
+        </div>
+
+
+        <div class="profile-actions">
+
+            <button
+                class="secondary-btn"
+                onclick="backToUsers()">
+
+                ← Назад
+
+            </button>
+
+            <button
+                class="primary-btn"
+                onclick="writeToPerson()">
+
+                💬 Написать
+
+            </button>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================
+     SETTINGS
+====================================== -->
+
+<section id="settingsPage" class="page hidden">
+
+    <div class="page-title">
+        Настройки
+    </div>
+
+    <div class="page-subtitle">
+        Настрой свой профиль
+    </div>
+
+
+    <div class="profile glass">
+
+        <div class="profile-top">
+
+            <div
+                id="myAvatar"
+                class="big-avatar">
+                M
+            </div>
+
+            <div>
+
+                <div
+                    id="myProfileName"
+                    class="profile-name">
+                    Meow User
+                </div>
+
+                <div
+                    id="myProfileUsername"
+                    class="profile-handle">
+                    @meow
+                </div>
+
+            </div>
+
+        </div>
+
+        <div
+            id="myProfileDescription"
+            class="profile-description">
+
+            Добро пожаловать в мой профиль ✨
+
+        </div>
+
+    </div>
+
+
+    <div class="settings glass">
+
+        <div class="settings-title">
+            ✦ Профиль
+        </div>
+
+
+        <div class="field">
+
+            <label>
+                Имя
+            </label>
+
+            <input
+                id="nameInput"
+                maxlength="40">
+
+        </div>
+
+
+        <div class="field">
+
+            <label>
+                Username
+            </label>
+
+            <input
+                id="usernameInput"
+                maxlength="20">
+
+        </div>
+
+
+        <div class="field">
+
+            <label>
+                Описание
+            </label>
+
+            <textarea
+                id="descriptionInput"
+                maxlength="160"></textarea>
+
+        </div>
+
 
         <button
-            id="navHome"
-            class="nav-btn active"
-            onclick="goTo('home')">
+            class="primary-btn"
+            style="width:100%"
+            onclick="saveProfile()">
 
-            <div class="nav-icon">
-                ◈
-            </div>
-
-            <div class="nav-label">
-                Главная
-            </div>
+            Сохранить изменения
 
         </button>
 
+    </div>
+
+
+    <div class="settings glass">
+
+        <div class="settings-title">
+            ✦ Интерфейс
+        </div>
+
+
+        <div class="setting-row">
+
+            <div class="setting-left">
+
+                <div class="setting-icon">
+                    🌙
+                </div>
+
+                <div>
+
+                    <div class="setting-name">
+                        Тёмная тема
+                    </div>
+
+                    <div class="setting-desc">
+                        Атмосферный внешний вид
+                    </div>
+
+                </div>
+
+            </div>
+
+            <button
+                class="toggle active"
+                onclick="toggleSetting(this)">
+
+                <div class="toggle-circle"></div>
+
+            </button>
+
+        </div>
+
+
+        <div class="setting-row">
+
+            <div class="setting-left">
+
+                <div class="setting-icon">
+                    ✨
+                </div>
+
+                <div>
+
+                    <div class="setting-name">
+                        Анимации
+                    </div>
+
+                    <div class="setting-desc">
+                        Плавные эффекты интерфейса
+                    </div>
+
+                </div>
+
+            </div>
+
+            <button
+                class="toggle active"
+                onclick="toggleSetting(this)">
+
+                <div class="toggle-circle"></div>
+
+            </button>
+
+        </div>
+
+
+        <div class="setting-row">
+
+            <div class="setting-left">
+
+                <div class="setting-icon">
+                    🔔
+                </div>
+
+                <div>
+
+                    <div class="setting-name">
+                        Уведомления
+                    </div>
+
+                    <div class="setting-desc">
+                        Настройка уведомлений
+                    </div>
+
+                </div>
+
+            </div>
+
+            <button
+                class="toggle"
+                onclick="toggleSetting(this)">
+
+                <div class="toggle-circle"></div>
+
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <div class="settings glass">
+
+        <div class="settings-title">
+            ✦ О приложении
+        </div>
+
+        <div class="setting-row">
+
+            <div class="setting-left">
+
+                <div class="setting-icon">
+                    🐱
+                </div>
+
+                <div>
+
+                    <div class="setting-name">
+                        Meowl Messenger
+                    </div>
+
+                    <div class="setting-desc">
+                        Версия 1.0
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================
+     CHAT
+====================================== -->
+
+<section id="chatPage" class="page hidden">
+
+    <div class="chat-page-head">
 
         <button
-            id="navUsers"
-            class="nav-btn"
-            onclick="goTo('users')">
+            class="chat-back"
+            onclick="backFromChat()">
 
-            <div class="nav-icon">
-                ♡
-            </div>
-
-            <div class="nav-label">
-                Люди
-            </div>
+            ←
 
         </button>
 
+        <div>
 
-        <button
-            id="navSettings"
-            class="nav-btn"
-            onclick="goTo('settings')">
+            <div
+                id="chatTitle"
+                class="page-title"
+                style="font-size:24px;margin:0">
 
-            <div class="nav-icon">
-                ⚙
+                Alex
+
             </div>
 
-            <div class="nav-label">
-                Настройки
+            <div
+                id="chatUsername"
+                class="page-subtitle"
+                style="margin:2px 0 0">
+
+                @alex
+
             </div>
 
-        </button>
+        </div>
 
-    </nav>
+    </div>
+
+
+    <div class="chat-preview glass">
+
+        <div class="chat-preview-head">
+
+            <div
+                id="chatAvatar"
+                class="avatar">
+
+                A
+
+            </div>
+
+            <div class="user-info">
+
+                <div
+                    id="chatHeadName"
+                    class="user-name">
+
+                    Alex
+
+                </div>
+
+                <div
+                    id="chatHeadUsername"
+                    class="user-handle">
+
+                    @alex
+
+                </div>
+
+            </div>
+
+            <div class="user-status"></div>
+
+        </div>
+
+
+        <div
+            id="messages"
+            class="chat-preview-messages">
+        </div>
+
+
+        <div class="chat-input">
+
+            <input
+                id="messageInput"
+                placeholder="Сообщение..."
+                maxlength="2000">
+
+            <button
+                class="send"
+                onclick="sendMessage()">
+
+                ➤
+
+            </button>
+
+        </div>
+
+    </div>
+
+</section>
+
+</main>
+
+
+<!-- =====================================
+     BOTTOM NAV
+====================================== -->
+
+<nav class="bottom-nav">
+
+    <button
+        id="navHome"
+        class="nav-btn active"
+        onclick="goTo('home')">
+
+        <div class="nav-icon">
+            ◈
+        </div>
+
+        <div class="nav-label">
+            Главная
+        </div>
+
+    </button>
+
+
+    <button
+        id="navUsers"
+        class="nav-btn"
+        onclick="goTo('users')">
+
+        <div class="nav-icon">
+            ♡
+        </div>
+
+        <div class="nav-label">
+            Люди
+        </div>
+
+    </button>
+
+
+    <button
+        id="navSettings"
+        class="nav-btn"
+        onclick="goTo('settings')">
+
+        <div class="nav-icon">
+            ⚙
+        </div>
+
+        <div class="nav-label">
+            Настройки
+        </div>
+
+    </button>
+
+</nav>
 
 </div>
 
@@ -1744,250 +1807,503 @@ textarea{
 <script>
 
 /* =========================================
-   NAVIGATION
+   ДАННЫЕ ПОЛЬЗОВАТЕЛЕЙ
 ========================================= */
 
-const pages = [
-    "home",
-    "users",
-    "settings",
-    "chat"
+const defaultUsers = [
+
+    {
+        id:"meow",
+        name:"Meow User",
+        username:"@meow",
+        description:"Добро пожаловать в мой профиль ✨"
+    },
+
+    {
+        id:"alex",
+        name:"Alex",
+        username:"@alex",
+        description:"Привет! Я Alex 👋 Люблю общение и новые знакомства."
+    },
+
+    {
+        id:"kitty",
+        name:"Kitty",
+        username:"@kitty",
+        description:"Просто Kitty 😺"
+    },
+
+    {
+        id:"neon",
+        name:"Neon",
+        username:"@neon",
+        description:"Люблю неон, музыку и красивые интерфейсы ✨"
+    }
+
 ];
 
-function goTo(page){
 
-    pages.forEach(name => {
+/* =========================================
+   LOCAL STORAGE
+========================================= */
 
-        const element =
-            document.getElementById(
-                name + "Page"
-            );
+function getProfile(){
 
-        if(element){
-            element.classList.add("hidden");
-        }
-
-    });
-
-
-    const target =
-        document.getElementById(
-            page + "Page"
+    const saved =
+        localStorage.getItem(
+            "meowl_profile"
         );
 
-    if(target){
-        target.classList.remove("hidden");
+    if(saved){
+
+        try{
+            return JSON.parse(saved);
+        }catch(e){}
+
     }
 
-
-    document
-        .querySelectorAll(".nav-btn")
-        .forEach(btn => {
-
-            btn.classList.remove("active");
-
-        });
+    return {
+        name:"Meow User",
+        username:"@meow",
+        description:"Добро пожаловать в мой профиль ✨"
+    };
+}
 
 
-    if(page === "home"){
-        document
-            .getElementById("navHome")
-            .classList.add("active");
-    }
+function saveProfileData(profile){
 
-    if(page === "users"){
-        document
-            .getElementById("navUsers")
-            .classList.add("active");
-    }
-
-    if(page === "settings"){
-        document
-            .getElementById("navSettings")
-            .classList.add("active");
-    }
-
-    window.scrollTo({
-        top:0,
-        behavior:"smooth"
-    });
+    localStorage.setItem(
+        "meowl_profile",
+        JSON.stringify(profile)
+    );
 }
 
 
 /* =========================================
-   SEARCH
+   USERS
 ========================================= */
 
-const search =
-    document.getElementById("search");
+let currentPerson = null;
 
-const users =
-    document.querySelectorAll(".user");
+function getUsers(){
 
+    const profile = getProfile();
 
-search.addEventListener(
-    "input",
-    function(){
+    return defaultUsers.map(user => {
 
-        const value =
-            this.value
-                .toLowerCase()
-                .trim();
+        if(user.id === "meow"){
 
+            return {
+                ...user,
+                name:profile.name,
+                username:profile.username,
+                description:profile.description
+            };
 
-        users.forEach(user => {
+        }
 
-            const text =
-                user.innerText
-                    .toLowerCase();
+        return user;
 
+    });
 
-            if(text.includes(value)){
-
-                user.style.display =
-                    "flex";
-
-            }else{
-
-                user.style.display =
-                    "none";
-            }
-
-        });
-
-    }
-);
+}
 
 
 /* =========================================
-   USER CLICK
+   RENDER USERS
 ========================================= */
 
-users.forEach(user => {
+function renderUsers(){
 
-    user.addEventListener(
-        "click",
-        function(){
+    const container =
+        document.getElementById("users");
+
+    const searchValue =
+        document
+            .getElementById("search")
+            .value
+            .toLowerCase()
+            .trim();
+
+
+    const users =
+        getUsers().filter(user => {
 
             const name =
-                this.querySelector(
-                    ".user-name"
-                )?.innerText || "Пользователь";
+                user.name.toLowerCase();
 
+            const username =
+                user.username.toLowerCase();
 
-            showToast(
-                "Профиль " + name
+            return (
+                name.includes(searchValue) ||
+                username.includes(searchValue)
             );
 
-        }
-    );
-
-});
+        });
 
 
-/* =========================================
-   SETTINGS TOGGLE
-========================================= */
-
-function toggleSetting(button){
-
-    button.classList.toggle("active");
-
-    showToast(
-        button.classList.contains("active")
-            ? "Настройка включена"
-            : "Настройка выключена"
-    );
-}
+    container.innerHTML = "";
 
 
-/* =========================================
-   PROFILE
-========================================= */
+    if(users.length === 0){
 
-function saveProfile(){
+        container.innerHTML = `
 
-    const name =
-        document.getElementById(
-            "nameInput"
-        ).value.trim();
+            <div class="empty glass">
 
+                <div class="empty-icon">
+                    🔎
+                </div>
 
-    const username =
-        document.getElementById(
-            "usernameInput"
-        ).value.trim();
+                Никого не найдено
 
+            </div>
 
-    const description =
-        document.getElementById(
-            "descriptionInput"
-        ).value.trim();
-
-
-    if(!name){
-
-        showToast(
-            "Введите имя"
-        );
+        `;
 
         return;
     }
 
 
-    document.querySelector(
-        ".profile-name"
-    ).textContent = name;
+    users.forEach(user => {
+
+        const item =
+            document.createElement("div");
+
+        item.className =
+            "user glass";
 
 
-    document.querySelector(
-        ".profile-handle"
-    ).textContent =
-        username.startsWith("@")
-            ? username
-            : "@" + username;
+        const firstLetter =
+            user.name
+                .charAt(0)
+                .toUpperCase();
 
 
-    document.querySelector(
-        ".profile-description"
-    ).textContent =
-        description ||
-        "Описание пока не добавлено";
+        item.innerHTML = `
+
+            <div class="avatar">
+                ${escapeHtml(firstLetter)}
+            </div>
+
+            <div class="user-info">
+
+                <div class="user-name">
+                    ${escapeHtml(user.name)}
+                </div>
+
+                <div class="user-handle">
+                    ${escapeHtml(user.username)}
+                </div>
+
+            </div>
+
+            <div class="user-status"></div>
+
+            <div class="user-arrow">
+                ›
+            </div>
+
+        `;
 
 
-    document.querySelector(
-        ".big-avatar"
-    ).textContent =
-        name
-            .charAt(0)
-            .toUpperCase();
+        item.addEventListener(
+            "click",
+            () => openPerson(user)
+        );
 
 
-    showToast(
-        "Профиль сохранён ✓"
-    );
+        container.appendChild(item);
+
+    });
+
 }
 
 
 /* =========================================
-   FAKE CHAT
+   OPEN PERSON
 ========================================= */
 
-function fakeSend(event){
+function openPerson(user){
 
-    if(event){
+    currentPerson = user;
 
-        if(event.key !== "Enter"){
-            return;
-        }
+    document.getElementById(
+        "personAvatar"
+    ).textContent =
+        user.name
+            .charAt(0)
+            .toUpperCase();
 
-        event.preventDefault();
+
+    document.getElementById(
+        "personName"
+    ).textContent =
+        user.name;
+
+
+    document.getElementById(
+        "personUsername"
+    ).textContent =
+        user.username;
+
+
+    document.getElementById(
+        "personDescription"
+    ).textContent =
+        user.description ||
+        "Описание отсутствует.";
+
+
+    goTo("person");
+
+}
+
+
+/* =========================================
+   BACK TO USERS
+========================================= */
+
+function backToUsers(){
+
+    currentPerson = null;
+
+    goTo("users");
+
+}
+
+
+/* =========================================
+   WRITE TO PERSON
+========================================= */
+
+function writeToPerson(){
+
+    if(!currentPerson){
+        return;
+    }
+
+    openChat(currentPerson);
+
+}
+
+
+/* =========================================
+   CHAT STORAGE
+========================================= */
+
+function chatKey(user){
+
+    return "meowl_chat_" + user.id;
+
+}
+
+
+function getMessages(user){
+
+    const saved =
+        localStorage.getItem(
+            chatKey(user)
+        );
+
+
+    if(!saved){
+        return [];
+    }
+
+
+    try{
+
+        return JSON.parse(saved);
+
+    }catch(e){
+
+        return [];
+
+    }
+
+}
+
+
+function saveMessages(user,messages){
+
+    localStorage.setItem(
+        chatKey(user),
+        JSON.stringify(messages)
+    );
+
+}
+
+
+/* =========================================
+   OPEN CHAT
+========================================= */
+
+function openChat(user){
+
+    currentPerson = user;
+
+
+    document.getElementById(
+        "chatTitle"
+    ).textContent =
+        user.name;
+
+
+    document.getElementById(
+        "chatUsername"
+    ).textContent =
+        user.username;
+
+
+    document.getElementById(
+        "chatHeadName"
+    ).textContent =
+        user.name;
+
+
+    document.getElementById(
+        "chatHeadUsername"
+    ).textContent =
+        user.username;
+
+
+    document.getElementById(
+        "chatAvatar"
+    ).textContent =
+        user.name
+            .charAt(0)
+            .toUpperCase();
+
+
+    renderMessages();
+
+
+    goTo("chat");
+
+
+    setTimeout(() => {
+
+        document
+            .getElementById("messageInput")
+            .focus();
+
+    },150);
+
+}
+
+
+/* =========================================
+   RENDER MESSAGES
+========================================= */
+
+function renderMessages(){
+
+    if(!currentPerson){
+        return;
+    }
+
+
+    const container =
+        document.getElementById(
+            "messages"
+        );
+
+
+    const messages =
+        getMessages(currentPerson);
+
+
+    container.innerHTML = "";
+
+
+    if(messages.length === 0){
+
+        container.innerHTML = `
+
+            <div class="empty">
+
+                <div class="empty-icon">
+                    💬
+                </div>
+
+                Начни общение с
+                ${escapeHtml(currentPerson.name)}
+
+            </div>
+
+        `;
+
+        return;
+    }
+
+
+    messages.forEach(message => {
+
+        const bubble =
+            document.createElement("div");
+
+
+        bubble.className =
+            "bubble " +
+            (
+                message.from === "me"
+                    ? "me"
+                    : "you"
+            );
+
+
+        const time =
+            new Date(
+                message.time
+            ).toLocaleTimeString(
+                "ru-RU",
+                {
+                    hour:"2-digit",
+                    minute:"2-digit"
+                }
+            );
+
+
+        bubble.innerHTML = `
+
+            ${escapeHtml(message.text)}
+
+            <span class="chat-time">
+                ${time}
+            </span>
+
+        `;
+
+
+        container.appendChild(
+            bubble
+        );
+
+    });
+
+
+    container.scrollTop =
+        container.scrollHeight;
+
+}
+
+
+/* =========================================
+   SEND MESSAGE
+========================================= */
+
+function sendMessage(){
+
+    if(!currentPerson){
+        return;
     }
 
 
     const input =
         document.getElementById(
-            "fakeMessage"
+            "messageInput"
         );
 
 
@@ -2000,34 +2316,374 @@ function fakeSend(event){
     }
 
 
-    const message =
-        document.createElement("div");
+    const messages =
+        getMessages(
+            currentPerson
+        );
 
 
-    message.className =
-        "bubble me";
+    messages.push({
+
+        from:"me",
+
+        text:text,
+
+        time:Date.now()
+
+    });
 
 
-    message.textContent =
-        text;
-
-
-    document
-        .getElementById("messages")
-        .appendChild(message);
+    saveMessages(
+        currentPerson,
+        messages
+    );
 
 
     input.value = "";
 
 
-    const box =
+    renderMessages();
+
+}
+
+
+/* =========================================
+   ENTER TO SEND
+========================================= */
+
+document
+    .getElementById("messageInput")
+    .addEventListener(
+        "keydown",
+        function(event){
+
+            if(
+                event.key === "Enter" &&
+                !event.shiftKey
+            ){
+
+                event.preventDefault();
+
+                sendMessage();
+
+            }
+
+        }
+    );
+
+
+/* =========================================
+   BACK FROM CHAT
+========================================= */
+
+function backFromChat(){
+
+    if(currentPerson){
+
+        openPerson(currentPerson);
+
+        return;
+
+    }
+
+    goTo("users");
+
+}
+
+
+/* =========================================
+   NAVIGATION
+========================================= */
+
+const pages = [
+    "home",
+    "users",
+    "settings",
+    "person",
+    "chat"
+];
+
+
+function goTo(page){
+
+    pages.forEach(name => {
+
+        const element =
+            document.getElementById(
+                name + "Page"
+            );
+
+        if(element){
+            element.classList.add(
+                "hidden"
+            );
+        }
+
+    });
+
+
+    const target =
         document.getElementById(
-            "messages"
+            page + "Page"
         );
 
 
-    box.scrollTop =
-        box.scrollHeight;
+    if(target){
+        target.classList.remove(
+            "hidden"
+        );
+    }
+
+
+    document
+        .querySelectorAll(".nav-btn")
+        .forEach(btn => {
+
+            btn.classList.remove(
+                "active"
+            );
+
+        });
+
+
+    if(page === "home"){
+
+        document
+            .getElementById("navHome")
+            .classList.add("active");
+
+    }
+
+
+    if(page === "users"){
+
+        document
+            .getElementById("navUsers")
+            .classList.add("active");
+
+        renderUsers();
+
+    }
+
+
+    if(page === "settings"){
+
+        document
+            .getElementById("navSettings")
+            .classList.add("active");
+
+        loadProfileIntoSettings();
+
+    }
+
+
+    window.scrollTo({
+        top:0,
+        behavior:"smooth"
+    });
+
+}
+
+
+/* =========================================
+   SEARCH
+========================================= */
+
+document
+    .getElementById("search")
+    .addEventListener(
+        "input",
+        renderUsers
+    );
+
+
+/* =========================================
+   SETTINGS
+========================================= */
+
+function loadProfileIntoSettings(){
+
+    const profile =
+        getProfile();
+
+
+    document.getElementById(
+        "nameInput"
+    ).value =
+        profile.name;
+
+
+    document.getElementById(
+        "usernameInput"
+    ).value =
+        profile.username;
+
+
+    document.getElementById(
+        "descriptionInput"
+    ).value =
+        profile.description;
+
+
+    updateMyProfileUI(profile);
+
+}
+
+
+function updateMyProfileUI(profile){
+
+    document.getElementById(
+        "myProfileName"
+    ).textContent =
+        profile.name;
+
+
+    document.getElementById(
+        "myProfileUsername"
+    ).textContent =
+        profile.username;
+
+
+    document.getElementById(
+        "myProfileDescription"
+    ).textContent =
+        profile.description ||
+        "Описание пока не добавлено";
+
+
+    document.getElementById(
+        "myAvatar"
+    ).textContent =
+        profile.name
+            .charAt(0)
+            .toUpperCase();
+
+}
+
+
+function saveProfile(){
+
+    let name =
+        document
+            .getElementById("nameInput")
+            .value
+            .trim();
+
+
+    let username =
+        document
+            .getElementById("usernameInput")
+            .value
+            .trim();
+
+
+    let description =
+        document
+            .getElementById("descriptionInput")
+            .value
+            .trim();
+
+
+    if(!name){
+
+        showToast(
+            "Введите имя"
+        );
+
+        return;
+
+    }
+
+
+    if(!username){
+
+        showToast(
+            "Введите username"
+        );
+
+        return;
+
+    }
+
+
+    if(!username.startsWith("@")){
+
+        username =
+            "@" + username;
+
+    }
+
+
+    const profile = {
+
+        name:name,
+
+        username:username,
+
+        description:
+            description ||
+            "Описание пока не добавлено"
+
+    };
+
+
+    saveProfileData(
+        profile
+    );
+
+
+    updateMyProfileUI(
+        profile
+    );
+
+
+    renderUsers();
+
+
+    showToast(
+        "Профиль сохранён ✓"
+    );
+
+}
+
+
+/* =========================================
+   TOGGLE
+========================================= */
+
+function toggleSetting(button){
+
+    button.classList.toggle(
+        "active"
+    );
+
+
+    showToast(
+
+        button.classList.contains(
+            "active"
+        )
+            ? "Настройка включена"
+            : "Настройка выключена"
+
+    );
+
+}
+
+
+/* =========================================
+   ESCAPE HTML
+========================================= */
+
+function escapeHtml(value){
+
+    return String(value)
+        .replaceAll("&","&amp;")
+        .replaceAll("<","&lt;")
+        .replaceAll(">","&gt;")
+        .replaceAll('"',"&quot;")
+        .replaceAll("'","&#039;");
+
 }
 
 
@@ -2036,6 +2692,7 @@ function fakeSend(event){
 ========================================= */
 
 let toastTimer;
+
 
 function showToast(text){
 
@@ -2061,6 +2718,7 @@ function showToast(text){
 
     toastTimer =
         setTimeout(
+
             () => {
 
                 toast.classList.remove(
@@ -2068,9 +2726,20 @@ function showToast(text){
                 );
 
             },
+
             1800
+
         );
+
 }
+
+
+/* =========================================
+   START
+========================================= */
+
+loadProfileIntoSettings();
+renderUsers();
 
 </script>
 

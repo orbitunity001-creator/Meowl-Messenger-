@@ -786,3 +786,352 @@ window.addEventListener(
 
   }
 );
+
+/* =========================
+   НАСТРОЙКИ
+========================= */
+
+var settingsButton =
+  document.getElementById("settingsButton");
+
+var settingsPage =
+  document.getElementById("settingsPage");
+
+var darkThemeToggle =
+  document.getElementById("darkThemeToggle");
+
+var neonToggle =
+  document.getElementById("neonToggle");
+
+var soundToggle =
+  document.getElementById("soundToggle");
+
+var vibrationToggle =
+  document.getElementById("vibrationToggle");
+
+var timeToggle =
+  document.getElementById("timeToggle");
+
+var notificationsToggle =
+  document.getElementById("notificationsToggle");
+
+var onlineToggle =
+  document.getElementById("onlineToggle");
+
+var typingToggle =
+  document.getElementById("typingToggle");
+
+
+/* =========================
+   ОТКРЫТИЕ НАСТРОЕК
+========================= */
+
+if (settingsButton) {
+
+  settingsButton.addEventListener("click", function () {
+
+    chatsPage.classList.add("hidden");
+    profilePage.classList.add("hidden");
+    settingsPage.classList.remove("hidden");
+
+    chatsButton.classList.remove("active");
+    profileButton.classList.remove("active");
+    settingsButton.classList.add("active");
+
+    pageTitle.textContent = "Настройки";
+
+  });
+
+}
+
+
+/* =========================
+   СОХРАНЕНИЕ НАСТРОЕК
+========================= */
+
+function saveSettings() {
+
+  var settings = {
+
+    darkTheme: darkThemeToggle.checked,
+    neon: neonToggle.checked,
+    sound: soundToggle.checked,
+    vibration: vibrationToggle.checked,
+    time: timeToggle.checked,
+    notifications: notificationsToggle.checked,
+    online: onlineToggle.checked,
+    typing: typingToggle.checked
+
+  };
+
+  localStorage.setItem(
+    "meowl_settings",
+    JSON.stringify(settings)
+  );
+
+}
+
+
+/* =========================
+   ЗАГРУЗКА НАСТРОЕК
+========================= */
+
+function loadSettings() {
+
+  var saved =
+    localStorage.getItem("meowl_settings");
+
+  if (!saved) {
+    return;
+  }
+
+  try {
+
+    var settings = JSON.parse(saved);
+
+    darkThemeToggle.checked =
+      settings.darkTheme !== false;
+
+    neonToggle.checked =
+      settings.neon !== false;
+
+    soundToggle.checked =
+      settings.sound !== false;
+
+    vibrationToggle.checked =
+      settings.vibration !== false;
+
+    timeToggle.checked =
+      settings.time !== false;
+
+    notificationsToggle.checked =
+      settings.notifications !== false;
+
+    onlineToggle.checked =
+      settings.online !== false;
+
+    typingToggle.checked =
+      settings.typing !== false;
+
+  } catch (error) {
+
+    console.log("Ошибка загрузки настроек");
+
+  }
+
+}
+
+
+/* =========================
+   СОХРАНЯЕМ ПРИ ИЗМЕНЕНИИ
+========================= */
+
+var settingsToggles = [
+
+  darkThemeToggle,
+  neonToggle,
+  soundToggle,
+  vibrationToggle,
+  timeToggle,
+  notificationsToggle,
+  onlineToggle,
+  typingToggle
+
+];
+
+settingsToggles.forEach(function (toggle) {
+
+  if (toggle) {
+
+    toggle.addEventListener(
+      "change",
+      saveSettings
+    );
+
+  }
+
+});
+
+
+/* =========================
+   ЭКСПОРТ
+========================= */
+
+var exportDataButton =
+  document.getElementById("exportDataButton");
+
+if (exportDataButton) {
+
+  exportDataButton.addEventListener(
+    "click",
+    function () {
+
+      var data = {};
+
+      for (
+        var i = 0;
+        i < localStorage.length;
+        i++
+      ) {
+
+        var key =
+          localStorage.key(i);
+
+        data[key] =
+          localStorage.getItem(key);
+
+      }
+
+      var blob =
+        new Blob(
+          [JSON.stringify(data, null, 2)],
+          {
+            type: "application/json"
+          }
+        );
+
+      var url =
+        URL.createObjectURL(blob);
+
+      var link =
+        document.createElement("a");
+
+      link.href = url;
+      link.download =
+        "meowl-backup.json";
+
+      link.click();
+
+      URL.revokeObjectURL(url);
+
+    }
+  );
+
+}
+
+
+/* =========================
+   ИМПОРТ
+========================= */
+
+var importDataButton =
+  document.getElementById("importDataButton");
+
+var importDataInput =
+  document.getElementById("importDataInput");
+
+if (importDataButton) {
+
+  importDataButton.addEventListener(
+    "click",
+    function () {
+
+      importDataInput.click();
+
+    }
+  );
+
+}
+
+if (importDataInput) {
+
+  importDataInput.addEventListener(
+    "change",
+    function () {
+
+      var file =
+        importDataInput.files[0];
+
+      if (!file) {
+        return;
+      }
+
+      var reader =
+        new FileReader();
+
+      reader.onload =
+        function (event) {
+
+          try {
+
+            var data =
+              JSON.parse(
+                event.target.result
+              );
+
+            Object.keys(data).forEach(
+              function (key) {
+
+                localStorage.setItem(
+                  key,
+                  data[key]
+                );
+
+              }
+            );
+
+            alert(
+              "Данные успешно импортированы!"
+            );
+
+            location.reload();
+
+          } catch (error) {
+
+            alert(
+              "Не удалось импортировать файл."
+            );
+
+          }
+
+        };
+
+      reader.readAsText(file);
+
+    }
+  );
+
+}
+
+
+/* =========================
+   ОЧИСТКА ДАННЫХ
+========================= */
+
+var clearDataButton =
+  document.getElementById("clearDataButton");
+
+if (clearDataButton) {
+
+  clearDataButton.addEventListener(
+    "click",
+    function () {
+
+      var answer =
+        confirm(
+          "Удалить все локальные данные Meowl Messenger?"
+        );
+
+      if (!answer) {
+        return;
+      }
+
+      localStorage.clear();
+
+      alert(
+        "Локальные данные удалены."
+      );
+
+      location.reload();
+
+    }
+  );
+
+}
+
+
+/* =========================
+   ЗАГРУЗИТЬ НАСТРОЙКИ
+========================= */
+
+loadSettings();

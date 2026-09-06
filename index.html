@@ -10,9 +10,10 @@
 
 <div class="container">
 
-  <!-- ВХОД -->
+  <!-- ВХОД / РЕГИСТРАЦИЯ -->
   <div id="authScreen" class="card">
     <div class="logo">M</div>
+
     <h1>Meowl Messenger</h1>
     <p class="subtitle">Общайся. Создавай. Будь собой.</p>
 
@@ -20,6 +21,7 @@
       <button id="loginTab" class="tab active" onclick="setMode('login')">
         Войти
       </button>
+
       <button id="registerTab" class="tab" onclick="setMode('register')">
         Регистрация
       </button>
@@ -35,7 +37,8 @@
     <p id="error"></p>
   </div>
 
-  <!-- ПРИЛОЖЕНИЕ -->
+
+  <!-- МЕССЕНДЖЕР -->
   <div id="appScreen" class="app hidden">
 
     <header>
@@ -44,60 +47,85 @@
         <p id="userEmail"></p>
       </div>
 
-      <button class="small-btn" onclick="logout()">Выйти</button>
+      <button class="logout-btn" onclick="logout()">Выйти</button>
     </header>
 
+
     <!-- ЧАТЫ -->
-    <section id="chatsPage" class="page">
+    <div id="chatsPage" class="page">
       <div class="empty-card">
-        <div class="big-icon">💬</div>
+        <div class="chat-icon">💬</div>
         <h3>Пока нет чатов</h3>
         <p>Здесь появятся твои переписки.</p>
       </div>
-    </section>
+    </div>
+
 
     <!-- ПРОФИЛЬ -->
-    <section id="profilePage" class="page hidden">
+    <div id="profilePage" class="page hidden">
+
       <div class="profile-card">
 
-        <div class="avatar-wrapper">
+        <div class="avatar">
           <img id="avatarPreview" src="" alt="Аватар">
         </div>
 
-        <label class="main-btn avatar-btn">
-          📷 Изменить аватар
+        <h2 id="profileNickname">Профиль</h2>
+        <p id="profileDescription">Описание профиля</p>
+
+        <button class="main-btn" onclick="openEditProfile()">
+          ✏️ Изменить профиль
+        </button>
+
+      </div>
+
+
+      <!-- РЕДАКТИРОВАНИЕ -->
+      <div id="editProfile" class="edit-card hidden">
+
+        <h2>Изменить профиль</h2>
+
+        <label>Аватар</label>
+
+        <label class="avatar-button">
+          📷 Выбрать аватар
           <input id="avatarInput" type="file" accept="image/*">
         </label>
 
         <label>Никнейм</label>
-        <input id="nickname" type="text" placeholder="Твой никнейм">
+        <input id="nickname" type="text" placeholder="Твой ник">
 
         <label>Описание</label>
-        <textarea id="description" placeholder="Расскажи о себе..."></textarea>
-
-        <label>Email</label>
-        <input id="profileEmail" type="email" disabled>
+        <textarea id="description" placeholder="Расскажи о себе"></textarea>
 
         <button class="main-btn" onclick="saveProfile()">
-          💾 Сохранить профиль
+          💾 Сохранить
+        </button>
+
+        <button class="cancel-btn" onclick="closeEditProfile()">
+          Отмена
         </button>
 
         <p id="profileMessage"></p>
 
       </div>
-    </section>
 
-    <!-- НИЖНЕЕ МЕНЮ -->
+    </div>
+
+
+    <!-- НИЖНЕЕ МЕНЮ ТОЛЬКО В АККАУНТЕ -->
     <nav class="bottom-nav">
+
       <button id="chatsNav" class="nav-btn active" onclick="showChats()">
         <span>💬</span>
-        <small>Чаты</small>
+        Чаты
       </button>
 
       <button id="profileNav" class="nav-btn" onclick="showProfile()">
         <span>👤</span>
-        <small>Профиль</small>
+        Профиль
       </button>
+
     </nav>
 
   </div>

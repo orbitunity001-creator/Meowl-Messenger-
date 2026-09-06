@@ -8,7 +8,6 @@
 <style>
 :root{
   --bg:#070914;
-  --bg2:#0d1020;
   --card:rgba(255,255,255,.075);
   --card2:rgba(255,255,255,.045);
   --border:rgba(255,255,255,.13);
@@ -19,13 +18,10 @@
   --pink:#ec4899;
   --green:#34d399;
   --orange:#fb923c;
-  --blue:#60a5fa;
-  --red:#fb7185;
   --radius:24px;
   --glass-opacity:.075;
   --glow:1;
   --font-size:16px;
-  --button-style:glass;
 }
 
 *{
@@ -36,12 +32,11 @@
 html,body{
   margin:0;
   padding:0;
-  width:100%;
   min-height:100%;
   background:
-    radial-gradient(circle at 15% 10%, color-mix(in srgb,var(--purple) 24%,transparent),transparent 35%),
-    radial-gradient(circle at 85% 20%, color-mix(in srgb,var(--cyan) 18%,transparent),transparent 35%),
-    radial-gradient(circle at 50% 100%, color-mix(in srgb,var(--pink) 15%,transparent),transparent 40%),
+    radial-gradient(circle at 15% 10%,rgba(139,92,246,.24),transparent 35%),
+    radial-gradient(circle at 85% 20%,rgba(34,211,238,.18),transparent 35%),
+    radial-gradient(circle at 50% 100%,rgba(236,72,153,.15),transparent 40%),
     var(--bg);
   color:var(--text);
   font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
@@ -49,12 +44,7 @@ html,body{
   overflow-x:hidden;
 }
 
-body{
-  min-height:100vh;
-}
-
-button,
-input{
+button,input,textarea{
   font:inherit;
 }
 
@@ -66,9 +56,8 @@ button{
 .app{
   width:100%;
   max-width:760px;
-  margin:0 auto;
+  margin:auto;
   min-height:100vh;
-  position:relative;
   padding-bottom:90px;
 }
 
@@ -115,13 +104,10 @@ button{
   align-items:center;
   justify-content:center;
   font-size:25px;
-  background:
-    linear-gradient(135deg,
-      color-mix(in srgb,var(--purple) 65%,transparent),
-      color-mix(in srgb,var(--cyan) 40%,transparent));
+  background:linear-gradient(135deg,rgba(139,92,246,.65),rgba(34,211,238,.4));
   border:1px solid var(--border);
   box-shadow:
-    0 0 calc(25px * var(--glow)) color-mix(in srgb,var(--purple) 45%,transparent),
+    0 0 calc(25px * var(--glow)) rgba(139,92,246,.45),
     inset 0 1px 0 rgba(255,255,255,.15);
   backdrop-filter:blur(20px);
 }
@@ -145,12 +131,6 @@ button{
   background:var(--card);
   border:1px solid var(--border);
   backdrop-filter:blur(18px);
-  transition:.2s;
-}
-
-.icon-button:hover{
-  transform:translateY(-2px);
-  box-shadow:0 0 22px color-mix(in srgb,var(--purple) 30%,transparent);
 }
 
 .card{
@@ -171,41 +151,20 @@ button{
     inset 0 1px 0 rgba(255,255,255,.08);
 }
 
-.card.clickable{
+.clickable{
   cursor:pointer;
   transition:.22s;
 }
 
-.card.clickable:hover{
+.clickable:hover{
   transform:translateY(-3px);
-  border-color:color-mix(in srgb,var(--purple) 45%,var(--border));
-  box-shadow:
-    0 18px 50px rgba(0,0,0,.3),
-    0 0 calc(28px * var(--glow)) color-mix(in srgb,var(--purple) 16%,transparent);
+  border-color:rgba(139,92,246,.45);
 }
 
 .hero{
   position:relative;
   overflow:hidden;
   padding:25px;
-}
-
-.hero::before{
-  content:"";
-  position:absolute;
-  width:170px;
-  height:170px;
-  border-radius:50%;
-  right:-70px;
-  top:-80px;
-  background:var(--purple);
-  opacity:.16;
-  filter:blur(25px);
-}
-
-.hero-content{
-  position:relative;
-  z-index:1;
 }
 
 .hero h2{
@@ -226,12 +185,6 @@ button{
   color:transparent;
 }
 
-.bot-card{
-  display:flex;
-  align-items:center;
-  gap:15px;
-}
-
 .avatar{
   width:56px;
   height:56px;
@@ -241,14 +194,26 @@ button{
   justify-content:center;
   border-radius:19px;
   font-size:28px;
-  background:
-    linear-gradient(
-      135deg,
-      color-mix(in srgb,var(--purple) 50%,transparent),
-      color-mix(in srgb,var(--cyan) 35%,transparent)
-    );
+  background:linear-gradient(
+    135deg,
+    rgba(139,92,246,.5),
+    rgba(34,211,238,.35)
+  );
   border:1px solid var(--border);
-  box-shadow:0 0 calc(25px * var(--glow)) color-mix(in srgb,var(--purple) 30%,transparent);
+  box-shadow:0 0 calc(25px * var(--glow)) rgba(139,92,246,.3);
+  overflow:hidden;
+}
+
+.avatar img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
+
+.bot-card{
+  display:flex;
+  align-items:center;
+  gap:15px;
 }
 
 .bot-info{
@@ -273,11 +238,10 @@ button{
 .badge{
   display:inline-flex;
   align-items:center;
-  gap:5px;
   padding:5px 9px;
   border-radius:999px;
-  background:color-mix(in srgb,var(--purple) 15%,transparent);
-  border:1px solid color-mix(in srgb,var(--purple) 35%,transparent);
+  background:rgba(139,92,246,.15);
+  border:1px solid rgba(139,92,246,.35);
   color:#ddd1ff;
   font-size:11px;
   margin-top:7px;
@@ -288,7 +252,6 @@ button{
   font-size:14px;
   color:var(--muted);
   font-weight:700;
-  letter-spacing:.3px;
 }
 
 .grid{
@@ -326,23 +289,13 @@ button{
   padding:12px 17px;
   color:#fff;
   font-weight:700;
-  background:
-    linear-gradient(
-      135deg,
-      color-mix(in srgb,var(--purple) 75%,transparent),
-      color-mix(in srgb,var(--cyan) 50%,transparent)
-    );
+  background:linear-gradient(
+    135deg,
+    rgba(139,92,246,.75),
+    rgba(34,211,238,.5)
+  );
   border:1px solid rgba(255,255,255,.16);
-  box-shadow:
-    0 10px 30px color-mix(in srgb,var(--purple) 20%,transparent),
-    inset 0 1px 0 rgba(255,255,255,.14);
-  transition:.2s;
-}
-
-.primary-button:hover{
-  transform:translateY(-2px);
-  box-shadow:
-    0 14px 35px color-mix(in srgb,var(--purple) 28%,transparent);
+  box-shadow:0 10px 30px rgba(139,92,246,.2);
 }
 
 .secondary-button{
@@ -353,19 +306,11 @@ button{
   color:#fff;
   background:var(--card);
   border:1px solid var(--border);
-  backdrop-filter:blur(18px);
-  transition:.2s;
-}
-
-.secondary-button:hover{
-  border-color:color-mix(in srgb,var(--cyan) 40%,var(--border));
-  transform:translateY(-1px);
 }
 
 .danger-button{
-  color:#fff;
   background:rgba(251,113,133,.12);
-  border:1px solid rgba(251,113,133,.28);
+  border-color:rgba(251,113,133,.28);
 }
 
 .row-buttons{
@@ -373,7 +318,7 @@ button{
   gap:10px;
 }
 
-.row-buttons > *{
+.row-buttons>*{
   flex:1;
 }
 
@@ -386,12 +331,15 @@ button{
   outline:none;
   background:rgba(0,0,0,.2);
   border:1px solid var(--border);
-  transition:.2s;
+}
+
+textarea.input{
+  padding-top:14px;
 }
 
 .input:focus{
   border-color:var(--purple);
-  box-shadow:0 0 22px color-mix(in srgb,var(--purple) 18%,transparent);
+  box-shadow:0 0 22px rgba(139,92,246,.18);
 }
 
 .input::placeholder{
@@ -413,10 +361,7 @@ button{
   background:rgba(12,14,28,.74);
   border:1px solid var(--border);
   backdrop-filter:blur(25px);
-  -webkit-backdrop-filter:blur(25px);
-  box-shadow:
-    0 15px 50px rgba(0,0,0,.4),
-    0 0 calc(35px * var(--glow)) color-mix(in srgb,var(--purple) 12%,transparent);
+  box-shadow:0 15px 50px rgba(0,0,0,.4);
 }
 
 .nav-button{
@@ -424,7 +369,6 @@ button{
   border-radius:17px;
   background:transparent;
   color:#81869f;
-  transition:.2s;
   display:flex;
   flex-direction:column;
   align-items:center;
@@ -433,30 +377,175 @@ button{
   font-size:11px;
 }
 
-.nav-button .nav-icon{
+.nav-icon{
   font-size:20px;
 }
 
 .nav-button.active{
   color:#fff;
-  background:
-    linear-gradient(
-      135deg,
-      color-mix(in srgb,var(--purple) 27%,transparent),
-      color-mix(in srgb,var(--cyan) 12%,transparent)
-    );
-  box-shadow:inset 0 1px 0 rgba(255,255,255,.08);
+  background:linear-gradient(
+    135deg,
+    rgba(139,92,246,.27),
+    rgba(34,211,238,.12)
+  );
 }
 
-.back-button{
+.list-item{
   display:flex;
   align-items:center;
-  gap:8px;
-  color:#fff;
-  background:transparent;
-  padding:0;
-  margin-bottom:18px;
+  gap:13px;
+  padding:14px;
+  border-radius:19px;
+  background:var(--card);
+  border:1px solid var(--border);
+  margin-bottom:10px;
+  cursor:pointer;
+}
+
+.list-main{
+  flex:1;
+  min-width:0;
+}
+
+.list-main h3{
+  margin:0 0 3px;
+  font-size:15px;
+}
+
+.list-main p{
+  margin:0;
+  color:var(--muted);
+  font-size:12px;
+}
+
+.arrow{
+  color:#7e849d;
+  font-size:20px;
+}
+
+.profile-top{
+  text-align:center;
+  padding:28px 18px;
+}
+
+.profile-avatar{
+  width:90px;
+  height:90px;
+  border-radius:30px;
+  margin:0 auto 14px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:44px;
+  background:linear-gradient(
+    135deg,
+    rgba(139,92,246,.45),
+    rgba(34,211,238,.35)
+  );
+  border:1px solid var(--border);
+  overflow:hidden;
+}
+
+.profile-avatar img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
+
+.setting-title{
+  margin:0 0 10px;
+  font-size:13px;
+  color:var(--muted);
   font-weight:700;
+}
+
+.theme-grid{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:9px;
+}
+
+.theme-button{
+  min-height:80px;
+  border-radius:18px;
+  color:#fff;
+  text-align:left;
+  padding:13px;
+  border:1px solid rgba(255,255,255,.14);
+  background:rgba(255,255,255,.06);
+}
+
+.theme-button.active{
+  border-color:#fff;
+}
+
+.theme-dot{
+  width:28px;
+  height:28px;
+  border-radius:50%;
+  margin-bottom:8px;
+}
+
+.theme-purple{background:linear-gradient(135deg,#8b5cf6,#22d3ee)}
+.theme-cyan{background:linear-gradient(135deg,#06b6d4,#3b82f6)}
+.theme-orange{background:linear-gradient(135deg,#f97316,#fb7185)}
+.theme-pink{background:linear-gradient(135deg,#ec4899,#8b5cf6)}
+.theme-green{background:linear-gradient(135deg,#10b981,#22c55e)}
+.theme-blue{background:linear-gradient(135deg,#2563eb,#38bdf8)}
+.theme-red{background:linear-gradient(135deg,#ef4444,#f97316)}
+.theme-gold{background:linear-gradient(135deg,#eab308,#f59e0b)}
+.theme-ice{background:linear-gradient(135deg,#94a3b8,#e0f2fe)}
+.theme-rainbow{background:linear-gradient(135deg,#ec4899,#8b5cf6,#22d3ee,#34d399,#facc15)}
+
+.theme-name{
+  font-size:12px;
+  font-weight:700;
+}
+
+.option-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:8px;
+}
+
+.option-button{
+  min-height:48px;
+  border-radius:15px;
+  background:var(--card);
+  color:#fff;
+  border:1px solid var(--border);
+}
+
+.option-button.active{
+  background:rgba(139,92,246,.3);
+  border-color:rgba(139,92,246,.7);
+}
+
+.range{
+  width:100%;
+  accent-color:var(--purple);
+}
+
+.range-row{
+  display:flex;
+  justify-content:space-between;
+  margin-bottom:8px;
+}
+
+.range-value{
+  color:var(--cyan);
+  font-size:12px;
+}
+
+.info-box{
+  padding:16px;
+  border-radius:18px;
+  background:var(--card);
+  border:1px solid var(--border);
+  line-height:1.6;
+  color:#d9dced;
+  font-size:13px;
+  white-space:pre-wrap;
 }
 
 .chat-header{
@@ -464,13 +553,6 @@ button{
   align-items:center;
   gap:12px;
   margin-bottom:15px;
-}
-
-.chat-header .avatar{
-  width:50px;
-  height:50px;
-  flex-basis:50px;
-  font-size:24px;
 }
 
 .chat-header h2{
@@ -511,13 +593,11 @@ button{
 
 .message.user{
   margin-left:auto;
-  background:
-    linear-gradient(
-      135deg,
-      color-mix(in srgb,var(--purple) 62%,transparent),
-      color-mix(in srgb,var(--pink) 35%,transparent)
-    );
-  border:1px solid rgba(255,255,255,.12);
+  background:linear-gradient(
+    135deg,
+    rgba(139,92,246,.62),
+    rgba(236,72,153,.35)
+  );
   border-bottom-right-radius:7px;
 }
 
@@ -527,7 +607,6 @@ button{
   position:sticky;
   bottom:0;
   padding-top:8px;
-  background:linear-gradient(transparent,var(--bg) 25%);
 }
 
 .chat-input .input{
@@ -542,257 +621,15 @@ button{
   font-size:20px;
 }
 
-.list-item{
+.back-button{
   display:flex;
   align-items:center;
-  gap:13px;
-  padding:14px;
-  border-radius:19px;
-  background:var(--card2);
-  border:1px solid var(--border);
-  margin-bottom:10px;
-  cursor:pointer;
-  transition:.2s;
-}
-
-.list-item:hover{
-  transform:translateY(-2px);
-  background:var(--card);
-}
-
-.list-item .avatar{
-  width:48px;
-  height:48px;
-  flex-basis:48px;
-  font-size:22px;
-}
-
-.list-main{
-  flex:1;
-  min-width:0;
-}
-
-.list-main h3{
-  margin:0 0 3px;
-  font-size:15px;
-}
-
-.list-main p{
-  margin:0;
-  color:var(--muted);
-  font-size:12px;
-  overflow:hidden;
-  text-overflow:ellipsis;
-  white-space:nowrap;
-}
-
-.arrow{
-  color:#7e849d;
-  font-size:20px;
-}
-
-.profile-top{
-  text-align:center;
-  padding:28px 18px;
-}
-
-.profile-avatar{
-  width:90px;
-  height:90px;
-  border-radius:30px;
-  margin:0 auto 14px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  font-size:44px;
-  background:
-    linear-gradient(
-      135deg,
-      color-mix(in srgb,var(--purple) 45%,transparent),
-      color-mix(in srgb,var(--cyan) 35%,transparent)
-    );
-  border:1px solid var(--border);
-  box-shadow:0 0 calc(35px * var(--glow)) color-mix(in srgb,var(--purple) 30%,transparent);
-}
-
-.profile-top h2{
-  margin:0 0 5px;
-}
-
-.profile-top p{
-  margin:0;
-  color:var(--muted);
-}
-
-.setting-group{
-  margin-bottom:18px;
-}
-
-.setting-title{
-  margin:0 0 10px;
-  font-size:13px;
-  color:var(--muted);
-  font-weight:700;
-}
-
-.theme-grid{
-  display:grid;
-  grid-template-columns:repeat(2,1fr);
-  gap:9px;
-}
-
-.theme-button{
-  position:relative;
-  overflow:hidden;
-  min-height:82px;
-  border-radius:18px;
-  color:#fff;
-  text-align:left;
-  padding:13px;
-  border:1px solid rgba(255,255,255,.14);
-  background:rgba(255,255,255,.06);
-  transition:.2s;
-}
-
-.theme-button:hover{
-  transform:translateY(-2px);
-}
-
-.theme-button.active{
-  border-color:#fff;
-  box-shadow:
-    0 0 0 2px rgba(255,255,255,.12),
-    0 0 25px rgba(255,255,255,.1);
-}
-
-.theme-dot{
-  width:28px;
-  height:28px;
-  border-radius:50%;
-  margin-bottom:8px;
-  border:1px solid rgba(255,255,255,.25);
-}
-
-.theme-name{
-  font-size:12px;
-  font-weight:700;
-}
-
-.theme-purple{
-  background:linear-gradient(135deg,#8b5cf6,#22d3ee);
-}
-
-.theme-cyan{
-  background:linear-gradient(135deg,#06b6d4,#3b82f6);
-}
-
-.theme-orange{
-  background:linear-gradient(135deg,#f97316,#fb7185);
-}
-
-.theme-pink{
-  background:linear-gradient(135deg,#ec4899,#8b5cf6);
-}
-
-.theme-green{
-  background:linear-gradient(135deg,#10b981,#22c55e);
-}
-
-.theme-blue{
-  background:linear-gradient(135deg,#2563eb,#38bdf8);
-}
-
-.theme-red{
-  background:linear-gradient(135deg,#ef4444,#f97316);
-}
-
-.theme-gold{
-  background:linear-gradient(135deg,#eab308,#f59e0b);
-}
-
-.theme-ice{
-  background:linear-gradient(135deg,#94a3b8,#e0f2fe);
-}
-
-.theme-rainbow{
-  background:linear-gradient(
-    135deg,
-    #ec4899,
-    #8b5cf6,
-    #22d3ee,
-    #34d399,
-    #facc15,
-    #fb7185
-  );
-}
-
-.option-grid{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
   gap:8px;
-}
-
-.option-button{
-  min-height:48px;
-  border-radius:15px;
-  background:var(--card2);
   color:#fff;
-  border:1px solid var(--border);
-}
-
-.option-button.active{
-  background:
-    linear-gradient(
-      135deg,
-      color-mix(in srgb,var(--purple) 30%,transparent),
-      color-mix(in srgb,var(--cyan) 15%,transparent)
-    );
-  border-color:color-mix(in srgb,var(--purple) 55%,white);
-}
-
-.range{
-  width:100%;
-  accent-color:var(--purple);
-}
-
-.range-row{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  margin-bottom:8px;
-}
-
-.range-value{
-  color:var(--cyan);
-  font-size:12px;
-}
-
-.info-box{
-  padding:16px;
-  border-radius:18px;
-  background:var(--card2);
-  border:1px solid var(--border);
-  line-height:1.6;
-  color:#d9dced;
-  font-size:13px;
-}
-
-.info-box h3{
-  margin:0 0 8px;
-  color:#fff;
-}
-
-.info-box ul{
-  margin:8px 0;
-  padding-left:20px;
-}
-
-.info-box li{
-  margin:5px 0;
-}
-
-.search-box{
-  margin-bottom:15px;
+  background:transparent;
+  padding:0;
+  margin-bottom:18px;
+  font-weight:700;
 }
 
 .empty{
@@ -819,10 +656,7 @@ button{
   background:rgba(15,17,32,.9);
   border:1px solid var(--border);
   backdrop-filter:blur(20px);
-  box-shadow:0 10px 40px rgba(0,0,0,.4);
   transition:.25s;
-  white-space:nowrap;
-  font-size:13px;
 }
 
 .toast.show{
@@ -850,18 +684,14 @@ button{
   width:min(560px,100%);
   max-height:88vh;
   overflow-y:auto;
-  background:
-    linear-gradient(
-      145deg,
-      rgba(25,28,50,.95),
-      rgba(9,11,25,.95)
-    );
+  background:linear-gradient(
+    145deg,
+    rgba(25,28,50,.97),
+    rgba(9,11,25,.97)
+  );
   border:1px solid var(--border);
   border-radius:26px;
   padding:21px;
-  box-shadow:
-    0 30px 90px rgba(0,0,0,.55),
-    0 0 calc(45px * var(--glow)) color-mix(in srgb,var(--purple) 16%,transparent);
 }
 
 .modal-header{
@@ -873,7 +703,6 @@ button{
 
 .modal-header h2{
   margin:0;
-  font-size:20px;
 }
 
 .close-button{
@@ -885,7 +714,65 @@ button{
   border:1px solid var(--border);
 }
 
+.avatar-picker{
+  display:grid;
+  grid-template-columns:repeat(6,1fr);
+  gap:9px;
+}
+
+.avatar-choice{
+  height:55px;
+  border-radius:17px;
+  background:var(--card);
+  border:1px solid var(--border);
+  color:#fff;
+  font-size:25px;
+}
+
+.avatar-choice.active{
+  border-color:#fff;
+  background:rgba(139,92,246,.3);
+  box-shadow:0 0 20px rgba(139,92,246,.25);
+}
+
+.upload-box{
+  border:1px dashed rgba(255,255,255,.25);
+  border-radius:18px;
+  padding:17px;
+  text-align:center;
+  color:var(--muted);
+}
+
+.preview-avatar{
+  width:92px;
+  height:92px;
+  border-radius:28px;
+  margin:0 auto 15px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:42px;
+  overflow:hidden;
+  background:linear-gradient(
+    135deg,
+    rgba(139,92,246,.45),
+    rgba(34,211,238,.3)
+  );
+  border:1px solid var(--border);
+}
+
+.preview-avatar img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
+
+.avatar-edit-button{
+  margin-top:8px;
+}
+
 @media(max-width:560px){
+
   .page{
     padding:15px;
   }
@@ -902,6 +789,10 @@ button{
     grid-template-columns:1fr 1fr;
   }
 
+  .avatar-picker{
+    grid-template-columns:repeat(4,1fr);
+  }
+
   .hero h2{
     font-size:23px;
   }
@@ -913,623 +804,529 @@ button{
 
 <div class="app">
 
-  <!-- ================= HOME ================= -->
+<!-- HOME -->
 
-  <section id="page-home" class="page active">
+<section id="page-home" class="page active">
 
-    <div class="header">
-      <div class="brand">
-        <div class="logo">🐱</div>
-        <div>
-          <h1>Meowl Messenger</h1>
-          <p>Общение в стеклянном мире ✨</p>
-        </div>
-      </div>
+  <div class="header">
 
-      <button class="icon-button" onclick="openSettings()">⚙️</button>
-    </div>
+    <div class="brand">
+      <div class="logo">🐱</div>
 
-    <div class="card hero">
-      <div class="hero-content">
-        <h2>
-          Добро пожаловать в
-          <span class="gradient-text">Meowl</span>
-        </h2>
-
-        <p>
-          Общайся, создавай ботов, настраивай внешний вид
-          и делай свой мессенджер таким, каким хочешь его видеть.
-        </p>
-
-        <button class="primary-button" onclick="openBot('official')">
-          🤖 Открыть Meowl Messenger
-        </button>
-      </div>
-    </div>
-
-    <div class="section-title">Быстрый доступ</div>
-
-    <div class="grid">
-
-      <div class="card small-card clickable" onclick="showPage('chats')">
-        <div class="small-icon">💬</div>
-        <h3>Чаты</h3>
-        <p>Открыть ботов и сохранённые диалоги</p>
-      </div>
-
-      <div class="card small-card clickable" onclick="showPage('people')">
-        <div class="small-icon">👥</div>
-        <h3>Люди</h3>
-        <p>Твой локальный список пользователей</p>
-      </div>
-
-      <div class="card small-card clickable" onclick="openSettings()">
-        <div class="small-icon">🎨</div>
-        <h3>Темы</h3>
-        <p>Меняй цвета стекла и свечение</p>
-      </div>
-
-      <div class="card small-card clickable" onclick="openRules()">
-        <div class="small-icon">📜</div>
-        <h3>Правила</h3>
-        <p>Правила Meowl Messenger</p>
-      </div>
-
-    </div>
-
-    <div class="section-title">Возможности</div>
-
-    <div class="card clickable" onclick="openBot('official')">
-      <div class="bot-card">
-        <div class="avatar">🤖</div>
-
-        <div class="bot-info">
-          <h3>Meowl Messenger</h3>
-          <p>Официальный бот мессенджера</p>
-          <span class="badge">✓ official</span>
-        </div>
-
-        <div class="arrow">›</div>
-      </div>
-    </div>
-
-  </section>
-
-
-  <!-- ================= CHATS ================= -->
-
-  <section id="page-chats" class="page">
-
-    <div class="header">
       <div>
-        <h2 style="margin:0">💬 Чаты</h2>
-        <p style="color:var(--muted);margin:5px 0 0">
-          Твои боты и диалоги
-        </p>
-      </div>
-
-      <button class="icon-button" onclick="openSettings()">⚙️</button>
-    </div>
-
-    <div id="chats-list"></div>
-
-  </section>
-
-
-  <!-- ================= PEOPLE ================= -->
-
-  <section id="page-people" class="page">
-
-    <div class="header">
-      <div>
-        <h2 style="margin:0">👥 Люди</h2>
-        <p style="color:var(--muted);margin:5px 0 0">
-          Пользователи Meowl
-        </p>
+        <h1>Meowl Messenger</h1>
+        <p>Общение в стеклянном мире ✨</p>
       </div>
     </div>
 
-    <div class="search-box">
-      <input
-        id="people-search"
-        class="input"
-        placeholder="🔎 Поиск пользователя..."
-        oninput="renderPeople()"
-      >
-    </div>
+    <button class="icon-button" onclick="openSettings()">⚙️</button>
 
-    <div id="people-list"></div>
+  </div>
 
-  </section>
+  <div class="card hero">
 
+    <h2>
+      Добро пожаловать в
+      <span class="gradient-text">Meowl</span>
+    </h2>
 
-  <!-- ================= PROFILE ================= -->
+    <p>
+      Общайся, создавай ботов и настраивай свой
+      мессенджер под себя.
+    </p>
 
-  <section id="page-profile" class="page">
-
-    <div class="header">
-      <div>
-        <h2 style="margin:0">👤 Профиль</h2>
-        <p style="color:var(--muted);margin:5px 0 0">
-          Твой локальный профиль
-        </p>
-      </div>
-
-      <button class="icon-button" onclick="openSettings()">⚙️</button>
-    </div>
-
-    <div class="card profile-top">
-
-      <div class="profile-avatar">🐱</div>
-
-      <h2>Meowler</h2>
-      <p>@meowler</p>
-
-      <div style="margin-top:15px">
-        <span class="badge">🐾 Meowl user</span>
-      </div>
-
-    </div>
-
-    <div class="card">
-
-      <div class="setting-title">Профиль</div>
-
-      <input
-        id="nickname-input"
-        class="input"
-        placeholder="Твоё имя"
-      >
-
-      <div style="height:10px"></div>
-
-      <input
-        id="username-input"
-        class="input"
-        placeholder="@username"
-      >
-
-      <div style="height:10px"></div>
-
-      <textarea
-        id="description-input"
-        class="input"
-        style="padding-top:14px;min-height:90px;resize:vertical"
-        placeholder="Описание профиля..."
-      ></textarea>
-
-      <div style="height:10px"></div>
-
-      <button class="primary-button" onclick="saveProfile()">
-        💾 Сохранить профиль
-      </button>
-
-    </div>
-
-    <div class="card clickable" onclick="openSettings()">
-      <div class="bot-card">
-        <div class="avatar">🎨</div>
-        <div class="bot-info">
-          <h3>Настройки</h3>
-          <p>Темы, стекло, кнопки и интерфейс</p>
-        </div>
-        <div class="arrow">›</div>
-      </div>
-    </div>
-
-  </section>
-
-
-  <!-- ================= SETTINGS ================= -->
-
-  <section id="page-settings" class="page">
-
-    <button class="back-button" onclick="closeSettings()">
-      ← Назад
+    <button class="primary-button" onclick="openBot('official')">
+      🤖 Открыть Meowl Messenger
     </button>
 
-    <div class="header">
-      <div>
-        <h2 style="margin:0">⚙️ Настройки</h2>
-        <p style="color:var(--muted);margin:5px 0 0">
-          Настрой Meowl под себя
+  </div>
+
+  <div class="section-title">
+    Быстрый доступ
+  </div>
+
+  <div class="grid">
+
+    <div class="card small-card clickable"
+         onclick="showPage('chats')">
+
+      <div class="small-icon">💬</div>
+      <h3>Чаты</h3>
+      <p>Боты и сохранённые диалоги</p>
+
+    </div>
+
+    <div class="card small-card clickable"
+         onclick="showPage('people')">
+
+      <div class="small-icon">👥</div>
+      <h3>Люди</h3>
+      <p>Пользователи Meowl</p>
+
+    </div>
+
+    <div class="card small-card clickable"
+         onclick="openSettings()">
+
+      <div class="small-icon">🎨</div>
+      <h3>Темы</h3>
+      <p>Цвета и стекло</p>
+
+    </div>
+
+    <div class="card small-card clickable"
+         onclick="openRules()">
+
+      <div class="small-icon">📜</div>
+      <h3>Правила</h3>
+      <p>Правила мессенджера</p>
+
+    </div>
+
+  </div>
+
+  <div class="section-title">
+    Официальный бот
+  </div>
+
+  <div class="card clickable"
+       onclick="openBot('official')">
+
+    <div class="bot-card">
+
+      <div class="avatar">
+        🤖
+      </div>
+
+      <div class="bot-info">
+
+        <h3>Meowl Messenger</h3>
+
+        <p>
+          Официальный бот
         </p>
-      </div>
-    </div>
 
-
-    <!-- THEMES -->
-
-    <div class="card">
-
-      <div class="setting-title">
-        🎨 Тема оформления
-      </div>
-
-      <div class="theme-grid">
-
-        <button
-          class="theme-button"
-          data-theme="purple"
-          onclick="setTheme('purple')"
-        >
-          <div class="theme-dot theme-purple"></div>
-          <div class="theme-name">💜 Neon Purple</div>
-        </button>
-
-        <button
-          class="theme-button"
-          data-theme="cyan"
-          onclick="setTheme('cyan')"
-        >
-          <div class="theme-dot theme-cyan"></div>
-          <div class="theme-name">💠 Cyan Glass</div>
-        </button>
-
-        <button
-          class="theme-button"
-          data-theme="orange"
-          onclick="setTheme('orange')"
-        >
-          <div class="theme-dot theme-orange"></div>
-          <div class="theme-name">🧡 Orange</div>
-        </button>
-
-        <button
-          class="theme-button"
-          data-theme="pink"
-          onclick="setTheme('pink')"
-        >
-          <div class="theme-dot theme-pink"></div>
-          <div class="theme-name">💫 Pink Galaxy</div>
-        </button>
-
-        <button
-          class="theme-button"
-          data-theme="green"
-          onclick="setTheme('green')"
-        >
-          <div class="theme-dot theme-green"></div>
-          <div class="theme-name">💚 Emerald</div>
-        </button>
-
-        <button
-          class="theme-button"
-          data-theme="blue"
-          onclick="setTheme('blue')"
-        >
-          <div class="theme-dot theme-blue"></div>
-          <div class="theme-name">🔵 Ocean</div>
-        </button>
-
-        <button
-          class="theme-button"
-          data-theme="red"
-          onclick="setTheme('red')"
-        >
-          <div class="theme-dot theme-red"></div>
-          <div class="theme-name">❤️ Ruby</div>
-        </button>
-
-        <button
-          class="theme-button"
-          data-theme="gold"
-          onclick="setTheme('gold')"
-        >
-          <div class="theme-dot theme-gold"></div>
-          <div class="theme-name">💛 Gold</div>
-        </button>
-
-        <button
-          class="theme-button"
-          data-theme="ice"
-          onclick="setTheme('ice')"
-        >
-          <div class="theme-dot theme-ice"></div>
-          <div class="theme-name">❄️ Ice</div>
-        </button>
-
-        <button
-          class="theme-button"
-          data-theme="rainbow"
-          onclick="setTheme('rainbow')"
-        >
-          <div class="theme-dot theme-rainbow"></div>
-          <div class="theme-name">🌈 Rainbow</div>
-        </button>
+        <span class="badge">
+          ✓ official
+        </span>
 
       </div>
+
+      <div class="arrow">›</div>
 
     </div>
 
+  </div>
 
-    <!-- GLASS -->
+</section>
 
-    <div class="card">
 
-      <div class="setting-title">
-        🪟 Стекло
-      </div>
+<!-- CHATS -->
 
-      <div class="range-row">
-        <span>Прозрачность</span>
-        <span id="glass-value" class="range-value">8%</span>
-      </div>
+<section id="page-chats" class="page">
 
-      <input
-        id="glass-range"
-        class="range"
-        type="range"
-        min="3"
-        max="18"
-        value="8"
-        oninput="changeGlass(this.value)"
-      >
+  <div class="header">
 
+    <div>
+      <h2 style="margin:0">💬 Чаты</h2>
+
+      <p style="color:var(--muted);margin:5px 0 0">
+        Твои боты и диалоги
+      </p>
     </div>
 
+    <button class="icon-button"
+            onclick="openSettings()">
+      ⚙️
+    </button>
 
-    <!-- GLOW -->
+  </div>
 
-    <div class="card">
+  <div id="chats-list"></div>
 
-      <div class="setting-title">
-        ✨ Свечение
-      </div>
+</section>
 
-      <div class="range-row">
-        <span>Интенсивность</span>
-        <span id="glow-value" class="range-value">100%</span>
-      </div>
 
-      <input
-        id="glow-range"
-        class="range"
-        type="range"
-        min="0"
-        max="200"
-        value="100"
-        oninput="changeGlow(this.value)"
-      >
+<!-- PEOPLE -->
 
+<section id="page-people" class="page">
+
+  <div class="header">
+
+    <div>
+      <h2 style="margin:0">👥 Люди</h2>
+
+      <p style="color:var(--muted);margin:5px 0 0">
+        Пользователи Meowl
+      </p>
     </div>
 
+  </div>
 
-    <!-- FONT -->
+  <input
+    id="people-search"
+    class="input"
+    placeholder="🔎 Поиск пользователя..."
+    oninput="renderPeople()"
+  >
 
-    <div class="card">
+  <div style="height:15px"></div>
 
-      <div class="setting-title">
-        🔤 Размер текста
-      </div>
+  <div id="people-list"></div>
 
-      <div class="option-grid">
+</section>
 
-        <button
-          class="option-button"
-          data-font="small"
-          onclick="setFontSize('small')"
-        >
-          Маленький
-        </button>
 
-        <button
-          class="option-button"
-          data-font="normal"
-          onclick="setFontSize('normal')"
-        >
-          Обычный
-        </button>
+<!-- PROFILE -->
 
-        <button
-          class="option-button"
-          data-font="large"
-          onclick="setFontSize('large')"
-        >
-          Большой
-        </button>
+<section id="page-profile" class="page">
 
-      </div>
+  <div class="header">
 
+    <div>
+      <h2 style="margin:0">👤 Профиль</h2>
+
+      <p style="color:var(--muted);margin:5px 0 0">
+        Твой профиль
+      </p>
     </div>
 
+    <button class="icon-button"
+            onclick="openSettings()">
+      ⚙️
+    </button>
 
-    <!-- BUTTON STYLE -->
+  </div>
 
-    <div class="card">
+  <div class="card profile-top">
 
-      <div class="setting-title">
-        🔘 Стиль кнопок
-      </div>
-
-      <div class="option-grid">
-
-        <button
-          class="option-button"
-          data-button="glass"
-          onclick="setButtonStyle('glass')"
-        >
-          🪟 Стекло
-        </button>
-
-        <button
-          class="option-button"
-          data-button="neon"
-          onclick="setButtonStyle('neon')"
-        >
-          ⚡ Neon
-        </button>
-
-        <button
-          class="option-button"
-          data-button="soft"
-          onclick="setButtonStyle('soft')"
-        >
-          🌙 Soft
-        </button>
-
-      </div>
-
+    <div class="profile-avatar">
+      🐱
     </div>
 
+    <h2>Meowler</h2>
 
-    <!-- EMOJIS -->
+    <p>@meowler</p>
 
-    <div class="card">
+  </div>
 
-      <div class="setting-title">
-        🐱 Стиль Meowl
-      </div>
+  <div class="card">
 
-      <div class="option-grid">
-
-        <button
-          class="option-button"
-          data-emoji="🐱"
-          onclick="setEmoji('🐱')"
-        >
-          🐱
-        </button>
-
-        <button
-          class="option-button"
-          data-emoji="😺"
-          onclick="setEmoji('😺')"
-        >
-          😺
-        </button>
-
-        <button
-          class="option-button"
-          data-emoji="😸"
-          onclick="setEmoji('😸')"
-        >
-          😸
-        </button>
-
-        <button
-          class="option-button"
-          data-emoji="🐈"
-          onclick="setEmoji('🐈')"
-        >
-          🐈
-        </button>
-
-        <button
-          class="option-button"
-          data-emoji="🐾"
-          onclick="setEmoji('🐾')"
-        >
-          🐾
-        </button>
-
-        <button
-          class="option-button"
-          data-emoji="✨"
-          onclick="setEmoji('✨')"
-        >
-          ✨
-        </button>
-
-      </div>
-
+    <div class="setting-title">
+      Профиль
     </div>
 
+    <input
+      id="nickname-input"
+      class="input"
+      placeholder="Твоё имя"
+    >
 
-    <!-- INFO -->
+    <div style="height:10px"></div>
 
-    <div class="card clickable" onclick="openRules()">
-      <div class="bot-card">
-        <div class="avatar">📜</div>
+    <input
+      id="username-input"
+      class="input"
+      placeholder="@username"
+    >
 
-        <div class="bot-info">
-          <h3>Правила</h3>
-          <p>Правила использования Meowl Messenger</p>
-        </div>
+    <div style="height:10px"></div>
 
-        <div class="arrow">›</div>
-      </div>
-    </div>
-
-
-    <div class="card clickable" onclick="openBotFeatures()">
-      <div class="bot-card">
-        <div class="avatar">🤖</div>
-
-        <div class="bot-info">
-          <h3>Возможности ботов</h3>
-          <p>Что умеют боты в Meowl Messenger</p>
-        </div>
-
-        <div class="arrow">›</div>
-      </div>
-    </div>
-
-
-    <div class="card clickable" onclick="openAbout()">
-      <div class="bot-card">
-        <div class="avatar">ℹ️</div>
-
-        <div class="bot-info">
-          <h3>О Meowl Messenger</h3>
-          <p>Информация, версия и возможности</p>
-        </div>
-
-        <div class="arrow">›</div>
-      </div>
-    </div>
-
+    <textarea
+      id="description-input"
+      class="input"
+      style="min-height:90px;resize:vertical"
+      placeholder="Описание..."
+    ></textarea>
 
     <div style="height:10px"></div>
 
     <button
-      class="secondary-button danger-button"
-      onclick="resetSettings()"
+      class="primary-button"
+      onclick="saveProfile()"
     >
-      ♻️ Сбросить настройки
+      💾 Сохранить профиль
     </button>
 
-  </section>
+  </div>
+
+</section>
+
+
+<!-- SETTINGS -->
+
+<section id="page-settings" class="page">
+
+  <button class="back-button"
+          onclick="closeSettings()">
+    ← Назад
+  </button>
+
+  <div class="header">
+
+    <div>
+      <h2 style="margin:0">
+        ⚙️ Настройки
+      </h2>
+
+      <p style="color:var(--muted);margin:5px 0 0">
+        Настрой Meowl под себя
+      </p>
+    </div>
+
+  </div>
+
+
+  <div class="card">
+
+    <div class="setting-title">
+      🎨 Тема оформления
+    </div>
+
+    <div class="theme-grid">
+
+      <button class="theme-button"
+              data-theme="purple"
+              onclick="setTheme('purple')">
+        <div class="theme-dot theme-purple"></div>
+        <div class="theme-name">💜 Neon Purple</div>
+      </button>
+
+      <button class="theme-button"
+              data-theme="cyan"
+              onclick="setTheme('cyan')">
+        <div class="theme-dot theme-cyan"></div>
+        <div class="theme-name">💠 Cyan Glass</div>
+      </button>
+
+      <button class="theme-button"
+              data-theme="orange"
+              onclick="setTheme('orange')">
+        <div class="theme-dot theme-orange"></div>
+        <div class="theme-name">🧡 Orange</div>
+      </button>
+
+      <button class="theme-button"
+              data-theme="pink"
+              onclick="setTheme('pink')">
+        <div class="theme-dot theme-pink"></div>
+        <div class="theme-name">💫 Pink Galaxy</div>
+      </button>
+
+      <button class="theme-button"
+              data-theme="green"
+              onclick="setTheme('green')">
+        <div class="theme-dot theme-green"></div>
+        <div class="theme-name">💚 Emerald</div>
+      </button>
+
+      <button class="theme-button"
+              data-theme="blue"
+              onclick="setTheme('blue')">
+        <div class="theme-dot theme-blue"></div>
+        <div class="theme-name">🔵 Ocean</div>
+      </button>
+
+      <button class="theme-button"
+              data-theme="red"
+              onclick="setTheme('red')">
+        <div class="theme-dot theme-red"></div>
+        <div class="theme-name">❤️ Ruby</div>
+      </button>
+
+      <button class="theme-button"
+              data-theme="gold"
+              onclick="setTheme('gold')">
+        <div class="theme-dot theme-gold"></div>
+        <div class="theme-name">💛 Gold</div>
+      </button>
+
+      <button class="theme-button"
+              data-theme="ice"
+              onclick="setTheme('ice')">
+        <div class="theme-dot theme-ice"></div>
+        <div class="theme-name">❄️ Ice</div>
+      </button>
+
+      <button class="theme-button"
+              data-theme="rainbow"
+              onclick="setTheme('rainbow')">
+        <div class="theme-dot theme-rainbow"></div>
+        <div class="theme-name">🌈 Rainbow</div>
+      </button>
+
+    </div>
+
+  </div>
+
+
+  <div class="card">
+
+    <div class="setting-title">
+      🪟 Прозрачность стекла
+    </div>
+
+    <div class="range-row">
+      <span>Уровень</span>
+      <span id="glass-value"
+            class="range-value">
+        8%
+      </span>
+    </div>
+
+    <input
+      id="glass-range"
+      class="range"
+      type="range"
+      min="3"
+      max="18"
+      value="8"
+      oninput="changeGlass(this.value)"
+    >
+
+  </div>
+
+
+  <div class="card">
+
+    <div class="setting-title">
+      ✨ Свечение
+    </div>
+
+    <div class="range-row">
+      <span>Интенсивность</span>
+
+      <span id="glow-value"
+            class="range-value">
+        100%
+      </span>
+    </div>
+
+    <input
+      id="glow-range"
+      class="range"
+      type="range"
+      min="0"
+      max="200"
+      value="100"
+      oninput="changeGlow(this.value)"
+    >
+
+  </div>
+
+
+  <div class="card clickable"
+       onclick="openRules()">
+
+    <div class="bot-card">
+
+      <div class="avatar">📜</div>
+
+      <div class="bot-info">
+
+        <h3>Правила</h3>
+
+        <p>
+          Правила Meowl Messenger
+        </p>
+
+      </div>
+
+      <div class="arrow">›</div>
+
+    </div>
+
+  </div>
+
+
+  <div class="card clickable"
+       onclick="openBotFeatures()">
+
+    <div class="bot-card">
+
+      <div class="avatar">🤖</div>
+
+      <div class="bot-info">
+
+        <h3>Возможности ботов</h3>
+
+        <p>
+          Что умеют боты
+        </p>
+
+      </div>
+
+      <div class="arrow">›</div>
+
+    </div>
+
+  </div>
+
+
+  <div class="card clickable"
+       onclick="openAbout()">
+
+    <div class="bot-card">
+
+      <div class="avatar">ℹ️</div>
+
+      <div class="bot-info">
+
+        <h3>О Meowl Messenger</h3>
+
+        <p>
+          Версия и информация
+        </p>
+
+      </div>
+
+      <div class="arrow">›</div>
+
+    </div>
+
+  </div>
+
+
+  <button
+    class="secondary-button danger-button"
+    onclick="resetSettings()"
+  >
+    ♻️ Сбросить настройки
+  </button>
+
+</section>
 
 </div>
 
 
-<!-- ================= BOTTOM NAV ================= -->
+<!-- BOTTOM NAV -->
 
 <nav class="bottom-nav">
 
-  <button
-    id="nav-home"
-    class="nav-button active"
-    onclick="showPage('home')"
-  >
+  <button id="nav-home"
+          class="nav-button active"
+          onclick="showPage('home')">
     <span class="nav-icon">🏠</span>
     <span>Главная</span>
   </button>
 
-  <button
-    id="nav-chats"
-    class="nav-button"
-    onclick="showPage('chats')"
-  >
+  <button id="nav-chats"
+          class="nav-button"
+          onclick="showPage('chats')">
     <span class="nav-icon">💬</span>
     <span>Чаты</span>
   </button>
 
-  <button
-    id="nav-people"
-    class="nav-button"
-    onclick="showPage('people')"
-  >
+  <button id="nav-people"
+          class="nav-button"
+          onclick="showPage('people')">
     <span class="nav-icon">👥</span>
     <span>Люди</span>
   </button>
 
-  <button
-    id="nav-profile"
-    class="nav-button"
-    onclick="showPage('profile')"
-  >
+  <button id="nav-profile"
+          class="nav-button"
+          onclick="showPage('profile')">
     <span class="nav-icon">👤</span>
     <span>Профиль</span>
   </button>
@@ -1537,33 +1334,31 @@ button{
 </nav>
 
 
-<!-- ================= CHAT PAGE ================= -->
+<!-- CHAT -->
 
-<section
-  id="chat-page"
-  class="page"
-  style="
-    position:fixed;
-    inset:0;
-    z-index:150;
-    background:var(--bg);
-    max-width:760px;
-    margin:0 auto;
-    overflow-y:auto;
-    padding-bottom:20px;
-  "
->
+<section id="chat-page"
+         class="page"
+         style="
+           position:fixed;
+           inset:0;
+           z-index:150;
+           background:var(--bg);
+           max-width:760px;
+           margin:auto;
+           overflow-y:auto;
+           padding-bottom:20px;
+         ">
 
-  <button class="back-button" onclick="closeChat()">
+  <button class="back-button"
+          onclick="closeChat()">
     ← Назад к чатам
   </button>
 
   <div id="chat-header"></div>
 
-  <div
-    id="chat-messages"
-    class="chat-messages"
-  ></div>
+  <div id="chat-messages"
+       class="chat-messages">
+  </div>
 
   <div class="chat-input">
 
@@ -1572,7 +1367,10 @@ button{
       class="input"
       placeholder="Напиши сообщение..."
       autocomplete="off"
-      onkeydown="if(event.key==='Enter') sendCurrentMessage()"
+      onkeydown="
+        if(event.key==='Enter')
+        sendCurrentMessage()
+      "
     >
 
     <button
@@ -1587,20 +1385,21 @@ button{
 </section>
 
 
-<!-- ================= MODAL ================= -->
+<!-- MODAL -->
 
-<div id="modal" class="modal">
+<div id="modal"
+     class="modal">
 
   <div class="modal-card">
 
     <div class="modal-header">
 
-      <h2 id="modal-title">Информация</h2>
+      <h2 id="modal-title">
+        Информация
+      </h2>
 
-      <button
-        class="close-button"
-        onclick="closeModal()"
-      >
+      <button class="close-button"
+              onclick="closeModal()">
         ×
       </button>
 
@@ -1613,31 +1412,32 @@ button{
 </div>
 
 
-<div id="toast" class="toast"></div>
+<div id="toast"
+     class="toast">
+</div>
 
 
 <script>
 
 /* =========================================================
    MEOWL MESSENGER
-   Полностью локальная версия
+   Версия с аватарами ботов
    ========================================================= */
 
+const APP_VERSION = "1.1.0";
 
-const APP_VERSION = "1.0.0";
-
-
-/* ================= STORAGE ================= */
 
 const STORAGE = {
-  bots:"meowl_created_bots_v3",
-  chats:"meowl_bot_chats_v3",
-  settings:"meowl_settings_v3",
-  profile:"meowl_profile_v3"
+  bots:"meowl_created_bots_v4",
+  chats:"meowl_bot_chats_v4",
+  settings:"meowl_settings_v4",
+  profile:"meowl_profile_v4"
 };
 
 
-/* ================= OFFICIAL BOT ================= */
+/* =========================================================
+   OFFICIAL BOT
+   ========================================================= */
 
 const officialBot = {
   id:"official",
@@ -1645,269 +1445,31 @@ const officialBot = {
   username:"MeowlMessenger",
   description:"Официальный бот Meowl Messenger.",
   emoji:"🤖",
+  avatarType:"emoji",
+  avatar:"",
   official:true
 };
 
 
-/* ================= RULES ================= */
-
-const rulesText = `
-🐾 ПРАВИЛА MEOWL MESSENGER
-
-Добро пожаловать в Meowl Messenger!
-
-Meowl Messenger создан как уютное место для общения, знакомств и обмена сообщениями.
-
-Пожалуйста, внимательно ознакомься с правилами.
-
-━━━━━━━━━━━━━━━━━━
-
-1. 🐱 УВАЖЕНИЕ К ДРУГИМ
-
-Каждый пользователь имеет право на нормальное и уважительное общение.
-
-Запрещено:
-
-• оскорблять других пользователей;
-• унижать людей;
-• преследовать пользователей;
-• намеренно провоцировать конфликты;
-• распространять ненависть;
-• угрожать другим пользователям;
-• постоянно отправлять нежелательные сообщения.
-
-Если тебе не нравится человек — просто прекрати общение с ним.
-
-━━━━━━━━━━━━━━━━━━
-
-2. 💬 СПАМ
-
-Не используй Meowl Messenger для массовой рассылки одинаковых сообщений.
-
-Запрещается:
-
-• массовая реклама;
-• большое количество одинаковых сообщений;
-• создание аккаунтов ради рассылки;
-• автоматический спам;
-• намеренная перегрузка приложения.
-
-━━━━━━━━━━━━━━━━━━
-
-3. 🚫 ЗАПРЕЩЁННЫЙ КОНТЕНТ
-
-Нельзя использовать мессенджер для распространения незаконного или опасного контента.
-
-Запрещается распространять:
-
-• мошеннические схемы;
-• фишинговые ссылки;
-• вредоносные программы;
-• украденные данные;
-• угрозы;
-• инструкции по причинению вреда;
-• материалы, нарушающие закон.
-
-━━━━━━━━━━━━━━━━━━
-
-4. 🔐 ЛИЧНЫЕ ДАННЫЕ
-
-Не публикуй чужие личные данные без разрешения.
-
-К личным данным относятся:
-
-• номера телефонов;
-• домашние адреса;
-• документы;
-• пароли;
-• банковские данные;
-• приватные фотографии;
-• данные аккаунтов;
-• другая личная информация.
-
-Никому не сообщай свой пароль.
-
-━━━━━━━━━━━━━━━━━━
-
-5. 🛡️ БЕЗОПАСНОСТЬ
-
-Никому не передавай пароль.
-
-Не вводи пароль на подозрительных сайтах.
-
-Если кто-то представляется администрацией Meowl Messenger и просит пароль — не сообщай его.
-
-━━━━━━━━━━━━━━━━━━
-
-6. 👤 USERNAME
-
-Username должен использоваться честно.
-
-Запрещается выдавать себя за другого пользователя или администрацию Meowl Messenger.
-
-━━━━━━━━━━━━━━━━━━
-
-7. 🤝 ОБЩЕНИЕ
-
-Уважай собеседников.
-
-Если человек просит прекратить общение — уважай его просьбу.
-
-━━━━━━━━━━━━━━━━━━
-
-8. 📢 РЕКЛАМА
-
-Не используй личные сообщения для массовой рекламы и навязчивого продвижения.
-
-━━━━━━━━━━━━━━━━━━
-
-9. 🤖 АВТОМАТИЗАЦИЯ
-
-Не пытайся взломать или перегрузить Meowl Messenger.
-
-Запрещены:
-
-• подбор паролей;
-• попытки получить доступ к чужому аккаунту;
-• обход ограничений;
-• эксплуатация ошибок;
-• вредоносные боты;
-• атаки на приложение.
-
-━━━━━━━━━━━━━━━━━━
-
-10. 🐾 АДМИНИСТРАЦИЯ
-
-За нарушение правил администрация может:
-
-• предупредить пользователя;
-• ограничить функции;
-• заблокировать аккаунт;
-• удалить нарушающий контент.
-
-━━━━━━━━━━━━━━━━━━
-
-11. ⚠️ НЕ ОБХОДИ ОГРАНИЧЕНИЯ
-
-Не создавай дополнительные аккаунты для обхода ограничений.
-
-━━━━━━━━━━━━━━━━━━
-
-12. ❤️ ГЛАВНОЕ ПРАВИЛО
-
-Относись к другим так, как хотел бы, чтобы относились к тебе.
-
-Meowl Messenger создан для общения, дружбы и новых знакомств.
-
-🐱 Спасибо, что используешь Meowl Messenger!
-
-Команда Meowl Messenger 💜
-`;
-
-
-/* ================= BOT FEATURES ================= */
-
-const botFeaturesText = `
-🤖 ВОЗМОЖНОСТИ БОТОВ MEOWL
-
-Боты — это специальные аккаунты внутри Meowl Messenger.
-
-━━━━━━━━━━━━━━━━━━
-
-🐱 ОФИЦИАЛЬНЫЙ БОТ
-
-Meowl Messenger — официальный бот.
-
-Команда:
-
-/start
-
-Показывает правила и информацию о мессенджере.
-
-━━━━━━━━━━━━━━━━━━
-
-🤖 СОЗДАНИЕ БОТА
-
-Команда:
-
-/newbot
-
-После этого бот попросит:
-
-1. Имя бота
-2. Username бота
-
-После создания бот появится в разделе:
-
-💬 Чаты
-
-━━━━━━━━━━━━━━━━━━
-
-🔗 ССЫЛКА
-
-Каждый созданный бот получает персональную ссылку.
-
-Например:
-
-?bot=MyCoolBot
-
-По ней можно открыть конкретного бота.
-
-━━━━━━━━━━━━━━━━━━
-
-💬 ЧАТ
-
-Каждый бот имеет собственный локальный чат.
-
-История сообщений сохраняется в браузере.
-
-━━━━━━━━━━━━━━━━━━
-
-⚙️ НАСТРОЙКИ
-
-Можно изменить:
-
-• тему;
-• цвета;
-• прозрачность стекла;
-• свечение;
-• размер текста;
-• стиль кнопок;
-• эмодзи.
-
-━━━━━━━━━━━━━━━━━━
-
-⚠️ ВАЖНО
-
-Эта версия работает полностью без сервера.
-
-Поэтому созданные тобой боты и их сообщения сохраняются только в твоём браузере.
-
-Другие пользователи не увидят их автоматически.
-
-`;
-
-
-/* ================= SETTINGS ================= */
+/* =========================================================
+   SETTINGS
+   ========================================================= */
 
 const defaultSettings = {
   theme:"purple",
   glass:8,
-  glow:100,
-  fontSize:"normal",
-  buttonStyle:"glass",
-  emoji:"🐱"
+  glow:100
 };
 
 
 let settings =
-  JSON.parse(localStorage.getItem(STORAGE.settings)) ||
-  {...defaultSettings};
+  JSON.parse(localStorage.getItem(STORAGE.settings))
+  || {...defaultSettings};
 
 
 let profile =
-  JSON.parse(localStorage.getItem(STORAGE.profile)) ||
-  {
+  JSON.parse(localStorage.getItem(STORAGE.profile))
+  || {
     nickname:"Meowler",
     username:"meowler",
     description:"Люблю Meowl Messenger 🐱"
@@ -1915,20 +1477,104 @@ let profile =
 
 
 let createdBots =
-  JSON.parse(localStorage.getItem(STORAGE.bots)) ||
-  [];
+  JSON.parse(localStorage.getItem(STORAGE.bots))
+  || [];
 
 
 let botChats =
-  JSON.parse(localStorage.getItem(STORAGE.chats)) ||
-  {};
+  JSON.parse(localStorage.getItem(STORAGE.chats))
+  || {};
 
 
 let currentBot = null;
+
 let currentPage = "home";
 
+let botCreationStep = null;
 
-/* ================= INIT ================= */
+let botCreationName = "";
+
+let botCreationUsername = "";
+
+let newBotAvatar = {
+  type:"emoji",
+  value:"🤖"
+};
+
+
+/* =========================================================
+   RULES
+   ========================================================= */
+
+const rulesText = `
+🐾 ПРАВИЛА MEOWL MESSENGER
+
+Добро пожаловать в Meowl Messenger!
+
+1. 🐱 Уважай других пользователей.
+
+2. 💬 Не занимайся спамом.
+
+3. 🚫 Не распространяй незаконный или опасный контент.
+
+4. 🔐 Не публикуй чужие личные данные.
+
+5. 🛡️ Не передавай свои пароли.
+
+6. 👤 Не выдавай себя за другого пользователя.
+
+7. 🤝 Уважай просьбы собеседников.
+
+8. 📢 Не используй сообщения для навязчивой рекламы.
+
+9. 🤖 Не пытайся взломать или перегрузить приложение.
+
+10. 🐾 За серьёзные нарушения возможна блокировка.
+
+11. ⚠️ Не обходи ограничения.
+
+12. ❤️ Главное правило:
+
+Относись к другим так, как хотел бы,
+чтобы относились к тебе.
+
+Команда Meowl Messenger 💜
+`;
+
+
+/* =========================================================
+   BOT FEATURES
+   ========================================================= */
+
+const botFeaturesText = `
+🤖 ВОЗМОЖНОСТИ БОТОВ
+
+/newbot
+
+Создание собственного бота.
+
+При создании можно указать:
+
+• имя;
+• username;
+• аватар.
+
+Аватар можно выбрать из готовых вариантов
+или загрузить изображение с устройства.
+
+Каждый созданный бот появляется
+в разделе 💬 Чаты.
+
+История сообщений сохраняется локально.
+
+⚠️ В этой версии без сервера созданные
+боты доступны только в твоём браузере.
+`;
+
+
+/* =========================================================
+   INIT
+   ========================================================= */
 
 document.addEventListener("DOMContentLoaded",()=>{
 
@@ -1945,15 +1591,20 @@ document.addEventListener("DOMContentLoaded",()=>{
 });
 
 
-/* ================= NAVIGATION ================= */
+/* =========================================================
+   NAVIGATION
+   ========================================================= */
 
 function showPage(page){
 
-  currentPage = page;
+  currentPage=page;
 
-  document.querySelectorAll(".page").forEach(el=>{
-    el.classList.remove("active");
-  });
+  document
+    .querySelectorAll(".page")
+    .forEach(el=>{
+      el.classList.remove("active");
+    });
+
 
   const target =
     document.getElementById("page-"+page);
@@ -1962,9 +1613,13 @@ function showPage(page){
     target.classList.add("active");
   }
 
-  document.querySelectorAll(".nav-button").forEach(el=>{
-    el.classList.remove("active");
-  });
+
+  document
+    .querySelectorAll(".nav-button")
+    .forEach(el=>{
+      el.classList.remove("active");
+    });
+
 
   const nav =
     document.getElementById("nav-"+page);
@@ -1972,6 +1627,7 @@ function showPage(page){
   if(nav){
     nav.classList.add("active");
   }
+
 
   if(page==="chats"){
     renderChats();
@@ -1985,43 +1641,41 @@ function showPage(page){
     loadProfile();
   }
 
-  window.scrollTo({
-    top:0,
-    behavior:"smooth"
-  });
 }
 
 
-/* ================= SETTINGS PAGE ================= */
+/* =========================================================
+   SETTINGS
+   ========================================================= */
 
 function openSettings(){
 
-  document.querySelectorAll(".page").forEach(el=>{
-    el.classList.remove("active");
-  });
+  document
+    .querySelectorAll(".page")
+    .forEach(el=>{
+      el.classList.remove("active");
+    });
 
-  document.getElementById("page-settings")
+
+  document
+    .getElementById("page-settings")
     .classList.add("active");
 
-  updateSettingsUI();
-
-  window.scrollTo({
-    top:0,
-    behavior:"smooth"
-  });
 }
 
 
 function closeSettings(){
 
-  showPage(currentPage==="settings" ? "home" : currentPage);
+  showPage(
+    currentPage==="settings"
+    ? "home"
+    : currentPage
+  );
 
 }
 
 
-/* ================= THEMES ================= */
-
-const themes = {
+const themes={
 
   purple:{
     bg:"#070914",
@@ -2098,17 +1752,11 @@ const themes = {
 
 function setTheme(theme){
 
-  if(!themes[theme]) return;
-
-  settings.theme = theme;
+  settings.theme=theme;
 
   saveSettings();
 
   applySettings();
-
-  updateSettingsUI();
-
-  showToast("🎨 Тема изменена");
 
 }
 
@@ -2116,125 +1764,46 @@ function setTheme(theme){
 function applySettings(){
 
   const theme =
-    themes[settings.theme] ||
-    themes.purple;
+    themes[settings.theme]
+    || themes.purple;
+
 
   const root =
     document.documentElement;
 
-  root.style.setProperty("--bg",theme.bg);
-  root.style.setProperty("--purple",theme.purple);
-  root.style.setProperty("--cyan",theme.cyan);
-  root.style.setProperty("--pink",theme.pink);
+
+  root.style.setProperty(
+    "--bg",
+    theme.bg
+  );
+
+  root.style.setProperty(
+    "--purple",
+    theme.purple
+  );
+
+  root.style.setProperty(
+    "--cyan",
+    theme.cyan
+  );
+
+  root.style.setProperty(
+    "--pink",
+    theme.pink
+  );
+
 
   root.style.setProperty(
     "--glass-opacity",
     Number(settings.glass)/100
   );
 
+
   root.style.setProperty(
     "--glow",
     Number(settings.glow)/100
   );
 
-  let font = "16px";
-
-  if(settings.fontSize==="small"){
-    font="14px";
-  }
-
-  if(settings.fontSize==="large"){
-    font="18px";
-  }
-
-  root.style.setProperty("--font-size",font);
-
-  document.body.dataset.buttonStyle =
-    settings.buttonStyle;
-
-}
-
-
-/* ================= GLASS ================= */
-
-function changeGlass(value){
-
-  settings.glass = Number(value);
-
-  document.getElementById("glass-value")
-    .textContent = value+"%";
-
-  saveSettings();
-
-  applySettings();
-
-}
-
-
-/* ================= GLOW ================= */
-
-function changeGlow(value){
-
-  settings.glow = Number(value);
-
-  document.getElementById("glow-value")
-    .textContent = value+"%";
-
-  saveSettings();
-
-  applySettings();
-
-}
-
-
-/* ================= FONT ================= */
-
-function setFontSize(size){
-
-  settings.fontSize = size;
-
-  saveSettings();
-
-  applySettings();
-
-  updateSettingsUI();
-
-}
-
-
-/* ================= BUTTON STYLE ================= */
-
-function setButtonStyle(style){
-
-  settings.buttonStyle = style;
-
-  saveSettings();
-
-  updateSettingsUI();
-
-  showToast("🔘 Стиль кнопок изменён");
-
-}
-
-
-/* ================= EMOJI ================= */
-
-function setEmoji(emoji){
-
-  settings.emoji = emoji;
-
-  saveSettings();
-
-  updateSettingsUI();
-
-  showToast("🐱 Стиль Meowl изменён");
-
-}
-
-
-/* ================= SETTINGS UI ================= */
-
-function updateSettingsUI(){
 
   document.querySelectorAll(".theme-button")
     .forEach(button=>{
@@ -2252,11 +1821,12 @@ function updateSettingsUI(){
     glass.value=settings.glass;
   }
 
+
   const glassValue =
     document.getElementById("glass-value");
 
   if(glassValue){
-    glassValue.textContent =
+    glassValue.textContent=
       settings.glass+"%";
   }
 
@@ -2268,45 +1838,39 @@ function updateSettingsUI(){
     glow.value=settings.glow;
   }
 
+
   const glowValue =
     document.getElementById("glow-value");
 
   if(glowValue){
-    glowValue.textContent =
+    glowValue.textContent=
       settings.glow+"%";
   }
-
-
-  document.querySelectorAll("[data-font]")
-    .forEach(button=>{
-      button.classList.toggle(
-        "active",
-        button.dataset.font===settings.fontSize
-      );
-    });
-
-
-  document.querySelectorAll("[data-button]")
-    .forEach(button=>{
-      button.classList.toggle(
-        "active",
-        button.dataset.button===settings.buttonStyle
-      );
-    });
-
-
-  document.querySelectorAll("[data-emoji]")
-    .forEach(button=>{
-      button.classList.toggle(
-        "active",
-        button.dataset.emoji===settings.emoji
-      );
-    });
 
 }
 
 
-/* ================= SAVE SETTINGS ================= */
+function changeGlass(value){
+
+  settings.glass=Number(value);
+
+  saveSettings();
+
+  applySettings();
+
+}
+
+
+function changeGlow(value){
+
+  settings.glow=Number(value);
+
+  saveSettings();
+
+  applySettings();
+
+}
+
 
 function saveSettings(){
 
@@ -2318,15 +1882,9 @@ function saveSettings(){
 }
 
 
-/* ================= RESET SETTINGS ================= */
-
 function resetSettings(){
 
-  if(!confirm("Сбросить все настройки?")){
-    return;
-  }
-
-  settings = {
+  settings={
     ...defaultSettings
   };
 
@@ -2334,14 +1892,14 @@ function resetSettings(){
 
   applySettings();
 
-  updateSettingsUI();
-
   showToast("♻️ Настройки сброшены");
 
 }
 
 
-/* ================= CHAT LIST ================= */
+/* =========================================================
+   BOT HELPERS
+   ========================================================= */
 
 function getAllBots(){
 
@@ -2353,27 +1911,59 @@ function getAllBots(){
 }
 
 
+function findBot(id){
+
+  return getAllBots()
+    .find(bot=>bot.id===id);
+
+}
+
+
+/* =========================================================
+   AVATAR HTML
+   ========================================================= */
+
+function botAvatarHTML(bot){
+
+  if(
+    bot.avatarType==="image" &&
+    bot.avatar
+  ){
+
+    return `
+      <img
+        src="${escapeHtml(bot.avatar)}"
+        alt="avatar"
+      >
+    `;
+
+  }
+
+  return escapeHtml(
+    bot.avatar ||
+    bot.emoji ||
+    "🤖"
+  );
+
+}
+
+
+/* =========================================================
+   CHAT LIST
+   ========================================================= */
+
 function renderChats(){
 
   const container =
     document.getElementById("chats-list");
 
-  if(!container) return;
+  if(!container){
+    return;
+  }
+
 
   const bots =
     getAllBots();
-
-  if(bots.length===0){
-
-    container.innerHTML=`
-      <div class="card empty">
-        <div class="empty-icon">💬</div>
-        <div>Пока нет чатов</div>
-      </div>
-    `;
-
-    return;
-  }
 
 
   container.innerHTML =
@@ -2385,7 +1975,7 @@ function renderChats(){
       >
 
         <div class="avatar">
-          ${bot.emoji || "🤖"}
+          ${botAvatarHTML(bot)}
         </div>
 
         <div class="list-main">
@@ -2395,7 +1985,7 @@ function renderChats(){
 
             ${
               bot.official
-              ? `<span class="badge">✓</span>`
+              ? `<span class="badge">✓ official</span>`
               : ""
             }
 
@@ -2418,27 +2008,22 @@ function renderChats(){
 }
 
 
-/* ================= OPEN BOT ================= */
-
-function findBot(id){
-
-  return getAllBots()
-    .find(bot=>bot.id===id);
-
-}
-
+/* =========================================================
+   OPEN BOT
+   ========================================================= */
 
 function openBot(id){
 
-  const bot =
-    findBot(id);
+  const bot=findBot(id);
 
   if(!bot){
     showToast("Бот не найден");
     return;
   }
 
-  currentBot = bot;
+
+  currentBot=bot;
+
 
   document
     .querySelectorAll(".page")
@@ -2446,18 +2031,15 @@ function openBot(id){
       el.classList.remove("active");
     });
 
-  const chatPage =
-    document.getElementById("chat-page");
 
-  chatPage.classList.add("active");
+  document
+    .getElementById("chat-page")
+    .classList.add("active");
+
 
   renderChatHeader();
 
   renderMessages();
-
-  setTimeout(()=>{
-    document.getElementById("chat-input").focus();
-  },100);
 
 }
 
@@ -2468,29 +2050,31 @@ function closeChat(){
     .getElementById("chat-page")
     .classList.remove("active");
 
-  renderChats();
 
   showPage("chats");
 
 }
 
 
-/* ================= CHAT HEADER ================= */
+/* =========================================================
+   CHAT HEADER
+   ========================================================= */
 
 function renderChatHeader(){
 
   const header =
     document.getElementById("chat-header");
 
+
   header.innerHTML=`
 
     <div class="chat-header">
 
       <div class="avatar">
-        ${currentBot.emoji || "🤖"}
+        ${botAvatarHTML(currentBot)}
       </div>
 
-      <div>
+      <div style="flex:1">
 
         <h2>
           ${escapeHtml(currentBot.name)}
@@ -2498,10 +2082,22 @@ function renderChatHeader(){
 
         <p>
           @${escapeHtml(currentBot.username)}
-          ${currentBot.official ? " • официальный" : ""}
         </p>
 
       </div>
+
+      ${
+        !currentBot.official
+        ? `
+          <button
+            class="icon-button"
+            onclick="editBotAvatar('${escapeJs(currentBot.id)}')"
+          >
+            🖼️
+          </button>
+        `
+        : ""
+      }
 
     </div>
 
@@ -2510,7 +2106,9 @@ function renderChatHeader(){
 }
 
 
-/* ================= MESSAGES ================= */
+/* =========================================================
+   CHAT
+   ========================================================= */
 
 function getBotMessages(id){
 
@@ -2538,24 +2136,41 @@ function renderMessages(){
   const container =
     document.getElementById("chat-messages");
 
+
   if(!container || !currentBot){
     return;
   }
 
+
   const messages =
     getBotMessages(currentBot.id);
 
-  if(messages.length===0){
+
+  if(!messages.length){
 
     container.innerHTML=`
 
       <div class="message bot">
 
-        ${escapeHtml(
+        ${
           currentBot.official
-          ? "Привет! 🐱 Я официальный бот Meowl Messenger.\\n\\nНапиши /start, чтобы узнать правила.\\n\\nНапиши /newbot, чтобы создать своего бота."
-          : "Привет! 🤖 Я бот @"+currentBot.username+"\\n\\nНапиши /start."
-        )}
+          ? `
+            Привет! 🐱
+
+            Я официальный бот Meowl Messenger.
+
+            /start — правила
+
+            /newbot — создать своего бота
+          `
+          : `
+            Привет! 🤖
+
+            Я бот @${escapeHtml(currentBot.username)}.
+
+            Напиши /start.
+          `
+        }
 
       </div>
 
@@ -2581,7 +2196,9 @@ function renderMessages(){
 }
 
 
-/* ================= SEND MESSAGE ================= */
+/* =========================================================
+   SEND
+   ========================================================= */
 
 function sendCurrentMessage(){
 
@@ -2589,15 +2206,19 @@ function sendCurrentMessage(){
     return;
   }
 
+
   const input =
     document.getElementById("chat-input");
+
 
   const text =
     input.value.trim();
 
+
   if(!text){
     return;
   }
+
 
   addMessage(
     currentBot.id,
@@ -2605,26 +2226,38 @@ function sendCurrentMessage(){
     text
   );
 
+
   input.value="";
+
+
+  if(botCreationStep){
+
+    processBotCreation(text);
+
+    return;
+  }
+
 
   setTimeout(()=>{
     botReply(currentBot,text);
-  },300);
+  },250);
 
 }
 
 
-function addMessage(botId,type,text){
+function addMessage(id,type,text){
 
-  if(!botChats[botId]){
-    botChats[botId]=[];
+  if(!botChats[id]){
+    botChats[id]=[];
   }
 
-  botChats[botId].push({
+
+  botChats[id].push({
     type,
     text,
     time:Date.now()
   });
+
 
   saveChats();
 
@@ -2633,15 +2266,15 @@ function addMessage(botId,type,text){
 }
 
 
-/* ================= BOT REPLY ================= */
+/* =========================================================
+   BOT REPLY
+   ========================================================= */
 
 function botReply(bot,text){
 
-  const command =
+  const command=
     text.toLowerCase().trim();
 
-
-  /* START */
 
   if(command==="/start"){
 
@@ -2651,15 +2284,13 @@ function botReply(bot,text){
       bot.official
       ? rulesText
       : `
-🤖 Добро пожаловать в @${bot.username}!
+🤖 Добро пожаловать!
 
-Это пользовательский бот Meowl Messenger.
+Я бот @${bot.username}.
 
-Доступные команды:
+Доступная команда:
 
-/start — запустить бота
-
-Бот работает локально в этом браузере.
+/start
       `.trim()
     );
 
@@ -2667,9 +2298,10 @@ function botReply(bot,text){
   }
 
 
-  /* NEW BOT */
-
-  if(bot.official && command==="/newbot"){
+  if(
+    bot.official &&
+    command==="/newbot"
+  ){
 
     startNewBotCreation();
 
@@ -2677,138 +2309,86 @@ function botReply(bot,text){
   }
 
 
-  /* HELP */
-
-  if(
-    command==="/help" ||
-    command==="help"
-  ){
-
-    addMessage(
-      bot.id,
-      "bot",
-      `
-🤖 Доступные команды:
-
-/start
-/newbot
-/help
-
-Для создания нового бота используй /newbot.
-      `.trim()
-    );
-
-    return;
-  }
-
-
-  /* DEFAULT */
-
   addMessage(
     bot.id,
     "bot",
     `
 🐱 Сообщение получено!
 
-Я пока не умею полноценно отвечать на обычные сообщения.
-
 Попробуй:
 
 /start
-/help
-${bot.official ? "/newbot" : ""}
+/newbot
     `.trim()
   );
 
 }
 
 
-/* ================= NEW BOT CREATION ================= */
-
-let botCreationStep = null;
-let botCreationName = "";
-
+/* =========================================================
+   NEW BOT CREATION
+   ========================================================= */
 
 function startNewBotCreation(){
 
   botCreationStep="name";
 
+  botCreationName="";
+
+  botCreationUsername="";
+
+  newBotAvatar={
+    type:"emoji",
+    value:"🤖"
+  };
+
+
   addMessage(
     currentBot.id,
     "bot",
     `
-🤖 Создание нового бота
+🤖 СОЗДАНИЕ НОВОГО БОТА
 
-Шаг 1 из 2.
+Шаг 1 из 3.
 
-Придумай имя для своего бота.
+Придумай имя бота.
 
-Имя должно быть на английском языке.
+Можно использовать английские буквы,
+цифры, пробелы, "-" и "_".
 
 Например:
 
 My Music Bot
-Weather Bot
 Cool Cat
+Weather Bot
 
-Напиши имя следующим сообщением.
+Напиши имя.
     `.trim()
   );
 
 }
 
 
-function askBotUsername(){
-
-  botCreationStep="username";
-
-  addMessage(
-    currentBot.id,
-    "bot",
-    `
-✅ Имя сохранено.
-
-Шаг 2 из 2.
-
-Теперь придумай username для бота.
-
-Можно использовать:
-
-• английские буквы
-• цифры
-• символ _
-
-От 4 до 30 символов.
-
-Например:
-
-MyMusicBot
-WeatherBot
-Cool_Cat_123
-
-Напиши username.
-    `.trim()
-  );
-
-}
-
+/* =========================================================
+   PROCESS CREATION
+   ========================================================= */
 
 function processBotCreation(text){
 
+  /* NAME */
+
   if(botCreationStep==="name"){
 
-    const name =
-      text.trim();
-
-    if(!/^[A-Za-z0-9][A-Za-z0-9 _-]{2,40}$/.test(name)){
+    if(
+      !/^[A-Za-z0-9][A-Za-z0-9 _-]{2,40}$/
+      .test(text)
+    ){
 
       addMessage(
         currentBot.id,
         "bot",
         `
 ❌ Неправильное имя.
-
-Используй английские буквы, цифры, пробелы, "-" или "_".
 
 Попробуй ещё раз.
         `.trim()
@@ -2817,20 +2397,50 @@ function processBotCreation(text){
       return;
     }
 
-    botCreationName=name;
 
-    askBotUsername();
+    botCreationName=text;
+
+    botCreationStep="username";
+
+
+    addMessage(
+      currentBot.id,
+      "bot",
+      `
+✅ Имя сохранено.
+
+Шаг 2 из 3.
+
+Теперь придумай username.
+
+Разрешены:
+
+• английские буквы
+• цифры
+• _
+
+От 4 до 30 символов.
+
+Например:
+
+MyMusicBot
+Cool_Cat
+Weather123
+      `.trim()
+    );
 
     return;
   }
 
 
+  /* USERNAME */
+
   if(botCreationStep==="username"){
 
-    const username =
-      text.trim();
-
-    if(!/^[A-Za-z][A-Za-z0-9_]{3,29}$/.test(username)){
+    if(
+      !/^[A-Za-z][A-Za-z0-9_]{3,29}$/
+      .test(text)
+    ){
 
       addMessage(
         currentBot.id,
@@ -2838,14 +2448,9 @@ function processBotCreation(text){
         `
 ❌ Неправильный username.
 
-Требования:
+Первый символ должен быть английской буквой.
 
-• от 4 до 30 символов;
-• английские буквы;
-• цифры;
-• _
-
-Первый символ должен быть буквой.
+Попробуй ещё раз.
         `.trim()
       );
 
@@ -2854,12 +2459,11 @@ function processBotCreation(text){
 
 
     const exists =
-      getAllBots()
-        .some(
-          bot =>
-            bot.username.toLowerCase() ===
-            username.toLowerCase()
-        );
+      getAllBots().some(
+        bot =>
+          bot.username.toLowerCase()===
+          text.toLowerCase()
+      );
 
 
     if(exists){
@@ -2868,9 +2472,9 @@ function processBotCreation(text){
         currentBot.id,
         "bot",
         `
-❌ Такой username уже существует.
+❌ Такой username уже занят.
 
-Придумай другой username.
+Придумай другой.
         `.trim()
       );
 
@@ -2878,145 +2482,603 @@ function processBotCreation(text){
     }
 
 
-    const newBot = {
+    botCreationUsername=text;
 
-      id:
-        "bot_" +
-        Date.now().toString(36),
-
-      name:
-        botCreationName,
-
-      username:
-        username,
-
-      description:
-        "Пользовательский бот Meowl Messenger.",
-
-      emoji:
-        "🤖",
-
-      official:false,
-
-      createdAt:
-        Date.now()
-
-    };
+    botCreationStep="avatar";
 
 
-    createdBots.push(newBot);
-
-    localStorage.setItem(
-      STORAGE.bots,
-      JSON.stringify(createdBots)
-    );
-
-
-    botChats[newBot.id]=[];
-
-    saveChats();
-
-
-    botCreationStep=null;
-
-    botCreationName="";
-
-
-    const link =
-      createBotLink(newBot.username);
-
-
-    addMessage(
-      currentBot.id,
-      "bot",
-      `
-🎉 Бот успешно создан!
-
-🤖 Имя:
-${newBot.name}
-
-👤 Username:
-@${newBot.username}
-
-🔗 Ссылка:
-${link}
-
-Бот уже добавлен в раздел:
-
-💬 Чаты
-
-Теперь ты можешь открыть его и общаться с ним.
-      `.trim()
-    );
-
-
-    renderChats();
-
-  }
-
-}
-
-
-/* ================= OVERRIDE SEND ================= */
-
-const originalSendCurrentMessage =
-  sendCurrentMessage;
-
-
-function sendMessageWithCreation(){
-
-  if(
-    currentBot &&
-    botCreationStep
-  ){
-
-    const input =
-      document.getElementById("chat-input");
-
-    const text =
-      input.value.trim();
-
-    if(!text){
-      return;
-    }
-
-    addMessage(
-      currentBot.id,
-      "user",
-      text
-    );
-
-    input.value="";
-
-    processBotCreation(text);
+    openAvatarCreation();
 
     return;
   }
 
-  originalSendCurrentMessage();
+
+  /* AVATAR */
+
+  if(botCreationStep==="avatar"){
+
+    return;
+  }
 
 }
 
 
-/* ================= REPLACE BUTTON ================= */
+/* =========================================================
+   AVATAR CREATION
+   ========================================================= */
 
-function sendCurrentMessage(){
+function openAvatarCreation(){
 
-  sendMessageWithCreation();
+  openModal(
+    "🖼️ Аватар бота",
+    `
+
+      <div style="text-align:center">
+
+        <div
+          id="avatar-preview"
+          class="preview-avatar"
+        >
+          🤖
+        </div>
+
+        <div class="setting-title">
+          Выбери аватар
+        </div>
+
+        <div class="avatar-picker">
+
+          <button
+            class="avatar-choice active"
+            onclick="selectBotEmoji('🤖',this)"
+          >
+            🤖
+          </button>
+
+          <button
+            class="avatar-choice"
+            onclick="selectBotEmoji('🐱',this)"
+          >
+            🐱
+          </button>
+
+          <button
+            class="avatar-choice"
+            onclick="selectBotEmoji('😺',this)"
+          >
+            😺
+          </button>
+
+          <button
+            class="avatar-choice"
+            onclick="selectBotEmoji('🐈',this)"
+          >
+            🐈
+          </button>
+
+          <button
+            class="avatar-choice"
+            onclick="selectBotEmoji('🦊',this)"
+          >
+            🦊
+          </button>
+
+          <button
+            class="avatar-choice"
+            onclick="selectBotEmoji('🐼',this)"
+          >
+            🐼
+          </button>
+
+          <button
+            class="avatar-choice"
+            onclick="selectBotEmoji('🐸',this)"
+          >
+            🐸
+          </button>
+
+          <button
+            class="avatar-choice"
+            onclick="selectBotEmoji('👾',this)"
+          >
+            👾
+          </button>
+
+          <button
+            class="avatar-choice"
+            onclick="selectBotEmoji('💜',this)"
+          >
+            💜
+          </button>
+
+          <button
+            class="avatar-choice"
+            onclick="selectBotEmoji('💠',this)"
+          >
+            💠
+          </button>
+
+          <button
+            class="avatar-choice"
+            onclick="selectBotEmoji('✨',this)"
+          >
+            ✨
+          </button>
+
+          <button
+            class="avatar-choice"
+            onclick="selectBotEmoji('🔥',this)"
+          >
+            🔥
+          </button>
+
+        </div>
+
+        <div style="height:18px"></div>
+
+        <div class="upload-box">
+
+          <div style="font-size:25px">
+            🖼️
+          </div>
+
+          <div style="margin:8px 0">
+            Или загрузи свою картинку
+          </div>
+
+          <input
+            id="bot-avatar-file"
+            type="file"
+            accept="image/*"
+            onchange="uploadBotAvatar(event)"
+            style="width:100%"
+          >
+
+        </div>
+
+        <div style="height:15px"></div>
+
+        <button
+          class="primary-button"
+          onclick="finishBotCreation()"
+        >
+          ✅ Создать бота
+        </button>
+
+      </div>
+
+    `
+  );
 
 }
 
 
-/* ================= BOT LINK ================= */
+/* =========================================================
+   SELECT EMOJI
+   ========================================================= */
+
+function selectBotEmoji(emoji,button){
+
+  newBotAvatar={
+    type:"emoji",
+    value:emoji
+  };
+
+
+  document
+    .querySelectorAll(".avatar-choice")
+    .forEach(el=>{
+      el.classList.remove("active");
+    });
+
+
+  button.classList.add("active");
+
+
+  const preview =
+    document.getElementById("avatar-preview");
+
+
+  if(preview){
+
+    preview.innerHTML=
+      escapeHtml(emoji);
+
+  }
+
+}
+
+
+/* =========================================================
+   UPLOAD AVATAR
+   ========================================================= */
+
+function uploadBotAvatar(event){
+
+  const file =
+    event.target.files[0];
+
+
+  if(!file){
+    return;
+  }
+
+
+  if(!file.type.startsWith("image/")){
+
+    showToast("Можно загрузить только изображение");
+
+    return;
+  }
+
+
+  if(file.size>2*1024*1024){
+
+    showToast("Максимальный размер — 2 МБ");
+
+    return;
+  }
+
+
+  const reader =
+    new FileReader();
+
+
+  reader.onload=function(){
+
+    newBotAvatar={
+      type:"image",
+      value:reader.result
+    };
+
+
+    const preview =
+      document.getElementById("avatar-preview");
+
+
+    if(preview){
+
+      preview.innerHTML=`
+        <img
+          src="${reader.result}"
+          alt="preview"
+        >
+      `;
+
+    }
+
+
+    document
+      .querySelectorAll(".avatar-choice")
+      .forEach(el=>{
+        el.classList.remove("active");
+      });
+
+  };
+
+
+  reader.readAsDataURL(file);
+
+}
+
+
+/* =========================================================
+   FINISH BOT CREATION
+   ========================================================= */
+
+function finishBotCreation(){
+
+  const bot={
+
+    id:
+      "bot_"+Date.now().toString(36),
+
+    name:
+      botCreationName,
+
+    username:
+      botCreationUsername,
+
+    description:
+      "Пользовательский бот Meowl Messenger.",
+
+    avatarType:
+      newBotAvatar.type,
+
+    avatar:
+      newBotAvatar.value,
+
+    emoji:
+      newBotAvatar.type==="emoji"
+      ? newBotAvatar.value
+      : "🤖",
+
+    official:false,
+
+    createdAt:
+      Date.now()
+
+  };
+
+
+  createdBots.push(bot);
+
+
+  localStorage.setItem(
+    STORAGE.bots,
+    JSON.stringify(createdBots)
+  );
+
+
+  botChats[bot.id]=[];
+
+  saveChats();
+
+
+  botCreationStep=null;
+
+  botCreationName="";
+
+  botCreationUsername="";
+
+
+  closeModal();
+
+
+  const link =
+    createBotLink(bot.username);
+
+
+  addMessage(
+    currentBot.id,
+    "bot",
+    `
+🎉 БОТ СОЗДАН!
+
+🤖 Имя:
+${bot.name}
+
+👤 Username:
+@${bot.username}
+
+🖼️ Аватар:
+${bot.avatarType==="image"
+  ? "Загруженное изображение"
+  : bot.avatar}
+
+🔗 Ссылка:
+${link}
+
+Бот уже появился в:
+
+💬 Чаты
+
+Нажми на него, чтобы открыть.
+    `.trim()
+  );
+
+
+  renderChats();
+
+  showToast("🎉 Бот создан");
+
+}
+
+
+/* =========================================================
+   EDIT BOT AVATAR
+   ========================================================= */
+
+function editBotAvatar(id){
+
+  const bot =
+    createdBots.find(
+      bot=>bot.id===id
+    );
+
+
+  if(!bot){
+    return;
+  }
+
+
+  newBotAvatar={
+    type:
+      bot.avatarType || "emoji",
+
+    value:
+      bot.avatar ||
+      bot.emoji ||
+      "🤖"
+  };
+
+
+  openModal(
+    "🖼️ Изменить аватар",
+    `
+
+      <div style="text-align:center">
+
+        <div
+          id="avatar-preview"
+          class="preview-avatar"
+        >
+
+          ${
+            newBotAvatar.type==="image"
+            ? `<img src="${escapeHtml(newBotAvatar.value)}">`
+            : escapeHtml(newBotAvatar.value)
+          }
+
+        </div>
+
+        <div class="setting-title">
+          Новый аватар
+        </div>
+
+        <div class="avatar-picker">
+
+          <button
+            class="avatar-choice"
+            onclick="selectBotEmoji('🤖',this)"
+          >🤖</button>
+
+          <button
+            class="avatar-choice"
+            onclick="selectBotEmoji('🐱',this)"
+          >🐱</button>
+
+          <button
+            class="avatar-choice"
+            onclick="selectBotEmoji('😺',this)"
+          >😺</button>
+
+          <button
+            class="avatar-choice"
+            onclick="selectBotEmoji('🐈',this)"
+          >🐈</button>
+
+          <button
+            class="avatar-choice"
+            onclick="selectBotEmoji('🦊',this)"
+          >🦊</button>
+
+          <button
+            class="avatar-choice"
+            onclick="selectBotEmoji('🐼',this)"
+          >🐼</button>
+
+          <button
+            class="avatar-choice"
+            onclick="selectBotEmoji('🐸',this)"
+          >🐸</button>
+
+          <button
+            class="avatar-choice"
+            onclick="selectBotEmoji('👾',this)"
+          >👾</button>
+
+          <button
+            class="avatar-choice"
+            onclick="selectBotEmoji('💜',this)"
+          >💜</button>
+
+          <button
+            class="avatar-choice"
+            onclick="selectBotEmoji('💠',this)"
+          >💠</button>
+
+          <button
+            class="avatar-choice"
+            onclick="selectBotEmoji('✨',this)"
+          >✨</button>
+
+          <button
+            class="avatar-choice"
+            onclick="selectBotEmoji('🔥',this)"
+          >🔥</button>
+
+        </div>
+
+        <div style="height:18px"></div>
+
+        <div class="upload-box">
+
+          <div style="margin-bottom:8px">
+            🖼️ Загрузить новую картинку
+          </div>
+
+          <input
+            type="file"
+            accept="image/*"
+            onchange="uploadBotAvatar(event)"
+          >
+
+        </div>
+
+        <div style="height:15px"></div>
+
+        <button
+          class="primary-button"
+          onclick="saveEditedBotAvatar('${escapeJs(id)}')"
+        >
+          💾 Сохранить аватар
+        </button>
+
+      </div>
+
+    `
+  );
+
+}
+
+
+/* =========================================================
+   SAVE EDITED AVATAR
+   ========================================================= */
+
+function saveEditedBotAvatar(id){
+
+  const bot =
+    createdBots.find(
+      bot=>bot.id===id
+    );
+
+
+  if(!bot){
+    return;
+  }
+
+
+  bot.avatarType=
+    newBotAvatar.type;
+
+
+  bot.avatar=
+    newBotAvatar.value;
+
+
+  bot.emoji=
+    newBotAvatar.type==="emoji"
+    ? newBotAvatar.value
+    : "🤖";
+
+
+  localStorage.setItem(
+    STORAGE.bots,
+    JSON.stringify(createdBots)
+  );
+
+
+  closeModal();
+
+  renderChats();
+
+
+  if(currentBot &&
+     currentBot.id===id){
+
+    currentBot=bot;
+
+    renderChatHeader();
+
+  }
+
+
+  showToast("🖼️ Аватар изменён");
+
+}
+
+
+/* =========================================================
+   BOT LINK
+   ========================================================= */
 
 function createBotLink(username){
 
-  const base =
-    window.location.origin +
-    window.location.pathname;
-
   return (
-    base +
+    window.location.origin +
+    window.location.pathname +
     "?bot=" +
     encodeURIComponent(username)
   );
@@ -3031,35 +3093,40 @@ function openBotFromUrl(){
       window.location.search
     );
 
+
   const username =
     params.get("bot");
+
 
   if(!username){
     return;
   }
 
+
   const bot =
-    getAllBots()
-      .find(
-        bot =>
-          bot.username.toLowerCase() ===
-          username.toLowerCase()
-      );
+    getAllBots().find(
+      bot =>
+        bot.username.toLowerCase()===
+        username.toLowerCase()
+    );
+
 
   if(bot){
 
     setTimeout(()=>{
       openBot(bot.id);
-    },200);
+    },300);
 
   }
 
 }
 
 
-/* ================= PEOPLE ================= */
+/* =========================================================
+   PEOPLE
+   ========================================================= */
 
-const localPeople = [
+const localPeople=[
 
   {
     id:"meowler",
@@ -3073,7 +3140,7 @@ const localPeople = [
     id:"meowl",
     name:"Meowl",
     username:"meowl",
-    description:"Создатель этого пространства ✨",
+    description:"Создатель Meowl ✨",
     emoji:"💜"
   },
 
@@ -3093,29 +3160,26 @@ function renderPeople(){
   const container =
     document.getElementById("people-list");
 
+
   if(!container){
     return;
   }
 
-  const input =
-    document.getElementById("people-search");
 
   const search =
-    input
-    ? input.value.toLowerCase().trim()
-    : "";
+    (
+      document.getElementById("people-search")
+      ?.value || ""
+    ).toLowerCase();
 
 
   const people =
-    localPeople.filter(person=>{
-
-      return (
-        !search ||
-        person.name.toLowerCase().includes(search) ||
+    localPeople.filter(
+      person =>
+        person.name.toLowerCase().includes(search)
+        ||
         person.username.toLowerCase().includes(search)
-      );
-
-    });
+    );
 
 
   if(!people.length){
@@ -3123,13 +3187,8 @@ function renderPeople(){
     container.innerHTML=`
 
       <div class="card empty">
-
-        <div class="empty-icon">
-          🔎
-        </div>
-
+        <div class="empty-icon">🔎</div>
         Пользователь не найден.
-
       </div>
 
     `;
@@ -3141,13 +3200,11 @@ function renderPeople(){
   container.innerHTML =
     people.map(person=>`
 
-      <div
-        class="list-item"
-        onclick="openPerson('${escapeJs(person.id)}')"
-      >
+      <div class="list-item"
+           onclick="openPerson('${escapeJs(person.id)}')">
 
         <div class="avatar">
-          ${person.emoji}
+          ${escapeHtml(person.emoji)}
         </div>
 
         <div class="list-main">
@@ -3162,9 +3219,7 @@ function renderPeople(){
 
         </div>
 
-        <div class="arrow">
-          ›
-        </div>
+        <div class="arrow">›</div>
 
       </div>
 
@@ -3177,8 +3232,9 @@ function openPerson(id){
 
   const person =
     localPeople.find(
-      person=>person.id===id
+      p=>p.id===id
     );
+
 
   if(!person){
     return;
@@ -3190,8 +3246,8 @@ function openPerson(id){
     `
       <div style="text-align:center">
 
-        <div class="profile-avatar">
-          ${person.emoji}
+        <div class="preview-avatar">
+          ${escapeHtml(person.emoji)}
         </div>
 
         <h2>
@@ -3202,18 +3258,9 @@ function openPerson(id){
           @${escapeHtml(person.username)}
         </p>
 
-        <div class="info-box" style="margin-top:15px">
+        <div class="info-box">
           ${escapeHtml(person.description)}
         </div>
-
-        <div style="height:10px"></div>
-
-        <button
-          class="primary-button"
-          onclick="closeModal();showToast('💬 Чат пока работает локально')"
-        >
-          💬 Написать
-        </button>
 
       </div>
     `
@@ -3222,62 +3269,48 @@ function openPerson(id){
 }
 
 
-/* ================= PROFILE ================= */
+/* =========================================================
+   PROFILE
+   ========================================================= */
 
 function loadProfile(){
 
-  const nickname =
+  const n=
     document.getElementById("nickname-input");
 
-  const username =
+  const u=
     document.getElementById("username-input");
 
-  const description =
+  const d=
     document.getElementById("description-input");
 
-  if(nickname){
-    nickname.value =
-      profile.nickname;
-  }
 
-  if(username){
-    username.value =
-      profile.username;
-  }
+  if(n)n.value=profile.nickname;
 
-  if(description){
-    description.value =
-      profile.description;
-  }
+  if(u)u.value=profile.username;
+
+  if(d)d.value=profile.description;
 
 }
 
 
 function saveProfile(){
 
-  const nickname =
-    document.getElementById("nickname-input").value.trim();
-
-  const username =
-    document.getElementById("username-input").value.trim();
-
-  const description =
-    document.getElementById("description-input").value.trim();
-
-
-  if(!nickname){
-
-    showToast("Введите имя");
-
-    return;
-  }
-
-
   profile={
-    nickname,
+
+    nickname:
+      document.getElementById("nickname-input")
+      .value.trim(),
+
     username:
-      username.replace(/^@/,""),
-    description
+      document.getElementById("username-input")
+      .value.trim()
+      .replace(/^@/,""),
+
+    description:
+      document.getElementById("description-input")
+      .value.trim()
+
   };
 
 
@@ -3292,85 +3325,58 @@ function saveProfile(){
 }
 
 
-/* ================= RULES ================= */
+/* =========================================================
+   INFO
+   ========================================================= */
 
 function openRules(){
 
   openModal(
     "📜 Правила",
-    `
-      <div class="info-box">
-        ${escapeHtml(rulesText)}
-      </div>
-    `
+    `<div class="info-box">
+      ${escapeHtml(rulesText)}
+    </div>`
   );
 
 }
 
-
-/* ================= BOT FEATURES ================= */
 
 function openBotFeatures(){
 
   openModal(
     "🤖 Возможности ботов",
-    `
-      <div class="info-box">
-        ${escapeHtml(botFeaturesText)}
-      </div>
-    `
+    `<div class="info-box">
+      ${escapeHtml(botFeaturesText)}
+    </div>`
   );
 
 }
 
-
-/* ================= ABOUT ================= */
 
 function openAbout(){
 
   openModal(
-    "ℹ️ О Meowl Messenger",
+    "ℹ️ Meowl Messenger",
     `
       <div class="info-box">
 
-        <h3>🐱 Meowl Messenger</h3>
+        🐱 Meowl Messenger
 
-        <p>
-          Красивый локальный веб-мессенджер
-          в стиле glass + neon.
-        </p>
+        Версия: ${APP_VERSION}
 
-        <p>
-          <b>Версия:</b> ${APP_VERSION}
-        </p>
+        Платформа: GitHub Pages
 
-        <p>
-          <b>Платформа:</b> GitHub Pages
-        </p>
+        Хранение: локальный браузер
 
-        <p>
-          <b>Хранение:</b> локально в браузере
-        </p>
+        Бэкенд: отсутствует
 
-        <p>
-          <b>Бэкенд:</b> отсутствует
-        </p>
+        Боты: локальные
 
-        <p>
-          <b>Боты:</b> локальные
-        </p>
+        Аватары ботов:
+        emoji + загрузка изображения
 
-        <p>
-          <b>Настройки:</b> сохраняются автоматически
-        </p>
-
-        <hr style="border-color:var(--border)">
-
-        <p>
-          💜 Meowl Messenger создан для
-          общения, экспериментов и красивого
-          интерфейса.
-        </p>
+        Настройки:
+        localStorage
 
       </div>
     `
@@ -3379,15 +3385,19 @@ function openAbout(){
 }
 
 
-/* ================= MODAL ================= */
+/* =========================================================
+   MODAL
+   ========================================================= */
 
 function openModal(title,content){
 
   document.getElementById("modal-title")
     .textContent=title;
 
+
   document.getElementById("modal-content")
     .innerHTML=content;
+
 
   document.getElementById("modal")
     .classList.add("show");
@@ -3403,17 +3413,20 @@ function closeModal(){
 }
 
 
-document.getElementById("modal")
-  .addEventListener("click",function(event){
+document
+  .getElementById("modal")
+  .addEventListener("click",e=>{
 
-    if(event.target===this){
+    if(e.target===e.currentTarget){
       closeModal();
     }
 
   });
 
 
-/* ================= TOAST ================= */
+/* =========================================================
+   TOAST
+   ========================================================= */
 
 let toastTimer;
 
@@ -3423,43 +3436,25 @@ function showToast(text){
   const toast =
     document.getElementById("toast");
 
+
   toast.textContent=text;
 
   toast.classList.add("show");
 
+
   clearTimeout(toastTimer);
 
-  toastTimer =
-    setTimeout(()=>{
-      toast.classList.remove("show");
-    },2200);
+
+  toastTimer=setTimeout(()=>{
+    toast.classList.remove("show");
+  },2200);
 
 }
 
 
-/* ================= COPY LINK ================= */
-
-function copyText(text){
-
-  if(navigator.clipboard){
-
-    navigator.clipboard.writeText(text)
-      .then(()=>{
-        showToast("🔗 Ссылка скопирована");
-      })
-      .catch(()=>{
-        showToast("Не удалось скопировать");
-      });
-
-    return;
-  }
-
-  showToast("Скопируй ссылку вручную");
-
-}
-
-
-/* ================= ESCAPE ================= */
+/* =========================================================
+   ESCAPE
+   ========================================================= */
 
 function escapeHtml(text){
 
@@ -3481,27 +3476,17 @@ function escapeJs(text){
 }
 
 
-/* ================= CLOSE MODAL ON ESC ================= */
+/* =========================================================
+   ESC
+   ========================================================= */
 
-document.addEventListener("keydown",event=>{
+document.addEventListener("keydown",e=>{
 
-  if(event.key==="Escape"){
-
+  if(e.key==="Escape"){
     closeModal();
-
   }
 
 });
-
-
-/* ================= GLOBAL CLICK ================= */
-
-window.addEventListener("click",()=>{
-
-  /* intentionally empty */
-
-});
-
 
 </script>
 

@@ -6,90 +6,66 @@
   <title>Meowl Messenger</title>
   <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
 
 <div class="container">
 
-  <!-- ВХОД -->
   <div id="authScreen" class="card">
 
     <div class="logo">M</div>
 
     <h1>Meowl Messenger</h1>
-
-    <p class="subtitle">
-      Общайся. Создавай. Будь собой.
-    </p>
+    <p class="subtitle">Общайся. Создавай. Будь собой.</p>
 
     <div class="tabs">
-      <button id="loginTab" class="tab active">
+      <button id="loginTab" class="tab active" onclick="setMode('login')">
         Войти
       </button>
 
-      <button id="registerTab" class="tab">
+      <button id="registerTab" class="tab" onclick="setMode('register')">
         Регистрация
       </button>
     </div>
 
-    <input
-      id="email"
-      type="email"
-      placeholder="Email"
-    >
+    <input id="email" type="email" placeholder="Email">
+    <input id="password" type="password" placeholder="Пароль">
 
-    <input
-      id="password"
-      type="password"
-      placeholder="Пароль"
-    >
-
-    <button id="authButton" class="main-btn">
-      Войти
+    <button class="main-btn" onclick="auth()">
+      <span id="authButtonText">Войти</span>
     </button>
 
     <p id="error"></p>
-
   </div>
 
 
-  <!-- МЕССЕНДЖЕР -->
   <div id="appScreen" class="app hidden">
 
     <header>
-
       <div>
         <h2 id="pageTitle">Чаты</h2>
         <p id="userEmail"></p>
       </div>
 
-      <button id="logoutButton" class="logout-btn">
+      <button class="logout-btn" onclick="logout()">
         Выйти
       </button>
-
     </header>
 
 
-    <!-- ЧАТЫ -->
-    <div id="chatsPage" class="page">
+    <section id="chatsPage">
 
       <div class="empty-card">
-
         <div class="chat-icon">💬</div>
 
         <h3>Пока нет чатов</h3>
 
-        <p>
-          Здесь появятся твои переписки.
-        </p>
-
+        <p>Здесь появятся твои переписки.</p>
       </div>
 
-    </div>
+    </section>
 
 
-    <!-- ПРОФИЛЬ -->
-    <div id="profilePage" class="page hidden">
+    <section id="profilePage" class="hidden">
 
       <div class="profile-card">
 
@@ -97,43 +73,37 @@
           <img id="avatarPreview" alt="Аватар">
         </div>
 
-        <h2 id="profileNickname">
-          Профиль
-        </h2>
+        <h2 id="profileNickname">Профиль</h2>
 
         <p id="profileDescription">
           Описание профиля
         </p>
 
-        <button id="editProfileButton" class="main-btn">
+        <button class="main-btn" onclick="editProfile()">
           ✏️ Изменить профиль
         </button>
 
       </div>
 
 
-      <!-- РЕДАКТИРОВАНИЕ -->
-      <div id="editProfile" class="edit-card hidden">
+      <div id="editBox" class="edit-card hidden">
 
         <h2>Изменить профиль</h2>
 
-
-        <!-- ФОТО -->
         <label>Аватар</label>
 
-        <button id="avatarButton" class="main-btn">
-          📷 Выбрать фото с устройства
+        <button class="main-btn" onclick="chooseAvatar()">
+          📷 Выбрать фото
         </button>
 
         <input
           id="avatarInput"
           type="file"
           accept="image/*"
-          hidden
+          style="display:none"
+          onchange="changeAvatar(event)"
         >
 
-
-        <!-- НИК -->
         <label>Никнейм</label>
 
         <input
@@ -143,8 +113,6 @@
           placeholder="Твой никнейм"
         >
 
-
-        <!-- ОПИСАНИЕ -->
         <label>Описание</label>
 
         <textarea
@@ -153,8 +121,6 @@
           placeholder="Расскажи о себе..."
         ></textarea>
 
-
-        <!-- ПОЧТА -->
         <label>Почта</label>
 
         <input
@@ -164,15 +130,11 @@
           readonly
         >
 
-
-        <!-- СОХРАНИТЬ -->
-        <button id="saveProfileButton" class="main-btn">
-          💾 Сохранить профиль
+        <button class="main-btn" onclick="saveProfile()">
+          💾 Сохранить
         </button>
 
-
-        <!-- ОТМЕНА -->
-        <button id="cancelProfileButton" class="cancel-btn">
+        <button class="cancel-btn" onclick="closeEdit()">
           Отмена
         </button>
 
@@ -180,27 +142,27 @@
 
       </div>
 
-    </div>
+    </section>
 
 
-    <!-- НИЖНИЕ КНОПКИ -->
     <nav class="bottom-nav">
 
-      <button id="chatsNav" class="nav-btn active">
-
+      <button
+        id="chatsButton"
+        class="nav-btn active"
+        onclick="showChats()"
+      >
         <span>💬</span>
-
         Чаты
-
       </button>
 
-
-      <button id="profileNav" class="nav-btn">
-
+      <button
+        id="profileButton"
+        class="nav-btn"
+        onclick="showProfile()"
+      >
         <span>👤</span>
-
         Профиль
-
       </button>
 
     </nav>

@@ -12,22 +12,17 @@
     padding:0;
 }
 
-html,body{
-    min-height:100%;
-}
-
 body{
+    min-height:100vh;
     font-family:Arial,Helvetica,sans-serif;
     color:#fff;
     background:
-        radial-gradient(circle at 15% 10%,rgba(123,52,255,.30),transparent 35%),
-        radial-gradient(circle at 85% 90%,rgba(0,225,255,.18),transparent 35%),
+        radial-gradient(circle at 15% 10%,#702cff55,transparent 35%),
+        radial-gradient(circle at 85% 90%,#00eaff33,transparent 35%),
         #080812;
 }
 
-button,
-input,
-textarea{
+button,input,textarea{
     font:inherit;
 }
 
@@ -36,12 +31,10 @@ button{
 }
 
 .hidden{
-    display:none !important;
+    display:none!important;
 }
 
-/* =========================
-   AUTH
-========================= */
+/* AUTH */
 
 .auth-screen{
     min-height:100vh;
@@ -53,33 +46,32 @@ button{
 
 .auth-card{
     width:100%;
-    max-width:420px;
+    max-width:430px;
     padding:30px;
-    border:1px solid rgba(255,255,255,.10);
-    border-radius:28px;
-    background:rgba(255,255,255,.06);
+    border:1px solid #ffffff18;
+    border-radius:30px;
+    background:#ffffff0b;
     backdrop-filter:blur(25px);
     -webkit-backdrop-filter:blur(25px);
-    box-shadow:
-        0 0 60px rgba(125,60,255,.18),
-        inset 0 1px 0 rgba(255,255,255,.06);
+    box-shadow:0 0 60px #7c3cff22;
 }
 
 .logo{
     text-align:center;
-    font-size:34px;
+    font-size:38px;
     font-weight:800;
-    margin-bottom:8px;
+    line-height:1.15;
 }
 
 .logo span{
-    color:#9d67ff;
+    color:#a365ff;
 }
 
 .subtitle{
+    margin:14px 0 25px;
     text-align:center;
-    color:#999;
-    margin-bottom:25px;
+    color:#aaa;
+    font-size:18px;
 }
 
 .tabs{
@@ -90,17 +82,16 @@ button{
 
 .tabs button{
     flex:1;
+    padding:14px;
     border:0;
-    padding:12px;
-    border-radius:14px;
-    color:#888;
-    background:rgba(255,255,255,.05);
+    border-radius:16px;
+    color:#999;
+    background:#ffffff08;
 }
 
 .tabs button.active{
     color:#fff;
-    background:linear-gradient(135deg,#813dff,#00cfff);
-    box-shadow:0 0 20px rgba(125,60,255,.20);
+    background:linear-gradient(135deg,#813cff,#00caff);
 }
 
 .field{
@@ -109,12 +100,12 @@ button{
 
 .field input{
     width:100%;
-    padding:14px 16px;
-    border:1px solid rgba(255,255,255,.10);
-    border-radius:15px;
+    padding:16px;
+    border:1px solid #ffffff15;
+    border-radius:17px;
     outline:none;
     color:#fff;
-    background:rgba(255,255,255,.06);
+    background:#ffffff09;
 }
 
 .field input::placeholder{
@@ -122,38 +113,28 @@ button{
 }
 
 .field input:focus{
-    border-color:rgba(137,72,255,.75);
-    box-shadow:0 0 20px rgba(125,60,255,.15);
+    border-color:#974cffaa;
+    box-shadow:0 0 20px #873cff22;
 }
 
 .main-btn{
     width:100%;
-    padding:14px;
+    padding:16px;
     border:0;
-    border-radius:15px;
+    border-radius:17px;
     color:#fff;
     font-weight:700;
-    background:linear-gradient(135deg,#813dff,#00cfff);
-    box-shadow:0 8px 25px rgba(70,70,255,.15);
-}
-
-.main-btn:active,
-.save-btn:active,
-.send-btn:active{
-    transform:scale(.98);
+    background:linear-gradient(135deg,#813cff,#00caff);
 }
 
 .error{
-    min-height:20px;
-    margin-top:12px;
+    min-height:22px;
+    margin-top:14px;
     text-align:center;
-    color:#ff6c8b;
-    font-size:14px;
+    color:#ff6687;
 }
 
-/* =========================
-   APP
-========================= */
+/* APP */
 
 .app{
     min-height:100vh;
@@ -163,7 +144,7 @@ button{
 .screen{
     width:100%;
     max-width:850px;
-    margin:0 auto;
+    margin:auto;
     padding:20px;
 }
 
@@ -173,10 +154,9 @@ button{
     z-index:5;
     margin:-20px -20px 20px;
     padding:20px;
-    border-bottom:1px solid rgba(255,255,255,.06);
-    background:rgba(8,8,18,.78);
+    border-bottom:1px solid #ffffff0c;
+    background:#080812dd;
     backdrop-filter:blur(20px);
-    -webkit-backdrop-filter:blur(20px);
 }
 
 .topbar h1{
@@ -185,22 +165,17 @@ button{
 
 .search{
     width:100%;
+    padding:15px;
     margin-bottom:15px;
-    padding:14px 16px;
-    border:1px solid rgba(255,255,255,.10);
-    border-radius:15px;
+    border:1px solid #ffffff15;
+    border-radius:16px;
     outline:none;
     color:#fff;
-    background:rgba(255,255,255,.06);
+    background:#ffffff09;
 }
 
 .search::placeholder{
     color:#777;
-}
-
-.search:focus{
-    border-color:rgba(137,72,255,.75);
-    box-shadow:0 0 20px rgba(125,60,255,.12);
 }
 
 .list{
@@ -213,24 +188,23 @@ button{
 .chat-card,
 .setting-card{
     padding:16px;
-    border:1px solid rgba(255,255,255,.09);
+    border:1px solid #ffffff12;
     border-radius:20px;
-    background:rgba(255,255,255,.055);
+    background:#ffffff09;
     backdrop-filter:blur(15px);
-    -webkit-backdrop-filter:blur(15px);
 }
 
 .user-card,
 .chat-card{
     cursor:pointer;
-    transition:.18s;
+    transition:.2s;
 }
 
 .user-card:hover,
 .chat-card:hover{
     transform:translateY(-1px);
-    border-color:rgba(141,82,255,.38);
-    background:rgba(255,255,255,.08);
+    border-color:#8d52ff55;
+    background:#ffffff0d;
 }
 
 .user-name{
@@ -240,7 +214,7 @@ button{
 
 .user-handle{
     margin-top:5px;
-    color:#9d78ff;
+    color:#9c72ff;
     font-size:14px;
 }
 
@@ -248,7 +222,6 @@ button{
     margin-top:8px;
     color:#999;
     font-size:13px;
-    line-height:1.4;
 }
 
 .empty{
@@ -258,14 +231,12 @@ button{
     line-height:1.6;
 }
 
-/* =========================
-   CHAT
-========================= */
+/* CHAT */
 
 .chat-screen{
     height:calc(100vh - 82px);
     max-width:850px;
-    margin:0 auto;
+    margin:auto;
     display:flex;
     flex-direction:column;
 }
@@ -275,18 +246,17 @@ button{
     align-items:center;
     gap:12px;
     padding:15px 20px;
-    border-bottom:1px solid rgba(255,255,255,.07);
-    background:rgba(8,8,18,.85);
+    border-bottom:1px solid #ffffff0d;
+    background:#080812dd;
     backdrop-filter:blur(20px);
-    -webkit-backdrop-filter:blur(20px);
 }
 
 .back-btn{
-    padding:10px 13px;
+    padding:10px 14px;
     border:0;
-    border-radius:12px;
+    border-radius:13px;
     color:#fff;
-    background:rgba(255,255,255,.07);
+    background:#ffffff0a;
 }
 
 .chat-title{
@@ -319,45 +289,39 @@ button{
 
 .message.other{
     align-self:flex-start;
-    border:1px solid rgba(255,255,255,.07);
+    border:1px solid #ffffff0c;
     border-bottom-left-radius:5px;
-    background:rgba(255,255,255,.07);
+    background:#ffffff0b;
 }
 
 .chat-form{
     display:flex;
     gap:8px;
     padding:12px 15px;
-    border-top:1px solid rgba(255,255,255,.07);
-    background:rgba(8,8,18,.94);
+    border-top:1px solid #ffffff0d;
+    background:#080812f2;
 }
 
 .chat-form input{
     flex:1;
     min-width:0;
-    padding:13px;
-    border:1px solid rgba(255,255,255,.10);
+    padding:14px;
+    border:1px solid #ffffff15;
     border-radius:15px;
     outline:none;
     color:#fff;
-    background:rgba(255,255,255,.06);
-}
-
-.chat-form input::placeholder{
-    color:#777;
+    background:#ffffff09;
 }
 
 .send-btn{
-    width:48px;
+    width:50px;
     border:0;
     border-radius:15px;
     color:#fff;
-    background:linear-gradient(135deg,#813dff,#00cfff);
+    background:linear-gradient(135deg,#813cff,#00caff);
 }
 
-/* =========================
-   SETTINGS
-========================= */
+/* SETTINGS */
 
 .setting-card{
     margin-bottom:12px;
@@ -369,62 +333,48 @@ button{
     font-size:13px;
 }
 
-.account-email{
-    color:#bbb;
-    word-break:break-all;
-}
-
 .setting-card input,
 .setting-card textarea{
     width:100%;
-    padding:13px;
-    border:1px solid rgba(255,255,255,.10);
-    border-radius:14px;
+    padding:14px;
+    border:1px solid #ffffff15;
+    border-radius:15px;
     outline:none;
     color:#fff;
-    background:rgba(255,255,255,.06);
+    background:#ffffff09;
 }
 
-.setting-card input::placeholder,
-.setting-card textarea::placeholder{
-    color:#777;
-}
-
-.setting-card input:focus,
-.setting-card textarea:focus{
-    border-color:rgba(137,72,255,.75);
+.setting-card textarea{
+    resize:none;
 }
 
 .setting-hint{
     margin-top:8px;
     color:#777;
     font-size:12px;
-    line-height:1.4;
 }
 
 .save-btn{
     width:100%;
-    padding:13px;
+    padding:14px;
     border:0;
-    border-radius:14px;
+    border-radius:15px;
     color:#fff;
     font-weight:700;
-    background:linear-gradient(135deg,#813dff,#00cfff);
+    background:linear-gradient(135deg,#813cff,#00caff);
 }
 
 .logout{
     width:100%;
     margin-top:15px;
-    padding:13px;
-    border:1px solid rgba(255,82,112,.35);
-    border-radius:14px;
+    padding:14px;
+    border:1px solid #ff527055;
+    border-radius:15px;
     color:#ff7190;
-    background:rgba(255,65,96,.08);
+    background:#ff416012;
 }
 
-/* =========================
-   NAVIGATION
-========================= */
+/* NAV */
 
 .bottom-nav{
     position:fixed;
@@ -432,21 +382,14 @@ button{
     right:0;
     bottom:0;
     z-index:20;
-
     height:75px;
-
     display:flex;
     justify-content:center;
     gap:8px;
-
     padding:10px;
-
-    border-top:1px solid rgba(255,255,255,.08);
-
-    background:rgba(8,8,18,.92);
-
-    backdrop-filter:blur(22px);
-    -webkit-backdrop-filter:blur(22px);
+    border-top:1px solid #ffffff10;
+    background:#080812ef;
+    backdrop-filter:blur(20px);
 }
 
 .nav-btn{
@@ -461,10 +404,7 @@ button{
 
 .nav-btn.active{
     color:#fff;
-    background:rgba(255,255,255,.07);
-    box-shadow:
-        inset 0 0 20px rgba(125,60,255,.08),
-        0 0 15px rgba(125,60,255,.05);
+    background:#ffffff0d;
 }
 
 @media(max-width:500px){
@@ -485,19 +425,13 @@ button{
     .message{
         max-width:85%;
     }
-
-    .bottom-nav{
-        height:72px;
-    }
 }
 </style>
 </head>
 
 <body>
 
-<!-- =========================
-     AUTH
-========================= -->
+<!-- AUTH -->
 
 <div id="authScreen" class="auth-screen">
 
@@ -530,7 +464,6 @@ button{
                     id="email"
                     type="email"
                     placeholder="Email"
-                    autocomplete="email"
                     required
                 >
             </div>
@@ -540,7 +473,6 @@ button{
                     id="password"
                     type="password"
                     placeholder="Пароль"
-                    autocomplete="current-password"
                     minlength="6"
                     required
                 >
@@ -563,9 +495,7 @@ button{
 </div>
 
 
-<!-- =========================
-     APP
-========================= -->
+<!-- APP -->
 
 <div id="app" class="app hidden">
 
@@ -580,7 +510,6 @@ button{
         <input
             id="chatSearch"
             class="search"
-            type="text"
             placeholder="🔎 Найти по @username"
             autocomplete="off"
         >
@@ -601,7 +530,6 @@ button{
         <input
             id="userSearch"
             class="search"
-            type="text"
             placeholder="🔎 Найти по @username"
             autocomplete="off"
         >
@@ -626,14 +554,12 @@ button{
                 <div
                     id="chatTitle"
                     class="chat-title"
-                >
-                </div>
+                ></div>
 
                 <div
                     id="chatHandle"
                     class="user-handle"
-                >
-                </div>
+                ></div>
 
             </div>
 
@@ -642,8 +568,7 @@ button{
         <div
             id="messages"
             class="chat-messages"
-        >
-        </div>
+        ></div>
 
         <form
             id="messageForm"
@@ -652,7 +577,6 @@ button{
 
             <input
                 id="messageInput"
-                type="text"
                 maxlength="2000"
                 placeholder="Написать сообщение..."
                 autocomplete="off"
@@ -681,21 +605,15 @@ button{
             <h1>⚙️ Настройки</h1>
         </div>
 
-
         <div class="setting-card">
 
             <div class="setting-title">
                 Аккаунт
             </div>
 
-            <div
-                id="accountEmail"
-                class="account-email"
-            >
-            </div>
+            <div id="accountEmail"></div>
 
         </div>
-
 
         <div class="setting-card">
 
@@ -705,19 +623,16 @@ button{
 
             <input
                 id="usernameInput"
-                type="text"
                 maxlength="21"
                 placeholder="@username"
                 autocomplete="off"
             >
 
             <div class="setting-hint">
-                Можно использовать латинские буквы,
-                цифры и _. Длина после @ — от 3 до 20 символов.
+                3–20 символов после @: a-z, 0-9 и _
             </div>
 
         </div>
-
 
         <div class="setting-card">
 
@@ -727,13 +642,11 @@ button{
 
             <input
                 id="nicknameInput"
-                type="text"
                 maxlength="40"
                 placeholder="Твой никнейм"
             >
 
         </div>
-
 
         <div class="setting-card">
 
@@ -750,7 +663,6 @@ button{
 
         </div>
 
-
         <button
             id="saveProfile"
             class="save-btn"
@@ -761,49 +673,41 @@ button{
         <div
             id="profileMessage"
             class="error"
-        >
-        </div>
-
+        ></div>
 
         <button
             id="logoutButton"
             class="logout"
         >
-            🚪 Выйти из аккаунта
+            🚪 Выйти
         </button>
 
     </section>
 
 
-    <!-- BOTTOM NAV -->
+    <!-- NAV -->
 
-    <nav
-        id="bottomNav"
-        class="bottom-nav"
-    >
+    <nav class="bottom-nav">
 
         <button
             id="navChats"
             class="nav-btn active"
         >
-            💬<br>
-            Чаты
+            💬<br>Чаты
         </button>
 
         <button
             id="navUsers"
             class="nav-btn"
         >
-            👥<br>
-            Пользователи
+            👥<br>Пользователи
         </button>
 
         <button
             id="navSettings"
             class="nav-btn"
         >
-            ⚙️<br>
-            Настройки
+            ⚙️<br>Настройки
         </button>
 
     </nav>
@@ -813,9 +717,9 @@ button{
 
 <script type="module">
 
-/* =====================================================
-   FIREBASE IMPORTS
-===================================================== */
+/* =========================================
+   FIREBASE
+========================================= */
 
 import {
     initializeApp
@@ -836,16 +740,16 @@ import {
     get,
     push,
     onValue,
-    serverTimestamp,
     update,
     remove,
-    runTransaction
+    runTransaction,
+    serverTimestamp
 } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-database.js";
 
 
-/* =====================================================
-   ТВОЙ FIREBASE CONFIG
-===================================================== */
+/* =========================================
+   ВОТ ТВОЙ API KEY
+========================================= */
 
 const firebaseConfig = {
 
@@ -875,9 +779,9 @@ const firebaseConfig = {
 };
 
 
-/* =====================================================
-   START FIREBASE
-===================================================== */
+/* =========================================
+   INIT
+========================================= */
 
 const firebaseApp =
     initializeApp(firebaseConfig);
@@ -889,29 +793,28 @@ const db =
     getDatabase(firebaseApp);
 
 
-/* =====================================================
+/* =========================================
    STATE
-===================================================== */
+========================================= */
 
 let currentUser = null;
 let currentProfile = null;
 
-let allUsers = {};
-let allChats = {};
+let users = {};
+let chats = {};
 
 let currentChatId = null;
-let currentChatUser = null;
 
-let unsubscribeUsers = null;
-let unsubscribeChats = null;
-let unsubscribeMessages = null;
+let stopUsers = null;
+let stopChats = null;
+let stopMessages = null;
 
 let registerMode = false;
 
 
-/* =====================================================
+/* =========================================
    ELEMENTS
-===================================================== */
+========================================= */
 
 const authScreen =
     document.getElementById("authScreen");
@@ -919,19 +822,13 @@ const authScreen =
 const app =
     document.getElementById("app");
 
-const loginTab =
-    document.getElementById("loginTab");
-
-const registerTab =
-    document.getElementById("registerTab");
-
 const authForm =
     document.getElementById("authForm");
 
-const emailInput =
+const email =
     document.getElementById("email");
 
-const passwordInput =
+const password =
     document.getElementById("password");
 
 const authButton =
@@ -939,6 +836,12 @@ const authButton =
 
 const authError =
     document.getElementById("authError");
+
+const loginTab =
+    document.getElementById("loginTab");
+
+const registerTab =
+    document.getElementById("registerTab");
 
 const chatsScreen =
     document.getElementById("chatsScreen");
@@ -952,32 +855,29 @@ const chatScreen =
 const settingsScreen =
     document.getElementById("settingsScreen");
 
+const usersList =
+    document.getElementById("usersList");
+
 const chatsList =
     document.getElementById("chatsList");
 
-const usersList =
-    document.getElementById("usersList");
+const userSearch =
+    document.getElementById("userSearch");
 
 const chatSearch =
     document.getElementById("chatSearch");
 
-const userSearch =
-    document.getElementById("userSearch");
+const messages =
+    document.getElementById("messages");
+
+const messageInput =
+    document.getElementById("messageInput");
 
 const chatTitle =
     document.getElementById("chatTitle");
 
 const chatHandle =
     document.getElementById("chatHandle");
-
-const messagesBox =
-    document.getElementById("messages");
-
-const messageForm =
-    document.getElementById("messageForm");
-
-const messageInput =
-    document.getElementById("messageInput");
 
 const usernameInput =
     document.getElementById("usernameInput");
@@ -994,21 +894,12 @@ const accountEmail =
 const profileMessage =
     document.getElementById("profileMessage");
 
-const navChats =
-    document.getElementById("navChats");
 
-const navUsers =
-    document.getElementById("navUsers");
+/* =========================================
+   AUTH MODE
+========================================= */
 
-const navSettings =
-    document.getElementById("navSettings");
-
-
-/* =====================================================
-   AUTH TABS
-===================================================== */
-
-loginTab.addEventListener("click", () => {
+loginTab.onclick = () => {
 
     registerMode = false;
 
@@ -1019,10 +910,10 @@ loginTab.addEventListener("click", () => {
 
     authError.textContent = "";
 
-});
+};
 
 
-registerTab.addEventListener("click", () => {
+registerTab.onclick = () => {
 
     registerMode = true;
 
@@ -1034,102 +925,91 @@ registerTab.addEventListener("click", () => {
 
     authError.textContent = "";
 
-});
+};
 
 
-/* =====================================================
-   AUTH FORM
-===================================================== */
+/* =========================================
+   LOGIN / REGISTER
+========================================= */
 
-authForm.addEventListener(
-    "submit",
-    async event => {
+authForm.onsubmit = async event => {
 
-        event.preventDefault();
+    event.preventDefault();
 
-        authError.textContent = "";
+    authError.textContent = "";
 
-        const email =
-            emailInput.value.trim();
+    const mail =
+        email.value.trim();
 
-        const password =
-            passwordInput.value;
+    const pass =
+        password.value;
 
-        authButton.disabled = true;
+    try {
 
-        try {
+        if(registerMode){
 
-            if(registerMode){
-
-                const result =
-                    await createUserWithEmailAndPassword(
-                        auth,
-                        email,
-                        password
-                    );
-
-                await createInitialProfile(
-                    result.user
-                );
-
-            }else{
-
-                await signInWithEmailAndPassword(
+            const result =
+                await createUserWithEmailAndPassword(
                     auth,
-                    email,
-                    password
+                    mail,
+                    pass
                 );
 
-            }
+            await createProfile(
+                result.user
+            );
 
-        }catch(error){
+        }else{
 
-            console.error(error);
-
-            authError.textContent =
-                firebaseError(error.code);
-
-        }finally{
-
-            authButton.disabled = false;
+            await signInWithEmailAndPassword(
+                auth,
+                mail,
+                pass
+            );
 
         }
 
+    }catch(error){
+
+        console.error(error);
+
+        authError.textContent =
+            firebaseError(error.code);
+
     }
-);
+
+};
 
 
-/* =====================================================
-   CREATE PROFILE AFTER REGISTRATION
-===================================================== */
+/* =========================================
+   CREATE PROFILE
+========================================= */
 
-async function createInitialProfile(user){
-
-    const baseUsername =
-        "@user_" +
-        user.uid
-            .slice(0,8)
-            .toLowerCase();
+async function createProfile(user){
 
     let username =
-        baseUsername;
+        "@user_" +
+        user.uid
+            .substring(0,8)
+            .toLowerCase();
 
-    let number = 1;
+    let i = 1;
 
     while(true){
 
         const usernameRef =
             ref(
                 db,
-                "usernameIndex/" + username
+                "usernameIndex/" +
+                username
             );
 
-        const transaction =
+        const result =
             await runTransaction(
                 usernameRef,
-                currentValue => {
+                value => {
 
-                    if(currentValue === null){
+                    if(value === null){
 
                         return user.uid;
 
@@ -1140,16 +1020,15 @@ async function createInitialProfile(user){
                 }
             );
 
-        if(transaction.committed){
-
+        if(result.committed){
             break;
-
         }
 
         username =
-            baseUsername +
+            "@user_" +
+            user.uid.substring(0,8) +
             "_" +
-            number++;
+            i++;
 
     }
 
@@ -1159,23 +1038,22 @@ async function createInitialProfile(user){
             : "Пользователь";
 
     await set(
-        ref(db,"users/" + user.uid),
+        ref(
+            db,
+            "users/" +
+            user.uid
+        ),
         {
 
-            username:
-                username,
-
+            username,
             usernameLower:
                 username.toLowerCase(),
 
-            nickname:
-                nickname,
-
+            nickname,
             nicknameLower:
                 nickname.toLowerCase(),
 
-            description:
-                "",
+            description:"",
 
             createdAt:
                 serverTimestamp()
@@ -1186,55 +1064,54 @@ async function createInitialProfile(user){
 }
 
 
-/* =====================================================
+/* =========================================
    AUTH STATE
-===================================================== */
+========================================= */
 
 onAuthStateChanged(
     auth,
     async user => {
 
-        if(user){
-
-            currentUser = user;
-
-            authScreen.classList.add("hidden");
-
-            app.classList.remove("hidden");
-
-            try{
-
-                await loadProfile();
-
-                startUsersListener();
-
-                startChatsListener();
-
-                showScreen("chats");
-
-            }catch(error){
-
-                console.error(error);
-
-                authError.textContent =
-                    "Ошибка загрузки профиля.";
-
-            }
-
-        }else{
+        if(!user){
 
             currentUser = null;
 
-            currentProfile = null;
+            authScreen.classList.remove(
+                "hidden"
+            );
 
-            authScreen.classList.remove("hidden");
+            app.classList.add(
+                "hidden"
+            );
 
-            app.classList.add("hidden");
+            stopAll();
 
-            stopListeners();
+            return;
+        }
 
-            currentChatId = null;
-            currentChatUser = null;
+        currentUser = user;
+
+        authScreen.classList.add(
+            "hidden"
+        );
+
+        app.classList.remove(
+            "hidden"
+        );
+
+        try{
+
+            await loadProfile();
+
+            listenUsers();
+
+            listenChats();
+
+            showScreen("chats");
+
+        }catch(error){
+
+            console.error(error);
 
         }
 
@@ -1242,15 +1119,11 @@ onAuthStateChanged(
 );
 
 
-/* =====================================================
-   LOAD PROFILE
-===================================================== */
+/* =========================================
+   PROFILE
+========================================= */
 
 async function loadProfile(){
-
-    if(!currentUser){
-        return;
-    }
 
     const snapshot =
         await get(
@@ -1263,7 +1136,7 @@ async function loadProfile(){
 
     if(!snapshot.exists()){
 
-        await createInitialProfile(
+        await createProfile(
             currentUser
         );
 
@@ -1289,246 +1162,196 @@ async function loadProfile(){
 }
 
 
-/* =====================================================
+/* =========================================
    SAVE PROFILE
-===================================================== */
+========================================= */
 
-document
-    .getElementById("saveProfile")
-    .addEventListener(
-        "click",
-        async () => {
+document.getElementById(
+    "saveProfile"
+).onclick = async () => {
 
-            if(
-                !currentUser ||
-                !currentProfile
-            ){
-                return;
-            }
+    let username =
+        usernameInput.value
+            .trim()
+            .toLowerCase();
 
-            profileMessage.style.color =
-                "#ff7190";
+    if(!username.startsWith("@")){
+        username = "@" + username;
+    }
 
-            profileMessage.textContent = "";
+    if(!/^@[a-z0-9_]{3,20}$/.test(username)){
 
-            let username =
-                usernameInput.value
-                    .trim()
-                    .toLowerCase();
+        profileMessage.textContent =
+            "❌ Неверный @username";
 
-            if(!username.startsWith("@")){
+        return;
+    }
 
-                username =
-                    "@" + username;
+    const old =
+        String(
+            currentProfile.username || ""
+        ).toLowerCase();
 
-            }
+    try{
 
-            const validUsername =
-                /^@[a-z0-9_]{3,20}$/;
+        if(username !== old){
 
-            if(!validUsername.test(username)){
+            const newRef =
+                ref(
+                    db,
+                    "usernameIndex/" +
+                    username
+                );
 
-                profileMessage.textContent =
-                    "❌ Неверный @username. Используй 3–20 символов: a-z, 0-9, _";
+            const result =
+                await runTransaction(
+                    newRef,
+                    value => {
 
-                return;
-
-            }
-
-            const oldUsername =
-                String(
-                    currentProfile.username || ""
-                ).toLowerCase();
-
-            const nickname =
-                nicknameInput.value.trim();
-
-            const description =
-                descriptionInput.value.trim();
-
-            try{
-
-                /* =====================================
-                   USERNAME НЕ МЕНЯЛСЯ
-                ===================================== */
-
-                if(username === oldUsername){
-
-                    await update(
-                        ref(
-                            db,
-                            "users/" +
-                            currentUser.uid
-                        ),
-                        {
-
-                            nickname:
-                                nickname,
-
-                            nicknameLower:
-                                nickname.toLowerCase(),
-
-                            description:
-                                description
-
+                        if(value === null){
+                            return currentUser.uid;
                         }
-                    );
 
-                }
-
-                /* =====================================
-                   USERNAME МЕНЯЕТСЯ
-                ===================================== */
-
-                else{
-
-                    const newUsernameRef =
-                        ref(
-                            db,
-                            "usernameIndex/" +
-                            username
-                        );
-
-                    const transaction =
-                        await runTransaction(
-                            newUsernameRef,
-                            currentValue => {
-
-                                if(
-                                    currentValue === null
-                                ){
-
-                                    return currentUser.uid;
-
-                                }
-
-                                if(
-                                    currentValue ===
-                                    currentUser.uid
-                                ){
-
-                                    return currentValue;
-
-                                }
-
-                                return;
-
-                            }
-                        );
-
-                    if(!transaction.committed){
-
-                        profileMessage.textContent =
-                            "❌ Такой @username уже занят.";
+                        if(
+                            value ===
+                            currentUser.uid
+                        ){
+                            return value;
+                        }
 
                         return;
 
                     }
+                );
 
-                    try{
-
-                        await update(
-                            ref(
-                                db,
-                                "users/" +
-                                currentUser.uid
-                            ),
-                            {
-
-                                username:
-                                    username,
-
-                                usernameLower:
-                                    username,
-
-                                nickname:
-                                    nickname,
-
-                                nicknameLower:
-                                    nickname.toLowerCase(),
-
-                                description:
-                                    description
-
-                            }
-                        );
-
-                    }catch(error){
-
-                        await remove(
-                            newUsernameRef
-                        );
-
-                        throw error;
-
-                    }
-
-                    if(oldUsername){
-
-                        await remove(
-                            ref(
-                                db,
-                                "usernameIndex/" +
-                                oldUsername
-                            )
-                        );
-
-                    }
-
-                }
-
-                await loadProfile();
-
-                profileMessage.style.color =
-                    "#65ffad";
+            if(!result.committed){
 
                 profileMessage.textContent =
-                    "✅ Профиль сохранён";
+                    "❌ Такой @username уже занят";
 
-                setTimeout(
-                    () => {
+                return;
+            }
 
-                        profileMessage.textContent =
-                            "";
+            try{
 
-                    },
-                    2500
+                await update(
+                    ref(
+                        db,
+                        "users/" +
+                        currentUser.uid
+                    ),
+                    {
+
+                        username,
+                        usernameLower:
+                            username,
+
+                        nickname:
+                            nicknameInput.value.trim(),
+
+                        nicknameLower:
+                            nicknameInput.value
+                                .trim()
+                                .toLowerCase(),
+
+                        description:
+                            descriptionInput.value.trim()
+
+                    }
                 );
 
             }catch(error){
 
-                console.error(error);
+                await remove(newRef);
 
-                profileMessage.style.color =
-                    "#ff7190";
-
-                profileMessage.textContent =
-                    firebaseError(error.code);
+                throw error;
 
             }
 
+            if(old){
+
+                await remove(
+                    ref(
+                        db,
+                        "usernameIndex/" +
+                        old
+                    )
+                );
+
+            }
+
+        }else{
+
+            await update(
+                ref(
+                    db,
+                    "users/" +
+                    currentUser.uid
+                ),
+                {
+
+                    nickname:
+                        nicknameInput.value.trim(),
+
+                    nicknameLower:
+                        nicknameInput.value
+                            .trim()
+                            .toLowerCase(),
+
+                    description:
+                        descriptionInput.value.trim()
+
+                }
+            );
+
         }
-    );
 
+        await loadProfile();
 
-/* =====================================================
-   USERS REALTIME LISTENER
-===================================================== */
+        profileMessage.style.color =
+            "#65ffad";
 
-function startUsersListener(){
+        profileMessage.textContent =
+            "✅ Сохранено";
 
-    if(unsubscribeUsers){
+        setTimeout(
+            () => {
+                profileMessage.textContent = "";
+            },
+            2000
+        );
 
-        unsubscribeUsers();
+    }catch(error){
+
+        console.error(error);
+
+        profileMessage.style.color =
+            "#ff6687";
+
+        profileMessage.textContent =
+            "❌ Не удалось сохранить";
 
     }
 
-    unsubscribeUsers =
+};
+
+
+/* =========================================
+   USERS
+========================================= */
+
+function listenUsers(){
+
+    if(stopUsers){
+        stopUsers();
+    }
+
+    stopUsers =
         onValue(
             ref(db,"users"),
             snapshot => {
 
-                allUsers =
+                users =
                     snapshot.val() || {};
 
                 renderUsers();
@@ -1541,82 +1364,67 @@ function startUsersListener(){
 }
 
 
-/* =====================================================
-   RENDER USERS
-===================================================== */
-
 function renderUsers(){
 
     usersList.innerHTML = "";
 
-    const search =
+    const query =
         userSearch.value
             .trim()
             .toLowerCase();
 
-    const users =
-        Object.entries(allUsers)
+    const list =
+        Object.entries(users)
             .filter(
                 ([uid,user]) => {
 
                     if(
                         uid ===
-                        currentUser?.uid
+                        currentUser.uid
                     ){
                         return false;
                     }
 
-                    const username =
-                        String(
-                            user.usernameLower || ""
+                    const name =
+                        (
+                            user.usernameLower ||
+                            ""
                         ).toLowerCase();
 
-                    if(!search){
-                        return true;
-                    }
-
-                    return username.includes(search);
+                    return !query ||
+                        name.includes(query);
 
                 }
             )
             .sort(
-                ([,a],[,b]) => {
-
-                    const ua =
-                        a.usernameLower || "";
-
-                    const ub =
-                        b.usernameLower || "";
-
-                    return ua.localeCompare(ub);
-
-                }
+                ([,a],[,b]) =>
+                    (
+                        a.usernameLower || ""
+                    ).localeCompare(
+                        b.usernameLower || ""
+                    )
             );
 
+    if(!list.length){
 
-    if(users.length === 0){
-
-        usersList.innerHTML = `
-            <div class="empty">
+        usersList.innerHTML =
+            `<div class="empty">
                 Пользователи не найдены
-            </div>
-        `;
+            </div>`;
 
         return;
-
     }
 
-
-    users.forEach(
+    list.forEach(
         ([uid,user]) => {
 
-            const card =
+            const div =
                 document.createElement("div");
 
-            card.className =
+            div.className =
                 "user-card";
 
-            card.innerHTML = `
+            div.innerHTML = `
 
                 <div class="user-name">
                     ${escapeHtml(
@@ -1627,68 +1435,54 @@ function renderUsers(){
 
                 <div class="user-handle">
                     ${escapeHtml(
-                        user.username ||
-                        ""
+                        user.username || ""
                     )}
                 </div>
 
                 ${
                     user.description
                     ?
-                    `
-                    <div class="user-description">
+                    `<div class="user-description">
                         ${escapeHtml(
                             user.description
                         )}
-                    </div>
-                    `
+                    </div>`
                     :
                     ""
                 }
 
             `;
 
-            card.addEventListener(
-                "click",
-                () => openChat(uid)
-            );
+            div.onclick =
+                () => openChat(uid);
 
-            usersList.appendChild(card);
+            usersList.appendChild(div);
 
         }
     );
 
 }
 
-
-/* =====================================================
-   USER SEARCH
-===================================================== */
-
-userSearch.addEventListener(
-    "input",
-    renderUsers
-);
+userSearch.oninput =
+    renderUsers;
 
 
-/* =====================================================
-   CHATS LISTENER
-===================================================== */
+/* =========================================
+   CHATS
+========================================= */
 
-function startChatsListener(){
+function listenChats(){
 
-    if(unsubscribeChats){
-
-        unsubscribeChats();
-
+    if(stopChats){
+        stopChats();
     }
 
-    unsubscribeChats =
+    stopChats =
         onValue(
             ref(db,"chats"),
             snapshot => {
 
-                allChats =
+                chats =
                     snapshot.val() || {};
 
                 renderChats();
@@ -1699,227 +1493,162 @@ function startChatsListener(){
 }
 
 
-/* =====================================================
-   RENDER CHATS
-===================================================== */
-
 function renderChats(){
 
     chatsList.innerHTML = "";
 
-    const search =
+    const query =
         chatSearch.value
             .trim()
             .toLowerCase();
 
-    const result = [];
+    const list = [];
 
-
-    Object.entries(allChats)
+    Object.entries(chats)
         .forEach(
             ([chatId,chat]) => {
 
                 if(
-                    !chat ||
                     !chat.participants ||
                     !chat.participants[
-                        currentUser?.uid
+                        currentUser.uid
                     ]
                 ){
-
                     return;
-
                 }
-
 
                 const ids =
                     Object.keys(
                         chat.participants
                     );
 
-                const otherUid =
+                const otherId =
                     ids.find(
                         id =>
                             id !==
                             currentUser.uid
                     );
 
-                if(!otherUid){
+                if(!otherId){
                     return;
                 }
 
+                const user =
+                    users[otherId];
 
-                const other =
-                    allUsers[otherUid];
-
-                if(!other){
+                if(!user){
                     return;
                 }
-
 
                 const username =
-                    String(
-                        other.usernameLower ||
+                    (
+                        user.usernameLower ||
                         ""
                     ).toLowerCase();
 
-
                 if(
-                    search &&
-                    !username.includes(search)
+                    query &&
+                    !username.includes(query)
                 ){
-
                     return;
-
                 }
 
-
-                result.push({
-
-                    chatId:
-                        chatId,
-
-                    otherUid:
-                        otherUid,
-
-                    other:
-                        other
-
+                list.push({
+                    chatId,
+                    otherId,
+                    user
                 });
 
             }
         );
 
+    if(!list.length){
 
-    if(result.length === 0){
-
-        chatsList.innerHTML = `
-            <div class="empty">
+        chatsList.innerHTML =
+            `<div class="empty">
                 Пока нет чатов.<br>
-                Открой «Пользователи» и выбери человека.
-            </div>
-        `;
+                Открой «Пользователи».
+            </div>`;
 
         return;
-
     }
 
+    list.forEach(item => {
 
-    result.forEach(
-        item => {
+        const div =
+            document.createElement("div");
 
-            const card =
-                document.createElement("div");
+        div.className =
+            "chat-card";
 
-            card.className =
-                "chat-card";
+        div.innerHTML = `
 
-            card.innerHTML = `
+            <div class="user-name">
+                ${escapeHtml(
+                    item.user.nickname ||
+                    "Пользователь"
+                )}
+            </div>
 
-                <div class="user-name">
-                    ${escapeHtml(
-                        item.other.nickname ||
-                        "Пользователь"
-                    )}
-                </div>
+            <div class="user-handle">
+                ${escapeHtml(
+                    item.user.username || ""
+                )}
+            </div>
 
-                <div class="user-handle">
-                    ${escapeHtml(
-                        item.other.username ||
-                        ""
-                    )}
-                </div>
+        `;
 
-            `;
-
-            card.addEventListener(
-                "click",
-                () =>
-                    openChat(
-                        item.otherUid
-                    )
+        div.onclick =
+            () => openChat(
+                item.otherId
             );
 
-            chatsList.appendChild(card);
+        chatsList.appendChild(div);
 
-        }
-    );
+    });
 
 }
 
-
-/* =====================================================
-   CHAT SEARCH
-===================================================== */
-
-chatSearch.addEventListener(
-    "input",
-    renderChats
-);
+chatSearch.oninput =
+    renderChats;
 
 
-/* =====================================================
+/* =========================================
    OPEN CHAT
-===================================================== */
+========================================= */
 
 async function openChat(otherUid){
 
-    if(
-        !currentUser ||
-        !otherUid ||
-        otherUid === currentUser.uid
-    ){
-
-        return;
-
-    }
-
-
     const other =
-        allUsers[otherUid];
+        users[otherUid];
 
     if(!other){
         return;
     }
 
-
-    const chatId =
-        createChatId(
-            currentUser.uid,
-            otherUid
-        );
-
-
     currentChatId =
-        chatId;
-
-    currentChatUser =
-        other;
-
+        [currentUser.uid,otherUid]
+            .sort()
+            .join("_");
 
     chatTitle.textContent =
         other.nickname ||
         "Пользователь";
 
     chatHandle.textContent =
-        other.username ||
-        "";
-
+        other.username || "";
 
     showScreen("chat");
-
 
     const chatRef =
         ref(
             db,
             "chats/" +
-            chatId
+            currentChatId
         );
-
 
     const snapshot =
         await get(chatRef);
-
 
     if(!snapshot.exists()){
 
@@ -1928,13 +1657,8 @@ async function openChat(otherUid){
             {
 
                 participants:{
-
-                    [currentUser.uid]:
-                        true,
-
-                    [otherUid]:
-                        true
-
+                    [currentUser.uid]:true,
+                    [otherUid]:true
                 },
 
                 createdAt:
@@ -1945,99 +1669,77 @@ async function openChat(otherUid){
 
     }
 
-
-    listenMessages(chatId);
-
-}
-
-
-/* =====================================================
-   CHAT ID
-===================================================== */
-
-function createChatId(a,b){
-
-    return [a,b]
-        .sort()
-        .join("_");
+    listenMessages();
 
 }
 
 
-/* =====================================================
-   LISTEN MESSAGES
-===================================================== */
+/* =========================================
+   MESSAGES
+========================================= */
 
-function listenMessages(chatId){
+function listenMessages(){
 
-    if(unsubscribeMessages){
-
-        unsubscribeMessages();
-
+    if(stopMessages){
+        stopMessages();
     }
 
-
-    unsubscribeMessages =
+    stopMessages =
         onValue(
             ref(
                 db,
                 "chats/" +
-                chatId +
+                currentChatId +
                 "/messages"
             ),
             snapshot => {
 
-                messagesBox.innerHTML = "";
+                messages.innerHTML = "";
 
                 const data =
                     snapshot.val() || {};
 
-                const messages =
-                    Object.values(data)
-                        .sort(
-                            (a,b) =>
-                                Number(
-                                    a.createdAt || 0
-                                )
-                                -
-                                Number(
-                                    b.createdAt || 0
-                                )
-                        );
+                Object.values(data)
+                    .sort(
+                        (a,b) =>
+                            Number(
+                                a.createdAt || 0
+                            ) -
+                            Number(
+                                b.createdAt || 0
+                            )
+                    )
+                    .forEach(
+                        message => {
 
+                            const div =
+                                document.createElement(
+                                    "div"
+                                );
 
-                messages.forEach(
-                    message => {
+                            div.className =
+                                "message " +
+                                (
+                                    message.senderId ===
+                                    currentUser.uid
+                                    ?
+                                    "mine"
+                                    :
+                                    "other"
+                                );
 
-                        const div =
-                            document.createElement(
-                                "div"
+                            div.textContent =
+                                message.text || "";
+
+                            messages.appendChild(
+                                div
                             );
 
-                        div.className =
-                            "message " +
-                            (
-                                message.senderId ===
-                                currentUser.uid
-                                ?
-                                "mine"
-                                :
-                                "other"
-                            );
+                        }
+                    );
 
-                        div.textContent =
-                            message.text || "";
-
-                        messagesBox.appendChild(
-                            div
-                        );
-
-                    }
-                );
-
-
-                messagesBox.scrollTop =
-                    messagesBox.scrollHeight;
+                messages.scrollTop =
+                    messages.scrollHeight;
 
             }
         );
@@ -2045,157 +1747,142 @@ function listenMessages(chatId){
 }
 
 
-/* =====================================================
-   SEND MESSAGE
-===================================================== */
+/* =========================================
+   SEND
+========================================= */
 
-messageForm.addEventListener(
-    "submit",
-    async event => {
+document.getElementById(
+    "messageForm"
+).onsubmit = async event => {
 
-        event.preventDefault();
+    event.preventDefault();
 
-        const text =
-            messageInput.value.trim();
+    const text =
+        messageInput.value.trim();
 
-
-        if(
-            !text ||
-            !currentChatId
-        ){
-
-            return;
-
-        }
-
-
-        if(text.length > 2000){
-
-            return;
-
-        }
-
-
-        try{
-
-            const messageRef =
-                push(
-                    ref(
-                        db,
-                        "chats/" +
-                        currentChatId +
-                        "/messages"
-                    )
-                );
-
-
-            await set(
-                messageRef,
-                {
-
-                    text:
-                        text,
-
-                    senderId:
-                        currentUser.uid,
-
-                    createdAt:
-                        serverTimestamp()
-
-                }
-            );
-
-
-            messageInput.value = "";
-
-            messageInput.focus();
-
-        }catch(error){
-
-            console.error(error);
-
-            alert(
-                "Не удалось отправить сообщение."
-            );
-
-        }
-
+    if(!text || !currentChatId){
+        return;
     }
-);
+
+    const messageRef =
+        push(
+            ref(
+                db,
+                "chats/" +
+                currentChatId +
+                "/messages"
+            )
+        );
+
+    await set(
+        messageRef,
+        {
+
+            text,
+
+            senderId:
+                currentUser.uid,
+
+            createdAt:
+                serverTimestamp()
+
+        }
+    );
+
+    messageInput.value = "";
+
+    messageInput.focus();
+
+};
 
 
-/* =====================================================
-   NAVIGATION
-===================================================== */
+/* =========================================
+   NAV
+========================================= */
 
-navChats.addEventListener(
-    "click",
-    () => showScreen("chats")
-);
-
-navUsers.addEventListener(
-    "click",
-    () => showScreen("users")
-);
-
-navSettings.addEventListener(
-    "click",
-    async () => {
-
-        await loadProfile();
-
-        showScreen("settings");
-
-    }
-);
+document.getElementById(
+    "navChats"
+).onclick = () =>
+    showScreen("chats");
 
 
-/* =====================================================
-   SHOW SCREEN
-===================================================== */
+document.getElementById(
+    "navUsers"
+).onclick = () =>
+    showScreen("users");
 
-function showScreen(screen){
+
+document.getElementById(
+    "navSettings"
+).onclick = async () => {
+
+    await loadProfile();
+
+    showScreen("settings");
+
+};
+
+
+/* =========================================
+   SCREENS
+========================================= */
+
+function showScreen(name){
 
     chatsScreen.classList.add("hidden");
     usersScreen.classList.add("hidden");
     chatScreen.classList.add("hidden");
     settingsScreen.classList.add("hidden");
 
-    navChats.classList.remove("active");
-    navUsers.classList.remove("active");
-    navSettings.classList.remove("active");
+    document
+        .getElementById("navChats")
+        .classList.remove("active");
+
+    document
+        .getElementById("navUsers")
+        .classList.remove("active");
+
+    document
+        .getElementById("navSettings")
+        .classList.remove("active");
 
 
-    if(screen === "chats"){
+    if(name === "chats"){
 
         chatsScreen.classList.remove("hidden");
 
-        navChats.classList.add("active");
+        document
+            .getElementById("navChats")
+            .classList.add("active");
 
     }
 
 
-    if(screen === "users"){
+    if(name === "users"){
 
         usersScreen.classList.remove("hidden");
 
-        navUsers.classList.add("active");
+        document
+            .getElementById("navUsers")
+            .classList.add("active");
 
         renderUsers();
 
     }
 
 
-    if(screen === "settings"){
+    if(name === "settings"){
 
         settingsScreen.classList.remove("hidden");
 
-        navSettings.classList.add("active");
+        document
+            .getElementById("navSettings")
+            .classList.add("active");
 
     }
 
 
-    if(screen === "chat"){
+    if(name === "chat"){
 
         chatScreen.classList.remove("hidden");
 
@@ -2204,102 +1891,69 @@ function showScreen(screen){
 }
 
 
-/* =====================================================
-   BACK FROM CHAT
-===================================================== */
+/* =========================================
+   BACK
+========================================= */
 
-document
-    .getElementById("backChat")
-    .addEventListener(
-        "click",
-        () => {
+document.getElementById(
+    "backChat"
+).onclick = () => {
 
-            if(unsubscribeMessages){
+    if(stopMessages){
 
-                unsubscribeMessages();
+        stopMessages();
 
-                unsubscribeMessages =
-                    null;
+        stopMessages = null;
 
-            }
+    }
 
-            currentChatId =
-                null;
+    currentChatId = null;
 
-            currentChatUser =
-                null;
+    showScreen("chats");
 
-            showScreen("chats");
-
-        }
-    );
+};
 
 
-/* =====================================================
+/* =========================================
    LOGOUT
-===================================================== */
+========================================= */
 
-document
-    .getElementById("logoutButton")
-    .addEventListener(
-        "click",
-        async () => {
+document.getElementById(
+    "logoutButton"
+).onclick = async () => {
 
-            try{
+    await signOut(auth);
 
-                await signOut(auth);
-
-            }catch(error){
-
-                console.error(error);
-
-            }
-
-        }
-    );
+};
 
 
-/* =====================================================
-   STOP LISTENERS
-===================================================== */
+/* =========================================
+   STOP
+========================================= */
 
-function stopListeners(){
+function stopAll(){
 
-    if(unsubscribeUsers){
-
-        unsubscribeUsers();
-
-        unsubscribeUsers =
-            null;
-
+    if(stopUsers){
+        stopUsers();
+        stopUsers = null;
     }
 
-
-    if(unsubscribeChats){
-
-        unsubscribeChats();
-
-        unsubscribeChats =
-            null;
-
+    if(stopChats){
+        stopChats();
+        stopChats = null;
     }
 
-
-    if(unsubscribeMessages){
-
-        unsubscribeMessages();
-
-        unsubscribeMessages =
-            null;
-
+    if(stopMessages){
+        stopMessages();
+        stopMessages = null;
     }
 
 }
 
 
-/* =====================================================
-   ESCAPE HTML
-===================================================== */
+/* =========================================
+   ESCAPE
+========================================= */
 
 function escapeHtml(value){
 
@@ -2313,48 +1967,45 @@ function escapeHtml(value){
 }
 
 
-/* =====================================================
-   FIREBASE ERRORS
-===================================================== */
+/* =========================================
+   ERRORS
+========================================= */
 
 function firebaseError(code){
 
     const errors = {
 
         "auth/email-already-in-use":
-            "❌ Этот Email уже зарегистрирован.",
+            "Этот Email уже зарегистрирован.",
 
         "auth/invalid-email":
-            "❌ Неверный Email.",
+            "Неверный Email.",
 
         "auth/weak-password":
-            "❌ Пароль должен содержать минимум 6 символов.",
+            "Пароль должен быть минимум 6 символов.",
 
         "auth/invalid-credential":
-            "❌ Неверный Email или пароль.",
+            "Неверный Email или пароль.",
 
         "auth/user-not-found":
-            "❌ Пользователь не найден.",
+            "Пользователь не найден.",
 
         "auth/wrong-password":
-            "❌ Неверный пароль.",
+            "Неверный пароль.",
 
         "auth/too-many-requests":
-            "❌ Слишком много попыток. Попробуй позже.",
+            "Слишком много попыток. Попробуй позже.",
 
         "auth/api-key-not-valid":
-            "❌ Firebase API key недействителен. Проверь Firebase Console.",
+            "Firebase отклонил API key.",
 
         "PERMISSION_DENIED":
-            "❌ Firebase Database Rules запрещают это действие."
+            "Firebase Database Rules запрещают действие."
 
     };
 
-
-    return (
-        errors[code] ||
-        "❌ Ошибка: " + code
-    );
+    return errors[code] ||
+        "Ошибка: " + code;
 
 }
 

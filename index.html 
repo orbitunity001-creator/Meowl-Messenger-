@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Meowl Messenger</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<!-- =========================
+     AUTH
+========================= -->
+
+<div id="authScreen" class="screen">
+
+    <div class="auth-glow glow-one"></div>
+    <div class="auth-glow glow-two"></div>
+
+    <div class="auth-card">
+
+        <div class="logo">
+            <div class="logo-cat">🐱</div>
+
+            <div>
+                <h1>Meowl</h1>
+                <p>Messenger</p>
+            </div>
+        </div>
+
+        <div class="auth-tabs">
+            <button id="loginTab" class="auth-tab active" type="button">
+                Вход
+            </button>
+
+            <button id="registerTab" class="auth-tab" type="button">
+                Регистрация
+            </button>
+        </div>
+
+        <form id="authForm">
+
+            <div class="input-group">
+                <label for="email">Email</label>
+
+                <input
+                    id="email"
+                    type="email"
+                    placeholder="example@mail.com"
+                    autocomplete="email"
+                    required
+                >
+            </div>
+
+            <div class="input-group">
+                <label for="password">Пароль</label>
+
+                <input
+                    id="password"
+                    type="password"
+                    placeholder="Введите пароль"
+                    autocomplete="current-password"
+                    minlength="4"
+                    required
+                >
+            </div>
+
+            <button id="authButton" class="main-button" type="submit">
+                Продолжить
+            </button>
+
+            <div id="authError" class="error-message"></div>
+
+        </form>
+
+    </div>
+</div>
+
+
+<!-- =========================
+     MAIN APP
+========================= -->
+
+<div id="appScreen" class="screen hidden">
+
+    <header class="top-header">
+
+        <div>
+            <div class="brand-small">
+                🐱 Meowl
+            </div>
+
+            <div id="pageTitle" class="page-title">
+                Чаты
+            </div>
+        </div>
+
+    </header>
+
+
+    <!-- =====================
+         CHATS
+    ====================== -->
+
+    <main id="chatsPage" class="page">
+
+        <div class="section-title">
+            Мои чаты
+        </div>
+
+        <button
+            id="favoritesButton"
+            class="chat-card"
+            type="button"
+        >
+
+            <div class="chat-avatar">
+                ⭐
+            </div>
+
+            <div class="chat-info">
+
+                <div class="chat-name">
+                    Избранное
+                </div>
+
+                <div id="favoritesPreview" class="chat-preview">
+                    Здесь будут твои сообщения
+                </div>
+
+            </div>
+
+            <div class="chat-arrow">
+                ›
+            </div>
+
+        </button>
+
+    </main>
+
+
+    <!-- =====================
+         PROFILE
+    ====================== -->
+
+    <main id="profilePage" class="page hidden">
+
+        <div class="profile-card">
+
+            <div class="profile-avatar-wrapper">
+
+                <img
+                    id="profileAvatar"
+                    class="profile-avatar"
+                    src=""
+                    alt="Аватар"
+                >
+
+                <label
+                    for="avatarInput"
+                    class="avatar-edit"
+                    title="Изменить аватар"
+                >
+                    ✏️
+                </label>
+
+                <input
+                    id="avatarInput"
+                    type="file"
+                    accept="image/*"
+                    hidden
+                >
+
+            </div>
+
+
+            <div class="profile-fields">
+
+                <div class="input-group">
+                    <label for="nicknameInput">
+                        Никнейм
+                    </label>
+
+                    <input
+                        id="nicknameInput"
+                        type="text"
+                        maxlength="30"
+                        placeholder="Твой никнейм"
+                    >
+                </div>
+
+
+                <div class="input-group">
+
+                    <label for="descriptionInput">
+                        Описание
+                    </label>
+
+                    <textarea
+                        id="descriptionInput"
+                        maxlength="150"
+                        placeholder="Расскажи немного о себе..."
+                    ></textarea>
+
+                </div>
+
+
+                <div class="input-group">
+
+                    <label for="profileEmail">
+                        Email
+                    </label>
+
+                    <input
+                        id="profileEmail"
+                        type="email"
+                        disabled
+                    >
+
+                </div>
+
+
+                <button
+                    id="saveProfileButton"
+                    class="main-button"
+                    type="button"
+                >
+                    Сохранить
+                </button>
+
+                <button
+                    id="logoutButton"
+                    class="danger-button"
+                    type="button"
+                >
+                    Выйти из аккаунта
+                </button>
+
+                <div
+                    id="profileSaved"
+                    class="success-message"
+                ></div>
+
+            </div>
+
+        </div>
+
+    </main>
+
+
+    <!-- =====================
+         BOTTOM NAVIGATION
+    ====================== -->
+
+    <nav class="bottom-nav">
+
+        <button
+            id="chatsNav"
+            class="nav-button active"
+            type="button"
+        >
+            <span>💬</span>
+            <small>Чаты</small>
+        </button>
+
+
+        <button
+            id="profileNav"
+            class="nav-button"
+            type="button"
+        >
+            <span>👤</span>
+            <small>Профиль</small>
+        </button>
+
+    </nav>
+
+</div>
+
+
+<!-- =========================
+     FAVORITES CHAT
+========================= -->
+
+<div id="favoritesScreen" class="chat-screen hidden">
+
+    <header class="chat-header">
+
+        <button
+            id="favoritesBack"
+            class="icon-button"
+            type="button"
+        >
+            ‹
+        </button>
+
+        <div class="chat-header-avatar">
+            ⭐
+        </div>
+
+        <div class="chat-header-info">
+
+            <div class="chat-header-name">
+                Избранное
+            </div>
+
+            <div class="chat-header-status">
+                Личные сообщения
+            </div>
+
+        </div>
+
+        <button
+            id="clearFavorites"
+            class="icon-button"
+            type="button"
+            title="Очистить чат"
+        >
+            🗑️
+        </button>
+
+    </header>
+
+
+    <main
+        id="favoritesMessages"
+        class="messages"
+    ></main>
+
+
+    <div
+        id="attachMenu"
+        class="attach-menu hidden"
+    >
+
+        <button
+            id="choosePhoto"
+            type="button"
+        >
+            🖼️ Фото
+        </button>
+
+        <button
+            id="chooseVideo"
+            type="button"
+        >
+            🎥 Видео
+        </button>
+
+    </div>
+
+
+    <form
+        id="messageForm"
+        class="message-form"
+    >
+
+        <button
+            id="attachButton"
+            class="attach-button"
+            type="button"
+        >
+            ＋
+        </button>
+
+        <input
+            id="messageInput"
+            type="text"
+            placeholder="Написать сообщение..."
+            autocomplete="off"
+        >
+
+        <button
+            class="send-button"
+            type="submit"
+        >
+            ➤
+        </button>
+
+    </form>
+
+
+    <input
+        id="photoInput"
+        type="file"
+        accept="image/*"
+        hidden
+    >
+
+    <input
+        id="videoInput"
+        type="file"
+        accept="video/*"
+        hidden
+    >
+
+</div>
+
+
+<script src="script.js"></script>
+
+</body>
+</html>

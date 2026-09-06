@@ -15,10 +15,32 @@ const logoutButton = document.getElementById("logoutButton");
 
 const userEmail = document.getElementById("userEmail");
 
+const pageTitle = document.getElementById("pageTitle");
+
+const chatsPage = document.getElementById("chatsPage");
+const profilePage = document.getElementById("profilePage");
+
+const chatsButton = document.getElementById("chatsButton");
+const profileButton = document.getElementById("profileButton");
+
+const avatarInput = document.getElementById("avatarInput");
+const avatarPreview = document.getElementById("avatarPreview");
+
+const nicknameInput = document.getElementById("nickname");
+const descriptionInput = document.getElementById("description");
+
+const profileEmail = document.getElementById("profileEmail");
+
+const saveProfile =
+    document.getElementById("saveProfile");
+
+const profileMessage =
+    document.getElementById("profileMessage");
+
 let isRegisterMode = false;
 
 
-/* Переключение между входом и регистрацией */
+/* ВХОД */
 
 loginTab.addEventListener("click", () => {
 
@@ -27,11 +49,14 @@ loginTab.addEventListener("click", () => {
     loginTab.classList.add("active");
     registerTab.classList.remove("active");
 
-    authForm.querySelector(".main-button").textContent = "Войти";
+    authForm.querySelector(".main-button").textContent =
+        "Войти";
 
     errorMessage.textContent = "";
 });
 
+
+/* РЕГИСТРАЦИЯ */
 
 registerTab.addEventListener("click", () => {
 
@@ -47,16 +72,20 @@ registerTab.addEventListener("click", () => {
 });
 
 
-/* Регистрация / вход */
+/* ФОРМА */
 
 authForm.addEventListener("submit", (event) => {
 
     event.preventDefault();
 
-    const email = emailInput.value.trim().toLowerCase();
-    const password = passwordInput.value;
+    const email =
+        emailInput.value.trim().toLowerCase();
+
+    const password =
+        passwordInput.value;
 
     errorMessage.textContent = "";
+
 
     if (!email || !password) {
 
@@ -66,10 +95,11 @@ authForm.addEventListener("submit", (event) => {
         return;
     }
 
+
     if (password.length < 6) {
 
         errorMessage.textContent =
-            "Пароль должен быть минимум 6 символов.";
+            "Пароль минимум 6 символов.";
 
         return;
     }
@@ -88,12 +118,15 @@ authForm.addEventListener("submit", (event) => {
 });
 
 
-/* Регистрация */
+/* РЕГИСТРАЦИЯ */
 
 function registerUser(email, password) {
 
     const users =
-        JSON.parse(localStorage.getItem("messengerUsers")) || {};
+        JSON.parse(
+            localStorage.getItem("messengerUsers")
+        ) || {};
+
 
     if (users[email]) {
 
@@ -103,33 +136,55 @@ function registerUser(email, password) {
         return;
     }
 
+
     users[email] = {
+
         email: email,
-        password: password
+
+        password: password,
+
+        profile: {
+
+            nickname:
+                email.split("@")[0],
+
+            description: "",
+
+            avatar: ""
+
+        }
+
     };
+
 
     localStorage.setItem(
         "messengerUsers",
         JSON.stringify(users)
     );
 
+
     localStorage.setItem(
         "messengerCurrentUser",
         email
     );
 
+
     openMessenger(email);
 }
 
 
-/* Вход */
+/* ВХОД */
 
 function loginUser(email, password) {
 
     const users =
-        JSON.parse(localStorage.getItem("messengerUsers")) || {};
+        JSON.parse(
+            localStorage.getItem("messengerUsers")
+        ) || {};
+
 
     const user = users[email];
+
 
     if (!user) {
 
@@ -139,133 +194,12 @@ function loginUser(email, password) {
         return;
     }
 
+
     if (user.password !== password) {
 
         errorMessage.textContent =
             "Неверный пароль.";
 
-        return;
-    }
-
-    localStorage.setItem(
-        "messengerCurrentUser",
-        email
-    );
-
-    openMessenger(email);
-}
-
-
-/* Открыть мессенджер */
-
-function openMessenger(email) {
-
-    authScreen.classList.add("hidden");
-
-    chatScreen.classList.remove("hidden");
-
-    userEmail.textContent = email;
-
-    authForm.reset();
-}
-
-
-/* Выход */
-
-logoutButton.addEventListener("click", () => {
-
-    localStorage.removeItem(
-        "messengerCurrentUser"
-    );
-
-    chatScreen.classList.add("hidden");
-
-    authScreen.classList.remove("hidden");
-
-    errorMessage.textContent = "";
-});
-
-
-/* Проверяем, был ли пользователь авторизован */
-
-const currentUser =
-    localStorage.getItem("messengerCurrentUser");
-
-if (currentUser) {
-
-    openMessenger(currentUser);
-
-}
-
-/* =========================
-   ПРОФИЛЬ
-========================= */
-
-const avatarInput =
-    document.getElementById("avatarInput");
-
-const avatarPreview =
-    document.getElementById("avatarPreview");
-
-const nicknameInput =
-    document.getElementById("nickname");
-
-const descriptionInput =
-    document.getElementById("description");
-
-const profileEmail =
-    document.getElementById("profileEmail");
-
-const saveProfileButton =
-    document.getElementById("saveProfile");
-
-const profileMessage =
-    document.getElementById("profileMessage");
-
-
-/* Открытие профиля */
-
-function showProfile() {
-
-    chatsPage.classList.add("hidden");
-
-    profilePage.classList.remove("hidden");
-
-    chatsButton.classList.remove("active");
-
-    profileButton.classList.add("active");
-
-    pageTitle.textContent = "Профиль";
-
-
-    const currentUser =
-        localStorage.getItem(
-            "messengerCurrentUser"
-        );
-
-
-    if (currentUser) {
-        loadProfile(currentUser);
-    }
-}
-
-
-/* Загрузка профиля */
-
-function loadProfile(email) {
-
-    const users =
-        JSON.parse(
-            localStorage.getItem(
-                "messengerUsers"
-            )
-        ) || {};
-
-
-    const user = users[email];
-
-
-    if (!user) {
         return;
     }
 
@@ -292,6 +226,113 @@ function loadProfile(email) {
     }
 
 
+    localStorage.setItem(
+        "messengerCurrentUser",
+        email
+    );
+
+
+    openMessenger(email);
+}
+
+
+/* ОТКРЫТЬ ПРИЛОЖЕНИЕ */
+
+function openMessenger(email) {
+
+    authScreen.classList.add("hidden");
+
+    chatScreen.classList.remove("hidden");
+
+    userEmail.textContent = email;
+
+    authForm.reset();
+
+    loadProfile(email);
+
+    showChats();
+}
+
+
+/* ЧАТЫ */
+
+function showChats() {
+
+    chatsPage.classList.remove("hidden");
+
+    profilePage.classList.add("hidden");
+
+    chatsButton.classList.add("active");
+
+    profileButton.classList.remove("active");
+
+    pageTitle.textContent = "Чаты";
+}
+
+
+chatsButton.addEventListener("click", showChats);
+
+
+/* ПРОФИЛЬ */
+
+profileButton.addEventListener("click", () => {
+
+    chatsPage.classList.add("hidden");
+
+    profilePage.classList.remove("hidden");
+
+    chatsButton.classList.remove("active");
+
+    profileButton.classList.add("active");
+
+    pageTitle.textContent = "Профиль";
+
+
+    const currentUser =
+        localStorage.getItem(
+            "messengerCurrentUser"
+        );
+
+
+    if (currentUser) {
+        loadProfile(currentUser);
+    }
+});
+
+
+/* ЗАГРУЗКА ПРОФИЛЯ */
+
+function loadProfile(email) {
+
+    const users =
+        JSON.parse(
+            localStorage.getItem("messengerUsers")
+        ) || {};
+
+
+    const user = users[email];
+
+
+    if (!user) {
+        return;
+    }
+
+
+    if (!user.profile) {
+
+        user.profile = {
+
+            nickname:
+                email.split("@")[0],
+
+            description: "",
+
+            avatar: ""
+
+        };
+    }
+
+
     nicknameInput.value =
         user.profile.nickname || "";
 
@@ -300,8 +341,7 @@ function loadProfile(email) {
         user.profile.description || "";
 
 
-    profileEmail.textContent =
-        email;
+    profileEmail.textContent = email;
 
 
     if (user.profile.avatar) {
@@ -312,149 +352,155 @@ function loadProfile(email) {
     } else {
 
         avatarPreview.innerHTML = "👤";
-
     }
 }
 
 
-/* Выбор аватара */
+/* АВАТАР */
 
-avatarInput.addEventListener(
-    "change",
-    function () {
+avatarInput.addEventListener("change", () => {
 
-        const file =
-            avatarInput.files[0];
+    const file =
+        avatarInput.files[0];
 
 
-        if (!file) {
-            return;
-        }
-
-
-        if (!file.type.startsWith("image/")) {
-
-            alert("Выбери изображение.");
-
-            return;
-        }
-
-
-        const reader =
-            new FileReader();
-
-
-        reader.onload =
-            function (event) {
-
-                avatarPreview.innerHTML =
-                    `<img src="${event.target.result}" alt="Аватар">`;
-
-            };
-
-
-        reader.readAsDataURL(file);
+    if (!file) {
+        return;
     }
-);
 
 
-/* Сохранение профиля */
+    if (!file.type.startsWith("image/")) {
 
-saveProfileButton.addEventListener(
-    "click",
-    function () {
+        alert("Выбери изображение.");
 
-        const currentUser =
-            localStorage.getItem(
-                "messengerCurrentUser"
-            );
+        return;
+    }
 
 
-        if (!currentUser) {
-            return;
-        }
+    const reader = new FileReader();
 
 
-        const users =
-            JSON.parse(
-                localStorage.getItem(
-                    "messengerUsers"
-                )
-            ) || {};
+    reader.onload = (event) => {
+
+        avatarPreview.innerHTML =
+            `<img src="${event.target.result}" alt="Аватар">`;
+    };
 
 
-        const user =
-            users[currentUser];
+    reader.readAsDataURL(file);
+});
 
 
-        if (!user) {
-            return;
-        }
+/* СОХРАНЕНИЕ ПРОФИЛЯ */
 
+saveProfile.addEventListener("click", () => {
 
-        let nickname =
-            nicknameInput.value.trim();
-
-
-        if (!nickname) {
-
-            nickname =
-                currentUser.split("@")[0];
-
-        }
-
-
-        let avatar = "";
-
-
-        const image =
-            avatarPreview.querySelector("img");
-
-
-        if (image) {
-
-            avatar = image.src;
-
-        } else {
-
-            avatar =
-                user.profile?.avatar || "";
-
-        }
-
-
-        user.profile = {
-
-            nickname: nickname,
-
-            description:
-                descriptionInput.value.trim(),
-
-            avatar: avatar
-
-        };
-
-
-        users[currentUser] = user;
-
-
-        localStorage.setItem(
-            "messengerUsers",
-            JSON.stringify(users)
+    const currentUser =
+        localStorage.getItem(
+            "messengerCurrentUser"
         );
 
 
-        profileMessage.textContent =
-            "✓ Профиль сохранён";
-
-
-        setTimeout(
-            function () {
-
-                profileMessage.textContent = "";
-
-            },
-            2500
-        );
+    if (!currentUser) {
+        return;
     }
-);
+
+
+    const users =
+        JSON.parse(
+            localStorage.getItem("messengerUsers")
+        ) || {};
+
+
+    const user = users[currentUser];
+
+
+    if (!user) {
+        return;
+    }
+
+
+    const nickname =
+        nicknameInput.value.trim()
+        || currentUser.split("@")[0];
+
+
+    const description =
+        descriptionInput.value.trim();
+
+
+    const image =
+        avatarPreview.querySelector("img");
+
+
+    let avatar =
+        user.profile?.avatar || "";
+
+
+    if (image) {
+        avatar = image.src;
+    }
+
+
+    user.profile = {
+
+        nickname: nickname,
+
+        description: description,
+
+        avatar: avatar
+    };
+
+
+    users[currentUser] = user;
+
+
+    localStorage.setItem(
+        "messengerUsers",
+        JSON.stringify(users)
+    );
+
+
+    profileMessage.textContent =
+        "✓ Профиль сохранён";
+
+
+    setTimeout(() => {
+
+        profileMessage.textContent = "";
+
+    }, 2500);
+});
+
+
+/* ВЫХОД */
+
+logoutButton.addEventListener("click", () => {
+
+    localStorage.removeItem(
+        "messengerCurrentUser"
+    );
+
+
+    chatScreen.classList.add("hidden");
+
+    authScreen.classList.remove("hidden");
+
+    errorMessage.textContent = "";
+
+    showChats();
+});
+
+
+/* АВТОВХОД */
+
+const currentUser =
+    localStorage.getItem(
+        "messengerCurrentUser"
+    );
+
+
+if (currentUser) {
+
+    openMessenger(currentUser);
+}

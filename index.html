@@ -10,161 +10,113 @@
 
 <div class="container">
 
-  <div id="authScreen" class="card">
-
+  <!-- ВХОД / РЕГИСТРАЦИЯ -->
+  <div id="auth">
     <div class="logo">M</div>
-
     <h1>Meowl Messenger</h1>
-    <p class="subtitle">Общайся. Создавай. Будь собой.</p>
+    <p class="subtitle">Общайся. Быстро. Удобно.</p>
 
     <div class="tabs">
-      <button id="loginTab" class="tab active" onclick="setMode('login')">
-        Войти
-      </button>
-
-      <button id="registerTab" class="tab" onclick="setMode('register')">
-        Регистрация
-      </button>
+      <button id="loginTab" class="active" onclick="setMode('login')">Войти</button>
+      <button id="registerTab" onclick="setMode('register')">Регистрация</button>
     </div>
 
-    <input id="email" type="email" placeholder="Email">
+    <input id="email" type="email" placeholder="Почта">
     <input id="password" type="password" placeholder="Пароль">
 
-    <button class="main-btn" onclick="auth()">
-      <span id="authButtonText">Войти</span>
-    </button>
+    <button class="mainBtn" onclick="authAction()" id="authBtn">Войти</button>
 
     <p id="error"></p>
   </div>
 
-
-  <div id="appScreen" class="app hidden">
+  <!-- МЕССЕНДЖЕР -->
+  <div id="messenger" style="display:none">
 
     <header>
-      <div>
-        <h2 id="pageTitle">Чаты</h2>
-        <p id="userEmail"></p>
-      </div>
-
-      <button class="logout-btn" onclick="logout()">
-        Выйти
-      </button>
+      <h2 id="pageTitle">Чаты</h2>
+      <button class="logout" onclick="logout()">Выйти</button>
     </header>
 
-
-    <section id="chatsPage">
-
-      <div class="empty-card">
-        <div class="chat-icon">💬</div>
-
-        <h3>Пока нет чатов</h3>
-
-        <p>Здесь появятся твои переписки.</p>
+    <!-- ЧАТЫ -->
+    <div id="chatsPage">
+      <div class="empty">
+        <div class="emptyIcon">💬</div>
+        <h3>Чатов пока нет</h3>
+        <p>Здесь появятся твои сообщения</p>
       </div>
+    </div>
 
-    </section>
+    <!-- ПРОФИЛЬ -->
+    <div id="profilePage" style="display:none">
 
+      <div class="profileCard">
 
-    <section id="profilePage" class="hidden">
+        <div class="avatar" id="profileAvatar">👤</div>
 
-      <div class="profile-card">
+        <h2 id="profileNickname">Пользователь</h2>
+        <p id="profileDescription">Описание не указано</p>
 
-        <div class="avatar">
-          <img id="avatarPreview" alt="Аватар">
+        <div class="profileInfo">
+          <div>
+            <span>📧 Почта</span>
+            <b id="profileEmail"></b>
+          </div>
         </div>
 
-        <h2 id="profileNickname">Профиль</h2>
-
-        <p id="profileDescription">
-          Описание профиля
-        </p>
-
-        <button class="main-btn" onclick="editProfile()">
+        <button class="mainBtn" onclick="editProfile()">
           ✏️ Изменить профиль
         </button>
 
       </div>
 
+      <!-- РЕДАКТИРОВАНИЕ -->
+      <div id="editProfileBox" class="profileCard" style="display:none">
 
-      <div id="editBox" class="edit-card hidden">
+        <h3>Изменить профиль</h3>
 
-        <h2>Изменить профиль</h2>
+        <div class="editAvatar">
+          <div class="avatar" id="editAvatar">👤</div>
 
-        <label>Аватар</label>
+          <input
+            type="file"
+            id="avatarInput"
+            accept="image/*"
+            style="display:none"
+            onchange="changeAvatar(event)"
+          >
 
-        <button class="main-btn" onclick="chooseAvatar()">
-          📷 Выбрать фото
-        </button>
+          <button class="secondaryBtn" onclick="document.getElementById('avatarInput').click()">
+            📷 Выбрать фото
+          </button>
+        </div>
 
-        <input
-          id="avatarInput"
-          type="file"
-          accept="image/*"
-          style="display:none"
-          onchange="changeAvatar(event)"
-        >
-
-        <label>Никнейм</label>
-
-        <input
-          id="nickname"
-          type="text"
-          maxlength="30"
-          placeholder="Твой никнейм"
-        >
-
-        <label>Описание</label>
+        <input id="nicknameInput" type="text" placeholder="Ник">
 
         <textarea
-          id="description"
-          maxlength="200"
-          placeholder="Расскажи о себе..."
+          id="descriptionInput"
+          placeholder="Описание"
+          rows="3"
         ></textarea>
 
-        <label>Почта</label>
+        <!-- ПОЧТА НЕ ИЗМЕНЯЕТСЯ -->
+        <input id="emailInput" type="email" readonly>
 
-        <input
-          id="profileEmail"
-          type="email"
-          disabled
-          readonly
-        >
-
-        <button class="main-btn" onclick="saveProfile()">
+        <button class="mainBtn" onclick="saveProfile()">
           💾 Сохранить
         </button>
 
-        <button class="cancel-btn" onclick="closeEdit()">
+        <button class="secondaryBtn" onclick="cancelEdit()">
           Отмена
         </button>
 
-        <p id="profileMessage"></p>
-
       </div>
 
-    </section>
+    </div>
 
-
-    <nav class="bottom-nav">
-
-      <button
-        id="chatsButton"
-        class="nav-btn active"
-        onclick="showChats()"
-      >
-        <span>💬</span>
-        Чаты
-      </button>
-
-      <button
-        id="profileButton"
-        class="nav-btn"
-        onclick="showProfile()"
-      >
-        <span>👤</span>
-        Профиль
-      </button>
-
+    <!-- НИЖНЕЕ МЕНЮ -->
+    <nav class="bottomNav">
+      <button onclick="showChats()">💬<span>Чаты</span></button>
+      <button onclick="showProfile()">👤<span>Профиль</span></button>
     </nav>
 
   </div>
@@ -172,6 +124,5 @@
 </div>
 
 <script src="script.js"></script>
-
 </body>
 </html>

@@ -6,35 +6,50 @@
   <title>Meowl Messenger</title>
   <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
 
 <div class="container">
 
   <!-- ВХОД -->
   <div id="authScreen" class="card">
+
     <div class="logo">M</div>
 
     <h1>Meowl Messenger</h1>
-    <p class="subtitle">Общайся. Создавай. Будь собой.</p>
+
+    <p class="subtitle">
+      Общайся. Создавай. Будь собой.
+    </p>
 
     <div class="tabs">
-      <button id="loginTab" class="tab active" onclick="setMode('login')">
+      <button id="loginTab" class="tab active">
         Войти
       </button>
 
-      <button id="registerTab" class="tab" onclick="setMode('register')">
+      <button id="registerTab" class="tab">
         Регистрация
       </button>
     </div>
 
-    <input id="email" type="email" placeholder="Email">
-    <input id="password" type="password" placeholder="Пароль">
+    <input
+      id="email"
+      type="email"
+      placeholder="Email"
+    >
 
-    <button class="main-btn" onclick="auth()">
-      <span id="authButtonText">Войти</span>
+    <input
+      id="password"
+      type="password"
+      placeholder="Пароль"
+    >
+
+    <button id="authButton" class="main-btn">
+      Войти
     </button>
 
     <p id="error"></p>
+
   </div>
 
 
@@ -42,12 +57,16 @@
   <div id="appScreen" class="app hidden">
 
     <header>
+
       <div>
         <h2 id="pageTitle">Чаты</h2>
         <p id="userEmail"></p>
       </div>
 
-      <button class="logout-btn" onclick="logout()">Выйти</button>
+      <button id="logoutButton" class="logout-btn">
+        Выйти
+      </button>
+
     </header>
 
 
@@ -55,11 +74,15 @@
     <div id="chatsPage" class="page">
 
       <div class="empty-card">
+
         <div class="chat-icon">💬</div>
 
         <h3>Пока нет чатов</h3>
 
-        <p>Здесь появятся твои переписки.</p>
+        <p>
+          Здесь появятся твои переписки.
+        </p>
+
       </div>
 
     </div>
@@ -71,39 +94,43 @@
       <div class="profile-card">
 
         <div class="avatar">
-          <img id="avatarPreview" src="" alt="Аватар">
+          <img id="avatarPreview" alt="Аватар">
         </div>
 
-        <h2 id="profileNickname">Профиль</h2>
+        <h2 id="profileNickname">
+          Профиль
+        </h2>
 
         <p id="profileDescription">
           Описание профиля
         </p>
 
-        <button class="main-btn" onclick="openEditProfile()">
+        <button id="editProfileButton" class="main-btn">
           ✏️ Изменить профиль
         </button>
 
       </div>
 
 
-      <!-- РЕДАКТИРОВАНИЕ ПРОФИЛЯ -->
+      <!-- РЕДАКТИРОВАНИЕ -->
       <div id="editProfile" class="edit-card hidden">
 
         <h2>Изменить профиль</h2>
 
 
-        <!-- АВАТАР -->
+        <!-- ФОТО -->
         <label>Аватар</label>
 
-        <label class="avatar-button">
+        <button id="avatarButton" class="main-btn">
           📷 Выбрать фото с устройства
-          <input
-            id="avatarInput"
-            type="file"
-            accept="image/*"
-          >
-        </label>
+        </button>
+
+        <input
+          id="avatarInput"
+          type="file"
+          accept="image/*"
+          hidden
+        >
 
 
         <!-- НИК -->
@@ -133,22 +160,21 @@
         <input
           id="profileEmail"
           type="email"
-          readonly
           disabled
+          readonly
         >
 
 
         <!-- СОХРАНИТЬ -->
-        <button class="main-btn" onclick="saveProfile()">
+        <button id="saveProfileButton" class="main-btn">
           💾 Сохранить профиль
         </button>
 
 
         <!-- ОТМЕНА -->
-        <button class="cancel-btn" onclick="closeEditProfile()">
+        <button id="cancelProfileButton" class="cancel-btn">
           Отмена
         </button>
-
 
         <p id="profileMessage"></p>
 
@@ -157,25 +183,24 @@
     </div>
 
 
-    <!-- НИЖНЕЕ МЕНЮ -->
+    <!-- НИЖНИЕ КНОПКИ -->
     <nav class="bottom-nav">
 
-      <button
-        id="chatsNav"
-        class="nav-btn active"
-        onclick="showChats()"
-      >
+      <button id="chatsNav" class="nav-btn active">
+
         <span>💬</span>
+
         Чаты
+
       </button>
 
-      <button
-        id="profileNav"
-        class="nav-btn"
-        onclick="showProfile()"
-      >
+
+      <button id="profileNav" class="nav-btn">
+
         <span>👤</span>
+
         Профиль
+
       </button>
 
     </nav>

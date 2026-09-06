@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Meowl Messenger</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<div id="auth" class="card">
+  <div class="logo">M</div>
+  <h1>Meowl Messenger</h1>
+  <p class="sub">Общайся. Быстро. Красиво.</p>
+
+  <div class="tabs">
+    <button id="loginTab" class="tab active" onclick="setMode('login')">Войти</button>
+    <button id="registerTab" class="tab" onclick="setMode('register')">Регистрация</button>
+  </div>
+
+  <input id="email" type="email" placeholder="Почта">
+  <input id="password" type="password" placeholder="Пароль">
+
+  <button class="mainBtn" onclick="auth()">Продолжить</button>
+
+  <p id="error"></p>
+</div>
+
+
+<div id="app">
+
+  <header>
+    <div>
+      <h2 id="pageTitle">Чаты</h2>
+      <small id="userEmail"></small>
+    </div>
+    <button class="logout" onclick="logout()">Выйти</button>
+  </header>
+
+
+  <main>
+
+    <section id="chatsPage">
+      <div class="empty">
+        <div class="bigIcon">💬</div>
+        <h2>Чатов пока нет</h2>
+        <p>Здесь будут отображаться твои чаты</p>
+      </div>
+    </section>
+
+
+    <section id="profilePage" class="hidden">
+
+      <div class="profileCard">
+
+        <div class="avatarBox">
+          <img id="avatar" src="" alt="Аватар">
+        </div>
+
+        <h2 id="profileNick">Ник</h2>
+        <p id="profileDesc">Описание профиля</p>
+
+        <button class="mainBtn" onclick="openEdit()">✏️ Изменить профиль</button>
+
+      </div>
+
+
+      <div id="editBox" class="profileCard hidden">
+
+        <h2>Редактирование</h2>
+
+        <button class="mainBtn" onclick="chooseAvatar()">📷 Выбрать фото</button>
+        <input id="avatarInput" type="file" accept="image/*" hidden>
+
+        <input id="nickname" type="text" placeholder="Ник">
+
+        <textarea id="description" placeholder="Описание"></textarea>
+
+        <input id="profileEmail" type="email" readonly disabled>
+
+        <button class="mainBtn" onclick="saveProfile()">💾 Сохранить</button>
+        <button class="cancelBtn" onclick="closeEdit()">Отмена</button>
+
+      </div>
+
+    </section>
+
+  </main>
+
+
+  <nav>
+    <button id="chatBtn" class="navBtn active" onclick="showChats()">💬<span>Чаты</span></button>
+    <button id="profileBtn" class="navBtn" onclick="showProfile()">👤<span>Профиль</span></button>
+  </nav>
+
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>

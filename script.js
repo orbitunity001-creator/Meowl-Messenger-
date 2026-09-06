@@ -1,360 +1,129 @@
-document.addEventListener("DOMContentLoaded", function () {
-
-  let mode = "login";
-  let selectedAvatar = "";
+let mode = "login";
+let newAvatar = "";
 
 
-  /* =========================
-     ЭЛЕМЕНТЫ
-  ========================= */
+/* =========================
+   ПОЛЬЗОВАТЕЛИ
+========================= */
 
-  const authScreen =
-    document.getElementById("authScreen");
+function getUsers() {
+  return JSON.parse(
+    localStorage.getItem("messengerUsers") || "{}"
+  );
+}
 
-  const appScreen =
-    document.getElementById("appScreen");
+function saveUsers(users) {
+  localStorage.setItem(
+    "messengerUsers",
+    JSON.stringify(users)
+  );
+}
 
-  const loginTab =
-    document.getElementById("loginTab");
-
-  const registerTab =
-    document.getElementById("registerTab");
-
-  const authButton =
-    document.getElementById("authButton");
-
-  const emailInput =
-    document.getElementById("email");
-
-  const passwordInput =
-    document.getElementById("password");
-
-  const error =
-    document.getElementById("error");
-
-  const chatsPage =
-    document.getElementById("chatsPage");
-
-  const profilePage =
-    document.getElementById("profilePage");
-
-  const chatsNav =
-    document.getElementById("chatsNav");
-
-  const profileNav =
-    document.getElementById("profileNav");
-
-  const pageTitle =
-    document.getElementById("pageTitle");
-
-  const userEmail =
-    document.getElementById("userEmail");
-
-  const logoutButton =
-    document.getElementById("logoutButton");
-
-  const avatarPreview =
-    document.getElementById("avatarPreview");
-
-  const profileNickname =
-    document.getElementById("profileNickname");
-
-  const profileDescription =
-    document.getElementById("profileDescription");
-
-  const editProfile =
-    document.getElementById("editProfile");
-
-  const editProfileButton =
-    document.getElementById("editProfileButton");
-
-  const avatarButton =
-    document.getElementById("avatarButton");
-
-  const avatarInput =
-    document.getElementById("avatarInput");
-
-  const nicknameInput =
-    document.getElementById("nickname");
-
-  const descriptionInput =
-    document.getElementById("description");
-
-  const profileEmail =
-    document.getElementById("profileEmail");
-
-  const saveProfileButton =
-    document.getElementById("saveProfileButton");
-
-  const cancelProfileButton =
-    document.getElementById("cancelProfileButton");
-
-  const profileMessage =
-    document.getElementById("profileMessage");
+function currentEmail() {
+  return localStorage.getItem(
+    "messengerCurrentUser"
+  );
+}
 
 
-  /* =========================
-     LOCAL STORAGE
-  ========================= */
+/* =========================
+   ВХОД / РЕГИСТРАЦИЯ
+========================= */
 
-  function getUsers() {
+function setMode(value) {
 
-    try {
+  mode = value;
 
-      return JSON.parse(
-        localStorage.getItem("messengerUsers") || "{}"
-      );
-
-    } catch {
-
-      return {};
-
-    }
-  }
-
-
-  function saveUsers(users) {
-
-    localStorage.setItem(
-      "messengerUsers",
-      JSON.stringify(users)
-    );
-
-  }
-
-
-  function getCurrentUser() {
-
-    return localStorage.getItem(
-      "messengerCurrentUser"
-    );
-
-  }
-
-
-  /* =========================
-     ВХОД / РЕГИСТРАЦИЯ
-  ========================= */
-
-  function setMode(newMode) {
-
-    mode = newMode;
-
-    loginTab.classList.toggle(
+  document
+    .getElementById("loginTab")
+    .classList.toggle(
       "active",
       mode === "login"
     );
 
-    registerTab.classList.toggle(
+  document
+    .getElementById("registerTab")
+    .classList.toggle(
       "active",
       mode === "register"
     );
 
-    authButton.textContent =
-      mode === "login"
-        ? "Войти"
-        : "Создать аккаунт";
+  document.getElementById(
+    "authButtonText"
+  ).textContent =
+    mode === "login"
+      ? "Войти"
+      : "Создать аккаунт";
 
-    error.textContent = "";
+  document.getElementById(
+    "error"
+  ).textContent = "";
+}
 
+
+function auth() {
+
+  const email =
+    document
+      .getElementById("email")
+      .value
+      .trim()
+      .toLowerCase();
+
+  const password =
+    document.getElementById(
+      "password"
+    ).value;
+
+  const error =
+    document.getElementById(
+      "error"
+    );
+
+  error.textContent = "";
+
+
+  if (!email || !password) {
+
+    error.textContent =
+      "Заполни все поля";
+
+    return;
   }
 
 
-  loginTab.addEventListener(
-    "click",
-    function () {
-      setMode("login");
-    }
-  );
+  if (password.length < 4) {
+
+    error.textContent =
+      "Пароль должен быть минимум 4 символа";
+
+    return;
+  }
 
 
-  registerTab.addEventListener(
-    "click",
-    function () {
-      setMode("register");
-    }
-  );
+  const users = getUsers();
 
 
-  authButton.addEventListener(
-    "click",
-    function () {
+  /* РЕГИСТРАЦИЯ */
 
-      const email =
-        emailInput.value
-          .trim()
-          .toLowerCase();
+  if (mode === "register") {
 
-      const password =
-        passwordInput.value;
+    if (users[email]) {
 
-      error.textContent = "";
-
-
-      if (!email || !password) {
-
-        error.textContent =
-          "Заполни все поля";
-
-        return;
-      }
-
-
-      if (password.length < 4) {
-
-        error.textContent =
-          "Пароль должен быть минимум 4 символа";
-
-        return;
-      }
-
-
-      const users = getUsers();
-
-
-      /* РЕГИСТРАЦИЯ */
-
-      if (mode === "register") {
-
-        if (users[email]) {
-
-          error.textContent =
-            "Такой аккаунт уже существует";
-
-          return;
-        }
-
-
-        users[email] = {
-
-          email: email,
-
-          password: password,
-
-          profile: {
-
-            nickname:
-              email.split("@")[0],
-
-            description: "",
-
-            avatar: ""
-
-          }
-
-        };
-
-
-        saveUsers(users);
-
-
-        localStorage.setItem(
-          "messengerCurrentUser",
-          email
-        );
-
-
-        openMessenger();
-
-        return;
-      }
-
-
-      /* ВХОД */
-
-      if (!users[email]) {
-
-        error.textContent =
-          "Аккаунт не найден";
-
-        return;
-      }
-
-
-      if (
-        users[email].password !== password
-      ) {
-
-        error.textContent =
-          "Неверный пароль";
-
-        return;
-      }
-
-
-      localStorage.setItem(
-        "messengerCurrentUser",
-        email
-      );
-
-
-      openMessenger();
-
-    }
-  );
-
-
-  /* =========================
-     ОТКРЫТЬ МЕССЕНДЖЕР
-  ========================= */
-
-  function openMessenger() {
-
-    const email =
-      getCurrentUser();
-
-    const users =
-      getUsers();
-
-
-    if (!email || !users[email]) {
+      error.textContent =
+        "Такой аккаунт уже существует";
 
       return;
     }
 
 
-    authScreen.classList.add(
-      "hidden"
-    );
+    users[email] = {
 
-    appScreen.classList.remove(
-      "hidden"
-    );
+      email: email,
 
+      password: password,
 
-    userEmail.textContent =
-      email;
-
-
-    loadProfile();
-
-    showChats();
-
-  }
-
-
-  /* =========================
-     ПРОФИЛЬ
-  ========================= */
-
-  function loadProfile() {
-
-    const email =
-      getCurrentUser();
-
-    const users =
-      getUsers();
-
-
-    if (!email || !users[email]) {
-
-      return;
-    }
-
-
-    if (!users[email].profile) {
-
-      users[email].profile = {
+      profile: {
 
         nickname:
           email.split("@")[0],
@@ -363,437 +132,497 @@ document.addEventListener("DOMContentLoaded", function () {
 
         avatar: ""
 
-      };
+      }
 
-      saveUsers(users);
-    }
-
-
-    const profile =
-      users[email].profile;
+    };
 
 
-    profileNickname.textContent =
-      profile.nickname ||
-      email.split("@")[0];
+    saveUsers(users);
 
 
-    profileDescription.textContent =
-      profile.description ||
-      "Описание профиля";
-
-
-    nicknameInput.value =
-      profile.nickname || "";
-
-
-    descriptionInput.value =
-      profile.description || "";
-
-
-    profileEmail.value =
-      email;
-
-
-    selectedAvatar =
-      profile.avatar || "";
-
-
-    showAvatar(
-      selectedAvatar
+    localStorage.setItem(
+      "messengerCurrentUser",
+      email
     );
 
+
+    openMessenger();
+
+    return;
   }
 
 
-  /* =========================
-     АВАТАР
-  ========================= */
+  /* ВХОД */
 
-  function showAvatar(avatar) {
+  if (!users[email]) {
 
-    if (avatar) {
+    error.textContent =
+      "Аккаунт не найден";
 
-      avatarPreview.src =
-        avatar;
-
-      return;
-    }
+    return;
+  }
 
 
-    avatarPreview.src =
+  if (
+    users[email].password !== password
+  ) {
+
+    error.textContent =
+      "Неверный пароль";
+
+    return;
+  }
+
+
+  localStorage.setItem(
+    "messengerCurrentUser",
+    email
+  );
+
+
+  openMessenger();
+}
+
+
+/* =========================
+   ОТКРЫТЬ АККАУНТ
+========================= */
+
+function openMessenger() {
+
+  const email = currentEmail();
+  const users = getUsers();
+
+
+  if (!email || !users[email]) {
+    return;
+  }
+
+
+  document
+    .getElementById("authScreen")
+    .classList.add("hidden");
+
+
+  document
+    .getElementById("appScreen")
+    .classList.remove("hidden");
+
+
+  document.getElementById(
+    "userEmail"
+  ).textContent = email;
+
+
+  loadProfile();
+
+  showChats();
+}
+
+
+/* =========================
+   ЧАТЫ
+========================= */
+
+function showChats() {
+
+  document
+    .getElementById("chatsPage")
+    .classList.remove("hidden");
+
+  document
+    .getElementById("profilePage")
+    .classList.add("hidden");
+
+
+  document.getElementById(
+    "pageTitle"
+  ).textContent = "Чаты";
+
+
+  document
+    .getElementById("chatsButton")
+    .classList.add("active");
+
+  document
+    .getElementById("profileButton")
+    .classList.remove("active");
+}
+
+
+/* =========================
+   ПРОФИЛЬ
+========================= */
+
+function showProfile() {
+
+  document
+    .getElementById("chatsPage")
+    .classList.add("hidden");
+
+  document
+    .getElementById("profilePage")
+    .classList.remove("hidden");
+
+
+  document.getElementById(
+    "pageTitle"
+  ).textContent = "Профиль";
+
+
+  document
+    .getElementById("chatsButton")
+    .classList.remove("active");
+
+  document
+    .getElementById("profileButton")
+    .classList.add("active");
+
+
+  loadProfile();
+}
+
+
+function loadProfile() {
+
+  const email = currentEmail();
+  const users = getUsers();
+
+
+  if (!email || !users[email]) {
+    return;
+  }
+
+
+  if (!users[email].profile) {
+
+    users[email].profile = {
+
+      nickname:
+        email.split("@")[0],
+
+      description: "",
+
+      avatar: ""
+
+    };
+
+    saveUsers(users);
+  }
+
+
+  const profile =
+    users[email].profile;
+
+
+  document.getElementById(
+    "profileNickname"
+  ).textContent =
+    profile.nickname ||
+    email.split("@")[0];
+
+
+  document.getElementById(
+    "profileDescription"
+  ).textContent =
+    profile.description ||
+    "Описание профиля";
+
+
+  document.getElementById(
+    "profileEmail"
+  ).value = email;
+
+
+  document.getElementById(
+    "nickname"
+  ).value =
+    profile.nickname || "";
+
+
+  document.getElementById(
+    "description"
+  ).value =
+    profile.description || "";
+
+
+  newAvatar =
+    profile.avatar || "";
+
+
+  showAvatar(newAvatar);
+}
+
+
+/* =========================
+   АВАТАР
+========================= */
+
+function showAvatar(avatar) {
+
+  const img =
+    document.getElementById(
+      "avatarPreview"
+    );
+
+
+  if (avatar) {
+
+    img.src = avatar;
+
+  } else {
+
+    img.src =
       "data:image/svg+xml;charset=UTF-8," +
       encodeURIComponent(`
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="200"
-          height="200"
-        >
+        <svg xmlns="http://www.w3.org/2000/svg"
+             width="200"
+             height="200">
+
           <rect
             width="100%"
             height="100%"
-            fill="#20212a"
-          />
+            fill="#20212a"/>
 
           <text
             x="50%"
-            y="57%"
+            y="58%"
             text-anchor="middle"
-            font-size="75"
-          >
+            font-size="75">
             👤
           </text>
+
         </svg>
       `);
+  }
+}
 
+
+function chooseAvatar() {
+
+  document
+    .getElementById("avatarInput")
+    .click();
+}
+
+
+function changeAvatar(event) {
+
+  const file =
+    event.target.files[0];
+
+
+  if (!file) {
+    return;
   }
 
 
-  /* КНОПКА ВЫБРАТЬ ФОТО */
+  if (!file.type.startsWith("image/")) {
 
-  avatarButton.addEventListener(
-    "click",
-    function () {
-
-      avatarInput.click();
-
-    }
-  );
-
-
-  /* ВЫБРАЛИ ФОТО */
-
-  avatarInput.addEventListener(
-    "change",
-    function () {
-
-      const file =
-        avatarInput.files[0];
-
-
-      if (!file) {
-
-        return;
-      }
-
-
-      if (
-        !file.type.startsWith("image/")
-      ) {
-
-        alert(
-          "Выбери фотографию"
-        );
-
-        avatarInput.value = "";
-
-        return;
-      }
-
-
-      const reader =
-        new FileReader();
-
-
-      reader.onload =
-        function (event) {
-
-          selectedAvatar =
-            event.target.result;
-
-
-          showAvatar(
-            selectedAvatar
-          );
-
-        };
-
-
-      reader.readAsDataURL(file);
-
-    }
-  );
-
-
-  /* =========================
-     ИЗМЕНИТЬ ПРОФИЛЬ
-  ========================= */
-
-  editProfileButton.addEventListener(
-    "click",
-    function () {
-
-      loadProfile();
-
-      editProfile.classList.remove(
-        "hidden"
-      );
-
-      profileMessage.textContent =
-        "";
-
-    }
-  );
-
-
-  /* =========================
-     СОХРАНИТЬ ПРОФИЛЬ
-  ========================= */
-
-  saveProfileButton.addEventListener(
-    "click",
-    function () {
-
-      const email =
-        getCurrentUser();
-
-      const users =
-        getUsers();
-
-
-      if (!email || !users[email]) {
-
-        return;
-      }
-
-
-      const nickname =
-        nicknameInput.value.trim();
-
-      const description =
-        descriptionInput.value.trim();
-
-
-      if (!nickname) {
-
-        profileMessage.textContent =
-          "Введите никнейм";
-
-        return;
-      }
-
-
-      users[email].profile = {
-
-        nickname:
-          nickname,
-
-        description:
-          description,
-
-        avatar:
-          selectedAvatar
-
-      };
-
-
-      saveUsers(users);
-
-
-      profileNickname.textContent =
-        nickname;
-
-
-      profileDescription.textContent =
-        description ||
-        "Описание профиля";
-
-
-      showAvatar(
-        selectedAvatar
-      );
-
-
-      profileMessage.textContent =
-        "✓ Профиль сохранён";
-
-
-      setTimeout(
-        function () {
-
-          editProfile.classList.add(
-            "hidden"
-          );
-
-          profileMessage.textContent =
-            "";
-
-        },
-        800
-      );
-
-    }
-  );
-
-
-  /* =========================
-     ОТМЕНА
-  ========================= */
-
-  cancelProfileButton.addEventListener(
-    "click",
-    function () {
-
-      editProfile.classList.add(
-        "hidden"
-      );
-
-      profileMessage.textContent =
-        "";
-
-      loadProfile();
-
-    }
-  );
-
-
-  /* =========================
-     ЧАТЫ
-  ========================= */
-
-  chatsNav.addEventListener(
-    "click",
-    function () {
-
-      showChats();
-
-    }
-  );
-
-
-  function showChats() {
-
-    chatsPage.classList.remove(
-      "hidden"
+    alert(
+      "Можно выбрать только фотографию"
     );
 
-    profilePage.classList.add(
-      "hidden"
-    );
+    event.target.value = "";
 
-    pageTitle.textContent =
-      "Чаты";
-
-
-    chatsNav.classList.add(
-      "active"
-    );
-
-    profileNav.classList.remove(
-      "active"
-    );
-
+    return;
   }
 
 
-  /* =========================
-     ПРОФИЛЬ
-  ========================= */
-
-  profileNav.addEventListener(
-    "click",
-    function () {
-
-      showProfile();
-
-    }
-  );
+  const reader =
+    new FileReader();
 
 
-  function showProfile() {
+  reader.onload = function () {
 
-    chatsPage.classList.add(
-      "hidden"
-    );
+    newAvatar =
+      reader.result;
 
-    profilePage.classList.remove(
-      "hidden"
-    );
+    showAvatar(newAvatar);
 
-    pageTitle.textContent =
-      "Профиль";
+  };
 
 
-    chatsNav.classList.remove(
-      "active"
-    );
-
-    profileNav.classList.add(
-      "active"
-    );
+  reader.readAsDataURL(file);
+}
 
 
-    loadProfile();
+/* =========================
+   ИЗМЕНИТЬ ПРОФИЛЬ
+========================= */
 
+function editProfile() {
+
+  document
+    .getElementById("editBox")
+    .classList.remove("hidden");
+
+  loadProfile();
+}
+
+
+function closeEdit() {
+
+  document
+    .getElementById("editBox")
+    .classList.add("hidden");
+
+  document.getElementById(
+    "profileMessage"
+  ).textContent = "";
+
+  loadProfile();
+}
+
+
+/* =========================
+   СОХРАНИТЬ
+========================= */
+
+function saveProfile() {
+
+  const email = currentEmail();
+  const users = getUsers();
+
+
+  if (!email || !users[email]) {
+    return;
   }
 
 
-  /* =========================
-     ВЫХОД
-  ========================= */
-
-  logoutButton.addEventListener(
-    "click",
-    function () {
-
-      localStorage.removeItem(
-        "messengerCurrentUser"
-      );
+  const nickname =
+    document
+      .getElementById("nickname")
+      .value
+      .trim();
 
 
-      appScreen.classList.add(
-        "hidden"
-      );
-
-      authScreen.classList.remove(
-        "hidden"
-      );
+  const description =
+    document
+      .getElementById("description")
+      .value
+      .trim();
 
 
-      emailInput.value = "";
-
-      passwordInput.value = "";
-
-      error.textContent = "";
-
-
-      editProfile.classList.add(
-        "hidden"
-      );
+  const message =
+    document.getElementById(
+      "profileMessage"
+    );
 
 
-      setMode("login");
+  if (!nickname) {
 
-    }
+    message.textContent =
+      "Введите никнейм";
+
+    return;
+  }
+
+
+  users[email].profile = {
+
+    nickname: nickname,
+
+    description: description,
+
+    avatar: newAvatar
+
+  };
+
+
+  saveUsers(users);
+
+
+  document.getElementById(
+    "profileNickname"
+  ).textContent =
+    nickname;
+
+
+  document.getElementById(
+    "profileDescription"
+  ).textContent =
+    description ||
+    "Описание профиля";
+
+
+  showAvatar(newAvatar);
+
+
+  message.textContent =
+    "✓ Профиль сохранён";
+
+
+  setTimeout(function () {
+
+    document
+      .getElementById("editBox")
+      .classList.add("hidden");
+
+    message.textContent = "";
+
+  }, 800);
+}
+
+
+/* =========================
+   ВЫХОД
+========================= */
+
+function logout() {
+
+  localStorage.removeItem(
+    "messengerCurrentUser"
   );
 
 
-  /* =========================
-     АВТОВХОД
-  ========================= */
-
-  const currentUser =
-    getCurrentUser();
+  document
+    .getElementById("appScreen")
+    .classList.add("hidden");
 
 
-  if (currentUser) {
+  document
+    .getElementById("authScreen")
+    .classList.remove("hidden");
+
+
+  document.getElementById(
+    "email"
+  ).value = "";
+
+
+  document.getElementById(
+    "password"
+  ).value = "";
+
+
+  setMode("login");
+}
+
+
+/* =========================
+   АВТОВХОД
+========================= */
+
+window.addEventListener(
+  "load",
+  function () {
+
+    const email =
+      currentEmail();
 
     const users =
       getUsers();
 
 
-    if (users[currentUser]) {
+    if (
+      email &&
+      users[email]
+    ) {
 
       openMessenger();
-
-    } else {
-
-      localStorage.removeItem(
-        "messengerCurrentUser"
-      );
 
     }
 
   }
-
-});
+);

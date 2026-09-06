@@ -3,1174 +3,1668 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>Meowl Messenger</title>
 
 <style>
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
+:root{
+  --bg:#070914;
+  --bg2:#0d1020;
+  --card:rgba(255,255,255,.075);
+  --card2:rgba(255,255,255,.045);
+  --border:rgba(255,255,255,.13);
+  --text:#fff;
+  --muted:#a9afc7;
+  --purple:#8b5cf6;
+  --cyan:#22d3ee;
+  --pink:#ec4899;
+  --green:#34d399;
+  --orange:#fb923c;
+  --blue:#60a5fa;
+  --red:#fb7185;
+  --radius:24px;
+  --glass-opacity:.075;
+  --glow:1;
+  --font-size:16px;
+  --button-style:glass;
 }
 
-:root {
-  --bg: #070914;
-  --card: rgba(20, 23, 45, .74);
-  --card2: rgba(30, 34, 65, .70);
-  --border: rgba(255,255,255,.10);
-  --text: #fff;
-  --muted: #9da4c5;
-  --purple: #8b5cf6;
-  --cyan: #22d3ee;
-  --pink: #ec4899;
-  --green: #34d399;
-  --red: #fb7185;
+*{
+  box-sizing:border-box;
+  -webkit-tap-highlight-color:transparent;
 }
 
-html,
-body {
-  min-height: 100%;
-}
-
-body {
-  min-height: 100vh;
-  font-family: Arial, Helvetica, sans-serif;
-  color: var(--text);
-
+html,body{
+  margin:0;
+  padding:0;
+  width:100%;
+  min-height:100%;
   background:
-    radial-gradient(
-      circle at 15% 15%,
-      rgba(139,92,246,.25),
-      transparent 30%
-    ),
-    radial-gradient(
-      circle at 85% 20%,
-      rgba(34,211,238,.18),
-      transparent 30%
-    ),
-    radial-gradient(
-      circle at 50% 90%,
-      rgba(236,72,153,.14),
-      transparent 35%
-    ),
+    radial-gradient(circle at 15% 10%, color-mix(in srgb,var(--purple) 24%,transparent),transparent 35%),
+    radial-gradient(circle at 85% 20%, color-mix(in srgb,var(--cyan) 18%,transparent),transparent 35%),
+    radial-gradient(circle at 50% 100%, color-mix(in srgb,var(--pink) 15%,transparent),transparent 40%),
     var(--bg);
+  color:var(--text);
+  font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  font-size:var(--font-size);
+  overflow-x:hidden;
+}
+
+body{
+  min-height:100vh;
 }
 
 button,
-input {
-  font: inherit;
+input{
+  font:inherit;
 }
 
-button {
-  cursor: pointer;
+button{
+  border:0;
+  cursor:pointer;
 }
 
-.hidden {
-  display: none !important;
+.app{
+  width:100%;
+  max-width:760px;
+  margin:0 auto;
+  min-height:100vh;
+  position:relative;
+  padding-bottom:90px;
 }
 
-
-/* =========================================
-   APP
-========================================= */
-
-#app {
-  min-height: 100vh;
-  padding-bottom: 92px;
+.page{
+  display:none;
+  padding:20px;
+  animation:pageIn .25s ease;
 }
 
-.topbar {
-  position: sticky;
-  top: 0;
-  z-index: 20;
-
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-
-  padding: 17px 18px;
-
-  background: rgba(7,9,20,.66);
-  backdrop-filter: blur(20px);
-
-  border-bottom:
-    1px solid rgba(255,255,255,.06);
+.page.active{
+  display:block;
 }
 
-.topbar-title {
-  font-size: 21px;
-  font-weight: 900;
+@keyframes pageIn{
+  from{
+    opacity:0;
+    transform:translateY(8px);
+  }
+  to{
+    opacity:1;
+    transform:translateY(0);
+  }
 }
 
-.topbar-sub {
-  color: var(--muted);
-  font-size: 12px;
-  margin-top: 3px;
+.header{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:15px;
+  margin-bottom:22px;
 }
 
-.mini-avatar {
-  width: 42px;
-  height: 42px;
+.brand{
+  display:flex;
+  align-items:center;
+  gap:12px;
+}
 
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  border-radius: 14px;
-
+.logo{
+  width:48px;
+  height:48px;
+  border-radius:17px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:25px;
   background:
-    linear-gradient(
-      135deg,
-      var(--purple),
-      var(--cyan)
-    );
-
-  font-size: 21px;
-}
-
-.content {
-  width: min(760px, 100%);
-  margin: 0 auto;
-  padding: 20px 16px;
-}
-
-
-/* =========================================
-   HERO
-========================================= */
-
-.hero {
-  position: relative;
-  overflow: hidden;
-
-  padding: 28px;
-
-  border-radius: 28px;
-
-  border:
-    1px solid var(--border);
-
-  background:
-    linear-gradient(
-      135deg,
-      rgba(139,92,246,.20),
-      rgba(34,211,238,.08)
-    ),
-    var(--card);
-
+    linear-gradient(135deg,
+      color-mix(in srgb,var(--purple) 65%,transparent),
+      color-mix(in srgb,var(--cyan) 40%,transparent));
+  border:1px solid var(--border);
   box-shadow:
-    0 20px 60px rgba(0,0,0,.25);
+    0 0 calc(25px * var(--glow)) color-mix(in srgb,var(--purple) 45%,transparent),
+    inset 0 1px 0 rgba(255,255,255,.15);
+  backdrop-filter:blur(20px);
 }
 
-.hero-cat {
-  font-size: 48px;
-  margin-bottom: 8px;
+.brand h1{
+  font-size:20px;
+  margin:0;
 }
 
-.hero h1 {
-  font-size: 30px;
-  margin-bottom: 8px;
+.brand p{
+  margin:3px 0 0;
+  color:var(--muted);
+  font-size:12px;
 }
 
-.hero p {
-  color: var(--muted);
-  line-height: 1.6;
+.icon-button{
+  width:45px;
+  height:45px;
+  border-radius:16px;
+  color:#fff;
+  background:var(--card);
+  border:1px solid var(--border);
+  backdrop-filter:blur(18px);
+  transition:.2s;
 }
 
-
-/* =========================================
-   HOME CARDS
-========================================= */
-
-.home-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-
-  gap: 13px;
-
-  margin-top: 16px;
+.icon-button:hover{
+  transform:translateY(-2px);
+  box-shadow:0 0 22px color-mix(in srgb,var(--purple) 30%,transparent);
 }
 
-.home-card {
-  position: relative;
-  overflow: hidden;
-
-  min-height: 150px;
-
-  padding: 20px;
-
-  text-align: left;
-
-  color: white;
-
-  border-radius: 22px;
-
-  border:
-    1px solid var(--border);
-
-  background: var(--card);
-
-  transition: .2s;
-}
-
-.home-card:hover {
-  transform: translateY(-2px);
-
-  border-color:
-    rgba(139,92,246,.45);
-}
-
-.home-card .icon {
-  font-size: 30px;
-  margin-bottom: 12px;
-}
-
-.home-card h3 {
-  font-size: 17px;
-  margin-bottom: 6px;
-}
-
-.home-card p {
-  color: var(--muted);
-  font-size: 13px;
-  line-height: 1.5;
-}
-
-.bot-card {
-  grid-column: 1 / -1;
-
-  min-height: 165px;
-
-  background:
-    radial-gradient(
-      circle at 90% 20%,
-      rgba(34,211,238,.16),
-      transparent 30%
-    ),
-    radial-gradient(
-      circle at 10% 90%,
-      rgba(139,92,246,.16),
-      transparent 35%
-    ),
-    var(--card);
-}
-
-.online {
-  position: absolute;
-
-  top: 16px;
-  right: 16px;
-
-  padding: 5px 9px;
-
-  border-radius: 999px;
-
-  color: #6ee7b7;
-
-  background:
-    rgba(52,211,153,.10);
-
-  border:
-    1px solid rgba(52,211,153,.25);
-
-  font-size: 10px;
-}
-
-
-/* =========================================
-   CHAT LIST
-========================================= */
-
-.chat-list {
-  display: grid;
-  gap: 11px;
-}
-
-.chat-item {
-  width: 100%;
-
-  display: flex;
-  align-items: center;
-
-  gap: 13px;
-
-  padding: 14px;
-
-  text-align: left;
-
-  color: white;
-
-  border:
-    1px solid var(--border);
-
-  border-radius: 21px;
-
-  background:
-    var(--card);
-
-  transition: .2s;
-}
-
-.chat-item:hover {
-  transform: translateY(-2px);
-
-  border-color:
-    rgba(139,92,246,.45);
-}
-
-.chat-item-avatar {
-  width: 50px;
-  height: 50px;
-
-  flex: 0 0 50px;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  border-radius: 17px;
-
+.card{
   background:
     linear-gradient(
-      135deg,
-      var(--purple),
-      var(--cyan)
+      145deg,
+      rgba(255,255,255,var(--glass-opacity)),
+      rgba(255,255,255,.025)
     );
-
-  font-size: 23px;
-}
-
-.chat-item-info {
-  flex: 1;
-  min-width: 0;
-}
-
-.chat-item-name {
-  font-weight: 900;
-  font-size: 16px;
-
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-.chat-item-username {
-  color: #a78bfa;
-  font-size: 12px;
-  margin-top: 3px;
-}
-
-.chat-item-desc {
-  color: var(--muted);
-  font-size: 12px;
-  margin-top: 5px;
-
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-.chat-arrow {
-  color: var(--muted);
-  font-size: 23px;
-}
-
-
-/* =========================================
-   PAGES
-========================================= */
-
-.page-title {
-  font-size: 27px;
-  font-weight: 900;
-  margin-bottom: 7px;
-}
-
-.page-subtitle {
-  color: var(--muted);
-  line-height: 1.5;
-  margin-bottom: 18px;
-}
-
-.placeholder {
-  padding: 25px;
-
-  border-radius: 24px;
-
-  border:
-    1px solid var(--border);
-
-  background:
-    var(--card);
-}
-
-.placeholder .big {
-  font-size: 45px;
-  margin-bottom: 12px;
-}
-
-
-/* =========================================
-   PROFILE
-========================================= */
-
-.profile-card {
-  text-align: center;
-
-  padding: 28px;
-
-  border-radius: 27px;
-
-  border:
-    1px solid var(--border);
-
-  background:
-    var(--card);
-}
-
-.profile-avatar {
-  width: 90px;
-  height: 90px;
-
-  margin:
-    0 auto 15px;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  border-radius: 28px;
-
-  background:
-    linear-gradient(
-      135deg,
-      var(--purple),
-      var(--cyan)
-    );
-
-  font-size: 42px;
-}
-
-.profile-name {
-  font-size: 25px;
-  font-weight: 900;
-}
-
-.profile-username {
-  margin-top: 5px;
-  color: #a78bfa;
-}
-
-.profile-description {
-  margin-top: 14px;
-
-  color: var(--muted);
-
-  line-height: 1.6;
-}
-
-
-/* =========================================
-   CREATE BOT
-========================================= */
-
-.form-card {
-  padding: 22px;
-
-  border-radius: 25px;
-
-  border:
-    1px solid var(--border);
-
-  background:
-    var(--card);
-}
-
-.form-title {
-  font-size: 20px;
-  font-weight: 900;
-  margin-bottom: 7px;
-}
-
-.form-text {
-  color: var(--muted);
-  font-size: 13px;
-  line-height: 1.55;
-  margin-bottom: 18px;
-}
-
-.field-label {
-  display: block;
-
-  color: var(--muted);
-
-  font-size: 13px;
-
-  margin-bottom: 7px;
-}
-
-.form-input {
-  width: 100%;
-
-  padding: 13px 15px;
-
-  border-radius: 15px;
-
-  border:
-    1px solid var(--border);
-
-  outline: none;
-
-  color: white;
-
-  background:
-    rgba(255,255,255,.045);
-
-  margin-bottom: 14px;
-}
-
-.form-input:focus {
-  border-color:
-    rgba(139,92,246,.75);
-
+  border:1px solid var(--border);
+  border-radius:var(--radius);
+  padding:18px;
+  margin-bottom:14px;
+  backdrop-filter:blur(22px);
+  -webkit-backdrop-filter:blur(22px);
   box-shadow:
-    0 0 20px
-    rgba(139,92,246,.12);
+    0 15px 45px rgba(0,0,0,.22),
+    inset 0 1px 0 rgba(255,255,255,.08);
 }
 
-.primary-btn {
-  width: 100%;
+.card.clickable{
+  cursor:pointer;
+  transition:.22s;
+}
 
-  padding: 14px;
-
-  border: none;
-
-  border-radius: 16px;
-
-  color: white;
-
-  font-weight: 900;
-
-  background:
-    linear-gradient(
-      135deg,
-      var(--purple),
-      #6366f1
-    );
-
+.card.clickable:hover{
+  transform:translateY(-3px);
+  border-color:color-mix(in srgb,var(--purple) 45%,var(--border));
   box-shadow:
-    0 10px 30px
-    rgba(99,102,241,.22);
+    0 18px 50px rgba(0,0,0,.3),
+    0 0 calc(28px * var(--glow)) color-mix(in srgb,var(--purple) 16%,transparent);
 }
 
-.secondary-btn {
-  width: 100%;
-
-  padding: 13px;
-
-  border-radius: 15px;
-
-  border:
-    1px solid var(--border);
-
-  color: white;
-
-  background:
-    rgba(255,255,255,.05);
+.hero{
+  position:relative;
+  overflow:hidden;
+  padding:25px;
 }
 
-.success-box {
-  padding: 20px;
-
-  border-radius: 22px;
-
-  border:
-    1px solid
-    rgba(52,211,153,.22);
-
-  background:
-    rgba(52,211,153,.07);
+.hero::before{
+  content:"";
+  position:absolute;
+  width:170px;
+  height:170px;
+  border-radius:50%;
+  right:-70px;
+  top:-80px;
+  background:var(--purple);
+  opacity:.16;
+  filter:blur(25px);
 }
 
-.success-title {
-  font-size: 20px;
-  font-weight: 900;
-  margin-bottom: 9px;
+.hero-content{
+  position:relative;
+  z-index:1;
 }
 
-.bot-link {
-  display: block;
-
-  margin:
-    13px 0;
-
-  padding: 12px;
-
-  border-radius: 13px;
-
-  color: #67e8f9;
-
-  background:
-    rgba(34,211,238,.07);
-
-  border:
-    1px solid
-    rgba(34,211,238,.18);
-
-  word-break: break-all;
-
-  text-decoration: none;
+.hero h2{
+  margin:0 0 8px;
+  font-size:27px;
 }
 
-.copy-btn {
-  width: 100%;
-
-  padding: 12px;
-
-  border-radius: 14px;
-
-  border:
-    1px solid var(--border);
-
-  color: white;
-
-  background:
-    rgba(255,255,255,.06);
+.hero p{
+  color:var(--muted);
+  line-height:1.55;
+  margin:0 0 20px;
 }
 
-
-/* =========================================
-   CHAT
-========================================= */
-
-.chat-shell {
-  height: calc(100vh - 165px);
-
-  min-height: 450px;
-
-  display: flex;
-  flex-direction: column;
-
-  overflow: hidden;
-
-  border-radius: 26px;
-
-  border:
-    1px solid var(--border);
-
-  background:
-    rgba(13,16,32,.70);
-
-  backdrop-filter:
-    blur(20px);
+.gradient-text{
+  background:linear-gradient(90deg,var(--purple),var(--cyan),var(--pink));
+  -webkit-background-clip:text;
+  background-clip:text;
+  color:transparent;
 }
 
-.chat-header {
-  display: flex;
-  align-items: center;
-
-  gap: 12px;
-
-  padding: 15px;
-
-  border-bottom:
-    1px solid var(--border);
+.bot-card{
+  display:flex;
+  align-items:center;
+  gap:15px;
 }
 
-.back-btn {
-  width: 40px;
-  height: 40px;
-
-  border-radius: 13px;
-
-  border:
-    1px solid var(--border);
-
-  background:
-    rgba(255,255,255,.05);
-
-  color: white;
-}
-
-.chat-avatar {
-  width: 42px;
-  height: 42px;
-
-  border-radius: 14px;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
+.avatar{
+  width:56px;
+  height:56px;
+  flex:0 0 56px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  border-radius:19px;
+  font-size:28px;
   background:
     linear-gradient(
       135deg,
-      var(--purple),
-      var(--cyan)
+      color-mix(in srgb,var(--purple) 50%,transparent),
+      color-mix(in srgb,var(--cyan) 35%,transparent)
     );
-
-  font-size: 20px;
+  border:1px solid var(--border);
+  box-shadow:0 0 calc(25px * var(--glow)) color-mix(in srgb,var(--purple) 30%,transparent);
 }
 
-.chat-name {
-  font-weight: 900;
+.bot-info{
+  min-width:0;
+  flex:1;
 }
 
-.chat-status {
-  margin-top: 2px;
-
-  color: #6ee7b7;
-
-  font-size: 12px;
+.bot-info h3{
+  margin:0 0 4px;
+  font-size:17px;
 }
 
-.messages {
-  flex: 1;
-
-  overflow-y: auto;
-
-  padding: 18px 14px;
-
-  display: flex;
-  flex-direction: column;
-
-  gap: 9px;
+.bot-info p{
+  margin:0;
+  color:var(--muted);
+  font-size:13px;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;
 }
 
-.message-row {
-  display: flex;
+.badge{
+  display:inline-flex;
+  align-items:center;
+  gap:5px;
+  padding:5px 9px;
+  border-radius:999px;
+  background:color-mix(in srgb,var(--purple) 15%,transparent);
+  border:1px solid color-mix(in srgb,var(--purple) 35%,transparent);
+  color:#ddd1ff;
+  font-size:11px;
+  margin-top:7px;
 }
 
-.message-row.me {
-  justify-content: flex-end;
+.section-title{
+  margin:25px 0 12px;
+  font-size:14px;
+  color:var(--muted);
+  font-weight:700;
+  letter-spacing:.3px;
 }
 
-.message {
-  max-width: 85%;
-
-  padding: 12px 14px;
-
-  border-radius: 18px;
-
-  font-size: 14px;
-
-  line-height: 1.55;
-
-  white-space: pre-wrap;
-
-  word-break: break-word;
+.grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:12px;
 }
 
-.message.bot {
-  background:
-    rgba(255,255,255,.07);
-
-  border:
-    1px solid
-    rgba(255,255,255,.08);
-
-  border-bottom-left-radius: 5px;
+.small-card{
+  padding:17px;
+  min-height:125px;
 }
 
-.message.me {
+.small-icon{
+  font-size:28px;
+  margin-bottom:12px;
+}
+
+.small-card h3{
+  margin:0 0 5px;
+  font-size:15px;
+}
+
+.small-card p{
+  color:var(--muted);
+  margin:0;
+  line-height:1.4;
+  font-size:12px;
+}
+
+.primary-button{
+  width:100%;
+  min-height:50px;
+  border-radius:17px;
+  padding:12px 17px;
+  color:#fff;
+  font-weight:700;
   background:
     linear-gradient(
       135deg,
-      #7c3aed,
-      #4f46e5
+      color-mix(in srgb,var(--purple) 75%,transparent),
+      color-mix(in srgb,var(--cyan) 50%,transparent)
     );
-
-  border-bottom-right-radius: 5px;
-}
-
-.time {
-  display: block;
-
-  margin-top: 5px;
-
-  text-align: right;
-
-  opacity: .5;
-
-  font-size: 9px;
-}
-
-.chat-input-area {
-  display: flex;
-
-  gap: 8px;
-
-  padding: 12px;
-
-  border-top:
-    1px solid var(--border);
-}
-
-.chat-input {
-  flex: 1;
-
-  min-width: 0;
-
-  padding: 13px 15px;
-
-  border-radius: 15px;
-
-  border:
-    1px solid var(--border);
-
-  outline: none;
-
-  color: white;
-
-  background:
-    rgba(255,255,255,.045);
-}
-
-.send-btn {
-  width: 48px;
-
-  border: none;
-
-  border-radius: 15px;
-
-  color: white;
-
-  background:
-    linear-gradient(
-      135deg,
-      var(--purple),
-      var(--cyan)
-    );
-
-  font-size: 20px;
-}
-
-
-/* =========================================
-   BOTTOM NAV
-========================================= */
-
-.bottom-nav {
-  position: fixed;
-
-  left: 50%;
-  bottom: 12px;
-
-  transform:
-    translateX(-50%);
-
-  z-index: 50;
-
-  width:
-    min(700px,calc(100% - 20px));
-
-  display: grid;
-
-  grid-template-columns:
-    repeat(4,1fr);
-
-  gap: 5px;
-
-  padding: 7px;
-
-  border-radius: 23px;
-
-  background:
-    rgba(14,17,34,.84);
-
-  border:
-    1px solid
-    rgba(255,255,255,.09);
-
-  backdrop-filter:
-    blur(25px);
-
+  border:1px solid rgba(255,255,255,.16);
   box-shadow:
-    0 15px 50px
-    rgba(0,0,0,.35);
+    0 10px 30px color-mix(in srgb,var(--purple) 20%,transparent),
+    inset 0 1px 0 rgba(255,255,255,.14);
+  transition:.2s;
 }
 
-.nav-btn {
-  border: none;
-
-  border-radius: 17px;
-
-  padding: 9px 4px;
-
-  color: var(--muted);
-
-  background: transparent;
-
-  font-size: 11px;
+.primary-button:hover{
+  transform:translateY(-2px);
+  box-shadow:
+    0 14px 35px color-mix(in srgb,var(--purple) 28%,transparent);
 }
 
-.nav-icon {
-  display: block;
-
-  font-size: 21px;
-
-  margin-bottom: 3px;
+.secondary-button{
+  width:100%;
+  min-height:48px;
+  border-radius:17px;
+  padding:11px 15px;
+  color:#fff;
+  background:var(--card);
+  border:1px solid var(--border);
+  backdrop-filter:blur(18px);
+  transition:.2s;
 }
 
-.nav-btn.active {
-  color: white;
+.secondary-button:hover{
+  border-color:color-mix(in srgb,var(--cyan) 40%,var(--border));
+  transform:translateY(-1px);
+}
 
+.danger-button{
+  color:#fff;
+  background:rgba(251,113,133,.12);
+  border:1px solid rgba(251,113,133,.28);
+}
+
+.row-buttons{
+  display:flex;
+  gap:10px;
+}
+
+.row-buttons > *{
+  flex:1;
+}
+
+.input{
+  width:100%;
+  min-height:52px;
+  border-radius:17px;
+  padding:0 16px;
+  color:#fff;
+  outline:none;
+  background:rgba(0,0,0,.2);
+  border:1px solid var(--border);
+  transition:.2s;
+}
+
+.input:focus{
+  border-color:var(--purple);
+  box-shadow:0 0 22px color-mix(in srgb,var(--purple) 18%,transparent);
+}
+
+.input::placeholder{
+  color:#737990;
+}
+
+.bottom-nav{
+  position:fixed;
+  left:50%;
+  bottom:12px;
+  transform:translateX(-50%);
+  width:min(720px,calc(100% - 22px));
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:6px;
+  padding:8px;
+  z-index:100;
+  border-radius:23px;
+  background:rgba(12,14,28,.74);
+  border:1px solid var(--border);
+  backdrop-filter:blur(25px);
+  -webkit-backdrop-filter:blur(25px);
+  box-shadow:
+    0 15px 50px rgba(0,0,0,.4),
+    0 0 calc(35px * var(--glow)) color-mix(in srgb,var(--purple) 12%,transparent);
+}
+
+.nav-button{
+  min-height:58px;
+  border-radius:17px;
+  background:transparent;
+  color:#81869f;
+  transition:.2s;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  gap:3px;
+  font-size:11px;
+}
+
+.nav-button .nav-icon{
+  font-size:20px;
+}
+
+.nav-button.active{
+  color:#fff;
   background:
     linear-gradient(
       135deg,
-      rgba(139,92,246,.30),
-      rgba(34,211,238,.10)
+      color-mix(in srgb,var(--purple) 27%,transparent),
+      color-mix(in srgb,var(--cyan) 12%,transparent)
     );
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.08);
 }
 
+.back-button{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  color:#fff;
+  background:transparent;
+  padding:0;
+  margin-bottom:18px;
+  font-weight:700;
+}
 
-/* =========================================
-   TOAST
-========================================= */
+.chat-header{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  margin-bottom:15px;
+}
 
-#toast {
-  position: fixed;
+.chat-header .avatar{
+  width:50px;
+  height:50px;
+  flex-basis:50px;
+  font-size:24px;
+}
 
-  left: 50%;
-  bottom: 95px;
+.chat-header h2{
+  margin:0;
+  font-size:18px;
+}
 
-  transform:
-    translateX(-50%)
-    translateY(20px);
+.chat-header p{
+  margin:3px 0 0;
+  color:var(--muted);
+  font-size:12px;
+}
 
-  z-index: 100;
+.chat-messages{
+  min-height:52vh;
+  max-height:65vh;
+  overflow-y:auto;
+  padding:5px 2px 15px;
+}
 
-  max-width:
-    calc(100% - 30px);
+.message{
+  max-width:90%;
+  padding:13px 15px;
+  margin:8px 0;
+  border-radius:19px;
+  line-height:1.5;
+  font-size:14px;
+  white-space:pre-wrap;
+  word-break:break-word;
+}
 
-  padding: 12px 17px;
+.message.bot{
+  margin-right:auto;
+  background:var(--card);
+  border:1px solid var(--border);
+  border-bottom-left-radius:7px;
+}
 
-  border-radius: 15px;
-
+.message.user{
+  margin-left:auto;
   background:
-    rgba(20,23,45,.95);
-
-  border:
-    1px solid var(--border);
-
-  color: white;
-
-  opacity: 0;
-
-  pointer-events: none;
-
-  transition: .25s;
-
-  text-align: center;
-
-  font-size: 13px;
-
-  backdrop-filter:
-    blur(15px);
+    linear-gradient(
+      135deg,
+      color-mix(in srgb,var(--purple) 62%,transparent),
+      color-mix(in srgb,var(--pink) 35%,transparent)
+    );
+  border:1px solid rgba(255,255,255,.12);
+  border-bottom-right-radius:7px;
 }
 
-#toast.show {
-  opacity: 1;
-
-  transform:
-    translateX(-50%)
-    translateY(0);
+.chat-input{
+  display:flex;
+  gap:8px;
+  position:sticky;
+  bottom:0;
+  padding-top:8px;
+  background:linear-gradient(transparent,var(--bg) 25%);
 }
 
+.chat-input .input{
+  flex:1;
+}
 
-/* =========================================
-   MOBILE
-========================================= */
+.send-button{
+  width:52px;
+  border-radius:17px;
+  background:linear-gradient(135deg,var(--purple),var(--cyan));
+  color:#fff;
+  font-size:20px;
+}
 
-@media(max-width:520px) {
+.list-item{
+  display:flex;
+  align-items:center;
+  gap:13px;
+  padding:14px;
+  border-radius:19px;
+  background:var(--card2);
+  border:1px solid var(--border);
+  margin-bottom:10px;
+  cursor:pointer;
+  transition:.2s;
+}
 
-  .home-grid {
-    grid-template-columns: 1fr;
+.list-item:hover{
+  transform:translateY(-2px);
+  background:var(--card);
+}
+
+.list-item .avatar{
+  width:48px;
+  height:48px;
+  flex-basis:48px;
+  font-size:22px;
+}
+
+.list-main{
+  flex:1;
+  min-width:0;
+}
+
+.list-main h3{
+  margin:0 0 3px;
+  font-size:15px;
+}
+
+.list-main p{
+  margin:0;
+  color:var(--muted);
+  font-size:12px;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+}
+
+.arrow{
+  color:#7e849d;
+  font-size:20px;
+}
+
+.profile-top{
+  text-align:center;
+  padding:28px 18px;
+}
+
+.profile-avatar{
+  width:90px;
+  height:90px;
+  border-radius:30px;
+  margin:0 auto 14px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:44px;
+  background:
+    linear-gradient(
+      135deg,
+      color-mix(in srgb,var(--purple) 45%,transparent),
+      color-mix(in srgb,var(--cyan) 35%,transparent)
+    );
+  border:1px solid var(--border);
+  box-shadow:0 0 calc(35px * var(--glow)) color-mix(in srgb,var(--purple) 30%,transparent);
+}
+
+.profile-top h2{
+  margin:0 0 5px;
+}
+
+.profile-top p{
+  margin:0;
+  color:var(--muted);
+}
+
+.setting-group{
+  margin-bottom:18px;
+}
+
+.setting-title{
+  margin:0 0 10px;
+  font-size:13px;
+  color:var(--muted);
+  font-weight:700;
+}
+
+.theme-grid{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:9px;
+}
+
+.theme-button{
+  position:relative;
+  overflow:hidden;
+  min-height:82px;
+  border-radius:18px;
+  color:#fff;
+  text-align:left;
+  padding:13px;
+  border:1px solid rgba(255,255,255,.14);
+  background:rgba(255,255,255,.06);
+  transition:.2s;
+}
+
+.theme-button:hover{
+  transform:translateY(-2px);
+}
+
+.theme-button.active{
+  border-color:#fff;
+  box-shadow:
+    0 0 0 2px rgba(255,255,255,.12),
+    0 0 25px rgba(255,255,255,.1);
+}
+
+.theme-dot{
+  width:28px;
+  height:28px;
+  border-radius:50%;
+  margin-bottom:8px;
+  border:1px solid rgba(255,255,255,.25);
+}
+
+.theme-name{
+  font-size:12px;
+  font-weight:700;
+}
+
+.theme-purple{
+  background:linear-gradient(135deg,#8b5cf6,#22d3ee);
+}
+
+.theme-cyan{
+  background:linear-gradient(135deg,#06b6d4,#3b82f6);
+}
+
+.theme-orange{
+  background:linear-gradient(135deg,#f97316,#fb7185);
+}
+
+.theme-pink{
+  background:linear-gradient(135deg,#ec4899,#8b5cf6);
+}
+
+.theme-green{
+  background:linear-gradient(135deg,#10b981,#22c55e);
+}
+
+.theme-blue{
+  background:linear-gradient(135deg,#2563eb,#38bdf8);
+}
+
+.theme-red{
+  background:linear-gradient(135deg,#ef4444,#f97316);
+}
+
+.theme-gold{
+  background:linear-gradient(135deg,#eab308,#f59e0b);
+}
+
+.theme-ice{
+  background:linear-gradient(135deg,#94a3b8,#e0f2fe);
+}
+
+.theme-rainbow{
+  background:linear-gradient(
+    135deg,
+    #ec4899,
+    #8b5cf6,
+    #22d3ee,
+    #34d399,
+    #facc15,
+    #fb7185
+  );
+}
+
+.option-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:8px;
+}
+
+.option-button{
+  min-height:48px;
+  border-radius:15px;
+  background:var(--card2);
+  color:#fff;
+  border:1px solid var(--border);
+}
+
+.option-button.active{
+  background:
+    linear-gradient(
+      135deg,
+      color-mix(in srgb,var(--purple) 30%,transparent),
+      color-mix(in srgb,var(--cyan) 15%,transparent)
+    );
+  border-color:color-mix(in srgb,var(--purple) 55%,white);
+}
+
+.range{
+  width:100%;
+  accent-color:var(--purple);
+}
+
+.range-row{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:8px;
+}
+
+.range-value{
+  color:var(--cyan);
+  font-size:12px;
+}
+
+.info-box{
+  padding:16px;
+  border-radius:18px;
+  background:var(--card2);
+  border:1px solid var(--border);
+  line-height:1.6;
+  color:#d9dced;
+  font-size:13px;
+}
+
+.info-box h3{
+  margin:0 0 8px;
+  color:#fff;
+}
+
+.info-box ul{
+  margin:8px 0;
+  padding-left:20px;
+}
+
+.info-box li{
+  margin:5px 0;
+}
+
+.search-box{
+  margin-bottom:15px;
+}
+
+.empty{
+  text-align:center;
+  padding:35px 20px;
+  color:var(--muted);
+}
+
+.empty-icon{
+  font-size:42px;
+  margin-bottom:10px;
+}
+
+.toast{
+  position:fixed;
+  left:50%;
+  bottom:90px;
+  transform:translate(-50%,20px);
+  opacity:0;
+  pointer-events:none;
+  z-index:300;
+  padding:12px 17px;
+  border-radius:16px;
+  background:rgba(15,17,32,.9);
+  border:1px solid var(--border);
+  backdrop-filter:blur(20px);
+  box-shadow:0 10px 40px rgba(0,0,0,.4);
+  transition:.25s;
+  white-space:nowrap;
+  font-size:13px;
+}
+
+.toast.show{
+  opacity:1;
+  transform:translate(-50%,0);
+}
+
+.modal{
+  position:fixed;
+  inset:0;
+  z-index:250;
+  display:none;
+  align-items:center;
+  justify-content:center;
+  padding:20px;
+  background:rgba(0,0,0,.62);
+  backdrop-filter:blur(8px);
+}
+
+.modal.show{
+  display:flex;
+}
+
+.modal-card{
+  width:min(560px,100%);
+  max-height:88vh;
+  overflow-y:auto;
+  background:
+    linear-gradient(
+      145deg,
+      rgba(25,28,50,.95),
+      rgba(9,11,25,.95)
+    );
+  border:1px solid var(--border);
+  border-radius:26px;
+  padding:21px;
+  box-shadow:
+    0 30px 90px rgba(0,0,0,.55),
+    0 0 calc(45px * var(--glow)) color-mix(in srgb,var(--purple) 16%,transparent);
+}
+
+.modal-header{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  margin-bottom:16px;
+}
+
+.modal-header h2{
+  margin:0;
+  font-size:20px;
+}
+
+.close-button{
+  width:38px;
+  height:38px;
+  border-radius:13px;
+  background:var(--card);
+  color:#fff;
+  border:1px solid var(--border);
+}
+
+@media(max-width:560px){
+  .page{
+    padding:15px;
   }
 
-  .bot-card {
-    grid-column: auto;
+  .grid{
+    grid-template-columns:1fr;
   }
 
-  .hero {
-    padding: 23px;
+  .theme-grid{
+    grid-template-columns:1fr 1fr;
   }
 
-  .hero h1 {
-    font-size: 27px;
+  .option-grid{
+    grid-template-columns:1fr 1fr;
   }
 
-  .chat-shell {
-    height: calc(100vh - 160px);
+  .hero h2{
+    font-size:23px;
   }
 }
 </style>
 </head>
 
-
 <body>
 
+<div class="app">
 
-<div id="app">
+  <!-- ================= HOME ================= -->
+
+  <section id="page-home" class="page active">
+
+    <div class="header">
+      <div class="brand">
+        <div class="logo">🐱</div>
+        <div>
+          <h1>Meowl Messenger</h1>
+          <p>Общение в стеклянном мире ✨</p>
+        </div>
+      </div>
+
+      <button class="icon-button" onclick="openSettings()">⚙️</button>
+    </div>
+
+    <div class="card hero">
+      <div class="hero-content">
+        <h2>
+          Добро пожаловать в
+          <span class="gradient-text">Meowl</span>
+        </h2>
+
+        <p>
+          Общайся, создавай ботов, настраивай внешний вид
+          и делай свой мессенджер таким, каким хочешь его видеть.
+        </p>
+
+        <button class="primary-button" onclick="openBot('official')">
+          🤖 Открыть Meowl Messenger
+        </button>
+      </div>
+    </div>
+
+    <div class="section-title">Быстрый доступ</div>
+
+    <div class="grid">
+
+      <div class="card small-card clickable" onclick="showPage('chats')">
+        <div class="small-icon">💬</div>
+        <h3>Чаты</h3>
+        <p>Открыть ботов и сохранённые диалоги</p>
+      </div>
+
+      <div class="card small-card clickable" onclick="showPage('people')">
+        <div class="small-icon">👥</div>
+        <h3>Люди</h3>
+        <p>Твой локальный список пользователей</p>
+      </div>
+
+      <div class="card small-card clickable" onclick="openSettings()">
+        <div class="small-icon">🎨</div>
+        <h3>Темы</h3>
+        <p>Меняй цвета стекла и свечение</p>
+      </div>
+
+      <div class="card small-card clickable" onclick="openRules()">
+        <div class="small-icon">📜</div>
+        <h3>Правила</h3>
+        <p>Правила Meowl Messenger</p>
+      </div>
+
+    </div>
+
+    <div class="section-title">Возможности</div>
+
+    <div class="card clickable" onclick="openBot('official')">
+      <div class="bot-card">
+        <div class="avatar">🤖</div>
+
+        <div class="bot-info">
+          <h3>Meowl Messenger</h3>
+          <p>Официальный бот мессенджера</p>
+          <span class="badge">✓ official</span>
+        </div>
+
+        <div class="arrow">›</div>
+      </div>
+    </div>
+
+  </section>
 
 
-  <!-- TOP -->
+  <!-- ================= CHATS ================= -->
 
-  <header class="topbar">
+  <section id="page-chats" class="page">
 
-    <div>
+    <div class="header">
+      <div>
+        <h2 style="margin:0">💬 Чаты</h2>
+        <p style="color:var(--muted);margin:5px 0 0">
+          Твои боты и диалоги
+        </p>
+      </div>
 
-      <div
-        id="topTitle"
-        class="topbar-title"
+      <button class="icon-button" onclick="openSettings()">⚙️</button>
+    </div>
+
+    <div id="chats-list"></div>
+
+  </section>
+
+
+  <!-- ================= PEOPLE ================= -->
+
+  <section id="page-people" class="page">
+
+    <div class="header">
+      <div>
+        <h2 style="margin:0">👥 Люди</h2>
+        <p style="color:var(--muted);margin:5px 0 0">
+          Пользователи Meowl
+        </p>
+      </div>
+    </div>
+
+    <div class="search-box">
+      <input
+        id="people-search"
+        class="input"
+        placeholder="🔎 Поиск пользователя..."
+        oninput="renderPeople()"
       >
-        Главная
+    </div>
+
+    <div id="people-list"></div>
+
+  </section>
+
+
+  <!-- ================= PROFILE ================= -->
+
+  <section id="page-profile" class="page">
+
+    <div class="header">
+      <div>
+        <h2 style="margin:0">👤 Профиль</h2>
+        <p style="color:var(--muted);margin:5px 0 0">
+          Твой локальный профиль
+        </p>
       </div>
 
-      <div class="topbar-sub">
-        Meowl Messenger
+      <button class="icon-button" onclick="openSettings()">⚙️</button>
+    </div>
+
+    <div class="card profile-top">
+
+      <div class="profile-avatar">🐱</div>
+
+      <h2>Meowler</h2>
+      <p>@meowler</p>
+
+      <div style="margin-top:15px">
+        <span class="badge">🐾 Meowl user</span>
       </div>
 
     </div>
 
-    <div class="mini-avatar">
-      🐱
+    <div class="card">
+
+      <div class="setting-title">Профиль</div>
+
+      <input
+        id="nickname-input"
+        class="input"
+        placeholder="Твоё имя"
+      >
+
+      <div style="height:10px"></div>
+
+      <input
+        id="username-input"
+        class="input"
+        placeholder="@username"
+      >
+
+      <div style="height:10px"></div>
+
+      <textarea
+        id="description-input"
+        class="input"
+        style="padding-top:14px;min-height:90px;resize:vertical"
+        placeholder="Описание профиля..."
+      ></textarea>
+
+      <div style="height:10px"></div>
+
+      <button class="primary-button" onclick="saveProfile()">
+        💾 Сохранить профиль
+      </button>
+
     </div>
 
-  </header>
+    <div class="card clickable" onclick="openSettings()">
+      <div class="bot-card">
+        <div class="avatar">🎨</div>
+        <div class="bot-info">
+          <h3>Настройки</h3>
+          <p>Темы, стекло, кнопки и интерфейс</p>
+        </div>
+        <div class="arrow">›</div>
+      </div>
+    </div>
+
+  </section>
 
 
-  <!-- CONTENT -->
+  <!-- ================= SETTINGS ================= -->
 
-  <main
-    id="content"
-    class="content"
-  ></main>
+  <section id="page-settings" class="page">
 
-
-  <!-- NAV -->
-
-  <nav class="bottom-nav">
-
-    <button
-      class="nav-btn active"
-      data-page="home"
-    >
-      <span class="nav-icon">🏠</span>
-      Главная
+    <button class="back-button" onclick="closeSettings()">
+      ← Назад
     </button>
 
-    <button
-      class="nav-btn"
-      data-page="chats"
-    >
-      <span class="nav-icon">💬</span>
-      Чаты
-    </button>
+    <div class="header">
+      <div>
+        <h2 style="margin:0">⚙️ Настройки</h2>
+        <p style="color:var(--muted);margin:5px 0 0">
+          Настрой Meowl под себя
+        </p>
+      </div>
+    </div>
+
+
+    <!-- THEMES -->
+
+    <div class="card">
+
+      <div class="setting-title">
+        🎨 Тема оформления
+      </div>
+
+      <div class="theme-grid">
+
+        <button
+          class="theme-button"
+          data-theme="purple"
+          onclick="setTheme('purple')"
+        >
+          <div class="theme-dot theme-purple"></div>
+          <div class="theme-name">💜 Neon Purple</div>
+        </button>
+
+        <button
+          class="theme-button"
+          data-theme="cyan"
+          onclick="setTheme('cyan')"
+        >
+          <div class="theme-dot theme-cyan"></div>
+          <div class="theme-name">💠 Cyan Glass</div>
+        </button>
+
+        <button
+          class="theme-button"
+          data-theme="orange"
+          onclick="setTheme('orange')"
+        >
+          <div class="theme-dot theme-orange"></div>
+          <div class="theme-name">🧡 Orange</div>
+        </button>
+
+        <button
+          class="theme-button"
+          data-theme="pink"
+          onclick="setTheme('pink')"
+        >
+          <div class="theme-dot theme-pink"></div>
+          <div class="theme-name">💫 Pink Galaxy</div>
+        </button>
+
+        <button
+          class="theme-button"
+          data-theme="green"
+          onclick="setTheme('green')"
+        >
+          <div class="theme-dot theme-green"></div>
+          <div class="theme-name">💚 Emerald</div>
+        </button>
+
+        <button
+          class="theme-button"
+          data-theme="blue"
+          onclick="setTheme('blue')"
+        >
+          <div class="theme-dot theme-blue"></div>
+          <div class="theme-name">🔵 Ocean</div>
+        </button>
+
+        <button
+          class="theme-button"
+          data-theme="red"
+          onclick="setTheme('red')"
+        >
+          <div class="theme-dot theme-red"></div>
+          <div class="theme-name">❤️ Ruby</div>
+        </button>
+
+        <button
+          class="theme-button"
+          data-theme="gold"
+          onclick="setTheme('gold')"
+        >
+          <div class="theme-dot theme-gold"></div>
+          <div class="theme-name">💛 Gold</div>
+        </button>
+
+        <button
+          class="theme-button"
+          data-theme="ice"
+          onclick="setTheme('ice')"
+        >
+          <div class="theme-dot theme-ice"></div>
+          <div class="theme-name">❄️ Ice</div>
+        </button>
+
+        <button
+          class="theme-button"
+          data-theme="rainbow"
+          onclick="setTheme('rainbow')"
+        >
+          <div class="theme-dot theme-rainbow"></div>
+          <div class="theme-name">🌈 Rainbow</div>
+        </button>
+
+      </div>
+
+    </div>
+
+
+    <!-- GLASS -->
+
+    <div class="card">
+
+      <div class="setting-title">
+        🪟 Стекло
+      </div>
+
+      <div class="range-row">
+        <span>Прозрачность</span>
+        <span id="glass-value" class="range-value">8%</span>
+      </div>
+
+      <input
+        id="glass-range"
+        class="range"
+        type="range"
+        min="3"
+        max="18"
+        value="8"
+        oninput="changeGlass(this.value)"
+      >
+
+    </div>
+
+
+    <!-- GLOW -->
+
+    <div class="card">
+
+      <div class="setting-title">
+        ✨ Свечение
+      </div>
+
+      <div class="range-row">
+        <span>Интенсивность</span>
+        <span id="glow-value" class="range-value">100%</span>
+      </div>
+
+      <input
+        id="glow-range"
+        class="range"
+        type="range"
+        min="0"
+        max="200"
+        value="100"
+        oninput="changeGlow(this.value)"
+      >
+
+    </div>
+
+
+    <!-- FONT -->
+
+    <div class="card">
+
+      <div class="setting-title">
+        🔤 Размер текста
+      </div>
+
+      <div class="option-grid">
+
+        <button
+          class="option-button"
+          data-font="small"
+          onclick="setFontSize('small')"
+        >
+          Маленький
+        </button>
+
+        <button
+          class="option-button"
+          data-font="normal"
+          onclick="setFontSize('normal')"
+        >
+          Обычный
+        </button>
+
+        <button
+          class="option-button"
+          data-font="large"
+          onclick="setFontSize('large')"
+        >
+          Большой
+        </button>
+
+      </div>
+
+    </div>
+
+
+    <!-- BUTTON STYLE -->
+
+    <div class="card">
+
+      <div class="setting-title">
+        🔘 Стиль кнопок
+      </div>
+
+      <div class="option-grid">
+
+        <button
+          class="option-button"
+          data-button="glass"
+          onclick="setButtonStyle('glass')"
+        >
+          🪟 Стекло
+        </button>
+
+        <button
+          class="option-button"
+          data-button="neon"
+          onclick="setButtonStyle('neon')"
+        >
+          ⚡ Neon
+        </button>
+
+        <button
+          class="option-button"
+          data-button="soft"
+          onclick="setButtonStyle('soft')"
+        >
+          🌙 Soft
+        </button>
+
+      </div>
+
+    </div>
+
+
+    <!-- EMOJIS -->
+
+    <div class="card">
+
+      <div class="setting-title">
+        🐱 Стиль Meowl
+      </div>
+
+      <div class="option-grid">
+
+        <button
+          class="option-button"
+          data-emoji="🐱"
+          onclick="setEmoji('🐱')"
+        >
+          🐱
+        </button>
+
+        <button
+          class="option-button"
+          data-emoji="😺"
+          onclick="setEmoji('😺')"
+        >
+          😺
+        </button>
+
+        <button
+          class="option-button"
+          data-emoji="😸"
+          onclick="setEmoji('😸')"
+        >
+          😸
+        </button>
+
+        <button
+          class="option-button"
+          data-emoji="🐈"
+          onclick="setEmoji('🐈')"
+        >
+          🐈
+        </button>
+
+        <button
+          class="option-button"
+          data-emoji="🐾"
+          onclick="setEmoji('🐾')"
+        >
+          🐾
+        </button>
+
+        <button
+          class="option-button"
+          data-emoji="✨"
+          onclick="setEmoji('✨')"
+        >
+          ✨
+        </button>
+
+      </div>
+
+    </div>
+
+
+    <!-- INFO -->
+
+    <div class="card clickable" onclick="openRules()">
+      <div class="bot-card">
+        <div class="avatar">📜</div>
+
+        <div class="bot-info">
+          <h3>Правила</h3>
+          <p>Правила использования Meowl Messenger</p>
+        </div>
+
+        <div class="arrow">›</div>
+      </div>
+    </div>
+
+
+    <div class="card clickable" onclick="openBotFeatures()">
+      <div class="bot-card">
+        <div class="avatar">🤖</div>
+
+        <div class="bot-info">
+          <h3>Возможности ботов</h3>
+          <p>Что умеют боты в Meowl Messenger</p>
+        </div>
+
+        <div class="arrow">›</div>
+      </div>
+    </div>
+
+
+    <div class="card clickable" onclick="openAbout()">
+      <div class="bot-card">
+        <div class="avatar">ℹ️</div>
+
+        <div class="bot-info">
+          <h3>О Meowl Messenger</h3>
+          <p>Информация, версия и возможности</p>
+        </div>
+
+        <div class="arrow">›</div>
+      </div>
+    </div>
+
+
+    <div style="height:10px"></div>
 
     <button
-      class="nav-btn"
-      data-page="people"
+      class="secondary-button danger-button"
+      onclick="resetSettings()"
     >
-      <span class="nav-icon">👥</span>
-      Люди
+      ♻️ Сбросить настройки
     </button>
 
-    <button
-      class="nav-btn"
-      data-page="profile"
-    >
-      <span class="nav-icon">👤</span>
-      Профиль
-    </button>
-
-  </nav>
+  </section>
 
 </div>
 
 
-<div id="toast"></div>
+<!-- ================= BOTTOM NAV ================= -->
+
+<nav class="bottom-nav">
+
+  <button
+    id="nav-home"
+    class="nav-button active"
+    onclick="showPage('home')"
+  >
+    <span class="nav-icon">🏠</span>
+    <span>Главная</span>
+  </button>
+
+  <button
+    id="nav-chats"
+    class="nav-button"
+    onclick="showPage('chats')"
+  >
+    <span class="nav-icon">💬</span>
+    <span>Чаты</span>
+  </button>
+
+  <button
+    id="nav-people"
+    class="nav-button"
+    onclick="showPage('people')"
+  >
+    <span class="nav-icon">👥</span>
+    <span>Люди</span>
+  </button>
+
+  <button
+    id="nav-profile"
+    class="nav-button"
+    onclick="showPage('profile')"
+  >
+    <span class="nav-icon">👤</span>
+    <span>Профиль</span>
+  </button>
+
+</nav>
+
+
+<!-- ================= CHAT PAGE ================= -->
+
+<section
+  id="chat-page"
+  class="page"
+  style="
+    position:fixed;
+    inset:0;
+    z-index:150;
+    background:var(--bg);
+    max-width:760px;
+    margin:0 auto;
+    overflow-y:auto;
+    padding-bottom:20px;
+  "
+>
+
+  <button class="back-button" onclick="closeChat()">
+    ← Назад к чатам
+  </button>
+
+  <div id="chat-header"></div>
+
+  <div
+    id="chat-messages"
+    class="chat-messages"
+  ></div>
+
+  <div class="chat-input">
+
+    <input
+      id="chat-input"
+      class="input"
+      placeholder="Напиши сообщение..."
+      autocomplete="off"
+      onkeydown="if(event.key==='Enter') sendCurrentMessage()"
+    >
+
+    <button
+      class="send-button"
+      onclick="sendCurrentMessage()"
+    >
+      ➤
+    </button>
+
+  </div>
+
+</section>
+
+
+<!-- ================= MODAL ================= -->
+
+<div id="modal" class="modal">
+
+  <div class="modal-card">
+
+    <div class="modal-header">
+
+      <h2 id="modal-title">Информация</h2>
+
+      <button
+        class="close-button"
+        onclick="closeModal()"
+      >
+        ×
+      </button>
+
+    </div>
+
+    <div id="modal-content"></div>
+
+  </div>
+
+</div>
+
+
+<div id="toast" class="toast"></div>
 
 
 <script>
 
-/* =====================================================
-   LOCAL STORAGE
-===================================================== */
-
-const BOTS_KEY =
-  "meowl_created_bots_v2";
-
-const CHAT_KEY =
-  "meowl_bot_chats_v2";
+/* =========================================================
+   MEOWL MESSENGER
+   Полностью локальная версия
+   ========================================================= */
 
 
-let bots =
-  JSON.parse(
-    localStorage.getItem(BOTS_KEY) || "[]"
-  );
+const APP_VERSION = "1.0.0";
 
 
-let botChats =
-  JSON.parse(
-    localStorage.getItem(CHAT_KEY) || "{}"
-  );
+/* ================= STORAGE ================= */
+
+const STORAGE = {
+  bots:"meowl_created_bots_v3",
+  chats:"meowl_bot_chats_v3",
+  settings:"meowl_settings_v3",
+  profile:"meowl_profile_v3"
+};
 
 
-/* =====================================================
-   MAIN ELEMENTS
-===================================================== */
+/* ================= OFFICIAL BOT ================= */
 
-const content =
-  document.getElementById("content");
-
-const topTitle =
-  document.getElementById("topTitle");
-
-
-/* =====================================================
-   TOAST
-===================================================== */
-
-let toastTimer;
-
-function showToast(text) {
-
-  const toast =
-    document.getElementById("toast");
-
-  clearTimeout(toastTimer);
-
-  toast.textContent = text;
-
-  toast.classList.add("show");
-
-  toastTimer =
-    setTimeout(() => {
-
-      toast.classList.remove("show");
-
-    }, 2800);
-}
+const officialBot = {
+  id:"official",
+  name:"Meowl Messenger",
+  username:"MeowlMessenger",
+  description:"Официальный бот Meowl Messenger.",
+  emoji:"🤖",
+  official:true
+};
 
 
-/* =====================================================
-   RULES
-===================================================== */
+/* ================= RULES ================= */
 
-const START_RULES = `🐾 ПРАВИЛА MEOWL MESSENGER
+const rulesText = `
+🐾 ПРАВИЛА MEOWL MESSENGER
 
 Добро пожаловать в Meowl Messenger!
 
 Meowl Messenger создан как уютное место для общения, знакомств и обмена сообщениями.
 
-Пожалуйста, внимательно ознакомься с правилами перед использованием мессенджера.
+Пожалуйста, внимательно ознакомься с правилами.
 
 ━━━━━━━━━━━━━━━━━━
 
 1. 🐱 УВАЖЕНИЕ К ДРУГИМ
 
-Каждый пользователь Meowl Messenger имеет право на нормальное и уважительное общение.
+Каждый пользователь имеет право на нормальное и уважительное общение.
 
 Запрещено:
 
@@ -1192,11 +1686,11 @@ Meowl Messenger создан как уютное место для общени�
 
 Запрещается:
 
-• массово отправлять рекламу;
-• отправлять большое количество одинаковых сообщений;
-• создавать множество аккаунтов ради рассылки;
-• использовать автоматические скрипты для спама;
-• намеренно перегружать приложение.
+• массовая реклама;
+• большое количество одинаковых сообщений;
+• создание аккаунтов ради рассылки;
+• автоматический спам;
+• намеренная перегрузка приложения.
 
 ━━━━━━━━━━━━━━━━━━
 
@@ -1211,7 +1705,7 @@ Meowl Messenger создан как уютное место для общени�
 • вредоносные программы;
 • украденные данные;
 • угрозы;
-• инструкции по причинению вреда людям;
+• инструкции по причинению вреда;
 • материалы, нарушающие закон.
 
 ━━━━━━━━━━━━━━━━━━
@@ -1226,7 +1720,7 @@ Meowl Messenger создан как уютное место для общени�
 • домашние адреса;
 • документы;
 • пароли;
-• данные банковских карт;
+• банковские данные;
 • приватные фотографии;
 • данные аккаунтов;
 • другая личная информация.
@@ -1237,7 +1731,7 @@ Meowl Messenger создан как уютное место для общени�
 
 5. 🛡️ БЕЗОПАСНОСТЬ
 
-Никому не передавай пароль от своего аккаунта.
+Никому не передавай пароль.
 
 Не вводи пароль на подозрительных сайтах.
 
@@ -1258,8 +1752,6 @@ Username должен использоваться честно.
 Уважай собеседников.
 
 Если человек просит прекратить общение — уважай его просьбу.
-
-Не нужно превращать обычное общение в постоянный конфликт.
 
 ━━━━━━━━━━━━━━━━━━
 
@@ -1282,8 +1774,6 @@ Username должен использоваться честно.
 • вредоносные боты;
 • атаки на приложение.
 
-Если ты обнаружил ошибку — сообщи администрации.
-
 ━━━━━━━━━━━━━━━━━━
 
 10. 🐾 АДМИНИСТРАЦИЯ
@@ -1295,13 +1785,11 @@ Username должен использоваться честно.
 • заблокировать аккаунт;
 • удалить нарушающий контент.
 
-Серьёзные нарушения могут привести к блокировке.
-
 ━━━━━━━━━━━━━━━━━━
 
 11. ⚠️ НЕ ОБХОДИ ОГРАНИЧЕНИЯ
 
-Не создавай дополнительные аккаунты для обхода блокировок или ограничений.
+Не создавай дополнительные аккаунты для обхода ограничений.
 
 ━━━━━━━━━━━━━━━━━━
 
@@ -1311,1245 +1799,1224 @@ Username должен использоваться честно.
 
 Meowl Messenger создан для общения, дружбы и новых знакомств.
 
-Не мешай другим пользователям пользоваться мессенджером.
+🐱 Спасибо, что используешь Meowl Messenger!
+
+Команда Meowl Messenger 💜
+`;
+
+
+/* ================= BOT FEATURES ================= */
+
+const botFeaturesText = `
+🤖 ВОЗМОЖНОСТИ БОТОВ MEOWL
+
+Боты — это специальные аккаунты внутри Meowl Messenger.
 
 ━━━━━━━━━━━━━━━━━━
 
-🐱 Спасибо, что используешь Meowl Messenger!
+🐱 ОФИЦИАЛЬНЫЙ БОТ
 
-Команда Meowl Messenger 💜`;
+Meowl Messenger — официальный бот.
+
+Команда:
+
+/start
+
+Показывает правила и информацию о мессенджере.
+
+━━━━━━━━━━━━━━━━━━
+
+🤖 СОЗДАНИЕ БОТА
+
+Команда:
+
+/newbot
+
+После этого бот попросит:
+
+1. Имя бота
+2. Username бота
+
+После создания бот появится в разделе:
+
+💬 Чаты
+
+━━━━━━━━━━━━━━━━━━
+
+🔗 ССЫЛКА
+
+Каждый созданный бот получает персональную ссылку.
+
+Например:
+
+?bot=MyCoolBot
+
+По ней можно открыть конкретного бота.
+
+━━━━━━━━━━━━━━━━━━
+
+💬 ЧАТ
+
+Каждый бот имеет собственный локальный чат.
+
+История сообщений сохраняется в браузере.
+
+━━━━━━━━━━━━━━━━━━
+
+⚙️ НАСТРОЙКИ
+
+Можно изменить:
+
+• тему;
+• цвета;
+• прозрачность стекла;
+• свечение;
+• размер текста;
+• стиль кнопок;
+• эмодзи.
+
+━━━━━━━━━━━━━━━━━━
+
+⚠️ ВАЖНО
+
+Эта версия работает полностью без сервера.
+
+Поэтому созданные тобой боты и их сообщения сохраняются только в твоём браузере.
+
+Другие пользователи не увидят их автоматически.
+
+`;
 
 
-/* =====================================================
-   NAVIGATION
-===================================================== */
+/* ================= SETTINGS ================= */
 
-document
-  .querySelectorAll(".nav-btn")
-  .forEach(button => {
+const defaultSettings = {
+  theme:"purple",
+  glass:8,
+  glow:100,
+  fontSize:"normal",
+  buttonStyle:"glass",
+  emoji:"🐱"
+};
 
-    button.addEventListener(
-      "click",
-      () => {
 
-        showPage(
-          button.dataset.page
-        );
+let settings =
+  JSON.parse(localStorage.getItem(STORAGE.settings)) ||
+  {...defaultSettings};
 
-      }
-    );
 
+let profile =
+  JSON.parse(localStorage.getItem(STORAGE.profile)) ||
+  {
+    nickname:"Meowler",
+    username:"meowler",
+    description:"Люблю Meowl Messenger 🐱"
+  };
+
+
+let createdBots =
+  JSON.parse(localStorage.getItem(STORAGE.bots)) ||
+  [];
+
+
+let botChats =
+  JSON.parse(localStorage.getItem(STORAGE.chats)) ||
+  {};
+
+
+let currentBot = null;
+let currentPage = "home";
+
+
+/* ================= INIT ================= */
+
+document.addEventListener("DOMContentLoaded",()=>{
+
+  applySettings();
+
+  loadProfile();
+
+  renderChats();
+
+  renderPeople();
+
+  openBotFromUrl();
+
+});
+
+
+/* ================= NAVIGATION ================= */
+
+function showPage(page){
+
+  currentPage = page;
+
+  document.querySelectorAll(".page").forEach(el=>{
+    el.classList.remove("active");
   });
 
+  const target =
+    document.getElementById("page-"+page);
 
-function setActive(page) {
+  if(target){
+    target.classList.add("active");
+  }
 
-  document
-    .querySelectorAll(".nav-btn")
-    .forEach(button => {
+  document.querySelectorAll(".nav-button").forEach(el=>{
+    el.classList.remove("active");
+  });
 
+  const nav =
+    document.getElementById("nav-"+page);
+
+  if(nav){
+    nav.classList.add("active");
+  }
+
+  if(page==="chats"){
+    renderChats();
+  }
+
+  if(page==="people"){
+    renderPeople();
+  }
+
+  if(page==="profile"){
+    loadProfile();
+  }
+
+  window.scrollTo({
+    top:0,
+    behavior:"smooth"
+  });
+}
+
+
+/* ================= SETTINGS PAGE ================= */
+
+function openSettings(){
+
+  document.querySelectorAll(".page").forEach(el=>{
+    el.classList.remove("active");
+  });
+
+  document.getElementById("page-settings")
+    .classList.add("active");
+
+  updateSettingsUI();
+
+  window.scrollTo({
+    top:0,
+    behavior:"smooth"
+  });
+}
+
+
+function closeSettings(){
+
+  showPage(currentPage==="settings" ? "home" : currentPage);
+
+}
+
+
+/* ================= THEMES ================= */
+
+const themes = {
+
+  purple:{
+    bg:"#070914",
+    purple:"#8b5cf6",
+    cyan:"#22d3ee",
+    pink:"#ec4899"
+  },
+
+  cyan:{
+    bg:"#041016",
+    purple:"#06b6d4",
+    cyan:"#38bdf8",
+    pink:"#3b82f6"
+  },
+
+  orange:{
+    bg:"#120907",
+    purple:"#f97316",
+    cyan:"#fb923c",
+    pink:"#fb7185"
+  },
+
+  pink:{
+    bg:"#120711",
+    purple:"#ec4899",
+    cyan:"#a855f7",
+    pink:"#f472b6"
+  },
+
+  green:{
+    bg:"#06110d",
+    purple:"#10b981",
+    cyan:"#34d399",
+    pink:"#22c55e"
+  },
+
+  blue:{
+    bg:"#060b17",
+    purple:"#2563eb",
+    cyan:"#38bdf8",
+    pink:"#60a5fa"
+  },
+
+  red:{
+    bg:"#130708",
+    purple:"#ef4444",
+    cyan:"#fb7185",
+    pink:"#f97316"
+  },
+
+  gold:{
+    bg:"#120e05",
+    purple:"#eab308",
+    cyan:"#f59e0b",
+    pink:"#facc15"
+  },
+
+  ice:{
+    bg:"#080d13",
+    purple:"#94a3b8",
+    cyan:"#e0f2fe",
+    pink:"#bae6fd"
+  },
+
+  rainbow:{
+    bg:"#080812",
+    purple:"#ec4899",
+    cyan:"#22d3ee",
+    pink:"#facc15"
+  }
+
+};
+
+
+function setTheme(theme){
+
+  if(!themes[theme]) return;
+
+  settings.theme = theme;
+
+  saveSettings();
+
+  applySettings();
+
+  updateSettingsUI();
+
+  showToast("🎨 Тема изменена");
+
+}
+
+
+function applySettings(){
+
+  const theme =
+    themes[settings.theme] ||
+    themes.purple;
+
+  const root =
+    document.documentElement;
+
+  root.style.setProperty("--bg",theme.bg);
+  root.style.setProperty("--purple",theme.purple);
+  root.style.setProperty("--cyan",theme.cyan);
+  root.style.setProperty("--pink",theme.pink);
+
+  root.style.setProperty(
+    "--glass-opacity",
+    Number(settings.glass)/100
+  );
+
+  root.style.setProperty(
+    "--glow",
+    Number(settings.glow)/100
+  );
+
+  let font = "16px";
+
+  if(settings.fontSize==="small"){
+    font="14px";
+  }
+
+  if(settings.fontSize==="large"){
+    font="18px";
+  }
+
+  root.style.setProperty("--font-size",font);
+
+  document.body.dataset.buttonStyle =
+    settings.buttonStyle;
+
+}
+
+
+/* ================= GLASS ================= */
+
+function changeGlass(value){
+
+  settings.glass = Number(value);
+
+  document.getElementById("glass-value")
+    .textContent = value+"%";
+
+  saveSettings();
+
+  applySettings();
+
+}
+
+
+/* ================= GLOW ================= */
+
+function changeGlow(value){
+
+  settings.glow = Number(value);
+
+  document.getElementById("glow-value")
+    .textContent = value+"%";
+
+  saveSettings();
+
+  applySettings();
+
+}
+
+
+/* ================= FONT ================= */
+
+function setFontSize(size){
+
+  settings.fontSize = size;
+
+  saveSettings();
+
+  applySettings();
+
+  updateSettingsUI();
+
+}
+
+
+/* ================= BUTTON STYLE ================= */
+
+function setButtonStyle(style){
+
+  settings.buttonStyle = style;
+
+  saveSettings();
+
+  updateSettingsUI();
+
+  showToast("🔘 Стиль кнопок изменён");
+
+}
+
+
+/* ================= EMOJI ================= */
+
+function setEmoji(emoji){
+
+  settings.emoji = emoji;
+
+  saveSettings();
+
+  updateSettingsUI();
+
+  showToast("🐱 Стиль Meowl изменён");
+
+}
+
+
+/* ================= SETTINGS UI ================= */
+
+function updateSettingsUI(){
+
+  document.querySelectorAll(".theme-button")
+    .forEach(button=>{
       button.classList.toggle(
         "active",
-        button.dataset.page === page
+        button.dataset.theme===settings.theme
       );
+    });
 
+
+  const glass =
+    document.getElementById("glass-range");
+
+  if(glass){
+    glass.value=settings.glass;
+  }
+
+  const glassValue =
+    document.getElementById("glass-value");
+
+  if(glassValue){
+    glassValue.textContent =
+      settings.glass+"%";
+  }
+
+
+  const glow =
+    document.getElementById("glow-range");
+
+  if(glow){
+    glow.value=settings.glow;
+  }
+
+  const glowValue =
+    document.getElementById("glow-value");
+
+  if(glowValue){
+    glowValue.textContent =
+      settings.glow+"%";
+  }
+
+
+  document.querySelectorAll("[data-font]")
+    .forEach(button=>{
+      button.classList.toggle(
+        "active",
+        button.dataset.font===settings.fontSize
+      );
+    });
+
+
+  document.querySelectorAll("[data-button]")
+    .forEach(button=>{
+      button.classList.toggle(
+        "active",
+        button.dataset.button===settings.buttonStyle
+      );
+    });
+
+
+  document.querySelectorAll("[data-emoji]")
+    .forEach(button=>{
+      button.classList.toggle(
+        "active",
+        button.dataset.emoji===settings.emoji
+      );
     });
 
 }
 
 
-function showPage(page) {
+/* ================= SAVE SETTINGS ================= */
 
-  setActive(page);
+function saveSettings(){
 
-  if (page === "home") {
-    renderHome();
-  }
-
-  if (page === "chats") {
-    renderChats();
-  }
-
-  if (page === "people") {
-    renderPeople();
-  }
-
-  if (page === "profile") {
-    renderProfile();
-  }
+  localStorage.setItem(
+    STORAGE.settings,
+    JSON.stringify(settings)
+  );
 
 }
 
 
-/* =====================================================
-   HOME
-===================================================== */
+/* ================= RESET SETTINGS ================= */
 
-function renderHome() {
+function resetSettings(){
 
-  topTitle.textContent =
-    "Главная";
+  if(!confirm("Сбросить все настройки?")){
+    return;
+  }
 
+  settings = {
+    ...defaultSettings
+  };
 
-  content.innerHTML = `
+  saveSettings();
 
-    <section class="hero">
+  applySettings();
 
-      <div class="hero-cat">
-        🐱
-      </div>
+  updateSettingsUI();
 
-      <h1>
-        Meowl Messenger
-      </h1>
-
-      <p>
-        Добро пожаловать в уютный
-        неоновый мессенджер для общения
-        и создания собственных ботов.
-      </p>
-
-    </section>
-
-
-    <div class="home-grid">
-
-
-      <button
-        class="home-card bot-card"
-        id="openOfficialBot"
-      >
-
-        <span class="online">
-          ONLINE
-        </span>
-
-        <div class="icon">
-          🤖
-        </div>
-
-        <h3>
-          Meowl Messenger
-        </h3>
-
-        <p>
-          Официальный бот мессенджера.
-          Напиши <b>/start</b> для правил
-          или <b>/newbot</b>, чтобы создать
-          своего бота.
-        </p>
-
-      </button>
-
-
-      <button
-        class="home-card"
-        id="homeChats"
-      >
-
-        <div class="icon">
-          💬
-        </div>
-
-        <h3>
-          Чаты
-        </h3>
-
-        <p>
-          Открывай свои созданные боты
-          и общайся с ними.
-        </p>
-
-      </button>
-
-
-      <button
-        class="home-card"
-        id="homePeople"
-      >
-
-        <div class="icon">
-          👥
-        </div>
-
-        <h3>
-          Люди
-        </h3>
-
-        <p>
-          Раздел для пользователей
-          Meowl Messenger.
-        </p>
-
-      </button>
-
-
-      <button
-        class="home-card"
-        id="homeProfile"
-      >
-
-        <div class="icon">
-          👤
-        </div>
-
-        <h3>
-          Профиль
-        </h3>
-
-        <p>
-          Твой профиль Meowl.
-        </p>
-
-      </button>
-
-
-    </div>
-
-  `;
-
-
-  document
-    .getElementById("openOfficialBot")
-    .onclick = () => {
-
-      openBot("official");
-
-    };
-
-
-  document
-    .getElementById("homeChats")
-    .onclick = () => {
-
-      showPage("chats");
-
-    };
-
-
-  document
-    .getElementById("homePeople")
-    .onclick = () => {
-
-      showPage("people");
-
-    };
-
-
-  document
-    .getElementById("homeProfile")
-    .onclick = () => {
-
-      showPage("profile");
-
-    };
+  showToast("♻️ Настройки сброшены");
 
 }
 
 
-/* =====================================================
-   OFFICIAL BOT
-===================================================== */
+/* ================= CHAT LIST ================= */
 
-const officialBot = {
-
-  id: "official",
-
-  name: "Meowl Messenger",
-
-  username: "MeowlMessenger",
-
-  description:
-    "Официальный бот Meowl Messenger."
-
-};
-
-
-/* =====================================================
-   CHAT LIST
-===================================================== */
-
-function getAllBots() {
+function getAllBots(){
 
   return [
     officialBot,
-    ...bots
+    ...createdBots
   ];
 
 }
 
 
-/* =====================================================
-   RENDER CHATS
-===================================================== */
+function renderChats(){
 
-function renderChats() {
+  const container =
+    document.getElementById("chats-list");
 
-  topTitle.textContent =
-    "Чаты";
+  if(!container) return;
 
-
-  const allBots =
+  const bots =
     getAllBots();
 
+  if(bots.length===0){
 
-  content.innerHTML = `
+    container.innerHTML=`
+      <div class="card empty">
+        <div class="empty-icon">💬</div>
+        <div>Пока нет чатов</div>
+      </div>
+    `;
 
-    <div class="page-title">
-      💬 Чаты
+    return;
+  }
+
+
+  container.innerHTML =
+    bots.map(bot=>`
+
+      <div
+        class="list-item"
+        onclick="openBot('${escapeJs(bot.id)}')"
+      >
+
+        <div class="avatar">
+          ${bot.emoji || "🤖"}
+        </div>
+
+        <div class="list-main">
+
+          <h3>
+            ${escapeHtml(bot.name)}
+
+            ${
+              bot.official
+              ? `<span class="badge">✓</span>`
+              : ""
+            }
+
+          </h3>
+
+          <p>
+            @${escapeHtml(bot.username)}
+          </p>
+
+        </div>
+
+        <div class="arrow">
+          ›
+        </div>
+
+      </div>
+
+    `).join("");
+
+}
+
+
+/* ================= OPEN BOT ================= */
+
+function findBot(id){
+
+  return getAllBots()
+    .find(bot=>bot.id===id);
+
+}
+
+
+function openBot(id){
+
+  const bot =
+    findBot(id);
+
+  if(!bot){
+    showToast("Бот не найден");
+    return;
+  }
+
+  currentBot = bot;
+
+  document
+    .querySelectorAll(".page")
+    .forEach(el=>{
+      el.classList.remove("active");
+    });
+
+  const chatPage =
+    document.getElementById("chat-page");
+
+  chatPage.classList.add("active");
+
+  renderChatHeader();
+
+  renderMessages();
+
+  setTimeout(()=>{
+    document.getElementById("chat-input").focus();
+  },100);
+
+}
+
+
+function closeChat(){
+
+  document
+    .getElementById("chat-page")
+    .classList.remove("active");
+
+  renderChats();
+
+  showPage("chats");
+
+}
+
+
+/* ================= CHAT HEADER ================= */
+
+function renderChatHeader(){
+
+  const header =
+    document.getElementById("chat-header");
+
+  header.innerHTML=`
+
+    <div class="chat-header">
+
+      <div class="avatar">
+        ${currentBot.emoji || "🤖"}
+      </div>
+
+      <div>
+
+        <h2>
+          ${escapeHtml(currentBot.name)}
+        </h2>
+
+        <p>
+          @${escapeHtml(currentBot.username)}
+          ${currentBot.official ? " • официальный" : ""}
+        </p>
+
+      </div>
+
     </div>
-
-    <div class="page-subtitle">
-      Здесь находятся Meowl Messenger
-      и созданные тобой боты.
-    </div>
-
-    <div
-      id="chatList"
-      class="chat-list"
-    ></div>
 
   `;
 
-
-  const list =
-    document.getElementById("chatList");
+}
 
 
-  allBots.forEach(bot => {
+/* ================= MESSAGES ================= */
 
-    const item =
-      document.createElement("button");
+function getBotMessages(id){
 
-    item.className =
-      "chat-item";
+  if(!botChats[id]){
+    botChats[id]=[];
+  }
+
+  return botChats[id];
+
+}
 
 
-    item.innerHTML = `
+function saveChats(){
 
-      <div class="chat-item-avatar">
-        🤖
-      </div>
+  localStorage.setItem(
+    STORAGE.chats,
+    JSON.stringify(botChats)
+  );
 
-      <div class="chat-item-info">
+}
 
-        <div class="chat-item-name">
-          ${escapeHtml(bot.name)}
-        </div>
 
-        <div class="chat-item-username">
-          @${escapeHtml(bot.username)}
-        </div>
+function renderMessages(){
 
-        <div class="chat-item-desc">
-          ${escapeHtml(bot.description)}
-        </div>
+  const container =
+    document.getElementById("chat-messages");
 
-      </div>
+  if(!container || !currentBot){
+    return;
+  }
 
-      <div class="chat-arrow">
-        ›
+  const messages =
+    getBotMessages(currentBot.id);
+
+  if(messages.length===0){
+
+    container.innerHTML=`
+
+      <div class="message bot">
+
+        ${escapeHtml(
+          currentBot.official
+          ? "Привет! 🐱 Я официальный бот Meowl Messenger.\\n\\nНапиши /start, чтобы узнать правила.\\n\\nНапиши /newbot, чтобы создать своего бота."
+          : "Привет! 🤖 Я бот @"+currentBot.username+"\\n\\nНапиши /start."
+        )}
+
       </div>
 
     `;
 
-
-    item.onclick = () => {
-
-      openBot(bot.id);
-
-    };
-
-
-    list.appendChild(item);
-
-  });
-
-}
-
-
-/* =====================================================
-   BOT CHAT
-===================================================== */
-
-function openBot(botId) {
-
-  const bot =
-    getAllBots()
-      .find(item => item.id === botId);
-
-
-  if (!bot) {
-
-    showToast(
-      "Бот не найден."
-    );
-
     return;
-
   }
 
 
-  topTitle.textContent =
-    bot.name;
+  container.innerHTML =
+    messages.map(message=>`
 
-
-  content.innerHTML = `
-
-    <div class="chat-shell">
-
-
-      <div class="chat-header">
-
-        <button
-          class="back-btn"
-          id="backChat"
-        >
-          ←
-        </button>
-
-
-        <div class="chat-avatar">
-          🤖
-        </div>
-
-
-        <div>
-
-          <div class="chat-name">
-            ${escapeHtml(bot.name)}
-          </div>
-
-          <div class="chat-status">
-            ● @${escapeHtml(bot.username)}
-          </div>
-
-        </div>
-
+      <div class="message ${message.type}">
+        ${escapeHtml(message.text)}
       </div>
 
-
-      <div
-        id="messages"
-        class="messages"
-      ></div>
+    `).join("");
 
 
-      <form
-        id="chatForm"
-        class="chat-input-area"
-      >
-
-        <input
-          id="chatInput"
-          class="chat-input"
-          autocomplete="off"
-          placeholder="Напиши сообщение..."
-        >
-
-        <button
-          class="send-btn"
-          type="submit"
-        >
-          ➤
-        </button>
-
-      </form>
-
-
-    </div>
-
-  `;
-
-
-  document
-    .getElementById("backChat")
-    .onclick = () => {
-
-      showPage("chats");
-
-    };
-
-
-  document
-    .getElementById("chatForm")
-    .onsubmit = event => {
-
-      event.preventDefault();
-
-      sendBotMessage(bot);
-
-    };
-
-
-  renderBotMessages(bot);
+  container.scrollTop =
+    container.scrollHeight;
 
 }
 
 
-/* =====================================================
-   SEND MESSAGE
-===================================================== */
+/* ================= SEND MESSAGE ================= */
 
-function sendBotMessage(bot) {
+function sendCurrentMessage(){
+
+  if(!currentBot){
+    return;
+  }
 
   const input =
-    document.getElementById("chatInput");
-
-
-  if (!input) return;
-
+    document.getElementById("chat-input");
 
   const text =
     input.value.trim();
 
-
-  if (!text) return;
-
-
-  input.value = "";
-
-
-  if (!botChats[bot.id]) {
-
-    botChats[bot.id] = [];
-
+  if(!text){
+    return;
   }
 
+  addMessage(
+    currentBot.id,
+    "user",
+    text
+  );
 
-  botChats[bot.id].push({
+  input.value="";
 
-    type: "me",
+  setTimeout(()=>{
+    botReply(currentBot,text);
+  },300);
 
-    text: text,
+}
 
-    time: Date.now()
 
+function addMessage(botId,type,text){
+
+  if(!botChats[botId]){
+    botChats[botId]=[];
+  }
+
+  botChats[botId].push({
+    type,
+    text,
+    time:Date.now()
   });
-
 
   saveChats();
 
-  renderBotMessages(bot);
+  renderMessages();
+
+}
 
 
-  /*
-   * /start
-   */
+/* ================= BOT REPLY ================= */
 
-  if (
-    text
-      .trim()
-      .toLowerCase() === "/start"
-  ) {
+function botReply(bot,text){
 
-    setTimeout(() => {
-
-      botChats[bot.id].push({
-
-        type: "bot",
-
-        text: bot.id === "official"
-          ? START_RULES
-          : getCreatedBotStart(bot),
-
-        time: Date.now()
-
-      });
+  const command =
+    text.toLowerCase().trim();
 
 
-      saveChats();
+  /* START */
 
-      renderBotMessages(bot);
+  if(command==="/start"){
 
-    }, 400);
+    addMessage(
+      bot.id,
+      "bot",
+      bot.official
+      ? rulesText
+      : `
+🤖 Добро пожаловать в @${bot.username}!
 
+Это пользовательский бот Meowl Messenger.
+
+Доступные команды:
+
+/start — запустить бота
+
+Бот работает локально в этом браузере.
+      `.trim()
+    );
 
     return;
-
   }
 
 
-  /*
-   * /newbot доступна только
-   * официальному боту.
-   */
+  /* NEW BOT */
 
-  if (
-    bot.id === "official" &&
-    text
-      .trim()
-      .toLowerCase() === "/newbot"
-  ) {
+  if(bot.official && command==="/newbot"){
 
-    setTimeout(() => {
-
-      startNewBotCreation();
-
-    }, 350);
-
+    startNewBotCreation();
 
     return;
-
   }
 
 
-  /*
-   * Остальные ответы.
-   */
+  /* HELP */
 
-  setTimeout(() => {
+  if(
+    command==="/help" ||
+    command==="help"
+  ){
 
-    let reply;
+    addMessage(
+      bot.id,
+      "bot",
+      `
+🤖 Доступные команды:
+
+/start
+/newbot
+/help
+
+Для создания нового бота используй /newbot.
+      `.trim()
+    );
+
+    return;
+  }
 
 
-    if (
-      bot.id === "official"
-    ) {
+  /* DEFAULT */
 
-      reply =
-        "🐱 Я официальный бот Meowl Messenger.\n\nДоступные команды:\n\n/start — правила Meowl Messenger\n/newbot — создать своего бота.";
+  addMessage(
+    bot.id,
+    "bot",
+    `
+🐱 Сообщение получено!
 
+Я пока не умею полноценно отвечать на обычные сообщения.
+
+Попробуй:
+
+/start
+/help
+${bot.official ? "/newbot" : ""}
+    `.trim()
+  );
+
+}
+
+
+/* ================= NEW BOT CREATION ================= */
+
+let botCreationStep = null;
+let botCreationName = "";
+
+
+function startNewBotCreation(){
+
+  botCreationStep="name";
+
+  addMessage(
+    currentBot.id,
+    "bot",
+    `
+🤖 Создание нового бота
+
+Шаг 1 из 2.
+
+Придумай имя для своего бота.
+
+Имя должно быть на английском языке.
+
+Например:
+
+My Music Bot
+Weather Bot
+Cool Cat
+
+Напиши имя следующим сообщением.
+    `.trim()
+  );
+
+}
+
+
+function askBotUsername(){
+
+  botCreationStep="username";
+
+  addMessage(
+    currentBot.id,
+    "bot",
+    `
+✅ Имя сохранено.
+
+Шаг 2 из 2.
+
+Теперь придумай username для бота.
+
+Можно использовать:
+
+• английские буквы
+• цифры
+• символ _
+
+От 4 до 30 символов.
+
+Например:
+
+MyMusicBot
+WeatherBot
+Cool_Cat_123
+
+Напиши username.
+    `.trim()
+  );
+
+}
+
+
+function processBotCreation(text){
+
+  if(botCreationStep==="name"){
+
+    const name =
+      text.trim();
+
+    if(!/^[A-Za-z0-9][A-Za-z0-9 _-]{2,40}$/.test(name)){
+
+      addMessage(
+        currentBot.id,
+        "bot",
+        `
+❌ Неправильное имя.
+
+Используй английские буквы, цифры, пробелы, "-" или "_".
+
+Попробуй ещё раз.
+        `.trim()
+      );
+
+      return;
     }
 
-    else {
+    botCreationName=name;
 
-      reply =
-        "🤖 Привет! Я бот @" +
-        bot.username +
-        ".\n\nПопробуй написать /start.";
+    askBotUsername();
 
+    return;
+  }
+
+
+  if(botCreationStep==="username"){
+
+    const username =
+      text.trim();
+
+    if(!/^[A-Za-z][A-Za-z0-9_]{3,29}$/.test(username)){
+
+      addMessage(
+        currentBot.id,
+        "bot",
+        `
+❌ Неправильный username.
+
+Требования:
+
+• от 4 до 30 символов;
+• английские буквы;
+• цифры;
+• _
+
+Первый символ должен быть буквой.
+        `.trim()
+      );
+
+      return;
     }
 
 
-    botChats[bot.id].push({
+    const exists =
+      getAllBots()
+        .some(
+          bot =>
+            bot.username.toLowerCase() ===
+            username.toLowerCase()
+        );
 
-      type: "bot",
 
-      text: reply,
+    if(exists){
 
-      time: Date.now()
+      addMessage(
+        currentBot.id,
+        "bot",
+        `
+❌ Такой username уже существует.
 
-    });
+Придумай другой username.
+        `.trim()
+      );
 
+      return;
+    }
+
+
+    const newBot = {
+
+      id:
+        "bot_" +
+        Date.now().toString(36),
+
+      name:
+        botCreationName,
+
+      username:
+        username,
+
+      description:
+        "Пользовательский бот Meowl Messenger.",
+
+      emoji:
+        "🤖",
+
+      official:false,
+
+      createdAt:
+        Date.now()
+
+    };
+
+
+    createdBots.push(newBot);
+
+    localStorage.setItem(
+      STORAGE.bots,
+      JSON.stringify(createdBots)
+    );
+
+
+    botChats[newBot.id]=[];
 
     saveChats();
 
-    renderBotMessages(bot);
 
-  }, 500);
+    botCreationStep=null;
 
-}
-
-
-/* =====================================================
-   CREATED BOT START
-===================================================== */
-
-function getCreatedBotStart(bot) {
-
-  return `🤖 Привет!
-
-Я бот ${bot.name}.
-
-Мой username:
-@${bot.username}
-
-Этот бот был создан в Meowl Messenger.
-
-Для начала общения можешь отправить /start ещё раз.
-
-━━━━━━━━━━━━━━━━━━
-
-Создатель:
-текущий пользователь Meowl Messenger
-
-━━━━━━━━━━━━━━━━━━
-
-🐾 Спасибо, что используешь Meowl Messenger!`;
-
-}
+    botCreationName="";
 
 
-/* =====================================================
-   RENDER MESSAGES
-===================================================== */
+    const link =
+      createBotLink(newBot.username);
 
-function renderBotMessages(bot) {
-
-  const box =
-    document.getElementById("messages");
-
-
-  if (!box) return;
-
-
-  box.innerHTML = "";
-
-
-  const chat =
-    botChats[bot.id] || [];
-
-
-  if (chat.length === 0) {
 
     addMessage(
-      box,
+      currentBot.id,
       "bot",
-      bot.id === "official"
-        ? "🐾 Привет! Я официальный бот Meowl Messenger.\n\nНапиши /start, чтобы получить правила.\n\nИли /newbot, чтобы создать своего бота."
-        : `🤖 Привет! Я ${bot.name}.\n\nНапиши /start.`
+      `
+🎉 Бот успешно создан!
+
+🤖 Имя:
+${newBot.name}
+
+👤 Username:
+@${newBot.username}
+
+🔗 Ссылка:
+${link}
+
+Бот уже добавлен в раздел:
+
+💬 Чаты
+
+Теперь ты можешь открыть его и общаться с ним.
+      `.trim()
     );
+
+
+    renderChats();
 
   }
 
+}
 
-  chat.forEach(message => {
+
+/* ================= OVERRIDE SEND ================= */
+
+const originalSendCurrentMessage =
+  sendCurrentMessage;
+
+
+function sendMessageWithCreation(){
+
+  if(
+    currentBot &&
+    botCreationStep
+  ){
+
+    const input =
+      document.getElementById("chat-input");
+
+    const text =
+      input.value.trim();
+
+    if(!text){
+      return;
+    }
 
     addMessage(
-      box,
-      message.type,
-      message.text,
-      message.time
+      currentBot.id,
+      "user",
+      text
     );
 
-  });
+    input.value="";
 
+    processBotCreation(text);
 
-  box.scrollTop =
-    box.scrollHeight;
+    return;
+  }
+
+  originalSendCurrentMessage();
 
 }
 
 
-/* =====================================================
-   MESSAGE ELEMENT
-===================================================== */
+/* ================= REPLACE BUTTON ================= */
 
-function addMessage(
-  box,
-  type,
-  text,
-  time
-) {
+function sendCurrentMessage(){
 
-  const row =
-    document.createElement("div");
-
-
-  row.className =
-    "message-row " +
-    (type === "me" ? "me" : "");
-
-
-  const message =
-    document.createElement("div");
-
-
-  message.className =
-    "message " +
-    (type === "me" ? "me" : "bot");
-
-
-  const textElement =
-    document.createElement("div");
-
-
-  textElement.textContent =
-    text;
-
-
-  message.appendChild(
-    textElement
-  );
-
-
-  if (time) {
-
-    const timeElement =
-      document.createElement("span");
-
-
-    timeElement.className =
-      "time";
-
-
-    timeElement.textContent =
-      new Date(time)
-        .toLocaleTimeString(
-          "ru-RU",
-          {
-            hour: "2-digit",
-            minute: "2-digit"
-          }
-        );
-
-
-    message.appendChild(
-      timeElement
-    );
-
-  }
-
-
-  row.appendChild(message);
-
-  box.appendChild(row);
+  sendMessageWithCreation();
 
 }
 
 
-/* =====================================================
-   /NEWBOT
-===================================================== */
+/* ================= BOT LINK ================= */
 
-function startNewBotCreation() {
+function createBotLink(username){
 
-  topTitle.textContent =
-    "Создание бота";
-
-
-  content.innerHTML = `
-
-    <div class="page-title">
-      🤖 Новый бот
-    </div>
-
-    <div class="page-subtitle">
-      Создай собственного бота
-      прямо в Meowl Messenger.
-    </div>
-
-
-    <div class="form-card">
-
-      <div class="form-title">
-        Шаг 1 — название
-      </div>
-
-      <div class="form-text">
-        Придумай название бота.
-        Используй английские буквы.
-        Например: <b>Weather Bot</b>,
-        <b>Music Helper</b> или
-        <b>My Cool Bot</b>.
-      </div>
-
-
-      <label class="field-label">
-        Название бота
-      </label>
-
-      <input
-        id="botNameInput"
-        class="form-input"
-        maxlength="40"
-        placeholder="My Cool Bot"
-        autocomplete="off"
-      >
-
-
-      <button
-        id="nextBotName"
-        class="primary-btn"
-      >
-        Продолжить →
-      </button>
-
-    </div>
-
-  `;
-
-
-  document
-    .getElementById("nextBotName")
-    .onclick = askBotUsername;
-
-}
-
-
-/* =====================================================
-   ASK USERNAME
-===================================================== */
-
-function askBotUsername() {
-
-  const nameInput =
-    document.getElementById("botNameInput");
-
-
-  const name =
-    nameInput.value.trim();
-
-
-  if (!name) {
-
-    showToast(
-      "Напиши название бота."
-    );
-
-    return;
-
-  }
-
-
-  /*
-   * Название должно содержать
-   * английские буквы.
-   */
-
-  if (
-    !/[A-Za-z]/.test(name)
-  ) {
-
-    showToast(
-      "Название должно содержать английские буквы."
-    );
-
-    return;
-
-  }
-
-
-  if (
-    !/^[A-Za-z0-9 _-]+$/.test(name)
-  ) {
-
-    showToast(
-      "Используй английские буквы, цифры, пробел, _ или -."
-    );
-
-    return;
-
-  }
-
-
-  content.innerHTML = `
-
-    <div class="page-title">
-      🤖 Новый бот
-    </div>
-
-    <div class="page-subtitle">
-      Отлично! Теперь выбери username.
-    </div>
-
-
-    <div class="form-card">
-
-      <div class="form-title">
-        Шаг 2 — username
-      </div>
-
-      <div class="form-text">
-        Username нужен для ссылки на твоего бота.
-        Используй английские буквы, цифры и символ _.
-      </div>
-
-
-      <label class="field-label">
-        Username
-      </label>
-
-      <input
-        id="botUsernameInput"
-        class="form-input"
-        maxlength="30"
-        placeholder="MyCoolBot"
-        autocomplete="off"
-      >
-
-
-      <button
-        id="createBotButton"
-        class="primary-btn"
-      >
-        🤖 Создать бота
-      </button>
-
-    </div>
-
-  `;
-
-
-  document
-    .getElementById("createBotButton")
-    .onclick = () => {
-
-      createBot(
-        name,
-        document
-          .getElementById("botUsernameInput")
-          .value
-      );
-
-    };
-
-}
-
-
-/* =====================================================
-   CREATE BOT
-===================================================== */
-
-function createBot(
-  name,
-  usernameValue
-) {
-
-  let username =
-    usernameValue
-      .trim()
-      .replace(/^@/, "");
-
-
-  if (!username) {
-
-    showToast(
-      "Напиши username."
-    );
-
-    return;
-
-  }
-
-
-  /*
-   * Убираем пробелы.
-   */
-
-  username =
-    username.replace(/\s/g, "");
-
-
-  /*
-   * Username:
-   * английские буквы,
-   * цифры,
-   * _
-   */
-
-  if (
-    !/^[A-Za-z0-9_]{4,30}$/.test(username)
-  ) {
-
-    showToast(
-      "Username: 4–30 символов, только A-Z, a-z, 0-9 и _."
-    );
-
-    return;
-
-  }
-
-
-  /*
-   * Проверяем уникальность.
-   */
-
-  const alreadyExists =
-    getAllBots()
-      .some(bot =>
-        bot.username.toLowerCase() ===
-        username.toLowerCase()
-      );
-
-
-  if (alreadyExists) {
-
-    showToast(
-      "Такой username уже существует."
-    );
-
-    return;
-
-  }
-
-
-  /*
-   * Создаём ID.
-   */
-
-  const id =
-    "bot_" +
-    Date.now().toString(36) +
-    "_" +
-    Math.random()
-      .toString(36)
-      .slice(2,8);
-
-
-  const bot = {
-
-    id: id,
-
-    name: name,
-
-    username: username,
-
-    description:
-      "Пользовательский бот Meowl Messenger.",
-
-    createdAt:
-      Date.now()
-
-  };
-
-
-  bots.push(bot);
-
-
-  localStorage.setItem(
-    BOTS_KEY,
-    JSON.stringify(bots)
-  );
-
-
-  /*
-   * Пустой чат бота.
-   */
-
-  botChats[id] = [];
-
-  saveChats();
-
-
-  /*
-   * Показываем ссылку.
-   */
-
-  showBotCreated(bot);
-
-}
-
-
-/* =====================================================
-   BOT CREATED
-===================================================== */
-
-function showBotCreated(bot) {
-
-  topTitle.textContent =
-    "Бот создан";
-
-
-  const botLink =
-    createBotLink(bot.username);
-
-
-  content.innerHTML = `
-
-    <div class="page-title">
-      🎉 Бот создан!
-    </div>
-
-
-    <div class="success-box">
-
-      <div class="success-title">
-        🤖 ${escapeHtml(bot.name)}
-      </div>
-
-      <div style="color:#9da4c5;line-height:1.6">
-
-        Твой бот успешно создан.
-
-        <br><br>
-
-        Username:
-        <b style="color:#a78bfa">
-          @${escapeHtml(bot.username)}
-        </b>
-
-      </div>
-
-
-      <a
-        id="botLink"
-        class="bot-link"
-        href="${escapeAttr(botLink)}"
-      >
-        ${escapeHtml(botLink)}
-      </a>
-
-
-      <button
-        id="copyBotLink"
-        class="copy-btn"
-      >
-        📋 Скопировать ссылку
-      </button>
-
-      <br><br>
-
-      <button
-        id="openCreatedBot"
-        class="primary-btn"
-      >
-        💬 Открыть бота
-      </button>
-
-    </div>
-
-  `;
-
-
-  document
-    .getElementById("copyBotLink")
-    .onclick = async () => {
-
-      try {
-
-        await navigator.clipboard.writeText(
-          botLink
-        );
-
-        showToast(
-          "✅ Ссылка скопирована!"
-        );
-
-      } catch {
-
-        showToast(
-          "Скопируй ссылку вручную."
-        );
-
-      }
-
-    };
-
-
-  document
-    .getElementById("openCreatedBot")
-    .onclick = () => {
-
-      openBot(bot.id);
-
-    };
-
-}
-
-
-/* =====================================================
-   BOT LINK
-===================================================== */
-
-function createBotLink(username) {
-
-  /*
-   * Ссылка ведёт на этот же GitHub Pages сайт.
-   *
-   * При открытии страницы параметр
-   * ?bot=username можно использовать
-   * для открытия нужного бота.
-   */
-
-  const url =
+  const base =
     window.location.origin +
     window.location.pathname;
 
-
   return (
-    url +
+    base +
     "?bot=" +
     encodeURIComponent(username)
   );
@@ -2557,217 +3024,484 @@ function createBotLink(username) {
 }
 
 
-/* =====================================================
-   OPEN BOT FROM LINK
-===================================================== */
-
-function openBotFromUrl() {
+function openBotFromUrl(){
 
   const params =
     new URLSearchParams(
       window.location.search
     );
 
-
   const username =
     params.get("bot");
 
-
-  if (!username) return;
-
+  if(!username){
+    return;
+  }
 
   const bot =
     getAllBots()
-      .find(item =>
-        item.username.toLowerCase() ===
-        username.toLowerCase()
+      .find(
+        bot =>
+          bot.username.toLowerCase() ===
+          username.toLowerCase()
       );
 
+  if(bot){
 
-  if (!bot) {
-
-    showToast(
-      "Этот бот не найден на этом устройстве."
-    );
-
-    return;
+    setTimeout(()=>{
+      openBot(bot.id);
+    },200);
 
   }
-
-
-  openBot(bot.id);
 
 }
 
 
-/* =====================================================
-   SAVE CHATS
-===================================================== */
+/* ================= PEOPLE ================= */
 
-function saveChats() {
+const localPeople = [
 
-  localStorage.setItem(
-    CHAT_KEY,
-    JSON.stringify(botChats)
+  {
+    id:"meowler",
+    name:"Meowler",
+    username:"meowler",
+    description:"Люблю Meowl Messenger 🐱",
+    emoji:"🐱"
+  },
+
+  {
+    id:"meowl",
+    name:"Meowl",
+    username:"meowl",
+    description:"Создатель этого пространства ✨",
+    emoji:"💜"
+  },
+
+  {
+    id:"neoncat",
+    name:"Neon Cat",
+    username:"neoncat",
+    description:"Neon & glass lover 💠",
+    emoji:"💠"
+  }
+
+];
+
+
+function renderPeople(){
+
+  const container =
+    document.getElementById("people-list");
+
+  if(!container){
+    return;
+  }
+
+  const input =
+    document.getElementById("people-search");
+
+  const search =
+    input
+    ? input.value.toLowerCase().trim()
+    : "";
+
+
+  const people =
+    localPeople.filter(person=>{
+
+      return (
+        !search ||
+        person.name.toLowerCase().includes(search) ||
+        person.username.toLowerCase().includes(search)
+      );
+
+    });
+
+
+  if(!people.length){
+
+    container.innerHTML=`
+
+      <div class="card empty">
+
+        <div class="empty-icon">
+          🔎
+        </div>
+
+        Пользователь не найден.
+
+      </div>
+
+    `;
+
+    return;
+  }
+
+
+  container.innerHTML =
+    people.map(person=>`
+
+      <div
+        class="list-item"
+        onclick="openPerson('${escapeJs(person.id)}')"
+      >
+
+        <div class="avatar">
+          ${person.emoji}
+        </div>
+
+        <div class="list-main">
+
+          <h3>
+            ${escapeHtml(person.name)}
+          </h3>
+
+          <p>
+            @${escapeHtml(person.username)}
+          </p>
+
+        </div>
+
+        <div class="arrow">
+          ›
+        </div>
+
+      </div>
+
+    `).join("");
+
+}
+
+
+function openPerson(id){
+
+  const person =
+    localPeople.find(
+      person=>person.id===id
+    );
+
+  if(!person){
+    return;
+  }
+
+
+  openModal(
+    person.name,
+    `
+      <div style="text-align:center">
+
+        <div class="profile-avatar">
+          ${person.emoji}
+        </div>
+
+        <h2>
+          ${escapeHtml(person.name)}
+        </h2>
+
+        <p style="color:var(--muted)">
+          @${escapeHtml(person.username)}
+        </p>
+
+        <div class="info-box" style="margin-top:15px">
+          ${escapeHtml(person.description)}
+        </div>
+
+        <div style="height:10px"></div>
+
+        <button
+          class="primary-button"
+          onclick="closeModal();showToast('💬 Чат пока работает локально')"
+        >
+          💬 Написать
+        </button>
+
+      </div>
+    `
   );
 
 }
 
 
-/* =====================================================
-   PEOPLE
-===================================================== */
+/* ================= PROFILE ================= */
 
-function renderPeople() {
+function loadProfile(){
 
-  topTitle.textContent =
-    "Люди";
+  const nickname =
+    document.getElementById("nickname-input");
 
+  const username =
+    document.getElementById("username-input");
 
-  content.innerHTML = `
+  const description =
+    document.getElementById("description-input");
 
-    <div class="page-title">
-      👥 Люди
-    </div>
+  if(nickname){
+    nickname.value =
+      profile.nickname;
+  }
 
-    <div class="page-subtitle">
-      Раздел пользователей Meowl Messenger.
-    </div>
+  if(username){
+    username.value =
+      profile.username;
+  }
 
-
-    <div class="placeholder">
-
-      <div class="big">
-        👥
-      </div>
-
-      <h3>
-        Пользователи
-      </h3>
-
-      <p
-        style="
-          color:#9da4c5;
-          margin-top:8px;
-          line-height:1.6
-        "
-      >
-        Реальные пользователи появятся,
-        когда мы подключим серверную базу.
-      </p>
-
-    </div>
-
-  `;
+  if(description){
+    description.value =
+      profile.description;
+  }
 
 }
 
 
-/* =====================================================
-   PROFILE
-===================================================== */
+function saveProfile(){
 
-function renderProfile() {
+  const nickname =
+    document.getElementById("nickname-input").value.trim();
 
-  topTitle.textContent =
-    "Профиль";
+  const username =
+    document.getElementById("username-input").value.trim();
 
-
-  content.innerHTML = `
-
-    <div class="profile-card">
-
-      <div class="profile-avatar">
-        🐱
-      </div>
-
-      <div class="profile-name">
-        Meowl User
-      </div>
-
-      <div class="profile-username">
-        @meowl_user
-      </div>
-
-      <div class="profile-description">
-        Добро пожаловать в Meowl Messenger 💜
-      </div>
-
-    </div>
+  const description =
+    document.getElementById("description-input").value.trim();
 
 
-    <div style="height:14px"></div>
+  if(!nickname){
+
+    showToast("Введите имя");
+
+    return;
+  }
 
 
-    <div class="placeholder">
+  profile={
+    nickname,
+    username:
+      username.replace(/^@/,""),
+    description
+  };
 
-      <div class="big">
-        🤖
-      </div>
 
-      <h3>
-        Мои боты
-      </h3>
+  localStorage.setItem(
+    STORAGE.profile,
+    JSON.stringify(profile)
+  );
 
-      <p
-        style="
-          color:#9da4c5;
-          margin-top:8px;
-          line-height:1.6
-        "
-      >
-        Создано ботов:
-        <b style="color:white">
-          ${bots.length}
-        </b>
-      </p>
 
-    </div>
-
-  `;
+  showToast("✅ Профиль сохранён");
 
 }
 
 
-/* =====================================================
-   ESCAPE
-===================================================== */
+/* ================= RULES ================= */
 
-function escapeHtml(value) {
+function openRules(){
 
-  return String(value ?? "")
-    .replaceAll("&", "&amp;")
-    .replaceAll("<", "&lt;")
-    .replaceAll(">", "&gt;")
-    .replaceAll('"', "&quot;")
-    .replaceAll("'", "&#039;");
-
-}
-
-
-function escapeAttr(value) {
-
-  return escapeHtml(value);
+  openModal(
+    "📜 Правила",
+    `
+      <div class="info-box">
+        ${escapeHtml(rulesText)}
+      </div>
+    `
+  );
 
 }
 
 
-/* =====================================================
-   START
-===================================================== */
+/* ================= BOT FEATURES ================= */
 
-renderHome();
+function openBotFeatures(){
+
+  openModal(
+    "🤖 Возможности ботов",
+    `
+      <div class="info-box">
+        ${escapeHtml(botFeaturesText)}
+      </div>
+    `
+  );
+
+}
 
 
-/*
- * Если сайт открыт по ссылке:
- *
- * ?bot=MyCoolBot
- *
- * пытаемся открыть этот бот.
- */
+/* ================= ABOUT ================= */
 
-openBotFromUrl();
+function openAbout(){
+
+  openModal(
+    "ℹ️ О Meowl Messenger",
+    `
+      <div class="info-box">
+
+        <h3>🐱 Meowl Messenger</h3>
+
+        <p>
+          Красивый локальный веб-мессенджер
+          в стиле glass + neon.
+        </p>
+
+        <p>
+          <b>Версия:</b> ${APP_VERSION}
+        </p>
+
+        <p>
+          <b>Платформа:</b> GitHub Pages
+        </p>
+
+        <p>
+          <b>Хранение:</b> локально в браузере
+        </p>
+
+        <p>
+          <b>Бэкенд:</b> отсутствует
+        </p>
+
+        <p>
+          <b>Боты:</b> локальные
+        </p>
+
+        <p>
+          <b>Настройки:</b> сохраняются автоматически
+        </p>
+
+        <hr style="border-color:var(--border)">
+
+        <p>
+          💜 Meowl Messenger создан для
+          общения, экспериментов и красивого
+          интерфейса.
+        </p>
+
+      </div>
+    `
+  );
+
+}
+
+
+/* ================= MODAL ================= */
+
+function openModal(title,content){
+
+  document.getElementById("modal-title")
+    .textContent=title;
+
+  document.getElementById("modal-content")
+    .innerHTML=content;
+
+  document.getElementById("modal")
+    .classList.add("show");
+
+}
+
+
+function closeModal(){
+
+  document.getElementById("modal")
+    .classList.remove("show");
+
+}
+
+
+document.getElementById("modal")
+  .addEventListener("click",function(event){
+
+    if(event.target===this){
+      closeModal();
+    }
+
+  });
+
+
+/* ================= TOAST ================= */
+
+let toastTimer;
+
+
+function showToast(text){
+
+  const toast =
+    document.getElementById("toast");
+
+  toast.textContent=text;
+
+  toast.classList.add("show");
+
+  clearTimeout(toastTimer);
+
+  toastTimer =
+    setTimeout(()=>{
+      toast.classList.remove("show");
+    },2200);
+
+}
+
+
+/* ================= COPY LINK ================= */
+
+function copyText(text){
+
+  if(navigator.clipboard){
+
+    navigator.clipboard.writeText(text)
+      .then(()=>{
+        showToast("🔗 Ссылка скопирована");
+      })
+      .catch(()=>{
+        showToast("Не удалось скопировать");
+      });
+
+    return;
+  }
+
+  showToast("Скопируй ссылку вручную");
+
+}
+
+
+/* ================= ESCAPE ================= */
+
+function escapeHtml(text){
+
+  return String(text)
+    .replace(/&/g,"&amp;")
+    .replace(/</g,"&lt;")
+    .replace(/>/g,"&gt;")
+    .replace(/"/g,"&quot;")
+    .replace(/'/g,"&#039;");
+
+}
+
+
+function escapeJs(text){
+
+  return String(text)
+    .replace(/\\/g,"\\\\")
+    .replace(/'/g,"\\'");
+}
+
+
+/* ================= CLOSE MODAL ON ESC ================= */
+
+document.addEventListener("keydown",event=>{
+
+  if(event.key==="Escape"){
+
+    closeModal();
+
+  }
+
+});
+
+
+/* ================= GLOBAL CLICK ================= */
+
+window.addEventListener("click",()=>{
+
+  /* intentionally empty */
+
+});
+
 
 </script>
 
